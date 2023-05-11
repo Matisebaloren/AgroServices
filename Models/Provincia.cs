@@ -10,7 +10,7 @@ namespace AgroServices.Models
 
         public string? Nombre { get; set; }
 
-        // public virtual ICollection<Subcategoria>? Subcategorias { get; set; }
+        public virtual ICollection<Usuario>? Usuarios { get; set; }
 
     }
 

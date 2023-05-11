@@ -13,7 +13,9 @@ public class AgroServicesDbContext : DbContext
 
     }
 
-    // public DbSet<Categoria> Categorias { get; set; }
+    public DbSet<Provincia> Provincias { get; set; }
+
+    public DbSet<Usuario> Usuarios { get; set; }
 
 
 
