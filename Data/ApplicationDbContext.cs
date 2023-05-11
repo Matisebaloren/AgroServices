@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace AgroServices.data;
+namespace AgroServices.Data;
 
 public class ApplicationDbContext : IdentityDbContext<IdentityUser>
 {
