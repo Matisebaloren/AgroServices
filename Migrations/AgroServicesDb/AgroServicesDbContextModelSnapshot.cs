@@ -38,14 +38,12 @@ namespace AgroServices.Migrations.AgroServicesDb
                     b.Property<string>("Respuesta")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UsuarioID")
-                        .HasColumnType("int");
+                    b.Property<string>("UsuarioNombre")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ConsultaID");
 
                     b.HasIndex("PublicacionID");
-
-                    b.HasIndex("UsuarioID");
 
                     b.ToTable("Consultas");
                 });
@@ -146,14 +144,12 @@ namespace AgroServices.Migrations.AgroServicesDb
                     b.Property<int>("Puntuacion")
                         .HasColumnType("int");
 
-                    b.Property<int>("UsuarioID")
-                        .HasColumnType("int");
+                    b.Property<string>("UsuarioNombre")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ValoracionID");
 
                     b.HasIndex("PublicacionID");
-
-                    b.HasIndex("UsuarioID");
 
                     b.ToTable("Valoraciones");
                 });
@@ -166,15 +162,7 @@ namespace AgroServices.Migrations.AgroServicesDb
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("AgroServices.Models.Usuario", "Usuarios")
-                        .WithMany("Consultas")
-                        .HasForeignKey("UsuarioID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Publicaciones");
-
-                    b.Navigation("Usuarios");
                 });
 
             modelBuilder.Entity("AgroServices.Models.Publicacion", b =>
@@ -207,15 +195,7 @@ namespace AgroServices.Migrations.AgroServicesDb
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("AgroServices.Models.Usuario", "Usuarios")
-                        .WithMany("Valoraciones")
-                        .HasForeignKey("UsuarioID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Publicaciones");
-
-                    b.Navigation("Usuarios");
                 });
 
             modelBuilder.Entity("AgroServices.Models.Provincia", b =>
@@ -232,11 +212,7 @@ namespace AgroServices.Migrations.AgroServicesDb
 
             modelBuilder.Entity("AgroServices.Models.Usuario", b =>
                 {
-                    b.Navigation("Consultas");
-
                     b.Navigation("Publicaciones");
-
-                    b.Navigation("Valoraciones");
                 });
 #pragma warning restore 612, 618
         }

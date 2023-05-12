@@ -25,11 +25,6 @@ namespace AgroServices.Models{
         public virtual Provincia? Provincias { get; set; }
 
         public virtual ICollection<Publicacion>? Publicaciones { get; set; }
-
-        public virtual ICollection<Valoracion>? Valoraciones { get; set; }
-
-        public virtual ICollection<Consulta>? Consultas { get; set; }
-
  
     }
 }
