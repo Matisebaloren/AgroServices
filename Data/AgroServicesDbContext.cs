@@ -17,6 +17,11 @@ public class AgroServicesDbContext : DbContext
 
     public DbSet<Usuario> Usuarios { get; set; }
 
+    public DbSet<Publicacion> Publicaciones { get; set; }
+
+    public DbSet<Valoracion> Valoraciones { get; set; }
+
+    public DbSet<Consulta> Consultas { get; set; }
 
 
 

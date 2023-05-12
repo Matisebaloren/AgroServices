@@ -12,6 +12,7 @@ namespace AgroServices.Models
 
         public virtual ICollection<Usuario>? Usuarios { get; set; }
 
+
     }
 
 }

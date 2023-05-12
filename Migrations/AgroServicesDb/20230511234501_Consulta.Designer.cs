@@ -3,6 +3,7 @@ using AgroServices.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AgroServices.Migrations.AgroServicesDb
 {
     [DbContext(typeof(AgroServicesDbContext))]
-    partial class AgroServicesDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230511234501_Consulta")]
+    partial class Consulta
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -47,7 +49,7 @@ namespace AgroServices.Migrations.AgroServicesDb
 
                     b.HasIndex("UsuarioID");
 
-                    b.ToTable("Consultas");
+                    b.ToTable("Consulta");
                 });
 
             modelBuilder.Entity("AgroServices.Models.Provincia", b =>
@@ -155,7 +157,7 @@ namespace AgroServices.Migrations.AgroServicesDb
 
                     b.HasIndex("UsuarioID");
 
-                    b.ToTable("Valoraciones");
+                    b.ToTable("Valoracion");
                 });
 
             modelBuilder.Entity("AgroServices.Models.Consulta", b =>

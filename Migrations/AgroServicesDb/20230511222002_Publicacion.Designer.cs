@@ -3,6 +3,7 @@ using AgroServices.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AgroServices.Migrations.AgroServicesDb
 {
     [DbContext(typeof(AgroServicesDbContext))]
-    partial class AgroServicesDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230511222002_Publicacion")]
+    partial class Publicacion
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -20,35 +22,6 @@ namespace AgroServices.Migrations.AgroServicesDb
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
-
-            modelBuilder.Entity("AgroServices.Models.Consulta", b =>
-                {
-                    b.Property<int>("ConsultaID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ConsultaID"), 1L, 1);
-
-                    b.Property<string>("Contenido")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("PublicacionID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Respuesta")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("UsuarioID")
-                        .HasColumnType("int");
-
-                    b.HasKey("ConsultaID");
-
-                    b.HasIndex("PublicacionID");
-
-                    b.HasIndex("UsuarioID");
-
-                    b.ToTable("Consultas");
-                });
 
             modelBuilder.Entity("AgroServices.Models.Provincia", b =>
                 {
@@ -129,54 +102,6 @@ namespace AgroServices.Migrations.AgroServicesDb
                     b.ToTable("Usuarios");
                 });
 
-            modelBuilder.Entity("AgroServices.Models.Valoracion", b =>
-                {
-                    b.Property<int>("ValoracionID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ValoracionID"), 1L, 1);
-
-                    b.Property<string>("Contenido")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("PublicacionID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Puntuacion")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UsuarioID")
-                        .HasColumnType("int");
-
-                    b.HasKey("ValoracionID");
-
-                    b.HasIndex("PublicacionID");
-
-                    b.HasIndex("UsuarioID");
-
-                    b.ToTable("Valoraciones");
-                });
-
-            modelBuilder.Entity("AgroServices.Models.Consulta", b =>
-                {
-                    b.HasOne("AgroServices.Models.Publicacion", "Publicaciones")
-                        .WithMany("Consultas")
-                        .HasForeignKey("PublicacionID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("AgroServices.Models.Usuario", "Usuarios")
-                        .WithMany("Consultas")
-                        .HasForeignKey("UsuarioID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Publicaciones");
-
-                    b.Navigation("Usuarios");
-                });
-
             modelBuilder.Entity("AgroServices.Models.Publicacion", b =>
                 {
                     b.HasOne("AgroServices.Models.Usuario", "Usuarios")
@@ -199,44 +124,14 @@ namespace AgroServices.Migrations.AgroServicesDb
                     b.Navigation("Provincias");
                 });
 
-            modelBuilder.Entity("AgroServices.Models.Valoracion", b =>
-                {
-                    b.HasOne("AgroServices.Models.Publicacion", "Publicaciones")
-                        .WithMany("Valoraciones")
-                        .HasForeignKey("PublicacionID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("AgroServices.Models.Usuario", "Usuarios")
-                        .WithMany("Valoraciones")
-                        .HasForeignKey("UsuarioID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Publicaciones");
-
-                    b.Navigation("Usuarios");
-                });
-
             modelBuilder.Entity("AgroServices.Models.Provincia", b =>
                 {
                     b.Navigation("Usuarios");
                 });
 
-            modelBuilder.Entity("AgroServices.Models.Publicacion", b =>
-                {
-                    b.Navigation("Consultas");
-
-                    b.Navigation("Valoraciones");
-                });
-
             modelBuilder.Entity("AgroServices.Models.Usuario", b =>
                 {
-                    b.Navigation("Consultas");
-
                     b.Navigation("Publicaciones");
-
-                    b.Navigation("Valoraciones");
                 });
 #pragma warning restore 612, 618
         }
