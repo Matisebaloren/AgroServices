@@ -20,9 +20,9 @@ namespace AgroServices.Models{
 
         public string? Localidad { get; set; }
 
-        public int ProvinciaID { get; set; }
+        public int LocalidadID { get; set; }
 
-        public virtual Provincia? Provincias { get; set; }
+        public virtual Localidad? Localidades { get; set; }
 
         public virtual ICollection<Publicacion>? Publicaciones { get; set; }
  
