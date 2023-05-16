@@ -15,7 +15,6 @@ namespace AgroServices.Models
 
         public int UsuarioID { get; set; }
 
-
         public int PublicacionID { get; set; }
 
         public virtual Publicacion? Publicaciones { get; set; }
