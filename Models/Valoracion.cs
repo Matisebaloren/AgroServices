@@ -16,6 +16,6 @@ namespace AgroServices.Models
 
         public virtual Publicacion? Publicaciones { get; set; }
 
-        public string? UsuarioNombre { get; set; }
+        public int UsuarioID { get; set; }
     }
 }
