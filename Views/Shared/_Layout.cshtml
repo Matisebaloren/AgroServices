@@ -15,101 +15,45 @@
     @* FIN DE LLAMADOS PARA DIFERENTES ESTILOS----------- *@
 </head> 
 <body>
-
-@* INICIO DE CODIGO SEARCH *@
-<navbar>
-  <div>
-    <div>
-      <div class="v-flex">
-        <div>
-          <div>
-            <div>
-              <div>
-              </div>
-          <div class="search">
-            <input type="text" class="search-textbox" placeholder="Search">
-            <a class="ico-btn search-btn"><i class="material-icons ic_search">&#xE8B6;</i></a>
-            <a class="ico-btn clear-btn"><i class="material-icons ic_clear">&#xE14C;</i></a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</navbar>
-
-
-
-@* FIN DE CODIGO SEARCH *@
-
-@* NAVBAR VERTICALIZADO--------------- *@
-  <header>
-    <nav class="sidebar close">
-        <header>
-            <div class="image-text">
-                <span class="image">
-                    @* <img src="logo.jpg" alt=""> *@
-                </span>
-
-                <div class="text logo-text">
-                    <span class="name"></span>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">AgroServices</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Provincias" asp-action="Index">Provincias</a>
+                        </li>
+                          <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Publicaciones" asp-action="Index">Publicaciónes</a>
+                        </li>
+                          <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Usuarios" asp-action="Index">Usuarios</a>
+                        </li>
+                          <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Localidades</a>
+                        </li>
+                          <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Consultas" asp-action="Index">Consultas</a>
+                        </li>
+                          <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Valoraciones" asp-action="Index">Valoraciones</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
-
-            <i class='bx bx-chevron-right toggle'></i>
-        </header>
-        <div>
-        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">AgroServices</a>
-        </div>
-        <div class="menu-bar">
-            <div class="menu">
-
-                <div class="container-fluid">
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                            aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                    </button>
-              <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                  <ul class="navbar-nav flex-grow-1">
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Inicio" asp-action="Index">Inicio</a>
-                            </li>
-                            @* SOLAMENTE PARA QUE LO PUEDA VER EL ADMIN *@
-                          @* <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Usuarios" asp-action="Index">Usuarios</a>
-                          </li> *@
-                          <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Publicaciones" asp-action="Index">Publicaciones</a>
-                          </li>
-                  </ul>
-              </div>
+        </nav>
+    </header>
 
 
-            <div class="bottom-content">
-                <li class="">
-                    <a href="#">
-                        <i class='bx bx-log-out icon' ></i>
-                        <span class="text nav-text">Cerrar Sesión</span>
-                    </a>
-                </li>
 
-                <li class="mode">
-                    <div class="sun-moon">
-                        <i class='bx bx-moon icon moon'></i>
-                        <i class='bx bx-sun icon sun'></i>
-                    </div>
-                    <span class="mode-text text">Modo oscuro</span>
-
-                    <div class="toggle-switch">
-                        <span class="switch"></span>
-                    </div>
-                </li>
-                
-            </div>
-        </div>
-    </nav>
-
-  </header>
-   @* FIN DE NAVBAR VERTICALIZADO-------- *@
    
 
  
