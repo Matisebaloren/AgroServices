@@ -17,29 +17,27 @@
 <body>
 
 @* INICIO DE CODIGO SEARCH *@
-<header>
-  <div class="navbar nav navbar-fixed-top navbar-inverse">
-    <div class="container-fluid">
+<navbar>
+  <div>
+    <div>
       <div class="v-flex">
-        <div class="navbar-body">
-          <div class="navbar-start">
-            <div class="hamburger-menu">
-              <div class="ic_menu">
-            </div>
-            </div>
-          </div>
+        <div>
+          <div>
+            <div>
+              <div>
+              </div>
           <div class="search">
             <input type="text" class="search-textbox" placeholder="Search">
-          </div>
-          <div class="navbar-end">
-            <a style="text-transform: uppercase">Get in</a>
+            <a class="ico-btn search-btn"><i class="material-icons ic_search">&#xE8B6;</i></a>
+            <a class="ico-btn clear-btn"><i class="material-icons ic_clear">&#xE14C;</i></a>
           </div>
         </div>
       </div>
     </div>
   </div>
+</navbar>
 
-</header>
+
 
 @* FIN DE CODIGO SEARCH *@
 
@@ -130,7 +128,7 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/js/interfaz.js" asp-append-version="true"></script>
-    <script src="~/js/Search.js" asp-append-version="true"></script>
+    <script src="~/js/search.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

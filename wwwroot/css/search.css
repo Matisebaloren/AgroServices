@@ -130,7 +130,7 @@ navbar div.search{
     align-items: center;
     -webkit-align-items: center;
     height: 42px;
-    padding: 0 9px;
+    padding: 0 150px;
     overflow-x: hidden;
 }
 navbar div.search.focused{
@@ -257,16 +257,3 @@ navbar .tab-highlighter{
     transition: all 0.6s cubic-bezier(0.21, 0.61, 0.36, 1);
 }
 
-/*Keyframes*/
-@keyframes SwiftSlide {
-    100%{
-        margin-right: 0;
-        opacity: 1;
-    }
-}
-@keyframes SwiftSlideToRight {
-    100%{
-        opacity:0;
-        margin-right: -30px;
-    }
-}
