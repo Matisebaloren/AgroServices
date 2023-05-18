@@ -13,8 +13,7 @@ namespace AgroServices.Models
 
         public string? Contenido { get; set; }
 
-        public string? UsuarioNombre { get; set; }
-
+        public int UsuarioID { get; set; }
 
         public int PublicacionID { get; set; }
 
