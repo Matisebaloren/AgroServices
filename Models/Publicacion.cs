@@ -16,7 +16,9 @@ namespace AgroServices.Models
 
         public int UsuarioID { get; set; }
 
-        public virtual Usuario? Usuarios { get; set;}
+        public virtual Usuario? Usuario { get; set;}
+
+        //imagen
 
          public virtual ICollection<Valoracion>? Valoraciones { get; set; }
 

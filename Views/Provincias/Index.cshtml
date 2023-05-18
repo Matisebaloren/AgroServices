@@ -1,3 +1,60 @@
 @{
-    Layout = "_Layout";
+
+    ViewData["Title"] = "Home Page";
+}
+
+
+<!-- Modal -->
+<div class="modal fade" id="ModalCategoria" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content fondo2">
+      <div class="modal-header">
+        <h5 class="modal-title" id="tituloModal">Agregar Categoria</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="CategoriaID" value="0" />
+        <div>
+            <label class="control-label">Categoria</label>
+            <input type="text" class="form-control" id="Descripcion" autocomplete="off" onkeyup="this.value = this.value.toUpperCase()"/>
+            <p class="text-danger" id="alerta"></p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" onclick="GuardarCategoria()" class="btn btn-primary">Guardar Cambios</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="fondoTablas">
+    <h1 class="display-4">Categorias</h1>
+
+      <!-- Button trigger modal -->
+      
+
+ 
+  <table class="table table-bordered table-hover table-light table-condensed text-uppercase">
+    <thead>
+        <tr>
+            <th>Descripcion</th>
+            <th class="text-end">
+              <button type="button" onclick="VaciarFormulario()" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ModalCategoria">
+              Nuevo</button>
+            </th>
+        </tr>
+    </thead>
+        <tbody id="tbody-categorias">        
+        </tbody>
+  </table>
+</div>
+
+
+
+
+
+@section Scripts{
+    <script src="~/js/categoria-1.0.0.js"></script>
 }
