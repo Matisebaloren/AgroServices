@@ -1,0 +1,53 @@
+@{
+
+    ViewData["Title"] = "Home Page";
+}
+
+
+<!-- Modal -->
+<div class="modal fade" id="ModalValoracion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content fondo2">
+      <div class="modal-header">
+        <h5 class="modal-title" id="tituloModal">Agregar Valoracion</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="ValoracionID" value="0" />
+        <div>
+            <label class="control-label">Valoracion</label>
+            <input type="text" class="form-control" id="Descripcion" autocomplete="off" onkeyup="this.value = this.value.toUpperCase()"/>
+            <p class="text-danger" id="alerta"></p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" onclick="GuardarValoracion()" class="btn btn-primary">Guardar Cambios</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="fondoTablas">
+    <h1 class="display-4">Valoracion</h1>
+
+      <!-- Button trigger modal -->
+      
+
+  @* Tabla con los datos de cada elemento *@
+ 
+  <table class="table table-bordered table-hover table-light table-condensed text-uppercase">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th class="text-end">
+              <button type="button" onclick="VaciarFormulario()" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ModalProvincia">
+              Nuevo</button>
+            </th>
+        </tr>
+    </thead>
+        <tbody id="tbody-valoraciones">        
+        </tbody>
+  </table>
+</div>

@@ -68,11 +68,13 @@ $("#tbody-provincias").empty();
 
 
 
-// function VaciarFormulario(){
-//     $("#Descripcion").val('');
-//     $("#ProvinciaID").val(0);
-//     document.getElementById("tituloModal").innerHTML = "Agregar Provincia";
-// }
+function VaciarFormulario(){
+    $("#Nombre").val('');
+    $("#ProvinciaID").val(0);
+    document.getElementById("tituloModal").innerHTML = "Agregar Provincia";
+}
+
+
 
 // function BuscarProvincia(provinciaID){
 //         $.ajax({
