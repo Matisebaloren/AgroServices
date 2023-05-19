@@ -10,6 +10,8 @@ namespace AgroServices.Models
 
         public string? Nombre { get; set; }
 
+        public bool Eliminado { get; set; }
+
         public virtual ICollection<Localidad>? Localidades { get; set; }
 
 

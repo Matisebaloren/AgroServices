@@ -12,6 +12,9 @@ namespace AgroServices.Models
 
         public int ProvinciaID { get; set; }
 
+        
+        public bool Eliminado { get; set; }
+
         public virtual Provincia? provincias { get; set; }
 
         public virtual ICollection<Usuario>? Usuarios { get; set; }

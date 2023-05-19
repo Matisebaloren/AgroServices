@@ -14,9 +14,9 @@ namespace AgroServices.Models{
 
         public int Clasificacion { get; set; }
 
-        public  string? Telefono { get; set; }
+        public  string? Telefono { get; set; } //Preguntar si quitarlo
 
-        public string? Email { get; set; }
+        public string? Email { get; set; }  //Preguntar si quitarlo
 
         public string? Localidad { get; set; }
 

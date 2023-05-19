@@ -2,6 +2,8 @@ window.onload = BuscarProvincias();
 
 
 function BuscarProvincias(){
+    console.log("prueba uno")
+
 $("#tbody-provincias").empty();
 
     $.ajax({

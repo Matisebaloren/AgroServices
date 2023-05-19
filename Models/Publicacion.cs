@@ -18,6 +18,9 @@ namespace AgroServices.Models
 
         public virtual Usuario? Usuario { get; set;}
 
+        public bool Eliminado { get; set; }
+
+
         //imagen
 
          public virtual ICollection<Valoracion>? Valoraciones { get; set; }
