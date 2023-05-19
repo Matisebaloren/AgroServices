@@ -1,82 +1,53 @@
 @{
-    ViewData["Title"] = "Servicios";
+
+    ViewData["Title"] = "Home Page";
 }
 
 
-<body class="body6"> 
-  <!-- Modal -->
-<div class="modal fade" id="ModalServicio" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- Modal -->
+<div class="modal fade" id="ModalLocalidad" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
-    <div class="modal-content">
+    <div class="modal-content fondo2">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Agregar Servicio</h5>
+        <h5 class="modal-title" id="tituloModal">Agregar Localidad</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <input type="hidden" id="ServicoID" value="0" />
+        <input type="hidden" id="LocalidadID" value="0" />
         <div>
-            <label class="control-label">Servicio</label>
+            <label class="control-label">Publicacion</label>
             <input type="text" class="form-control" id="Descripcion" autocomplete="off" onkeyup="this.value = this.value.toUpperCase()"/>
-        </div>
-        <div>
-          <label class="control-label">Telefono</label>
-          <input type="text" class="form-control" id="Telefono" autocomplete="off" onkeyup="this.value = this.value.toUpperCase()"/>
-        </div>
-         <div>
-          <label class="control-label">Direcion</label>
-          <input type="text" class="form-control" id="Direcion" autocomplete="off" onkeyup="this.value = this.value.toUpperCase()"/>
-        </div>
-        <div>
-          <label class="control-label">
-            SubCategoria
-          </label>
-          @Html.DropDownList("SubCategoriaID", null, htmlAttributes: new {@class="form-control"})
+            <p class="text-danger" id="alerta"></p>
         </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-        <button type="button" onclick="GuardarServicio()" class="btn btn-primary">Guardar Cambios</button>
+        <button type="button" onclick="GuardarLocalidad()" class="btn btn-primary">Guardar Cambios</button>
       </div>
     </div>
   </div>
 </div>
 
 
-<div>
-    <h1 class="display-4">Servicio</h1>
+<div class="fondoTablas">
+    <h1 class="display-4">Localidades</h1>
 
-
-       @{if (User.Identity.IsAuthenticated){
-     
-      <div class="mb-2">
-        <button type="button" onclick="VaciarFormulario()" class="btn btn-primary boton2" data-bs-toggle="modal" data-bs-target="#ModalServicio">
-            Nuevo
-        </button>
-      </div>
-    } 
-    else{
-    }
-    }
-    
+      <!-- Button trigger modal -->
       
 
+  @* Tabla con los datos de cada elemento *@
  
-  <table class="table table-bordered table-striped table-condensed">
+  <table class="table table-bordered table-hover table-light table-condensed text-uppercase">
     <thead>
         <tr>
-            <th>Descripcion</th>
-            <th>telefono</th>
-            <th>Direcion</th>
+            <th>Nombre</th>
+            <th class="text-end">
+              <button type="button" onclick="VaciarFormulario()" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ModalProvincia">
+              Nuevo</button>
+            </th>
         </tr>
-      
     </thead>
-        <tbody id="tbody-servicios">        
+        <tbody id="tbody-localidades">        
         </tbody>
   </table>
 </div>
-
-</body>
-
-@section Scripts{
-    <script src="~/js/servicios-1.0.0.js"></script>
-}
