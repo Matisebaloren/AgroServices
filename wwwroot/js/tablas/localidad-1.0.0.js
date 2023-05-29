@@ -2,7 +2,6 @@ window.onload = BuscarLocalidades();
 
 
 function BuscarLocalidades(){
-    console.log("prueba uno")
 
 $("#tbody-localidades").empty();
 
@@ -22,11 +21,11 @@ $("#tbody-localidades").empty();
         success : function(localidades) { 
             $("#tbody-localidades").empty();
             let BotonDeshabilitado = '';
-            $.each(localidades, function(index, localidades) {
-                if(localidades.eliminado == true){
+            $.each(localidades, function(index, localidad) {
+                if(localidad.eliminado == true){
                     BotonDeshabilitado = `
                     <tr class="table-danger" >
-                        <td> ${localidades.nombre}</td>
+                        <td> ${localidad.nombre}</td>
                         <td class=" text-end">
                             <a class="btn btn-eliminar btn-habilitar" onClick="DeshabilitarLocalidad('${localidad.localidadID}')" role="button"></a>
                         </td>
@@ -65,9 +64,6 @@ $("#tbody-localidades").empty();
 }
 
 
-
-
-
 function VaciarFormulario(){
     $("#Nombre").val('');
     $("#LocalidadID").val(0);
@@ -75,160 +71,162 @@ function VaciarFormulario(){
 }
 
 
-
-// function BuscarProvincia(provinciaID){
-//         $.ajax({
-//         // la URL para la petición
-//         url : '../../Provincias/BuscarProvincias',
-//         // la información a enviar
-//         // (también es posible utilizar una cadena de datos)
-//         data : { provinciaID: provinciaID },    
-//         // especifica si será una petición POST o GET
-//         type : 'GET',
-//         // el tipo de información que se espera de respuesta
-//         dataType : 'json',
-//         // código a ejecutar si la petición es satisfactoria;
-//         // la respuesta es pasada como argumento a la función
-//         success : function(provincias) {
-           
-//             if (provincias.length == 1){
-//                 let provincia = provincias[0];
-//                 $("#Descripcion").val(provincia.descripcion);
-//                 $("#ProvinciaID").val(provincia.provinciaID);
-//                 document.getElementById("tituloModal").innerHTML = "Editar Provincia";
-//                 $("#ModalProvincia").modal("show");
-//             }
-//         },
-   
-//         // código a ejecutar si la petición falla;
-//         // son pasados como argumentos a la función
-//         // el objeto de la petición en crudo y código de estatus de la petición
-//         error : function(xhr, status) {
-//             alert('Error al cargar provincias');
-//             document.getElementById("alerta").innerHTML = "Error al cargar provincias";
-//         },
-   
-//         // código a ejecutar sin importar si la petición falló o no
-//         complete : function(xhr, status) {
-//             //alert('Petición realizada');
-//         }
-//     });
-// }
-
-
-// function DeshabilitarProvincia(provinciaID){
-//     let Deshabilitar = true;
-//     $.ajax({
-//     // la URL para la petición
-//     url : '../../Provincias/BuscarProvincias',
-//     // la información a enviar
-//     // (también es posible utilizar una cadena de datos)
-//     data : { provinciaID: provinciaID, Deshabilitar: Deshabilitar},    
-//     // especifica si será una petición POST o GET
-//     type : 'GET',
-//     // el tipo de información que se espera de respuesta
-//     dataType : 'json',
-//     // código a ejecutar si la petición es satisfactoria;
-//     // la respuesta es pasada como argumento a la función
-//     success : function(provincias) {
-//         if(provincias == null){
-//             alert("Nasatadas");
-//         }
-        
+function BuscarLocalidad(localidadID){
+    $.ajax({
+    // la URL para la petición
+    url : '../../Localidades/BuscarLocalidades',
+    // la información a enviar
+    // (también es posible utilizar una cadena de datos)
+    data : { localidadID: localidadID },    
+    // especifica si será una petición POST o GET
+    type : 'GET',
+    // el tipo de información que se espera de respuesta
+    dataType : 'json',
+    // código a ejecutar si la petición es satisfactoria;
+    // la respuesta es pasada como argumento a la función
+    success : function(localidades) {
        
-//         BuscarProvincias();
-//     },
+        if (localidades.length == 1){
+            let localidad = localidades[0];
+            $("#Nombre").val(localidad.nombre);
+            $("#LocalidadID").val(localidad.localidadID);
+            $("#ProvinciaID").val(localidad.provinciaID);
+            document.getElementById("tituloModal").innerHTML = "Editar Localidad";
+            $("#ModalLocalidad").modal("show");
+        }
+    },
 
-//     // código a ejecutar si la petición falla;
-//     // son pasados como argumentos a la función
-//     // el objeto de la petición en crudo y código de estatus de la petición
-//     error : function(xhr, status) {
-//         const Toast = Swal.mixin({
-//             toast: true,
-//             position: 'top-end',
-//             showConfirmButton: false,
-//             timer: 3000,
-//             timerProgressBar: true,
-//             didOpen: (toast) => {
-//             toast.addEventListener('mouseenter', Swal.stopTimer)
-//             toast.addEventListener('mouseleave', Swal.resumeTimer)
-//         }
-//         })
-//             Toast.fire({
-//             icon: 'error',
-//             title: 'Aún se encuentran Subprovincias asociadas habilitadas'
-//         })
-//     },
+    // código a ejecutar si la petición falla;
+    // son pasados como argumentos a la función
+    // el objeto de la petición en crudo y código de estatus de la petición
+    error : function(xhr, status) {
+        alert('Error al cargar localidades');
+        document.getElementById("alerta").innerHTML = "Error al cargar localidades";
+    },
 
-//     // código a ejecutar sin importar si la petición falló o no
-//     complete : function(xhr, status) {
-//         //alert('Petición realizada');
-//     }
-// });
-// }
+    // código a ejecutar sin importar si la petición falló o no
+    complete : function(xhr, status) {
+        //alert('Petición realizada');
+    }
+});
+}
 
 
-
-
-// function GuardarProvincia(){
-//     //JAVASCRIPT
-//     let descripcion1 = document.getElementById("Descripcion").value;
-//     let descripcion2 = $("#Descripcion").val();
-//     let provinciaID = $("#ProvinciaID").val();
-//     $.ajax({
-//         // la URL para la petición
-//         url : '../../Provincias/GuardarProvincia',
-//         // la información a enviar
-//         // (también es posible utilizar una cadena de datos)
-//         data : { provinciaID : provinciaID, descripcion : descripcion1 },    
-//         // especifica si será una petición POST o GET
-//         type : 'POST',
-//         // el tipo de información que se espera de respuesta
-//         dataType : 'json',
-//         // código a ejecutar si la petición es satisfactoria;
-//         // la respuesta es pasada como argumento a la función
-//         success : function(resultado) {  
-//             const Toast = Swal.mixin({
-//                 toast: true,
-//                 position: 'top-end',
-//                 showConfirmButton: false,
-//                 timer: 3000,
-//                 timerProgressBar: true,
-//                 didOpen: (toast) => {
-//                 toast.addEventListener('mouseenter', Swal.stopTimer)
-//                 toast.addEventListener('mouseleave', Swal.resumeTimer)
-//             }
-//             })
-//             if(resultado == "faltas"){
-//                 Toast.fire({
-//                 icon: 'error',
-//                 title: 'Complete el campo'
-//                 })
-//             }
-//             if(resultado == "repetir"){
-//                 Toast.fire({
-//                 icon: 'error',
-//                 title: 'La Provincia ya existe'
-//                 })
-//             }
+function GuardarLocalidad(){
+    //JAVASCRIPT
+    let nombre = $("#Nombre").val();
+    let localidadID = $("#LocalidadID").val();
+    let provinciaID = $("#ProvinciaID").val();
+    console.log(nombre+" "+localidadID)
+    $.ajax({
+        // la URL para la petición
+        url : '../../Localidades/GuardarLocalidad',
+        // la información a enviar
+        // (también es posible utilizar una cadena de datos)
+        data : { localidadID : localidadID, nombre : nombre, provinciaID : provinciaID },    
+        // especifica si será una petición POST o GET
+        type : 'POST',
+        // el tipo de información que se espera de respuesta
+        dataType : 'json',
+        // código a ejecutar si la petición es satisfactoria;
+        // la respuesta es pasada como argumento a la función
+        success : function(resultado) {
+            console.log(resultado);
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+            })
             
-//             if(resultado == "crear"){
-//                 $("#ModalProvincia").modal("hide");
-//                 BuscarProvincias();
-//             }  
-//         //    else{
-//         //         document.getElementById("alerta").innerHTML = "Existe una Categoría con la misma descripción.";
-//         //         alert("Existe una Categoría con la misma descripción.");
-               
-//         //    }
-//         },
+            if(resultado == "faltas"){
+                Toast.fire({
+                icon: 'error',
+                title: 'Complete todos los campos'
+                })
+            }
+            if(resultado == "repetir"){
+                Toast.fire({
+                icon: 'error',
+                title: 'La Localidad ya existe'
+                })
+            }
+            if(resultado == "Crear"){
+                
+                $("#ModalLocalidad").modal("hide");
+                BuscarLocalidades();
+            }        
+
+        },
    
-//         // código a ejecutar si la petición falla;
-//         // son pasados como argumentos a la función
-//         // el objeto de la petición en crudo y código de estatus de la petición
-//         error : function(xhr, status) {
-//             alert('Disculpe, existió un problema');
-//         }
-//     });
-// }
+        // código a ejecutar si la petición falla;
+        // son pasados como argumentos a la función
+        // el objeto de la petición en crudo y código de estatus de la petición
+        error : function(xhr, status) {
+            alert('Disculpe, existió un problema');
+        }
+    });
+}
+
+function DeshabilitarLocalidad(localidadID){
+    console.log("hola")
+
+    $.ajax({
+    // la URL para la petición
+    url : '../../Localidades/Deshabilitar',
+    // la información a enviar
+    // (también es posible utilizar una cadena de datos)
+    data : { localidadID: localidadID},    
+    // especifica si será una petición POST o GET
+    type : 'GET',
+    // el tipo de información que se espera de respuesta
+    dataType : 'json',
+    // código a ejecutar si la petición es satisfactoria;
+    // la respuesta es pasada como argumento a la función
+    success : function(resultado) {
+        console.log(resultado);
+       if(resultado == "error"){
+        alert("Imposible Habilitar una localidad con categorias deshabilitadas")
+       }
+       if(resultado == "serviciosHabilitados"){
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+            })
+                Toast.fire({
+                icon: 'error',
+                title: 'Aún se encuentran servicios asociados habilitados'
+            })
+            
+       }
+       if(resultado == "cambiar"){
+        BuscarLocalidades();
+       }
+    },
+
+    // código a ejecutar si la petición falla;
+    // son pasados como argumentos a la función
+    // el objeto de la petición en crudo y código de estatus de la petición
+    error : function(xhr, status) {
+        alert('Error al cargar localidades');
+    },
+
+    // código a ejecutar sin importar si la petición falló o no
+    complete : function(xhr, status) {
+        //alert('Petición realizada');
+    }
+});
+}
 

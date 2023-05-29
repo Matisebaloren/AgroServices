@@ -1,3 +1,6 @@
+@model AgroServices.Models.Localidad
+
+
 @{
 
     ViewData["Title"] = "Home Page";
@@ -15,8 +18,12 @@
       <div class="modal-body">
         <input type="hidden" id="LocalidadID" value="0" />
         <div>
-            <label class="control-label">Publicacion</label>
-            <input type="text" class="form-control" id="Descripcion" autocomplete="off" onkeyup="this.value = this.value.toUpperCase()"/>
+            <label class="control-label">Nombre de Localidad</label>
+            <input type="text" class="form-control" id="Nombre" autocomplete="off" onkeyup="this.value = this.value.toUpperCase()"/>
+            
+            <label class="control-label">provincia</label>
+            <select asp-for="ProvinciaID" class ="form-control" id="ProvinciaID" asp-items="ViewBag.ProvinciaID"></select>
+            
             <p class="text-danger" id="alerta"></p>
         </div>
       </div>
@@ -42,7 +49,7 @@
         <tr>
             <th>Nombre</th>
             <th class="text-end">
-              <button type="button" onclick="VaciarFormulario()" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ModalProvincia">
+              <button type="button" onclick="VaciarFormulario()" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ModalLocalidad">
               Nuevo</button>
             </th>
         </tr>
@@ -51,3 +58,7 @@
         </tbody>
   </table>
 </div>
+
+@section Scripts{
+    <script src="~/js/tablas/localidad-1.0.0.js"></script>
+}

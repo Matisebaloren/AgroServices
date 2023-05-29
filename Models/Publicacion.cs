@@ -10,7 +10,7 @@ namespace AgroServices.Models
 
         public bool ClasificacionOferta { get; set; }
 
-        public int Titulo { get; set; }
+        public string? Titulo { get; set; }
 
         public string? Descripcion { get; set; }
 
@@ -19,7 +19,6 @@ namespace AgroServices.Models
         public virtual Usuario? Usuario { get; set;}
 
         public bool Eliminado { get; set; }
-
 
         //imagen
 
