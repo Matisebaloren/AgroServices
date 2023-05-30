@@ -8,7 +8,6 @@ namespace AgroServices.Controllers;
 public class PublicacionesController : Controller
 {
     private readonly ILogger<PublicacionesController> _logger;
-
     private AgroServicesDbContext _contexto;
 
     public PublicacionesController(ILogger<PublicacionesController> logger, AgroServicesDbContext contexto)
@@ -22,4 +21,5 @@ public class PublicacionesController : Controller
         return View();
     }
 
+    
 }

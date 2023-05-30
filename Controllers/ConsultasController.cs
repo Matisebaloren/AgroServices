@@ -7,8 +7,7 @@ namespace AgroServices.Controllers;
 
 public class ConsultasController : Controller
 {
-    private readonly ILogger<ConsultasController> _logger;
-
+private readonly ILogger<ConsultasController> _logger;
     private AgroServicesDbContext _contexto;
 
     public ConsultasController(ILogger<ConsultasController> logger, AgroServicesDbContext contexto)
@@ -22,4 +21,6 @@ public class ConsultasController : Controller
         return View();
     }
 
+    
 }
+

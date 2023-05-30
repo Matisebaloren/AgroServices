@@ -8,7 +8,6 @@ namespace AgroServices.Controllers;
 public class ValoracionesController : Controller
 {
     private readonly ILogger<ValoracionesController> _logger;
-
     private AgroServicesDbContext _contexto;
 
     public ValoracionesController(ILogger<ValoracionesController> logger, AgroServicesDbContext contexto)
@@ -22,4 +21,6 @@ public class ValoracionesController : Controller
         return View();
     }
 
+   
 }
+

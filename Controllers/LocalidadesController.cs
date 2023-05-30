@@ -9,7 +9,6 @@ namespace AgroServices.Controllers;
 public class LocalidadesController : Controller
 {
     private readonly ILogger<LocalidadesController> _logger;
-
     private AgroServicesDbContext _contexto;
 
     public LocalidadesController(ILogger<LocalidadesController> logger, AgroServicesDbContext contexto)
