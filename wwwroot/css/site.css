@@ -105,7 +105,7 @@ body.dark {
 .sidebar {
   background-color: var(--white-color);
   width: 260px;
-  position: fixed;
+  position: fixed !important;
   top: 0;
   left: 0;
   height: 100%;
@@ -222,7 +222,7 @@ body.dark {
   padding: 15px 15px 15px 52px;
 }
 .bottom_content {
-  position: fixed;
+  /* position: fixed; */
   bottom: 60px;
   left: 0;
   width: 260px;
@@ -261,6 +261,9 @@ body.dark {
 #sidebarOpen {
   display: none;
 }
+
+
+
 @media screen and (max-width: 768px) {
   #sidebarOpen {
     font-size: 25px;
@@ -268,9 +271,12 @@ body.dark {
     margin-right: 10px;
     cursor: pointer;
     color: var(--grey-color);
+    
   }
   .sidebar.close {
     left: -100%;
+    position: fixed !important;
+
   }
   .search_bar {
     display: none;
@@ -278,6 +284,10 @@ body.dark {
   .sidebar.close .bottom_content {
     left: -100%;
   }
+}
+
+.sidebar{
+  position: relative; ;
 }
 
 .imgLogo{
@@ -289,30 +299,5 @@ body.dark {
   padding-top: 12vh;
 }
 
-/* botones de tablas */
+/* pruebas */
 
-.btn-eliminar{
-  background-image: url(../img/x.svg);
-  background-color: #0400ff00;
-  background-repeat: no-repeat;
-  background-size: contain;
-  filter: invert(23%) sepia(100%) saturate(2024%) hue-rotate(337deg) brightness(94%) contrast(85%);
-  width: 2em;
-  height: 2em; 
-}
-
-.btn-eliminar:hover{
-  filter: grayscale(100%);
-}
-
-.btn-editar{
-  background-image: url(../img/pen.svg);
-  filter: invert(34%) sepia(66%) saturate(5719%) hue-rotate(214deg) brightness(106%) contrast(105%); 
-}
-
-.btn-habilitar{
-  background-image: url(../img/check.svg);
-  filter: invert(29%) sepia(78%) saturate(4052%) hue-rotate(145deg) brightness(90%) contrast(80%);
-}
-
-/* fin de botones de */
