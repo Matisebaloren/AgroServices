@@ -71,7 +71,6 @@ public class ProvinciasController : Controller
                     var provinciaEditar = _contexto.Provincias.Find(provinciaID);
                     if(provinciaEditar != null){
                         provinciaEditar.Nombre = nombre;
-                        provinciaEditar.ProvinciaID = provinciaID;
                         _contexto.SaveChanges();
                             resultado = "Crear";
                     }

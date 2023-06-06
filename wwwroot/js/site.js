@@ -56,7 +56,7 @@ submenuItems.forEach((item, index) => {
 
 // CREANDO FILTRADO DE BUSQUEDA INTERNO
 
-document.getElementById("inputSearch").addEventListener("keyup", buscador_interno);
+// document.getElementById("inputSearch").addEventListener("keyup", buscador_interno);
 
 function buscador_interno(){
 
