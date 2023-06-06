@@ -1,95 +1,104 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-
-
-
-
-@* COMIENZO DE CODIGO PARA EL CARROUSEL *@
-
-@* FIN DE CODIGO PARA EL CARROUSEL *@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-@* COMIENZO DE CODIGO DE TARJETAS PARA DIFERENTES FILTROS *@
-<section class="wrapper">
-    <div class="container-fostrap">
-        <div>
-        </div>
-        <div class="content">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-4">
-                        <div class="card">
-                            <a class="img-card" href="http://www.fostrap.com/2016/03/bootstrap-3-carousel-fade-effect.html">
-                            <img src="https://www.deere.com.ar/assets/images/region-3/products/harvesters/platforms/plataforma_1366x768.jpg" />
-                          </a>
-                            <div class="card-content">
-                                <h4 class="card-title">
-                                    <a href="http://www.fostrap.com/2016/03/bootstrap-3-carousel-fade-effect.html"> Trillado
-                                  </a>
-                                </h4>
-                            </div>
-                            <div class="card-read-more">
-                                <a href="http://www.fostrap.com/2016/03/bootstrap-3-carousel-fade-effect.html" class="btn btn-link btn-block">
-                                    Acceder
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-sm-4">
-                        <div class="card">
-                            <a class="img-card" href="http://www.fostrap.com/2016/03/5-button-hover-animation-effects-css3.html">
-                            <img src="https://www.deere.es/assets/images/region-2/products/self-propelled-forage-harvesters/9000-series/9000_series_r2c021456_large_large_b5c8cb1c6b7d3065dc4e0d3816a216081a1998f1.jpg" />
-                          </a>
-                            <div class="card-content">
-                                <h4 class="card-title">
-                                    <a href="http://www.fostrap.com/2016/02/awesome-material-design-responsive-menu.html"> Picado
-                                  </a>
-                                </h4>
-                            </div>
-                            <div class="card-read-more">
-                                <a href="https://codepen.io/wisnust10/full/ZWERZK/" class="btn btn-link btn-block">
-                                    Acceder
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-sm-4">
-                        <div class="card">
-                            <a class="img-card" href="http://www.fostrap.com/2016/03/5-button-hover-animation-effects-css3.html">
-                            <img src="https://www.deere.com.ar/assets/images/region-3/products/drills/plantadora.jpg" />
-                          </a>
-                            <div class="card-content">
-                                <h4 class="card-title">
-                                    <a href="http://www.fostrap.com/2016/03/5-button-hover-animation-effects-css3.html"> Sembrado
-                                  </a>
-                                </h4>
-                            </div>
-                            <div class="card-read-more">
-                                <a href="http://www.fostrap.com/2016/03/5-button-hover-animation-effects-css3.html" class="btn btn-link btn-block">
-                                    Acceder
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+@* COMIENZO DE CODIGO DE CARROUSEL--------------- *@
+<div id="carouselExampleIndicators" class="carousel slide">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="https://agrotecnica.online/wp-content/uploads/2019/12/r2g017866_tech_LSC_web.jpg" class="d-block w-100" alt="...">
     </div>
-</section>
-@* FIN DE CODIGO DE TARJETAS PARA DIFERENTES FILTROS *@
+    <div class="carousel-item">
+      <img src="https://e00-marca.uecdn.es/assets/multimedia/imagenes/2016/08/04/14702956354018.jpg" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="https://img.interempresas.net/fotos/3333810.jpeg" class="d-block w-100" alt="...">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+@* FIN DE CODIGO DE CARROUSEL-------------- *@
+
+
+
+@* COMIENZO DE CODIGO DE TARJETAS PARA DIFERENTES FILTROS------------------- *@
+      <section class="main-course">
+        <div class="course-box">
+          <ul>
+            <li class="active">Explorar</li>
+          </ul>
+          <div class="course">
+            <div class="box">
+              <h3>HTML</h3>
+              <p>80% - progress</p>
+              <button>continue</button>
+              <i class="fab fa-html5 html"></i>
+            </div>
+            <div class="box">
+              <h3>CSS</h3>
+              <p>50% - progress</p>
+              <button>continue</button>
+              <i class="fab fa-css3-alt css"></i>
+            </div>
+            <div class="box">
+              <h3>JavaScript</h3>
+              <p>30% - progress</p>
+              <button>continue</button>
+              <i class="fab fa-js-square js"></i>
+            </div>
+          </div>
+        </div>
+      </section>
+            <section class="main-course">
+        <div class="course-box">
+          <div class="course">
+            <div class="box">
+              <h3>HTML</h3>
+              <p>80% - progress</p>
+              <button>continue</button>
+              <i class="fab fa-html5 html"></i>
+            </div>
+            <div class="box">
+              <h3>CSS</h3>
+              <p>50% - progress</p>
+              <button>continue</button>
+              <i class="fab fa-css3-alt css"></i>
+            </div>
+            <div class="box">
+              <h3>JavaScript</h3>
+              <p>30% - progress</p>
+              <button>continue</button>
+              <i class="fab fa-js-square js"></i>
+            </div>
+          </div>
+        </div>
+      </section>
+@* FIN DE CODIGO DE TARJETAS PARA DIFERENTES FILTROS -----------------*@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
