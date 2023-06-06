@@ -1,16 +1,4 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
-
-// Write your JavaScript code.
-
-// $('.button-collapse').sideNav();
-
-// $('.collapsible').collapsible();
-
-// $('select').material_select();
-
-//FUNCIONES DEL NAVBAR VERTICALIZADO
-const body = document.querySelector("body");
+﻿const body = document.querySelector("body");
 const darkLight = document.querySelector("#darkLight");
 const sidebar = document.querySelector(".sidebar");
 const submenuItems = document.querySelectorAll(".submenu_item");
@@ -19,12 +7,12 @@ const sidebarClose = document.querySelector(".collapse_sidebar");
 const sidebarExpand = document.querySelector(".expand_sidebar");
 sidebarOpen.addEventListener("click", () => sidebar.classList.toggle("close"));
 
-sidebarClose.addEventListener("click", () => {
-  sidebar.classList.add("close", "hoverable");
-});
-sidebarExpand.addEventListener("click", () => {
-  sidebar.classList.remove("close", "hoverable");
-});
+// sidebarClose.addEventListener("click", () => {
+//   sidebar.classList.add("close", "hoverable");
+// });
+// sidebarExpand.addEventListener("click", () => {
+//   sidebar.classList.remove("close", "hoverable");
+// });
 
 sidebar.addEventListener("mouseenter", () => {
   if (sidebar.classList.contains("hoverable")) {
@@ -58,11 +46,11 @@ submenuItems.forEach((item, index) => {
   });
 });
 
-if (window.innerWidth < 768) {
-  sidebar.classList.add("close");
-} else {
-  sidebar.classList.remove("close");
-}
+// if (window.innerWidth < 768) {
+//   sidebar.classList.add("close");
+// } else {
+//   sidebar.classList.remove("close");
+// }
 
 //FIN DE FUNCIONES DEL NAVBAR VERTICALIZADO
 

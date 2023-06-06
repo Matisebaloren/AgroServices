@@ -3,6 +3,7 @@ using AgroServices.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AgroServices.Migrations.AgroServicesDb
 {
     [DbContext(typeof(AgroServicesDbContext))]
-    partial class AgroServicesDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230601003857_ModificacionModel_Usuario")]
+    partial class ModificacionModel_Usuario
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -135,13 +137,22 @@ namespace AgroServices.Migrations.AgroServicesDb
                     b.Property<string>("Apellido")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("Eliminado")
-                        .HasColumnType("bit");
+                    b.Property<int>("Clasificacion")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Localidad")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("LocalidadID")
                         .HasColumnType("int");
 
                     b.Property<string>("Nombre")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Telefono")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("UsuarioID");

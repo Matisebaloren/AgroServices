@@ -6,6 +6,7 @@
     <title>@ViewData["Title"] - AgroServices</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/botonesInicio.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/AgroServices.styles.css" asp-append-version="true" />
 
     @* links par el nav Nuevo *@
@@ -32,8 +33,15 @@
       </div>
     </nav>
 
+
+    <div class="hstack gap-2">
+
+
+
+    
     <!-- sidebar -->
-    <nav class="sidebar hover hoverable close">
+    <nav class="sidebar hoverable close
+    ">
       <div class="menu_content">
         <ul class="menu_items">
           <div class="menu_title menu_dahsboard"></div>
@@ -150,10 +158,10 @@
               <span class="navlink">Features</span>
             </a>
           </li>
-        </ul>
+        @* </ul> *@
 
         <!-- Sidebar Open / Close -->
-        <div class="bottom_content">
+        @* <div class="bottom_content">
           <div class="bottom expand_sidebar">
             <span> Expand</span>
             <i class='bx bx-log-in' ></i>
@@ -162,7 +170,8 @@
             <span> Collapse</span>
             <i class='bx bx-log-out'></i>
           </div>
-        </div>
+        </div> *@
+        </ul>
       </div>
     </nav>
 
@@ -206,6 +215,8 @@
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
+    </div>
+
     </div>
 
     @* <footer class="border-top footer text-muted">
