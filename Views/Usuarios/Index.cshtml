@@ -7,15 +7,15 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="ModalLocalidad" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="ModalUsuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content fondo2">
       <div class="modal-header">
-        <h5 class="modal-title" id="tituloModal">Agregar Localidad</h5>
+        <h5 class="modal-title" id="tituloModal">Agregar Usuario</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <input type="hidden" id="UsuarioID" value="0" />
+        <input type="" id="UsuarioID" value="0" />
         <div>
             <label class="control-label">Nombre</label>
             <input type="text" class="form-control" id="Nombre" autocomplete="off" onkeyup="this.value = this.value.toUpperCase()"/>
@@ -26,8 +26,8 @@
             @* <label class="control-label">Email</label>
             <input type="email" class="form-control" id="Email" autocomplete="off" onkeyup="this.value = this.value.toUpperCase()"/> *@
 
-            <label class="control-label">Telefono</label>
-            <input type="tel" class="form-control" id="Telefono" autocomplete="off" onkeyup="this.value = this.value.toUpperCase()"/>
+            @* <label class="control-label">Telefono</label>
+            <input type="tel" class="form-control" id="Telefono" autocomplete="off" onkeyup="this.value = this.value.toUpperCase()"/> *@
 
             <label class="control-label">Localidad</label>
             <select asp-for="LocalidadID" class ="form-control" id="LocalidadID" asp-items="ViewBag.LocalidadID"></select>
@@ -37,7 +37,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-        <button type="button" onclick="GuardarLocalidad()" class="btn btn-primary">Guardar Cambios</button>
+        <button type="button" onclick="GuardarUsuario()" class="btn btn-primary">Guardar Cambios</button>
       </div>
     </div>
   </div>
@@ -58,8 +58,11 @@
     <thead>
         <tr>
             <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Provincia</th>
+            <th>Localidad</th>
             <th class="text-end">
-              <button type="button" onclick="VaciarFormulario()" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ModalProvincia">
+              <button type="button" onclick="VaciarFormulario()" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ModalUsuario">
               Nuevo</button>
             </th>
         </tr>
@@ -68,3 +71,8 @@
         </tbody>
   </table>
 </div>
+
+
+@section Scripts{
+    <script src="~/js/tablas/usuario-1.0.0.js"></script>
+}

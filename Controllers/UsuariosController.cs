@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using AgroServices.Data;
 using AgroServices.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AgroServices.Controllers;
 
@@ -19,23 +21,41 @@ public class UsuariosController : Controller
 
     public IActionResult Index()
     {
-        var localidades = _contexto.Localidades.Where(c => c.Eliminado == false).ToList(); 
-        ViewBag.LocalidadID = new SelectList(localidades, "LocalidadID", "Nombre");       
+        var localidades = _contexto.Localidades.Where(c => c.Eliminado == false).ToList();
+        ViewBag.LocalidadID = new SelectList(localidades, "LocalidadID", "Nombre");
         return View();
     }
 
-     // Busca usuarios para la tabla
+    // Busca usuarios para la tabla
     public JsonResult BuscarUsuarios(int usuarioID = 0)
     {
-        var usuarios = _contexto.Usuarios.ToList();
-        
+        List<VistaUsuario> UsuariosMostrar = new List<VistaUsuario>();
+        var usuarios = _contexto.Usuarios.Include(s => s.Localidades)
+            .Include(s => s.Localidades.provincias)
+            .ToList();
+
         if (usuarioID > 0)
-        {   
+        {
             usuarios = usuarios.Where(p => p.UsuarioID == usuarioID).OrderBy(p => p.Nombre).ToList();
         }
-        
-        _contexto.SaveChanges();
-        return Json(usuarios);
+        foreach (var usuario in usuarios)
+        {
+            var UsuarioMostrar = new VistaUsuario
+            {
+                UsuarioID = usuario.UsuarioID,
+                Nombre = usuario.Nombre,
+                Apellido = usuario.Apellido,
+                LocalidadDescripcion = usuario.Localidades.Nombre,
+                LocalidadID = usuario.LocalidadID,
+                ProvinciaDescripcion = usuario.Localidades.provincias.Nombre,
+                Eliminado = usuario.Eliminado
+            };
+            UsuariosMostrar.Add(UsuarioMostrar);
+        };
+
+
+
+        return Json(UsuariosMostrar);
     }
 
     // crea o modifica elemento de la base de datos
@@ -45,15 +65,19 @@ public class UsuariosController : Controller
         string resultado = "Error";
 
         //verificamos si Nombre esta completo
-        if (!string.IsNullOrEmpty(nombre)){     
-                        //SI ES 0 QUIERE DECIR QUE ESTA CREANDO EL ELEMENTO
-            if(usuarioID == 0){
+        if (!string.IsNullOrEmpty(nombre))
+        {
+            //SI ES 0 QUIERE DECIR QUE ESTA CREANDO EL ELEMENTO
+            if (usuarioID == 0)
+            {
                 //BUSCAMOS EN LA TABLA SI EXISTE UNA CON LA MISMO NOMBRE
                 var usuarioOriginal = _contexto.Usuarios.Where(c => c.Nombre == nombre).FirstOrDefault();
-                if(usuarioOriginal == null){
-                
+                if (usuarioOriginal == null)
+                {
+
                     //DECLARAMOS EL OBJETO DANDO EL VALOR
-                    var UsuarioGuardar = new Usuario{
+                    var UsuarioGuardar = new Usuario
+                    {
                         Nombre = nombre,
                         Apellido = apellido,
                         LocalidadID = localidadID
@@ -63,33 +87,38 @@ public class UsuariosController : Controller
                     resultado = "Crear";
 
                 }
-                else{
+                else
+                {
                     resultado = "repetir";
                 }
             }
-            else{
+            else
+            {
                 //BUSCAMOS EN LA TABLA SI EXISTE UNA CON LA MISMA DESCRIPCION Y DISTINTO ID DE REGISTRO AL QUE ESTAMOS EDITANDO
                 var usuarioOriginal = _contexto.Usuarios.Where(c => c.Nombre == nombre && c.UsuarioID != usuarioID).Count();
                 // var categoriaIguales = categoriaOriginal.Where(c => c.CategoriaID == categoriaID).Count();
-                if(usuarioOriginal == 0){
+                if (usuarioOriginal == 0)
+                {
                     //crear variable que guarde el objeto segun el id deseado
                     var usuarioEditar = _contexto.Usuarios.Find(usuarioID);
-                    if(usuarioEditar != null){
-                        usuarioEditar.UsuarioID = usuarioID;
+                    if (usuarioEditar != null)
+                    {
                         usuarioEditar.Nombre = nombre;
-                        usuarioEditar.UsuarioID = usuarioID;
+                        usuarioEditar.Apellido = apellido;
                         usuarioEditar.LocalidadID = localidadID;
                         _contexto.SaveChanges();
                         resultado = "Crear";
                     }
-                    
+
                 }
-                else{
+                else
+                {
                     resultado = "repetir";
                 }
-            }                          
+            }
         }
-        else{
+        else
+        {
             resultado = "faltas";
         }
 
@@ -97,27 +126,28 @@ public class UsuariosController : Controller
     }
 
 
-    public JsonResult Deshabilitar(int usuarioID){
-     String resultado = "error";
-     var usuario = _contexto.Usuarios.Where(c => c.UsuarioID == usuarioID).FirstOrDefault();
-    // var categoriaDeshabilitada = _contexto.Categorias.Where(c => c.Eliminado == true && c.CategoriaID == usuario.Categoria.CategoriaID).Count();
-    // var servicios = _contexto.Servicios.Where(s => s.Eliminado == false && s.UsuarioID == usuarioID).Count();
-   
+    public JsonResult Deshabilitar(int usuarioID)
+    {
+        String resultado = "error";
+        var usuario = _contexto.Usuarios.Where(c => c.UsuarioID == usuarioID).FirstOrDefault();
+        // var categoriaDeshabilitada = _contexto.Categorias.Where(c => c.Eliminado == true && c.CategoriaID == usuario.Categoria.CategoriaID).Count();
+        // var servicios = _contexto.Servicios.Where(s => s.Eliminado == false && s.UsuarioID == usuarioID).Count();
+
         if (usuario.Eliminado == true)
         {
             usuario.Eliminado = false;
-            
+
         }
         else
         {
             usuario.Eliminado = true;
-            
+
         }
         resultado = "cambiar";
-            
+
         _contexto.SaveChanges();
-    
-     return Json(resultado);
+
+        return Json(resultado);
     }
 }
 
