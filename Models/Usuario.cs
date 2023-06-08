@@ -40,6 +40,9 @@ public class VistaUsuario{
 
     public string LocalidadDescripcion { get; set; }
 
+    [DataType(DataType.Date)]
+    public DateTime Fecha { get; set; }
+
     public int ProvinciaID { get; set; }
 
     public string ProvinciaDescripcion { get; set; }

@@ -25,9 +25,11 @@ namespace AgroServices.Models
 
         //imagen
 
-         public virtual ICollection<Valoracion>? Valoraciones { get; set; }
+        public virtual ICollection<Valoracion>? Valoraciones { get; set; }
 
-         public virtual ICollection<Consulta>? Consultas { get; set; }
+        //  public virtual ICollection<Consulta>? Consultas { get; set; }
+
+        public virtual ICollection<Solicitud>? Solicitudes { get; set; }
  
     }
 }

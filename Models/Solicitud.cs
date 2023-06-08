@@ -3,14 +3,14 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AgroServices.Models
 {
-    public class Valoracion
+    public class Solicitud
     {
         [Key]
-        public int ValoracionID { get; set; }
+        public int SolicitudID { get; set; }
 
-        public string? Contenido { get; set; }
+        public string? Email { get; set; }
 
-        public int Puntuacion { get; set; }
+        public string? Descripcion { get; set; }
 
         [DataType(DataType.Date)]
         public DateTime Fecha { get; set; }
@@ -19,6 +19,5 @@ namespace AgroServices.Models
 
         public virtual Publicacion? Publicaciones { get; set; }
 
-        public int UsuarioID { get; set; }
     }
 }
