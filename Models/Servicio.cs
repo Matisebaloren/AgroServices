@@ -11,9 +11,6 @@ namespace AgroServices.Models{
         public string? descripcion { get; set; }
 
         public bool Eliminado { get; set; }
-
-        public virtual ICollection<Publicacion>? Publicaciones { get; set; }
-
  
     }
 }

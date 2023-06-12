@@ -11,7 +11,6 @@ namespace AgroServices.Models
         public string? Nombre { get; set; }
 
         public int ProvinciaID { get; set; }
-
         
         public bool Eliminado { get; set; }
 

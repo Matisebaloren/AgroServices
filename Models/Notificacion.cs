@@ -13,9 +13,11 @@ namespace AgroServices.Models
 
         public string? Descripcion { get; set; }
 
-        public int UsuarioID { get; set; }
+        //para que cuando clickes en la noti te envie a la publicación
+        public int PublicacionID { get; set; }
 
-        public virtual Usuario? Usuarios { get; set; }
+        //usuario que causo la notificacion
+        public int UsuarioID { get; set; }
 
         public bool Eliminado { get; set; }
     }

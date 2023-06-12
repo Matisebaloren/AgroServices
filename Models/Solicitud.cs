@@ -8,7 +8,7 @@ namespace AgroServices.Models
         [Key]
         public int SolicitudID { get; set; }
 
-        public string? Email { get; set; }
+        // public string? Email { get; set; }
 
         public string? Descripcion { get; set; }
 
@@ -19,5 +19,16 @@ namespace AgroServices.Models
 
         public virtual Publicacion? Publicaciones { get; set; }
 
+        public int UsuarioID { get; set; }
+
+        public virtual Usuario? Usuarios { get; set; }
+
+        public Tipo_estado estado { get; set; }
+
+        public enum Tipo_estado{
+            solicitado = 0,
+            aprovado = 1,
+            valorado = 2
+        }
     }
 }

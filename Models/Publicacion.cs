@@ -8,7 +8,7 @@ namespace AgroServices.Models
       [Key]
         public int PublicacionID { get; set; }
 
-        public bool ClasificacionOferta { get; set; }
+        public bool EsOferta { get; set; }
 
         public string? Titulo { get; set; }
 
@@ -19,17 +19,16 @@ namespace AgroServices.Models
 
         public int UsuarioID { get; set; }
 
+// cantidad de veces que se valido el servicio
+        public int Contador { get; set; }
+
         public virtual Usuario? Usuario { get; set;}
 
         public bool Eliminado { get; set; }
 
-        //imagen
-
         public virtual ICollection<Valoracion>? Valoraciones { get; set; }
 
-        //  public virtual ICollection<Consulta>? Consultas { get; set; }
-
         public virtual ICollection<Solicitud>? Solicitudes { get; set; }
- 
+
     }
 }

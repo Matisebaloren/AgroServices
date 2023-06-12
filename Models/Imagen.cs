@@ -10,11 +10,11 @@ namespace AgroServices.Models
 
         public byte[]? Img_public { get; set; }
 
-        public int UsuarioID { get; set; }
+        public int PublicacionID { get; set; }
 
-        public virtual Usuario? Usuario { get; set;}
+        public virtual Publicacion? Publicaciones { get; set;}
 
-        public bool Eliminado { get; set; }
+        // public bool Eliminado { get; set; }
  
     }
 }

@@ -23,7 +23,7 @@ namespace AgroServices.Models{
 
         public virtual ICollection<Publicacion>? Publicaciones { get; set; }
 
-        public virtual ICollection<Notificacion>? Notificaciones { get; set; }
+        public virtual ICollection<Solicitud>? Solicitudes { get; set; }
  
     }
 }

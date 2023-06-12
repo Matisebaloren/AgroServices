@@ -232,3 +232,7 @@ function VaciarFormulario(){
 //     });
 // }
 
+
+function seleccionarTipo(value){
+    console.log(value);
+  }

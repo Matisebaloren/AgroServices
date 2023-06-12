@@ -16,6 +16,21 @@ public class PublicacionesController : Controller
         _contexto = contexto;
     }
 
+    public IActionResult Formulario()
+        {
+            return View();
+        }
+
+    public IActionResult VistaPublicacion()
+        {
+            return View();
+        }
+
+    public IActionResult Buscador()
+        {
+            return View();
+        }
+
     public IActionResult Index()
     {
         return View();
