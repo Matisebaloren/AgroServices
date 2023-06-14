@@ -31,6 +31,8 @@ public class AgroServicesDbContext : DbContext
 
     public DbSet<Notificacion> Notificaciones { get; set; }
 
+    public DbSet<Etiqueta> Etiquetas { get; set; }
+
 
 
 }

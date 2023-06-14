@@ -22,8 +22,6 @@ namespace AgroServices.Models{
         public virtual Localidad? Localidades { get; set; }
 
         public virtual ICollection<Publicacion>? Publicaciones { get; set; }
-
-        public virtual ICollection<Solicitud>? Solicitudes { get; set; }
  
     }
 }

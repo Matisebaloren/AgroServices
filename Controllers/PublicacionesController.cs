@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using AgroServices.Data;
 using AgroServices.Models;
 
+
 namespace AgroServices.Controllers;
 
 public class PublicacionesController : Controller
@@ -17,24 +18,27 @@ public class PublicacionesController : Controller
     }
 
     public IActionResult Formulario()
-        {
-            return View();
-        }
+    {
+        var servicios = _contexto.Servicios.ToList();
+        // ViewBag.ServicioID = new SelectList(servicios, "ServicioID", "descripcion");
+        return View(servicios);
+    }
 
     public IActionResult VistaPublicacion()
-        {
-            return View();
-        }
-
-    public IActionResult Buscador()
-        {
-            return View();
-        }
-
-    public IActionResult Index()
     {
         return View();
     }
 
-    
+    public IActionResult Buscador()
+    {
+        return View();
+    }
+
+    public IActionResult Index()
+    {
+
+        return View();
+    }
+
+
 }

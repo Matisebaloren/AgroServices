@@ -1,3 +1,5 @@
+@model AgroServices.Models.Publicacion
+
 
 @{
 
@@ -7,7 +9,7 @@
 
   
 
-<form>
+<form id="files" method="post" enctype="multipart/form-data">
 <h3>Nueva Publicación</h3>
 
 <div class="mb-3">
@@ -19,55 +21,36 @@
         <option value="2">Demanda de Servicio</option>
     </Select>
  </div>
+
  <div id="TipoSeleccionado">
-  @* imput del titulo *@
-  <div class="mb-3">
-    <label class="form-label">Título</label>
-    <input type="text" class="form-control" id="titulo">
-  </div>
-
-
- @* Lista de imagenes (solo cuando es oferta)*@
- <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="..." class="d-block w-100" alt="...">
+    @* imput del titulo *@
+    <div class="mb-3">
+      <label class="form-label">Título</label>
+      <input type="text" class="form-control" id="titulo">
     </div>
-    <div class="carousel-item">
-      <img src="..." class="d-block w-100" alt="...">
+
+    @* imput de la descripcion *@
+    <div class="mb-3">
+      <label class="form-label">Descripcion</label>
+      <input type="text" class="form-control" id="descripcion">
     </div>
-    <div class="carousel-item">
-      <img src="..." class="d-block w-100" alt="...">
+
+    @* lista de etiquetas *@
+<div class="mb-3">
+      <label class="form-label">etiqueta</label>
+      <Select id="etiqueta" onchange=seleccionarTipo(this.value)>
+        <select class ="form-control" id="etiqueta"></select>
+      
+    </Select>
     </div>
-  </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div>
 
-  <div class="mb-3">
-    <label class="form-label">Imagenes</label>
-    <input type="document" class="form-control" id="Imagenes">
-  </div>
 
-  @* imput de la descripcion *@
-  <div class="mb-3">
-    <label class="form-label">Descripcion</label>
-    <input type="text" class="form-control" id="descripcion">
-  </div>
+    <table>
+      <thead></thead>
+      <tbody></tbody>
+    </table>
 
-  @* lista de etiquetas *@
-  <table>
-    <thead></thead>
-    <tbody></tbody>
-  </table>
-
-  <button type="submit" class="btn btn-primary">Subir Publicación</button>
+    <button type="submit" class="btn btn-primary">Subir Publicación</button>
  </div>
 </form>
 

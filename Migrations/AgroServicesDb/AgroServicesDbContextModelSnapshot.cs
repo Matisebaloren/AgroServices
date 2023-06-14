@@ -49,7 +49,7 @@ namespace AgroServices.Migrations.AgroServicesDb
 
                     b.HasIndex("PublicacionID");
 
-                    b.ToTable("Consultas");
+                    b.ToTable("Consultas", (string)null);
                 });
 
             modelBuilder.Entity("AgroServices.Models.Localidad", b =>
@@ -73,7 +73,7 @@ namespace AgroServices.Migrations.AgroServicesDb
 
                     b.HasIndex("ProvinciaID");
 
-                    b.ToTable("Localidades");
+                    b.ToTable("Localidades", (string)null);
                 });
 
             modelBuilder.Entity("AgroServices.Models.Notificacion", b =>
@@ -100,7 +100,7 @@ namespace AgroServices.Migrations.AgroServicesDb
 
                     b.HasIndex("UsuarioID");
 
-                    b.ToTable("Notificacion");
+                    b.ToTable("Notificacion", (string)null);
                 });
 
             modelBuilder.Entity("AgroServices.Models.Provincia", b =>
@@ -119,7 +119,7 @@ namespace AgroServices.Migrations.AgroServicesDb
 
                     b.HasKey("ProvinciaID");
 
-                    b.ToTable("Provincias");
+                    b.ToTable("Provincias", (string)null);
                 });
 
             modelBuilder.Entity("AgroServices.Models.Publicacion", b =>
@@ -152,7 +152,7 @@ namespace AgroServices.Migrations.AgroServicesDb
 
                     b.HasIndex("UsuarioID");
 
-                    b.ToTable("Publicaciones");
+                    b.ToTable("Publicaciones", (string)null);
                 });
 
             modelBuilder.Entity("AgroServices.Models.Usuario", b =>
@@ -182,7 +182,7 @@ namespace AgroServices.Migrations.AgroServicesDb
 
                     b.HasIndex("LocalidadID");
 
-                    b.ToTable("Usuarios");
+                    b.ToTable("Usuarios", (string)null);
                 });
 
             modelBuilder.Entity("AgroServices.Models.Valoracion", b =>
@@ -209,7 +209,7 @@ namespace AgroServices.Migrations.AgroServicesDb
 
                     b.HasIndex("PublicacionID");
 
-                    b.ToTable("Valoraciones");
+                    b.ToTable("Valoraciones", (string)null);
                 });
 
             modelBuilder.Entity("AgroServices.Models.Consulta", b =>

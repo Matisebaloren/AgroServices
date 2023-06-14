@@ -21,8 +21,6 @@ namespace AgroServices.Models
 
         public int UsuarioID { get; set; }
 
-        public virtual Usuario? Usuarios { get; set; }
-
         public Tipo_estado estado { get; set; }
 
         public enum Tipo_estado{

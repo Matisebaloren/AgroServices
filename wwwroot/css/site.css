@@ -448,6 +448,19 @@ body.dark {
   /* FIN DE CODIGO CARDS BUTTONS*/
 
 
+/* clases para publicacion */
+
+#TipoSeleccionado{
+  display: none;
+}
+
+.img{
+  /* background-image: url(../img/logo.jpg); */
+  background-size:contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+  height: 30vh;
+}
 
 
 

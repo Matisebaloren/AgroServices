@@ -20,7 +20,7 @@ public class LocalidadesController : Controller
     public IActionResult Index()
     {
         var provincias = _contexto.Provincias.Where(c => c.Eliminado == false).ToList(); 
-        ViewBag.ProvinciaID = new SelectList(provincias, "ProvinciaID", "Nombre");       
+        ViewBag.ProvinciaID = new SelectList(provincias, "ProvinciaID", "descripcion");       
         return View();
     }
 

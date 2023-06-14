@@ -1,30 +1,29 @@
 window.onload = BuscarPublicaciones();
 
+function BuscarPublicaciones() {
+  console.log("prueba uno");
 
-function BuscarPublicaciones(){
-    console.log("prueba uno")
+  $("#tbody-publicaciones").empty();
 
-$("#tbody-publicaciones").empty();
+  $.ajax({
+    // la URL para la petición
+    url: "../../Publicaciones/BuscarPublicaciones",
+    // la información a enviar
+    // (también es posible utilizar una cadena de datos)
+    data: {},
+    // especifica si será una petición POST o GET
+    type: "GET",
+    // el tipo de información que se espera de respuesta
+    dataType: "json",
+    // código a ejecutar si la petición es satisfactoria;
+    // la respuesta es pasada como argumento a la función
 
-    $.ajax({
-        // la URL para la petición
-        url : '../../Publicaciones/BuscarPublicaciones',
-        // la información a enviar
-        // (también es posible utilizar una cadena de datos)
-        data : {},    
-        // especifica si será una petición POST o GET
-        type : 'GET',
-        // el tipo de información que se espera de respuesta
-        dataType : 'json',
-        // código a ejecutar si la petición es satisfactoria;
-        // la respuesta es pasada como argumento a la función
-        
-        success : function(publicaciones) { 
-            $("#tbody-publicaciones").empty();
-            let BotonDeshabilitado = '';
-            $.each(publicaciones, function(index, publicaciones) {
-                if(publicaciones.eliminado == true){
-                    BotonDeshabilitado = `
+    success: function (publicaciones) {
+      $("#tbody-publicaciones").empty();
+      let BotonDeshabilitado = "";
+      $.each(publicaciones, function (index, publicaciones) {
+        if (publicaciones.eliminado == true) {
+          BotonDeshabilitado = `
                     <tr class="table-danger" >
                         <td> ${publicaciones.nombre}</td>
                         <td class=" text-end">
@@ -32,9 +31,8 @@ $("#tbody-publicaciones").empty();
                         </td>
                     </tr>
                     `;
-                }
-                else{
-                    BotonDeshabilitado = `
+        } else {
+          BotonDeshabilitado = `
                     <tr>
                         <td class=" danger" >${publicacion.nombre} </td>
                         <td class=" text-end">
@@ -43,38 +41,32 @@ $("#tbody-publicaciones").empty();
                         </td>
                     </tr>
                     `;
-                }
-                $("#tbody-publicaciones").append(`
-                    ${BotonDeshabilitado}
-                `);      
-            });
-        },
-   
-        // código a ejecutar si la petición falla;
-        // son pasados como argumentos a la función
-        // el objeto de la petición en crudo y código de estatus de la petición
-        error : function(xhr, status) {
-            alert('Error al cargar publicaciones');
-        },
-   
-        // código a ejecutar sin importar si la petición falló o no
-        complete : function(xhr, status) {
-            //alert('Petición realizada');
         }
-    });
+        $("#tbody-publicaciones").append(`
+                    ${BotonDeshabilitado}
+                `);
+      });
+    },
+
+    // código a ejecutar si la petición falla;
+    // son pasados como argumentos a la función
+    // el objeto de la petición en crudo y código de estatus de la petición
+    error: function (xhr, status) {
+      alert("Error al cargar publicaciones");
+    },
+
+    // código a ejecutar sin importar si la petición falló o no
+    complete: function (xhr, status) {
+      //alert('Petición realizada');
+    },
+  });
 }
 
-
-
-
-
-function VaciarFormulario(){
-    $("#Nombre").val('');
-    $("#PublicacionID").val(0);
-    document.getElementById("tituloModal").innerHTML = "Agregar Publicacion";
+function VaciarFormulario() {
+  $("#Nombre").val("");
+  $("#PublicacionID").val(0);
+  document.getElementById("tituloModal").innerHTML = "Agregar Publicacion";
 }
-
-
 
 // function BuscarProvincia(provinciaID){
 //         $.ajax({
@@ -82,7 +74,7 @@ function VaciarFormulario(){
 //         url : '../../Provincias/BuscarProvincias',
 //         // la información a enviar
 //         // (también es posible utilizar una cadena de datos)
-//         data : { provinciaID: provinciaID },    
+//         data : { provinciaID: provinciaID },
 //         // especifica si será una petición POST o GET
 //         type : 'GET',
 //         // el tipo de información que se espera de respuesta
@@ -90,7 +82,7 @@ function VaciarFormulario(){
 //         // código a ejecutar si la petición es satisfactoria;
 //         // la respuesta es pasada como argumento a la función
 //         success : function(provincias) {
-           
+
 //             if (provincias.length == 1){
 //                 let provincia = provincias[0];
 //                 $("#Descripcion").val(provincia.descripcion);
@@ -99,7 +91,7 @@ function VaciarFormulario(){
 //                 $("#ModalProvincia").modal("show");
 //             }
 //         },
-   
+
 //         // código a ejecutar si la petición falla;
 //         // son pasados como argumentos a la función
 //         // el objeto de la petición en crudo y código de estatus de la petición
@@ -107,14 +99,13 @@ function VaciarFormulario(){
 //             alert('Error al cargar provincias');
 //             document.getElementById("alerta").innerHTML = "Error al cargar provincias";
 //         },
-   
+
 //         // código a ejecutar sin importar si la petición falló o no
 //         complete : function(xhr, status) {
 //             //alert('Petición realizada');
 //         }
 //     });
 // }
-
 
 // function DeshabilitarProvincia(provinciaID){
 //     let Deshabilitar = true;
@@ -123,7 +114,7 @@ function VaciarFormulario(){
 //     url : '../../Provincias/BuscarProvincias',
 //     // la información a enviar
 //     // (también es posible utilizar una cadena de datos)
-//     data : { provinciaID: provinciaID, Deshabilitar: Deshabilitar},    
+//     data : { provinciaID: provinciaID, Deshabilitar: Deshabilitar},
 //     // especifica si será una petición POST o GET
 //     type : 'GET',
 //     // el tipo de información que se espera de respuesta
@@ -134,8 +125,7 @@ function VaciarFormulario(){
 //         if(provincias == null){
 //             alert("Nasatadas");
 //         }
-        
-       
+
 //         BuscarProvincias();
 //     },
 
@@ -167,9 +157,6 @@ function VaciarFormulario(){
 // });
 // }
 
-
-
-
 // function GuardarProvincia(){
 //     //JAVASCRIPT
 //     let descripcion1 = document.getElementById("Descripcion").value;
@@ -180,14 +167,14 @@ function VaciarFormulario(){
 //         url : '../../Provincias/GuardarProvincia',
 //         // la información a enviar
 //         // (también es posible utilizar una cadena de datos)
-//         data : { provinciaID : provinciaID, descripcion : descripcion1 },    
+//         data : { provinciaID : provinciaID, descripcion : descripcion1 },
 //         // especifica si será una petición POST o GET
 //         type : 'POST',
 //         // el tipo de información que se espera de respuesta
 //         dataType : 'json',
 //         // código a ejecutar si la petición es satisfactoria;
 //         // la respuesta es pasada como argumento a la función
-//         success : function(resultado) {  
+//         success : function(resultado) {
 //             const Toast = Swal.mixin({
 //                 toast: true,
 //                 position: 'top-end',
@@ -211,18 +198,18 @@ function VaciarFormulario(){
 //                 title: 'La Provincia ya existe'
 //                 })
 //             }
-            
+
 //             if(resultado == "crear"){
 //                 $("#ModalProvincia").modal("hide");
 //                 BuscarProvincias();
-//             }  
+//             }
 //         //    else{
 //         //         document.getElementById("alerta").innerHTML = "Existe una Categoría con la misma descripción.";
 //         //         alert("Existe una Categoría con la misma descripción.");
-               
+
 //         //    }
 //         },
-   
+
 //         // código a ejecutar si la petición falla;
 //         // son pasados como argumentos a la función
 //         // el objeto de la petición en crudo y código de estatus de la petición
@@ -233,6 +220,32 @@ function VaciarFormulario(){
 // }
 
 
-function seleccionarTipo(value){
+// js para el formulario
+function seleccionarTipo(value) {
     console.log(value);
-  }
+  switch (value){
+    case "0":
+        console.log("es cero");
+      $("#TipoSeleccionado").hide();
+      break;
+      case "1":
+      $("#TipoSeleccionado").show();
+      $("#ListaImagenes").show();
+      break;
+      case "2":
+      $("#TipoSeleccionado").show();
+      $("#ListaImagenes").hide();
+      break;
+  };
+}
+
+function buscarEtiquetas(){
+
+}
+
+let arrEtiqueta = new Array();
+
+function AñadirEtiqueta(id) {
+    console.log(value);
+}
+
