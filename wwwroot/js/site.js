@@ -58,38 +58,70 @@ submenuItems.forEach((item, index) => {
 
 // document.getElementById("inputSearch").addEventListener("keyup", buscador_interno);
 
-function buscador_interno(){
+// function buscador_interno(){
 
 
-    filter = inputSearch.value.toUpperCase();
-    li = box_search.getElementsByTagName("li");
+//     filter = inputSearch.value.toUpperCase();
+//     li = box_search.getElementsByTagName("li");
 
     //Recorriendo elementos a filtrar mediante los "li"
-    for (i = 0; i < li.length; i++){
+  //   for (i = 0; i < li.length; i++){
 
-        a = li[i].getElementsByTagName("a")[0];
-        textValue = a.textContent || a.innerText;
+  //       a = li[i].getElementsByTagName("a")[0];
+  //       textValue = a.textContent || a.innerText;
 
-        if(textValue.toUpperCase().indexOf(filter) > -1){
+  //       if(textValue.toUpperCase().indexOf(filter) > -1){
 
-            li[i].style.display = "";
-            box_search.style.display = "block";
+  //           li[i].style.display = "";
+  //           box_search.style.display = "block";
 
-            if (inputSearch.value === ""){
-                box_search.style.display = "none";
-            }
+  //           if (inputSearch.value === ""){
+  //               box_search.style.display = "none";
+  //           }
 
-        }else{
-            li[i].style.display = "none";
-        }
+  //       }else{
+  //           li[i].style.display = "none";
+  //       }
 
-    }
+  //   }
 
-  }
-
-
+  // }
 
 
+
+//CREANDO FILTRADO DE BUSQUEDA.
+// document.getElementById("inputSearch").addEventListener("keyup",buscador_interno);
+
+
+// function buscador_interno(){
+
+//   filter = inputSearch.value.toUpperCase();
+//   li = box_search.getElementsByTagName("li");
+
+//   //RECORRIENDO ELEMENTOS A FILTRAR MEDIANTE "LI"
+//   for (1 = 0; 1 < li.length; 1++){
+
+//     a = li[i].getElementsByTagName("a")[0];
+//     textValue = a.textContent || a.innerText; 
+    
+//     if (textValue.toUpperCase().indexOf(filter) > -1){
+
+//       li[1].style.display = "";
+//       box_search.style.display = "block";
+      
+//       if(inputSearch.value === ""){
+//         box_search.style.display = "none"; 
+//       }
+
+//     }else{
+//       li[1].style.display = "none"; 
+//     }
+      
+    
+//   }
+
+
+// }
 
 
 
