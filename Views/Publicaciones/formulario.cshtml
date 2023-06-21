@@ -1,60 +1,65 @@
-@model AgroServices.Models.Publicacion
+@model AgroServices.Models.Publicacion;
 
 
 @{
 
-    ViewData["Title"] = "Home Page";
+  ViewData["Title"] = "Home Page";
 }
 
 
-  
+
 
 <form id="files" method="post" enctype="multipart/form-data">
 <h3>Nueva Publicación</h3>
 
-<div class="mb-3">
-    <label class="form-label">Tipo de publicación</label>
- 
-    <Select id="tipo" onchange=seleccionarTipo(this.value)>
+<div class="mb-3 col-6 col-md-3">
+    <label class="form-label bold">Tipo de publicación:</label>
+
+    <Select class="form-control" id="EsOferta" onchange=seleccionarTipo(this.value)>
         <option value="0">- Seleccionar -</option>
         <option value="1">Ofertar de un servicio</option>
-        <option value="2">Demanda de Servicio</option>
+        <option value="2">Buscar Servicio</option>
     </Select>
  </div>
 
- <div id="TipoSeleccionado">
-    @* imput del titulo *@
-    <div class="mb-3">
+  <input type="hidden" id="PublicacionID" value="0"></input>
+  <input type="hidden" id="UsuarioID" value="1"></input>
+
+ <div id="TipoSeleccionado" class="container">
+  <div class="row">
+      @* imput del titulo *@
+    <div class="mb-3 col-12 col-md-8 col-lg-4">
       <label class="form-label">Título</label>
-      <input type="text" class="form-control" id="titulo">
+      <input type="text" class="form-control" id="Titulo">
     </div>
 
-    @* imput de la descripcion *@
-    <div class="mb-3">
-      <label class="form-label">Descripcion</label>
-      <input type="text" class="form-control" id="descripcion">
+      @* imput de la descripcion *@
+    <div class="mb-3 col-12 col-lg-8">
+      <label class="form-label">Descripción</label>
+      <textarea type="text" class="form-control" id="descripcion"></textarea>
     </div>
 
-    @* lista de etiquetas *@
-<div class="mb-3">
-      <label class="form-label">etiqueta</label>
-      <Select id="etiqueta" onchange=seleccionarTipo(this.value)>
-        <select class ="form-control" id="etiqueta"></select>
-      
-    </Select>
+      @* lista de etiquetas *@
+    <div class="mb-3 col-12">
+        <div class="col-6 col-md-4">
+          <label class="form-label">Etiquetas:</label>
+          <select class = "form-control m" id="ServicioID" onchange=AñadirEtiqueta(this.value)></select>
+        </div>
+        <div id="Etiqueta-List" class="col"></div>
+
+
+
     </div>
 
 
-    <table>
-      <thead></thead>
-      <tbody></tbody>
-    </table>
-
-    <button type="submit" class="btn btn-primary">Subir Publicación</button>
+    <div class="btn-formulario mx-auto">
+      <button type="button" onclick=GuardarPublicacion() class="btn btn-primary">Guardar Publicación</button>
+    </div>
+  </div>
  </div>
 </form>
 
 
 @section Scripts{
-    <script src="~/js/tablas/publicacion-1.0.0.js"></script>
+            <script src="~/js/tablas/publicacion-1.0.0.js"></script>
 }
