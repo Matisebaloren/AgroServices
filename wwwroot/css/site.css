@@ -475,7 +475,9 @@ body.dark {
 
 
 
-
+.navbar-nav{
+  flex-direction:unset ;
+}
 
 
 

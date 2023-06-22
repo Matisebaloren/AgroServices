@@ -1,182 +1,144 @@
 ﻿<!DOCTYPE html>
 <html lang="sp">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - AgroServices</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/botonesInicio.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/AgroServices.styles.css" asp-append-version="true" />
 
-    @* links par el nav Nuevo *@
-    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>@ViewData["Title"] - AgroServices</title>
+  <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+  <link rel="stylesheet" href="~/css/botonesInicio.css" asp-append-version="true" />
+  <link rel="stylesheet" href="~/AgroServices.styles.css" asp-append-version="true" />
+
+  @* links par el nav Nuevo *@
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
 
 </head>
+
+
+
+
 <body>
-    <!-- navbar -->
-    <nav class="navbar ">
-      <div class="logo_item">
-        <i class="bx bx-menu" id="sidebarOpen"></i>
-        @* <img class="imgLogo" alt=""></i> *@
-        AgroServices
-      </div>
+  <!-- navbar -->
+  <nav class="navbar ">
+    <div class="logo_item">
+      <i class="bx bx-menu" id="sidebarOpen"></i>
+      @* <img class="imgLogo" alt=""></i> *@
+      AgroServices
+    </div>
 
-      <div class="search_bar">
-        <input type="text" placeholder="Search" />
-      </div>
+    <div class="search_bar">
+      <input type="text" placeholder="Search" />
+    </div>
 
-      <div class="navbar_content">
-        <partial name="_LoginPartial" />
-        <i class="bi bi-grid"></i>
-        @* <i class='bx bx-sun' id="darkLight"></i> *@ 
-      </div>
-    </nav>
-
-
-    <div class="hstack gap-2">
+    <div class="navbar_content">
+      <partial name="_LoginPartial" />
+      <i class="bi bi-grid"></i>
+      @* <i class='bx bx-sun' id="darkLight"></i> *@
+    </div>
+  </nav>
 
 
+  <div class="hstack gap-2">
 
-    
     <!-- sidebar -->
-    <nav class="sidebar hoverable close
-    ">
+    <nav class="sidebar hoverable close">
       <div class="menu_content">
         <ul class="menu_items">
-          <div class="menu_title menu_dahsboard"></div>
+          
           <!-- duplicate or remove this li tag if you want to add or remove navlink with submenu -->
           <!-- start -->
-          <li class="item">
+            <li class="item">
             <div href="#" class="nav_link submenu_item">
               <span class="navlink_icon">
                 <i class="bx bx-home-alt"></i>
               </span>
-              <span class="navlink">Casa</span>
+              <span class="navlink">Inicio</span>
               <i class="bx bx-chevron-right arrow-left"></i>
             </div>
 
-            <ul class="menu_items submenu">
-              <a href="#" class="nav_link sublink">Nav Sub Link</a>
-              <a href="#" class="nav_link sublink">Nav Sub Link</a>
-              <a href="#" class="nav_link sublink">Nav Sub Link</a>
-              <a href="#" class="nav_link sublink">Nav Sub Link</a>
-            </ul>
-          </li>
-          <!-- end -->
+      @* <ul class="menu_items submenu">
+        <a href="#" class="nav_link sublink">Nav Sub Link</a>
+      </ul> *@
+      </li>
+      <!-- end -->
 
-          <!-- duplicate this li tag if you want to add or remove  navlink with submenu -->
-          <!-- start -->
-          <li class="item">
-            <div href="#" class="nav_link submenu_item">
-              <span class="navlink_icon">
-                <i class="bx bx-grid-alt"></i>
-              </span>
-              <span class="navlink">Categorias</span>
-              <i class="bx bx-chevron-right arrow-left"></i>
-            </div>
+      <!-- duplicate this li tag if you want to add or remove  navlink with submenu -->
+      <!-- start -->
+      <li class="item">
+        <div href="#" class="nav_link submenu_item">
+          <span class="navlink_icon">
+            <i class="bx bx-grid-alt"></i>
+          </span>
+          <span class="navlink">Categorias</span>
+          <i class="bx bx-chevron-right arrow-left"></i>
+        </div>
 
-            <ul class="menu_items submenu">
-              <a href="#" class="nav_link sublink">Cosecha</a>
-              <a href="#" class="nav_link sublink">Picado</a>
-              <a href="#" class="nav_link sublink">Sembrado</a>
-            </ul>
-          </li>
-          <!-- end -->
+        <ul class="menu_items submenu">
+          <a href="#" class="nav_link sublink">Cosecha</a>
+          <a href="#" class="nav_link sublink">Picado</a>
+          <a href="#" class="nav_link sublink">Sembrado</a>
         </ul>
+      </li>
+      <!-- end -->
+      </ul>
 
-        <ul class="menu_items">
-          <div class="menu_title menu_editor"></div>
-          <!-- duplicate these li tag if you want to add or remove navlink only -->
-          <!-- Start -->
-          <li class="item">
-            <a href="#" class="nav_link">
-              <span class="navlink_icon">
-                <i class="bx bxs-magic-wand"></i>
-              </span>
-              <span class="navlink">Magic build</span>
-            </a>
-          </li>
-          <!-- End -->
+      <ul class="menu_items">
+        <div class="menu_title menu_opciones"></div>
+        <!-- duplicate these li tag if you want to add or remove navlink only -->
+        <!-- Start -->
+        <li class="item">
+        <div href="#" class="nav_link submenu_item">
+          <span class="navlink_icon">
+            <i class="bx bx-grid-alt"></i>
+          </span>
+          <span class="navlink">Publicación</span>
+          <i class="bx bx-chevron-right arrow-left"></i>
+        </div>
 
-          <li class="item">
-            <a href="#" class="nav_link">
-              <span class="navlink_icon">
-                <i class="bx bx-loader-circle"></i>
-              </span>
-              <span class="navlink">Filters</span>
-            </a>
-          </li>
-          <li class="item">
-            <a href="#" class="nav_link">
-              <span class="navlink_icon">
-                <i class="bx bx-filter"></i>
-              </span>
-              <span class="navlink">Filter</span>
-            </a>
-          </li>
-          <li class="item">
-            <a href="#" class="nav_link">
-              <span class="navlink_icon">
-                <i class="bx bx-cloud-upload"></i>
-              </span>
-              <span class="navlink">Upload new</span>
-            </a>
-          </li>
+        <ul class="menu_items submenu">
+          <a href="#" class="nav_link sublink">Nueva Publicación</a>
         </ul>
-        <ul class="menu_items">
-          <div class="menu_title menu_setting"></div>
-          <li class="item">
-            <a href="#" class="nav_link">
-              <span class="navlink_icon">
-                <i class="bx bx-flag"></i>
-              </span>
-              <span class="navlink">Notice board</span>
-            </a>
-          </li>
-          <li class="item">
-            <a href="#" class="nav_link">
-              <span class="navlink_icon">
-                <i class="bx bx-medal"></i>
-              </span>
-              <span class="navlink">Award</span>
-            </a>
-          </li>
-          <li class="item">
-            <a href="#" class="nav_link">
-              <span class="navlink_icon">
-                <i class="bx bx-cog"></i>
-              </span>
-              <span class="navlink">Setting</span>
-            </a>
-          </li>
-          <li class="item">
-            <a href="#" class="nav_link">
-              <span class="navlink_icon">
-                <i class="bx bx-layer"></i>
-              </span>
-              <span class="navlink">Features</span>
-            </a>
-          </li>
-        @* </ul> *@
+        <ul class="menu_items submenu">
+          <a href="#" class="nav_link sublink">Servicios</a>
+        </ul>
+        <ul class="menu_items submenu">
+          <a href="#" class="nav_link sublink">Publicaciones</a>
+        </ul>
+        <ul class="menu_items submenu">
+          <a href="#" class="nav_link sublink">Solicitudes</a>
+        </ul>
+      </li>
+        <!-- End -->
+          @* </ul> *@
 
         <!-- Sidebar Open / Close -->
-        @* <div class="bottom_content">
-          <div class="bottom expand_sidebar">
-            <span> Expand</span>
-            <i class='bx bx-log-in' ></i>
-          </div>
-          <div class="bottom collapse_sidebar">
-            <span> Collapse</span>
-            <i class='bx bx-log-out'></i>
-          </div>
+          @* <div class="bottom_content">
+        <div class="bottom expand_sidebar">
+        <span> Expand</span>
+        <i class='bx bx-log-in' ></i>
+        </div>
+        <div class="bottom collapse_sidebar">
+        <span> Collapse</span>
+        <i class='bx bx-log-out'></i>
+        </div>
         </div> *@
-        </ul>
+      </ul>
+  </div>
+  </nav>
+
+
+    @* ------INTENTO DE BUSCADOR *@
+  @* <div class="wrapper">
+    <div class="search-input">
+      <a href="" target="_blank" hidden></a>
+      <input type="text" placeholder="Buscar...">
+      <div class="autocom-box">
+
       </div>
-    </nav>
-
-
-
+      <div class="icon"><i class="fas fa-search"></i></div>
+    </div>
+  </div> *@
 
 
 
@@ -188,46 +150,48 @@
 
 
     @* <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">AgroServices</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header> *@
-    
+  <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+  <div class="container-fluid">
+  <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">AgroServices</a>
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
+  aria-controls="navbarSupportedContent"
+  aria-expanded="false" aria-label="Toggle navigation">
+  <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+  <ul class="navbar-nav flex-grow-1">
+  <li class="nav-item">
+  <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+  </li>
+  <li class="nav-item">
+  <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+  </li>
+  </ul>
+  </div>
+  </div>
+  </nav>
+  </header> *@
 
-     @* aca empieza las vistas  *@
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
 
-    </div>
+    @* aca empieza las vistas *@
+  <div class="container">
+    <main role="main" class="pb-3">
+        @RenderBody()
+    </main>
+  </div>
 
-    @* <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2023 - AgroServices - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer> *@
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    <script src="~/js/sweetalerts2.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+  </div>
+
+  @* <footer class="border-top footer text-muted">
+  <div class="container">
+  &copy; 2023 - AgroServices - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+  </div>
+  </footer> *@
+  <script src="~/lib/jquery/dist/jquery.min.js"></script>
+  <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="~/js/site.js" asp-append-version="true"></script>
+  <script src="~/js/sweetalerts2.js" asp-append-version="true"></script>
+  @await RenderSectionAsync("Scripts", required: false)
 </body>
+
 </html>
