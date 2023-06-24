@@ -66,7 +66,7 @@ function BuscarPublicacion(publicacionID = 0) {
 
         let imagen = "<td></td>";
         if (item.imagenBase64) {
-          imagen = `<td><img src="data:${item.tipoImagen};base64, ${item.imagenBase64}" style="width: 100%; height: 35vw"/></td>`;
+          imagen = `<td><img src="data:${item.tipoImagen};base64, ${item.imagenBase64}" style="width: 100%; height: 35vw; display: block"/></td>`;
         }
 
         $("#Lista_imagenes").append(
