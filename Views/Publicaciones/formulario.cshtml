@@ -1,65 +1,113 @@
 @model AgroServices.Models.Publicacion;
 
-
 @{
 
-  ViewData["Title"] = "Home Page";
+ViewData["Title"] = "Home Page";
 }
 
 
-
-
-<form id="files" method="post" enctype="multipart/form-data">
 <h3>Nueva Publicación</h3>
 
-<div class="mb-3 col-6 col-md-3">
-    <label class="form-label bold">Tipo de publicación:</label>
+<!-- Modal -->
+<div class="modal fade" id="ModalImagen" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="titulo-modal"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form name="files" id="files" method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <input type="hidden" name="ImagenID" id="ImagenID" value="0" />
+                    <div>
+                        <label class="control-label">Imagen</label>
+                        <input type='file' class="form-control" accept="image/*" name="imagen" id='imagen'>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button class="btn btn-primary">Guardar Cambios</button>
+                </div>
+            </form>
 
-    <Select class="form-control" id="EsOferta" onchange=seleccionarTipo(this.value)>
-        <option value="0">- Seleccionar -</option>
-        <option value="1">Ofertar de un servicio</option>
-        <option value="2">Buscar Servicio</option>
-    </Select>
- </div>
-
-  <input type="hidden" id="PublicacionID" value="0"></input>
-  <input type="hidden" id="UsuarioID" value="1"></input>
-
- <div id="TipoSeleccionado" class="container">
-  <div class="row">
-      @* imput del titulo *@
-    <div class="mb-3 col-12 col-md-8 col-lg-4">
-      <label class="form-label">Título</label>
-      <input type="text" class="form-control" id="Titulo">
-    </div>
-
-      @* imput de la descripcion *@
-    <div class="mb-3 col-12 col-lg-8">
-      <label class="form-label">Descripción</label>
-      <textarea type="text" class="form-control" id="descripcion"></textarea>
-    </div>
-
-      @* lista de etiquetas *@
-    <div class="mb-3 col-12">
-        <div class="col-6 col-md-4">
-          <label class="form-label">Etiquetas:</label>
-          <select class = "form-control m" id="ServicioID" onchange=AñadirEtiqueta(this.value)></select>
         </div>
-        <div id="Etiqueta-List" class="col"></div>
+    </div>
+</div>
 
+<form id="formulario" method="post">
+    <div class="mb-3 col-6 col-md-3">
+        <label class="form-label bold">Tipo de publicación:</label>
 
-
+        <Select class="form-control" id="EsOferta" onchange=seleccionarTipo(this.value)>
+            <option value="0">- Seleccionar -</option>
+            <option value="1">Ofertar de un servicio</option>
+            <option value="2">Buscar Servicio</option>
+        </Select>
     </div>
 
+    <input type="hidden" id="PublicacionID" value="13"></input>
+    <input type="hidden" id="UsuarioID" value="1"></input>
 
-    <div class="btn-formulario mx-auto">
-      <button type="button" onclick=GuardarPublicacion() class="btn btn-primary">Guardar Publicación</button>
+    <div id="TipoSeleccionado" class="container">
+        <div class="row">
+            @* imput del titulo *@
+            <div class="mb-3 col-12 col-md-8 col-lg-4">
+                <label class="form-label">Título</label>
+                <input type="text" class="form-control" id="Titulo">
+            </div>
+
+
+
+            @* lista de etiquetas *@
+            <div class="mb-3 col-12">
+                <div class="col-6 col-md-4">
+                    <label class="form-label">Etiquetas:</label>
+                    <select class="form-control mb-2" id="ServicioID" onchange=AñadirEtiqueta(this.value)></select>
+                </div>
+                <div id="Etiqueta-List" class="tags col"></div>
+            </div>
+
+            @* imput de la descripcion *@
+            <div class="mb-3 col-12">
+                <label class="form-label">Descripción</label>
+                <textarea type="text" class="form-control" id="descripcion"></textarea>
+            </div>
+
+            <div class="btn-formulario mx-auto">
+                <button type="button" onclick=GuardarPublicacion() class="btn btn-primary">Guardar Publicación</button>
+            </div>
+        </div>
     </div>
-  </div>
- </div>
 </form>
+
+@* Seccion Imagenes *@
+
+<div class="my-3">
+    <label class="form-label bold">Imagenes Asociadas:</label>
+    @* <div class="mb-3 col-12 col-lg-8" id="div_img">
+        <label class="form-label">Imagenes:</label>
+        <div id="Lista_imagenes">
+
+        </div>
+    </div> *@
+
+    <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+        <div class="carousel-inner" id="Lista_imagenes">       
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</div>
+
+
 
 
 @section Scripts{
-            <script src="~/js/tablas/publicacion-1.0.0.js"></script>
+      <script src="~/js/tablas/publicacion-1.0.0.js"></script>
 }

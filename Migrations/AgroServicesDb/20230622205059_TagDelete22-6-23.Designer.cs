@@ -4,6 +4,7 @@ using AgroServices.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AgroServices.Migrations.AgroServicesDb
 {
     [DbContext(typeof(AgroServicesDbContext))]
-    partial class AgroServicesDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230622205059_TagDelete22-6-23")]
+    partial class TagDelete22623
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -41,7 +43,7 @@ namespace AgroServices.Migrations.AgroServicesDb
 
                     b.HasKey("EtiquetaID");
 
-                    b.ToTable("Etiquetas", (string)null);
+                    b.ToTable("Etiquetas");
                 });
 
             modelBuilder.Entity("AgroServices.Models.Imagen", b =>
@@ -52,26 +54,17 @@ namespace AgroServices.Migrations.AgroServicesDb
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ImagenID"), 1L, 1);
 
-                    b.Property<bool>("Eliminado")
-                        .HasColumnType("bit");
-
-                    b.Property<byte[]>("Img")
+                    b.Property<byte[]>("Img_public")
                         .HasColumnType("varbinary(max)");
-
-                    b.Property<string>("NombreImagen")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("PublicacionID")
                         .HasColumnType("int");
-
-                    b.Property<string>("TipoImagen")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ImagenID");
 
                     b.HasIndex("PublicacionID");
 
-                    b.ToTable("Imagenes", (string)null);
+                    b.ToTable("Imagenes");
                 });
 
             modelBuilder.Entity("AgroServices.Models.Localidad", b =>
@@ -95,7 +88,7 @@ namespace AgroServices.Migrations.AgroServicesDb
 
                     b.HasIndex("ProvinciaID");
 
-                    b.ToTable("Localidades", (string)null);
+                    b.ToTable("Localidades");
                 });
 
             modelBuilder.Entity("AgroServices.Models.Notificacion", b =>
@@ -123,7 +116,7 @@ namespace AgroServices.Migrations.AgroServicesDb
 
                     b.HasKey("NotificacionID");
 
-                    b.ToTable("Notificaciones", (string)null);
+                    b.ToTable("Notificaciones");
                 });
 
             modelBuilder.Entity("AgroServices.Models.Provincia", b =>
@@ -142,7 +135,7 @@ namespace AgroServices.Migrations.AgroServicesDb
 
                     b.HasKey("ProvinciaID");
 
-                    b.ToTable("Provincias", (string)null);
+                    b.ToTable("Provincias");
                 });
 
             modelBuilder.Entity("AgroServices.Models.Publicacion", b =>
@@ -178,7 +171,7 @@ namespace AgroServices.Migrations.AgroServicesDb
 
                     b.HasIndex("UsuarioID");
 
-                    b.ToTable("Publicaciones", (string)null);
+                    b.ToTable("Publicaciones");
                 });
 
             modelBuilder.Entity("AgroServices.Models.Servicio", b =>
@@ -197,7 +190,7 @@ namespace AgroServices.Migrations.AgroServicesDb
 
                     b.HasKey("ServicioID");
 
-                    b.ToTable("Servicios", (string)null);
+                    b.ToTable("Servicios");
                 });
 
             modelBuilder.Entity("AgroServices.Models.Solicitud", b =>
@@ -227,7 +220,7 @@ namespace AgroServices.Migrations.AgroServicesDb
 
                     b.HasIndex("PublicacionID");
 
-                    b.ToTable("Solicitudes", (string)null);
+                    b.ToTable("Solicitudes");
                 });
 
             modelBuilder.Entity("AgroServices.Models.Usuario", b =>
@@ -257,7 +250,7 @@ namespace AgroServices.Migrations.AgroServicesDb
 
                     b.HasIndex("LocalidadID");
 
-                    b.ToTable("Usuarios", (string)null);
+                    b.ToTable("Usuarios");
                 });
 
             modelBuilder.Entity("AgroServices.Models.Valoracion", b =>
@@ -287,7 +280,7 @@ namespace AgroServices.Migrations.AgroServicesDb
 
                     b.HasIndex("PublicacionID");
 
-                    b.ToTable("Valoraciones", (string)null);
+                    b.ToTable("Valoraciones");
                 });
 
             modelBuilder.Entity("AgroServices.Models.Imagen", b =>

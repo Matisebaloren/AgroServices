@@ -477,11 +477,18 @@ body.dark {
 
 
 
-/* btn guardar vista formulario */
+/* clases para formulario */
 .btn-formulario{
   width: auto;
 }
 
+.tag{
+  background: #bbb;
+  margin-right: 7px;
+  color: #fff;
+  padding: 4px 7px;
+  border-radius: 20px;
+}
 
 /* container se le da un paddin izquierda si supera los 768 px */
 @media (min-width: 768px) {

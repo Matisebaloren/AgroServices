@@ -30,5 +30,7 @@ namespace AgroServices.Models
 
         public virtual ICollection<Solicitud>? Solicitudes { get; set; }
 
+        public virtual ICollection<Imagen>? Imagenes { get; set; }
+
     }
 }
