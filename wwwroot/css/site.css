@@ -15,8 +15,16 @@ html {
 
 body {
   /* margin-bottom: 60px; */
-  background-color:white;
+  /* background-color:white; */
+  background: url(../img/trigo.jpg);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
 }
+
+
+
 
 
 /*CODIGO NUEVO PARA NAVBAR
@@ -388,9 +396,13 @@ body.dark {
   height: 300px;
   padding: 10px 10px 30px 10px;
   margin-top: 10px;
-  background: #fff;
+  /* background: #fff; */
   border-radius: 10px;
   box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 5px;
+  /* filter: blur(10px); */
+  backdrop-filter: burl(10px);
 }
 .course-box ul{
   list-style: none;
@@ -475,7 +487,9 @@ body.dark {
 
 
 
-
+.navbar-nav{
+  flex-direction:unset ;
+}
 
 /* clases para formulario */
 .btn-formulario{
