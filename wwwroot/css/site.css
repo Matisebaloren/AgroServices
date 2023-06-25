@@ -588,6 +588,13 @@ body.dark {
   border-radius: 10px;
   background-color: black !important;
 }
+
+.itemA{
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
+}
+
 @media (min-width: 768px) {
   .itemImg{
     height: 20vw;

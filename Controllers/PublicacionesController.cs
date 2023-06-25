@@ -19,28 +19,10 @@ public class PublicacionesController : Controller
         _logger = logger;
         _contexto = contexto;
     }
-    // public async Task<IActionResult> Edit(int? id)
-    //         {
-    //             if (id == null || _context.Home == null)
-    //             {
-    //                 return NotFound();
-    //             }
+    
 
-    //             var home = await _context.Home.FindAsync(id);
-    //             if (home == null)
-    //             {
-    //                 return NotFound();
-    //             }
-    //             ViewData["LocationID"] = new SelectList(_context.Location, "LocationID", "LocationName");
-    //             return View(home);
-    //         }
-
-    public async Task<IActionResult> Formulario(int? id = 0, int SecImg = 0)
+    public async Task<IActionResult> Formulario(int? id = 0)
     {
-        if (SecImg != 0)
-        {
-            ViewBag.SecImg = 1;
-        }
         ViewBag.publicacionID = id;
 
         var servicios = _contexto.Servicios.Where(x => x.Eliminado == false).ToList();
@@ -54,15 +36,11 @@ public class PublicacionesController : Controller
         return View("Formulario");
     }
 
-    public IActionResult VistaPublicacion()
+    public IActionResult VistaPublicacion(int? id = 0)
     {
+        ViewBag.publicacionID = id;
         return View();
     }
-
-    // public IActionResult Buscador()
-    // {
-    //     return View();
-    // }
 
     public JsonResult BuscarServicios()
     {
