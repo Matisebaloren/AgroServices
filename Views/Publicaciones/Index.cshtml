@@ -29,25 +29,15 @@
 </div>
 
 
-<div class="fondoTablas">
-    <h1 class="display-4">Publicaciones</h1>
-
-      <!-- Button trigger modal -->
-      
-
+<div class="FondoGlass-1 my-5">
+  <h2 class="">Publicaciones</h2>
   @* Tabla con los datos de cada elemento *@
  
   <table class="table table-bordered table-hover table-light table-condensed text-uppercase">
-    <thead>
-        <tr>
-            <th>Nombre</th>
-            <th class="text-end">
-              <button type="button" onclick="VaciarFormulario()" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ModalProvincia">
-              Nuevo</button>
-            </th>
-        </tr>
-    </thead>
-        <tbody id="tbody-publicaciones">        
-        </tbody>
+    <tbody id="tbody-publicaciones"></tbody>
   </table>
 </div>
+
+@section Scripts{
+    <script src="~/js/tablas/buscador-1.0.0.js"></script>
+}

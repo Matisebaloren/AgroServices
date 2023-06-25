@@ -13,6 +13,7 @@ namespace AgroServices.Models{
         public int PublicacionID { get; set; }
 
         public bool Eliminado { get; set; }
+
  
     }
 }

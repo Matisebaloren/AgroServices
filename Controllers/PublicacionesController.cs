@@ -110,7 +110,8 @@ public class PublicacionesController : Controller
 
     public JsonResult GuardarPublicacion(int publicacionID, string titulo, string descripcion, bool esOferta, int usuarioID)
     {
-        string resultado = "Error";
+        // >0: crear   0: editar   -1: faltan rellenar campos  -2: error
+        int resultado = -2;
 
         //verificamos si Nombre esta completo
         if (!string.IsNullOrEmpty(titulo) || !string.IsNullOrEmpty(descripcion) || !esOferta)
@@ -129,9 +130,13 @@ public class PublicacionesController : Controller
                     Fecha = hoy
                 };
                 _contexto.Add(PublicacionGuardar);
-
                 _contexto.SaveChanges();
-                resultado = "Crear";
+
+                var recienCreado = _contexto.Publicaciones.OrderByDescending(p => p.PublicacionID).FirstOrDefault();
+                if (recienCreado != null)
+                {
+                    resultado = recienCreado.PublicacionID;
+                };
             }
             else
             {
@@ -144,13 +149,13 @@ public class PublicacionesController : Controller
                     publicacionEditar.EsOferta = esOferta;
                     publicacionEditar.Descripcion = descripcion;
                     _contexto.SaveChanges();
-                    resultado = "crear";
+                    resultado = 0;
                 }
             }
         }
         else
         {
-            resultado = "faltas";
+            resultado = -1;
         }
 
         return Json(resultado);
@@ -158,7 +163,7 @@ public class PublicacionesController : Controller
 
     public JsonResult GuardarTag(int publicacionID, int servicioID, bool eliminado)
     {
-        string resultado = "Error";
+        string resultado = "error";
 
         if (publicacionID > 0 || servicioID > 0)
         {
@@ -176,7 +181,7 @@ public class PublicacionesController : Controller
                 };
                 _contexto.Add(EtiquetaGuardar);
                 _contexto.SaveChanges();
-                resultado = "Crear";
+                resultado = "crear";
             }
             else
             {
@@ -187,7 +192,7 @@ public class PublicacionesController : Controller
                     {
                         etiquetaEditar.Eliminado = true;
                         _contexto.SaveChanges();
-                        resultado = "editar";
+                        resultado = "eliminar";
                     }
                 }
                 else
@@ -240,7 +245,7 @@ public class PublicacionesController : Controller
                 _contexto.Add(imagenGuardar);
                 _contexto.SaveChanges();
                 resultado = true;
-                
+
             }
 
         }
