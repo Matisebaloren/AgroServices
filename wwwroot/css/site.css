@@ -1,10 +1,10 @@
 html {
-  font-size: 14px;
+  font-size: 10px;
 }
 
 @media (min-width: 768px) {
   html {
-    font-size: 16px;
+    font-size: 15px;
   }
 }
 
@@ -22,11 +22,6 @@ body {
   background-size: cover;
   background-attachment: fixed;
 }
-
-
-
-/* BUTTON PARA INGRESAR E INICIO DE SESION */
-
 
 /*CODIGO NUEVO PARA NAVBAR
 /* Import Google font - Poppins */
@@ -126,7 +121,7 @@ body.dark {
   transition: all 0.5s ease;
 }
 .sidebar.close {
-  padding: 60px 0;
+  padding: 80px 0;
   width: 80px;
 }
 .sidebar::-webkit-scrollbar {
@@ -194,7 +189,7 @@ body.dark {
   padding: 4px 15px;
   border-radius: 8px;
   text-decoration: none;
-  color: var(--grey-color);
+  color: var(--white-color);
   white-space: nowrap;
 }
 .sidebar.close .navlink {
@@ -272,8 +267,6 @@ body.dark {
   display: none;
 }
 
-
-
 @media screen and (max-width: 768px) {
   #sidebarOpen {
     font-size: 25px;
@@ -281,12 +274,10 @@ body.dark {
     margin-right: 10px;
     cursor: pointer;
     color: var(--grey-color);
-    
   }
   .sidebar.close {
     left: -100%;
     position: fixed !important;
-
   }
   .search_bar {
     display: none;
@@ -296,20 +287,28 @@ body.dark {
   }
 }
 
-.sidebar{
-  position: relative; ;
+/* CLASES adicionales de navbar */
+
+.sidebar {
+  position: relative;
 }
 
-.imgLogo{
-  background: url(../img/logo.jpg);
-  background-size:cover;
-}
-
-.navbarModificado{
+.navbarModificado {
   padding-top: 12vh;
 }
 
-/* pruebas */
+.FondoGlass-Navbar{
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+  box-sizing: border-box;
+  background: rgba(0, 0, 0, 0.3);
+  /* padding: 3vw 3vw; */
+  /* font-family: "Montserrat"; */
+  /* border-radius: 15px; */
+  box-shadow: 1px 10px 15px rgba(0, 0, 0, 0.3);
+  color: aliceblue;
+}
+
 
 
 
@@ -317,17 +316,17 @@ body.dark {
 
 /*  import google fonts */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700");
-.logo{
+.logo {
   text-align: center;
   display: flex;
   margin: 10px 0 0 10px;
 }
-.logo img{
+.logo img {
   width: 45px;
   height: 45px;
   border-radius: 50%;
 }
-.logo span{
+.logo span {
   font-weight: bold;
   padding-left: 15px;
   font-size: 18px;
@@ -335,27 +334,27 @@ body.dark {
 }
 
 /* Main Section */
-.main{
+.main {
   position: relative;
   padding: 20px;
   width: 100%;
 }
-.main-top{
+.main-top {
   display: flex;
   width: 100%;
 }
-.main-top i{
+.main-top i {
   position: absolute;
   right: 0;
   margin: 10px 30px;
   color: rgb(110, 109, 109);
   cursor: pointer;
 }
-.main-skills{
+.main-skills {
   display: flex;
   margin-top: 20px;
 }
-.main-skills .card{
+.main-skills .card {
   width: 25%;
   margin: 10px;
   background: #fff;
@@ -364,14 +363,14 @@ body.dark {
   padding: 10px;
   box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
 }
-.main-skills .card h3{
+.main-skills .card h3 {
   margin: 10px;
   text-transform: capitalize;
 }
-.main-skills .card p{
+.main-skills .card p {
   font-size: 12px;
 }
-.main-skills .card button{
+.main-skills .card button {
   background: orangered;
   color: #fff;
   padding: 7px 15px;
@@ -379,20 +378,20 @@ body.dark {
   margin-top: 15px;
   cursor: pointer;
 }
-.main-skills .card button:hover{
+.main-skills .card button:hover {
   background: rgba(223, 70, 15, 0.856);
 }
-.main-skills .card i{
+.main-skills .card i {
   font-size: 22px;
   padding: 10px;
 }
 
 /* Courses */
-.main-course{
-  margin-top:20px ;
+.main-course {
+  margin-top: 20px;
   text-transform: capitalize;
 }
-.course-box{
+.course-box {
   width: 100%;
   height: 300px;
   padding: 10px 10px 30px 10px;
@@ -405,23 +404,23 @@ body.dark {
   /* filter: blur(10px); */
   backdrop-filter: burl(10px);
 }
-.course-box ul{
+.course-box ul {
   list-style: none;
   display: flex;
 }
-.course-box ul li{
+.course-box ul li {
   margin: 10px;
   color: gray;
   cursor: pointer;
 }
-.course-box ul .active{
+.course-box ul .active {
   color: #000;
   border-bottom: 1px solid #000;
 }
-.course-box .course{
+.course-box .course {
   display: flex;
 }
-.box{
+.box {
   width: 33%;
     padding: 10px;
     margin: 10px;
@@ -429,7 +428,7 @@ body.dark {
     background: rgb(235, 233, 233);
     box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
 }
-.img{
+.img {
   border-radius: 10px;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
   cursor: pointer;
@@ -440,13 +439,13 @@ body.dark {
   width: 100%;
   background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTb_tcSL00b3GMuVEyO5Ia6yvgGQsqpjL_i4w&usqp=CAU);
 }
-.box p{
+.box p {
   font-size: 12px;
   margin-top: 5px;
 }
-.box button{
-  /* background:#ced3cd; */
-  /* color: #fff; */
+.box button {
+  background: #000;
+  color: #fff;
   padding: 7px 10px;
   border-radius: 10px;
   margin-top: 3rem;
@@ -455,60 +454,152 @@ body.dark {
   height: 146px;
   backdrop-filter: burl(10px);
 }
-.box button:hover{
+.box button:hover {
   background: rgba(0, 0, 0, 0.842);
 }
-.box i{
+.box i {
   font-size: 7rem;
   float: right;
   margin: -20px 20px 20px 0;
 }
-.html{
+.html {
   color: rgb(25, 94, 54);
 }
-.css{
+.css {
   color: rgb(104, 179, 35);
 }
-.js{
+.js {
   color: rgb(28, 98, 179);
 }
-  /* FIN DE CODIGO CARDS BUTTONS*/
-
+/* FIN DE CODIGO CARDS BUTTONS*/
 
 /* clases para publicacion */
 
-#TipoSeleccionado{
+#TipoSeleccionado {
   display: none;
 }
 
-.img{
-  /* background-image: url(../img/logo.jpg); */
-  background-size:contain;
+/* .img {
+  background-image: url(../img/logo.jpg);
+  background-size: contain;
   background-repeat: no-repeat;
   background-position: center center;
   height: 30vh;
+} */
+
+.navbar-nav {
+  flex-direction: unset;
 }
 
-
-
-.navbar-nav{
-  flex-direction:unset ;
-}
-
-/* btn guardar vista formulario */
-.btn-formulario{
+/* clases para formulario */
+.btn-formulario {
   width: auto;
 }
 
+.tag {
+  font-weight: bold;
+  background: #e4ff6d;
+  margin-right: 7px;
+  color: #000000;
+  padding: 4px 7px;
+  border-radius: 3px;
+  /* border-radius: 60% 40% 40% 20%; */
+  clip-path: polygon(
+    0 40%,
+    10% 0,
+    100% 0%,
+    100% 60%,
+    90% 100%,
+    0% 100%
+  )
+}
 
 /* container se le da un paddin izquierda si supera los 768 px */
 @media (min-width: 768px) {
-  .container-body{
-  padding-left: 6rem;
+  .container-body {
+    padding-left: 6rem;
+  }
 }
+
+/* Fondo de tablas */
+
+.FondoGlass-1 {
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+  box-sizing: border-box;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 3vw 3vw;
+  font-family: "Montserrat";
+  /* z-index: 0; */
+  border-radius: 15px;
+  box-shadow: 1px 10px 15px rgba(0, 0, 0, 0.3);
+  color: aliceblue;
 }
 
-
-
+.FondoGlass-2{
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px);
+  color: white;
+  box-shadow: 1px 10px 15px rgba(254, 255, 255, 0.3);
   
-  
+}
+
+.btn-cambiar {
+  position:absolute;  
+  background-color: yellow;
+  bottom: -5%;
+  height: auto;
+  right: 50%;
+  border-radius: 5px 5px 30px 30px;
+  /* border: 2px dashed black; */
+}
+
+.btn-cambiar2 {
+  position:absolute;  
+  background-color: yellow;
+  font-style: italic;
+  bottom: 95%;
+  height: auto;
+  right: 50%;
+  border-radius:30px 30px 5px 5px ;
+}
+
+.btn-añadir-img {
+  position:absolute;  
+  background-color: rgb(82, 255, 183);
+  bottom: 3%;
+  height: auto;
+  left: 30%;
+  border-radius: 20px 20px 20px 20px ;
+  align-items: center;
+}
+
+.btn-eliminar-img {
+  position:absolute;  
+  background-color: rgb(253, 91, 62);
+  bottom: 3%;
+  height: auto;
+  right: 30%;
+  border-radius: 20px 20px 20px 20px ;
+  align-items: center;
+}
+
+/* CSS para el buscador */
+
+.itemImg{
+  height: 35vw;
+  border-radius: 10px;
+  background-color: black !important;
+}
+
+.itemA{
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
+}
+
+@media (min-width: 768px) {
+  .itemImg{
+    height: 20vw;
+  }
+}

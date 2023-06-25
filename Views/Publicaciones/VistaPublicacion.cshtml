@@ -1,19 +1,34 @@
+<div class="FondoGlass-1 my-5">
+
+<input type="" id="PublicacionID" value=@ViewBag.publicacionID></input>
+
 @* titulo *@
-<h3 id="titulo"></h3>
+<h2 id=titulo></h2>
 
 @* carosel de imagenes *@
 
 
 @* descripcion *@
-
+<p id="descripcion"></p>
 
 @* usuario *@
-
+<div>
+    <p id=User-name></p>
+</div>
 
 @* caja valoraciones y Valoracion general de 1 a 5 estrellas *@
+<div>
+    <h2>Valoracion:</h2>
+    <textarea id="contenido" cols="30" rows="10"></textarea>
+</div>
 
 
 @* boton de solicitud (solo para los usuarios registrados - el dueño de la publi)*@
 
 
 @* sadas *@
+</div>
+
+@section Scripts{
+    <script src="~/js/tablas/vista-1.0.0.js"></script>
+}

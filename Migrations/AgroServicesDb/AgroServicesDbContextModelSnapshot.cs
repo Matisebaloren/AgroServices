@@ -30,6 +30,9 @@ namespace AgroServices.Migrations.AgroServicesDb
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EtiquetaID"), 1L, 1);
 
+                    b.Property<bool>("Eliminado")
+                        .HasColumnType("bit");
+
                     b.Property<int>("PublicacionID")
                         .HasColumnType("int");
 
@@ -38,7 +41,7 @@ namespace AgroServices.Migrations.AgroServicesDb
 
                     b.HasKey("EtiquetaID");
 
-                    b.ToTable("Etiquetas");
+                    b.ToTable("Etiquetas", (string)null);
                 });
 
             modelBuilder.Entity("AgroServices.Models.Imagen", b =>
@@ -49,17 +52,26 @@ namespace AgroServices.Migrations.AgroServicesDb
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ImagenID"), 1L, 1);
 
-                    b.Property<byte[]>("Img_public")
+                    b.Property<bool>("Eliminado")
+                        .HasColumnType("bit");
+
+                    b.Property<byte[]>("Img")
                         .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("NombreImagen")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("PublicacionID")
                         .HasColumnType("int");
+
+                    b.Property<string>("TipoImagen")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ImagenID");
 
                     b.HasIndex("PublicacionID");
 
-                    b.ToTable("Imagenes");
+                    b.ToTable("Imagenes", (string)null);
                 });
 
             modelBuilder.Entity("AgroServices.Models.Localidad", b =>
@@ -83,7 +95,7 @@ namespace AgroServices.Migrations.AgroServicesDb
 
                     b.HasIndex("ProvinciaID");
 
-                    b.ToTable("Localidades");
+                    b.ToTable("Localidades", (string)null);
                 });
 
             modelBuilder.Entity("AgroServices.Models.Notificacion", b =>
@@ -111,7 +123,7 @@ namespace AgroServices.Migrations.AgroServicesDb
 
                     b.HasKey("NotificacionID");
 
-                    b.ToTable("Notificaciones");
+                    b.ToTable("Notificaciones", (string)null);
                 });
 
             modelBuilder.Entity("AgroServices.Models.Provincia", b =>
@@ -130,7 +142,7 @@ namespace AgroServices.Migrations.AgroServicesDb
 
                     b.HasKey("ProvinciaID");
 
-                    b.ToTable("Provincias");
+                    b.ToTable("Provincias", (string)null);
                 });
 
             modelBuilder.Entity("AgroServices.Models.Publicacion", b =>
@@ -166,7 +178,7 @@ namespace AgroServices.Migrations.AgroServicesDb
 
                     b.HasIndex("UsuarioID");
 
-                    b.ToTable("Publicaciones");
+                    b.ToTable("Publicaciones", (string)null);
                 });
 
             modelBuilder.Entity("AgroServices.Models.Servicio", b =>
@@ -185,7 +197,7 @@ namespace AgroServices.Migrations.AgroServicesDb
 
                     b.HasKey("ServicioID");
 
-                    b.ToTable("Servicios");
+                    b.ToTable("Servicios", (string)null);
                 });
 
             modelBuilder.Entity("AgroServices.Models.Solicitud", b =>
@@ -215,7 +227,7 @@ namespace AgroServices.Migrations.AgroServicesDb
 
                     b.HasIndex("PublicacionID");
 
-                    b.ToTable("Solicitudes");
+                    b.ToTable("Solicitudes", (string)null);
                 });
 
             modelBuilder.Entity("AgroServices.Models.Usuario", b =>
@@ -245,7 +257,7 @@ namespace AgroServices.Migrations.AgroServicesDb
 
                     b.HasIndex("LocalidadID");
 
-                    b.ToTable("Usuarios");
+                    b.ToTable("Usuarios", (string)null);
                 });
 
             modelBuilder.Entity("AgroServices.Models.Valoracion", b =>
@@ -275,7 +287,7 @@ namespace AgroServices.Migrations.AgroServicesDb
 
                     b.HasIndex("PublicacionID");
 
-                    b.ToTable("Valoraciones");
+                    b.ToTable("Valoraciones", (string)null);
                 });
 
             modelBuilder.Entity("AgroServices.Models.Imagen", b =>
