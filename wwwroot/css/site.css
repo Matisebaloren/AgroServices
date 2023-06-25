@@ -25,6 +25,7 @@ body {
 
 
 
+/* BUTTON PARA INGRESAR E INICIO DE SESION */
 
 
 /*CODIGO NUEVO PARA NAVBAR
@@ -422,11 +423,11 @@ body.dark {
 }
 .box{
   width: 33%;
-  padding: 10px;
-  margin: 10px;
-  border-radius: 10px;
-  background: rgb(235, 233, 233);
-  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    margin: 10px;
+    border-radius: 10px;
+    background: rgb(235, 233, 233);
+    box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
 }
 .img{
   border-radius: 10px;
@@ -444,12 +445,15 @@ body.dark {
   margin-top: 5px;
 }
 .box button{
-  background: #000;
-  color: #fff;
+  /* background:#ced3cd; */
+  /* color: #fff; */
   padding: 7px 10px;
   border-radius: 10px;
   margin-top: 3rem;
   cursor: pointer;
+  width: 300px;
+  height: 146px;
+  backdrop-filter: burl(10px);
 }
 .box button:hover{
   background: rgba(0, 0, 0, 0.842);
