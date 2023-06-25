@@ -1,10 +1,5 @@
 html {
-  font-size: 14px;
-}
-
-.p,
-label {
-  font-size: 1rem;
+  font-size: 10px;
 }
 
 @media (min-width: 768px) {
@@ -489,11 +484,21 @@ body.dark {
 }
 
 .tag {
-  background: #bbb;
+  font-weight: bold;
+  background: #e4ff6d;
   margin-right: 7px;
-  color: #fff;
+  color: #000000;
   padding: 4px 7px;
-  border-radius: 20px;
+  border-radius: 3px;
+  /* border-radius: 60% 40% 40% 20%; */
+  clip-path: polygon(
+    0 40%,
+    10% 0,
+    100% 0%,
+    100% 60%,
+    90% 100%,
+    0% 100%
+  )
 }
 
 /* container se le da un paddin izquierda si supera los 768 px */
@@ -506,28 +511,59 @@ body.dark {
 /* Fondo de tablas */
 
 .FondoGlass-1 {
-  /* 
-  background-color: rgba(255, 255, 255, 0.5);
-  border: 10px outset;
-  border-color: linear-gradient(34deg, #C3C3C3 0%, #FFFFFF 100%);
-  border-radius: 20px; */
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
-  width: 100%;
   box-sizing: border-box;
   background: rgba(0, 0, 0, 0.3);
-  padding: 5% 5%;
+  padding: 3vw 3vw;
   font-family: "Montserrat";
   z-index: 0;
   border-radius: 15px;
   box-shadow: 1px 10px 15px rgba(0, 0, 0, 0.3);
-  margin: 10px;
   color: aliceblue;
 }
 
-.FondoGlass-1 h2 {
-  font-size: 36px;
+.FondoGlass-2{
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px);
+  color: white;
+  box-shadow: 1px 10px 15px rgba(254, 255, 255, 0.3);
+  
 }
-.FondoGlass-1 p {
-  color: #fff;
+
+.btn-cambiar {
+  position:absolute;  
+  background-color: yellow;
+  bottom: -5%;
+  height: auto;
+  right: 50%;
+  border-radius:5px 5px 30px 30px;
+}
+
+.btn-cambiar2 {
+  position:absolute;  
+  background-color: yellow;
+  font-style: italic;
+  bottom: 95%;
+  height: auto;
+  right: 50%;
+  border-radius:30px 30px 5px 5px ;
+}
+
+.btn-añadir-img {
+  position:absolute;  
+  background-color: rgb(82, 255, 183);
+  bottom: 3%;
+  height: auto;
+  left: 33%;
+  border-radius: 30px 30px 30px 30px ;
+}
+
+.btn-eliminar-img {
+  position:absolute;  
+  background-color: rgb(253, 91, 62);
+  bottom: 4.1%;
+  height: auto;
+  left: 66%;
+  border-radius: 5px 5px 30px 30px ;
 }

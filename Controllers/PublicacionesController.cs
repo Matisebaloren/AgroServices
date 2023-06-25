@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using AgroServices.Data;
 using AgroServices.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -18,20 +19,39 @@ public class PublicacionesController : Controller
         _logger = logger;
         _contexto = contexto;
     }
+    // public async Task<IActionResult> Edit(int? id)
+    //         {
+    //             if (id == null || _context.Home == null)
+    //             {
+    //                 return NotFound();
+    //             }
 
-    public IActionResult Formulario()
+    //             var home = await _context.Home.FindAsync(id);
+    //             if (home == null)
+    //             {
+    //                 return NotFound();
+    //             }
+    //             ViewData["LocationID"] = new SelectList(_context.Location, "LocationID", "LocationName");
+    //             return View(home);
+    //         }
+
+    public async Task<IActionResult> Formulario(int? id = 0, int SecImg = 0)
     {
-        var servicios = _contexto.Servicios.Where(x => x.Eliminado == false).ToList();
+        if (SecImg != 0)
+        {
+            ViewBag.SecImg = 1;
+        }
+        ViewBag.publicacionID = id;
 
+        var servicios = _contexto.Servicios.Where(x => x.Eliminado == false).ToList();
         var seleccionServicio = new Servicio()
         {
             ServicioID = 0,
             descripcion = "[SELECCIONE UN SERVICIO]",
         };
         servicios.Add(seleccionServicio);
-
         ViewBag.ServicioID = new SelectList(servicios.OrderBy(p => p.descripcion), "ServicioID", "descripcion", 0);
-        return View();
+        return View("Formulario");
     }
 
     public IActionResult VistaPublicacion()
@@ -60,7 +80,7 @@ public class PublicacionesController : Controller
 
     public JsonResult BuscarImagenes(int publicacionID = 0)
     {
-        var imagenes = _contexto.Imagenes.Where(x => x.PublicacionID == publicacionID).ToList();
+        var imagenes = _contexto.Imagenes.Where(x => x.PublicacionID == publicacionID && x.Eliminado != true).ToList();
         foreach (var item in imagenes)
         {
             if (item.Img != null)
@@ -189,16 +209,18 @@ public class PublicacionesController : Controller
         return Json(resultado);
     }
 
-    public JsonResult GuardarImagen(int ImagenID, IFormFile imagen, int publicacionID)
+    public async Task<IActionResult> GuardarImagen(int ImagenID, IFormFile imagen, int publicacionID)
     {
         bool resultado = false;
-        if (imagen != null && imagen.Length > 0)
+        if (ImagenID == 0)
         {
-            //SI ES 0 QUIERE DECIR QUE ESTA CREANDO LA CATEGORIA
-            if (ImagenID == 0)
+            if (imagen != null && imagen.Length > 0)
             {
+                //SI ES 0 QUIERE DECIR QUE ESTA CREANDO LA CATEGORIA
+
                 //DECLAMOS EL OBJETO DANDO EL VALOR
-                var imagenGuardar = new Imagen {
+                var imagenGuardar = new Imagen
+                {
                     PublicacionID = publicacionID
                 };
 
@@ -212,38 +234,27 @@ public class PublicacionesController : Controller
                 imagenGuardar.Img = imagenBinaria;
                 imagenGuardar.TipoImagen = imagen.ContentType;
                 imagenGuardar.NombreImagen = imagen.FileName;
-                
+
 
 
                 _contexto.Add(imagenGuardar);
                 _contexto.SaveChanges();
                 resultado = true;
+                
             }
-            else
+
+        }
+        else
+        {
+            //crear variable que guarde el objeto segun el id deseado
+            var ImagenEditar = _contexto.Imagenes.Find(ImagenID);
+            if (ImagenEditar != null)
             {
-                //crear variable que guarde el objeto segun el id deseado
-                var ImagenEditar = _contexto.Imagenes.Find(ImagenID);
-                if (ImagenEditar != null)
-                {
-                    if (imagen != null && imagen.Length > 0)
-                    {
-                        byte[] imagenBinaria = null;
-                        using (var fs1 = imagen.OpenReadStream())
-                        using (var ms1 = new MemoryStream())
-                        {
-                            fs1.CopyTo(ms1);
-                            imagenBinaria = ms1.ToArray();
-                        }
-                        ImagenEditar.Img = imagenBinaria;
-                        ImagenEditar.TipoImagen = imagen.ContentType;
-                        ImagenEditar.NombreImagen = imagen.FileName;
-                    }
-                    _contexto.SaveChanges();
-                    resultado = true;
-                }
+                ImagenEditar.Eliminado = true;
+                _contexto.SaveChanges();
+                resultado = true;
             }
         }
-
         return Json(resultado);
     }
 

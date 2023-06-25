@@ -1,6 +1,7 @@
 let tagsActive = new Array();
 let serviciosDisp = new Array();
-let publicacionID = 13;
+let publicacionID = $("#PublicacionID").val();
+console.log(publicacionID + " este es el id de publicacion");
 window.onload = BuscarPublicacion(publicacionID);
 
 function BuscarPublicacion(publicacionID = 0) {
@@ -53,29 +54,27 @@ function BuscarPublicacion(publicacionID = 0) {
     dataType: "json",
 
     success: function (imagenes) {
-      console.log("imagenes numero:" + imagenes.length);
-
       let clase = "active";
+      if(imagenes.length == 0){
+        $("#Lista_imagenes").append(
+          `<div class="carousel-item ${clase}" >
+          <div class="FondoGlass-1" style="width: 100%; height: 35vw;">
+          <svg style="fill:#ffffff; position: absolute; right: 43%; top: 32%;" xmlns="http://www.w3.org/2000/svg" height="6em" viewBox="0 0 576 512"><path d="M160 80H512c8.8 0 16 7.2 16 16V320c0 8.8-7.2 16-16 16H490.8L388.1 178.9c-4.4-6.8-12-10.9-20.1-10.9s-15.7 4.1-20.1 10.9l-52.2 79.8-12.4-16.9c-4.5-6.2-11.7-9.8-19.4-9.8s-14.8 3.6-19.4 9.8L175.6 336H160c-8.8 0-16-7.2-16-16V96c0-8.8 7.2-16 16-16zM96 96V320c0 35.3 28.7 64 64 64H512c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H160c-35.3 0-64 28.7-64 64zM48 120c0-13.3-10.7-24-24-24S0 106.7 0 120V344c0 75.1 60.9 136 136 136H456c13.3 0 24-10.7 24-24s-10.7-24-24-24H136c-48.6 0-88-39.4-88-88V120zm208 24a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"/></svg>          </div>
+            </div>
+            `
+        );
+      }
       $.each(imagenes, function (index, item) {
-        let celdaEditar = `<td class="text-center"> <a class="btn btn-primary btn-sm" onClick="BuscarCategoria(${item.ImagenID})" role="button">Editar</a></td>`;
-        let celdaDeshabilitar = `<td class="text-center"> <a class="btn btn-danger btn-sm" onClick="DeshabilitarHabilitar(${item.ImagenID}, true)" role="button">Deshabilitar</a></td>`;
-        if (item.eliminado) {
-          celdaEditar = `<td class="text-center"></td>`;
-          celdaDeshabilitar = `<td class="text-center"> <a class="btn btn-success btn-sm" onClick="DeshabilitarHabilitar(${item.ImagenID}, false)" role="button">Habilitar</a></td>`;
-        }
-
+        console.log("id de item" + item.imagenID);
         let imagen = "<td></td>";
         if (item.imagenBase64) {
-          imagen = `<td><img src="data:${item.tipoImagen};base64, ${item.imagenBase64}" style="width: 100%; height: 35vw; display: block"/></td>`;
+          imagen = `<input hidden name="id" value="${item.imagenID}"></input><img src="data:${item.tipoImagen};base64, ${item.imagenBase64}" style="width: 100%; height: 35vw; display: block"/>`;
         }
-
         $("#Lista_imagenes").append(
-          `<div class="carousel-item ${clase}">
+          `<div class="carousel-item ${clase}" >
               ${imagen}
             </div>
             `
-          // ${celdaEditar}
-          // ${celdaDeshabilitar}
         );
         clase = "";
       });
@@ -86,30 +85,34 @@ function BuscarPublicacion(publicacionID = 0) {
   });
 
   // BUSCAR INFORMARCION DE PUBLICACION
-  $.ajax({
-    url: "../../Publicaciones/BuscarPublicaciones",
-    data: { publicacionID: publicacionID },
-    type: "GET",
-    dataType: "json",
-    success: function (publicaciones) {
-      console.log(publicaciones);
-      if (publicaciones.length > 0) {
-        if (publicaciones[0].esOferta == true) {
-          $("#EsOferta").val(1);
-          seleccionarTipo("1");
+  if (publicacionID > 0) {
+    $.ajax({
+      url: "../../Publicaciones/BuscarPublicaciones",
+      data: { publicacionID: publicacionID },
+      type: "GET",
+      dataType: "json",
+      success: function (publicaciones) {
+        console.log(publicaciones);
+        if (publicaciones.length > 0) {
+          if (publicaciones[0].esOferta == true) {
+            $("#EsOferta").val(1);
+            seleccionarTipo("1");
+          } else {
+            $("#EsOferta").val(2);
+            seleccionarTipo("2");
+          }
+          $("#UsuarioID").val(publicaciones[0].usuarioID);
+          $("#Titulo").val(publicaciones[0].titulo);
+          $("#descripcion").val(publicaciones[0].descripcion);
         } else {
-          $("#EsOferta").val(2);
-          seleccionarTipo("2");
+          publicacionID = 0;
         }
-        $("#UsuarioID").val(publicaciones[0].usuarioID);
-        $("#Titulo").val(publicaciones[0].titulo);
-        $("#descripcion").val(publicaciones[0].descripcion);
-      }
-    },
-    error: function (xhr, status) {
-      alert("Error al cargar publicaciones");
-    },
-  });
+      },
+      error: function (xhr, status) {
+        alert("Error al cargar publicaciones");
+      },
+    });
+  }
 }
 
 function GuardarPublicacion() {
@@ -219,19 +222,27 @@ function seleccionarTipo(value) {
   // console.log(value);
   switch (value) {
     case "0":
-      // console.log("es cero");
-      $("#TipoSeleccionado").hide();
+      $("#Titulo").prop("disabled", true);
+      $("#ServicioID").prop("disabled", true);
+      $("#Etiqueta-List").hide();
+      $("#descripcion").prop("disabled", true);
+      $("#btn-guardar").prop("disabled", true);
       break;
     case "1":
-      $("#TipoSeleccionado").show();
-      $("#ListaImagenes").show();
+      $("#Titulo").prop("disabled", false);
+      $("#ServicioID").prop("disabled", false);
+      $("#Etiqueta-List").show();
+      $("#descripcion").prop("disabled", false);
+      $("#btn-guardar").prop("disabled", false);
       break;
     case "2":
-      $("#TipoSeleccionado").show();
-      $("#ListaImagenes").hide();
+      $("#Titulo").prop("disabled", false);
+      $("#ServicioID").prop("disabled", false);
+      $("#Etiqueta-List").show();
+      $("#descripcion").prop("disabled", false);
+      $("#btn-guardar").prop("disabled", false);
       break;
   }
-  $("#ModalImagen").modal("show");
   actualizarTag();
 }
 
@@ -318,4 +329,52 @@ function QuitarTag(id) {
   serviciosDisp.push(resultado);
   // tagsActive = tagsActive.filter((tags) => tags.servicioID != id);
   actualizarTag();
+}
+
+$("#div-imagenes").hide();
+
+function CambiarSeccion() {
+  $("#div-main").addClass("animate__slideOutUp");
+  setTimeout(() => {
+    $("#div-datos").hide();
+    $("#div-imagenes").show();
+    $("#div-main").removeClass("animate__slideOutUp");
+    $("#div-main").addClass("animate__slideInUp");
+    setTimeout(() => {
+      $("#div-main").removeClass("animate__slideInUp");
+    }, 1000);
+  }, 1000);
+}
+
+function CambiarSeccion2() {
+  $("#div-main").addClass("animate__slideOutDown");
+  setTimeout(() => {
+    $("#div-datos").show();
+    $("#div-imagenes").hide();
+    $("#div-main").removeClass("animate__slideOutDown");
+    $("#div-main").addClass("animate__slideInDown");
+    setTimeout(() => {
+      $("#div-main").removeClass("animate__slideInDown");
+    }, 1500);
+  }, 700);
+}
+
+function NuevaImagen() {
+  $("#ModalImagen").modal("show");
+}
+
+function EliminarImagen() {
+  var imagenID = $(".active").find('[name="id"]').val();
+  console.log(imagenID);
+  $.ajax({
+    url: "../../Publicaciones/GuardarImagen",
+    data: {
+      ImagenID: imagenID,
+    },
+    type: "POST",
+    dataType: "json",
+    error: function (xhr, status) {
+      alert("Disculpe, existió un problema");
+    },
+  });
 }
