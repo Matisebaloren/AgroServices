@@ -5,7 +5,7 @@ function BuscarPublicaciones() {
 
   $.ajax({
     url: "../../Publicaciones/BuscarPublicaciones",
-    data: { publicacionID: publicacionID },
+    data: { },
     type: "GET",
     dataType: "json",
     success: function (publicaciones) {
