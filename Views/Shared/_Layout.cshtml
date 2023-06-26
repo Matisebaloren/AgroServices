@@ -22,16 +22,27 @@
 <body>
   <!-- navbar -->
   <nav class="navbar FondoGlass-Navbar">
-    <div  class="logo_item">
+    <div class="logo_item">
+      <img src="/img/logoprueba.png" alt="Logo">
       <i class="bx bx-menu" id="sidebarOpen"></i>
       @* <img class="imgLogo" alt=""></i> *@
-      <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">AgroServices</a> 
-      
+      <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">AgroServices</a>
+
     </div>
 
     <div class="search_bar">
       <input type="text" placeholder="Search" />
     </div>
+
+    <div id="click" onclick="notify();">
+      <i class="bi bi-bell-fill"></i>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bell-fill"
+        viewBox="0 0 16 16">
+        <path
+          d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z" />
+      </svg>
+    </div>
+
 
     <div class="navbar_content">
       <partial name="_LoginPartial" />
@@ -46,88 +57,88 @@
 
     <!-- sidebar -->
     <nav class="sidebar FondoGlass-Navbar hoverable close">
-    <div class="menu_content">
+      <div class="menu_content">
         <ul class="menu_items">
 
-            @* <li class="item">
-                <div asp-controller="" asp-action="" class="nav_link sublink">
-                    <span class="navlink_icon">
-                        <i class="bx bx-home-alt"></i>
-                    </span>
-                    <span class="navlink">Inicio</span>
-                </div>
-            </li>
-            <li class="item"> *@
-            <a asp-controller="" asp-action="" class="nav_link">
-              <span class="navlink_icon">
-                <i class="bx bx-home-alt"></i>
-              </span>
-              <span class="navlink">Filters</span>
-            </a>
+          @* <li class="item">
+          <div asp-controller="" asp-action="" class="nav_link sublink">
+          <span class="navlink_icon">
+          <i class="bx bx-home-alt"></i>
+          </span>
+          <span class="navlink">Inicio</span>
+          </div>
           </li>
-            <!-- end -->
+          <li class="item"> *@
+          <a asp-controller="" asp-action="" class="nav_link">
+            <span class="navlink_icon">
+              <i class="bx bx-home-alt"></i>
+            </span>
+            <span class="navlink">Filters</span>
+          </a>
+          </li>
+          <!-- end -->
 
-            <!-- duplicate this li tag if you want to add or remove  navlink with submenu -->
-            <!-- start -->
-            <li class="item">
-                <div href="#" class="nav_link submenu_item">
-                    <span class="navlink_icon">
-                        <i class="bx bx-grid-alt"></i>
-                    </span>
-                    <span class="navlink">Categorias</span>
-                    <i class="bx bx-chevron-right arrow-left"></i>
-                </div>
+          <!-- duplicate this li tag if you want to add or remove  navlink with submenu -->
+          <!-- start -->
+          <li class="item">
+            <div href="#" class="nav_link submenu_item">
+              <span class="navlink_icon">
+                <i class="bx bx-grid-alt"></i>
+              </span>
+              <span class="navlink">Categorias</span>
+              <i class="bx bx-chevron-right arrow-left"></i>
+            </div>
 
-                <ul class="menu_items submenu">
-                    <a class="nav_link sublink">Cosecha</a>
-                    <a href="" class="nav_link sublink">Picado</a>
-                    <a href="#" class="nav_link sublink">Sembrado</a>
-                </ul>
-            </li>
-            <!-- end -->
+            <ul class="menu_items submenu">
+              <a class="nav_link sublink">Cosecha</a>
+              <a href="" class="nav_link sublink">Picado</a>
+              <a href="#" class="nav_link sublink">Sembrado</a>
+            </ul>
+          </li>
+          <!-- end -->
 
           @* <div class="menu_title menu_opciones"></div> *@
 
-            <!-- Start -->
-            <li class="item">
-                <div href="#" class="nav_link submenu_item">
-                    <span class="navlink_icon">
-                        <i class="bx bx-grid-alt"></i>
-                    </span>
-                    <span class="navlink">Publicación</span>
-                    <i class="bx bx-chevron-right arrow-left"></i>
-                </div>
+          <!-- Start -->
+          <li class="item">
+            <div href="#" class="nav_link submenu_item">
+              <span class="navlink_icon">
+                <i class="bx bx-grid-alt"></i>
+              </span>
+              <span class="navlink">Publicación</span>
+              <i class="bx bx-chevron-right arrow-left"></i>
+            </div>
 
-                <ul class="menu_items submenu">
-                    <a asp-controller="Publicaciones" asp-action="Formulario" asp-route-id="0"
-                        class="nav_link sublink">Nueva Publicación</a>
-                </ul>
-                <ul class="menu_items submenu">
-                    <a asp-controller="Servicios" asp-action="Index" class="nav_link sublink">Servicios</a>
-                </ul>
-                <ul class="menu_items submenu">
-                    <a asp-controller="Publicaciones" asp-action="Index" class="nav_link sublink">Publicaciones</a>
-                </ul>
-                <ul class="menu_items submenu">
-                    <a href="#" class="nav_link sublink">Solicitudes</a>
-                </ul>
-            </li>
-        </ul>   <!-- End -->
-    </div>
-</nav>
+            <ul class="menu_items submenu">
+              <a asp-controller="Publicaciones" asp-action="Formulario" asp-route-id="0" class="nav_link sublink">Nueva
+                Publicación</a>
+            </ul>
+            <ul class="menu_items submenu">
+              <a asp-controller="Servicios" asp-action="Index" class="nav_link sublink">Servicios</a>
+            </ul>
+            <ul class="menu_items submenu">
+              <a asp-controller="Publicaciones" asp-action="Index" class="nav_link sublink">Publicaciones</a>
+            </ul>
+            <ul class="menu_items submenu">
+              <a href="#" class="nav_link sublink">Solicitudes</a>
+            </ul>
+          </li>
+        </ul> <!-- End -->
+      </div>
+    </nav>
 
 
     @* ------INTENTO DE BUSCADOR *@
     @* <div class="wrapper">
     <div class="search-input">
-      <a href="" target="_blank" hidden></a>
-      <input type="text" placeholder="Buscar...">
-      <div class="autocom-box">
+    <a href="" target="_blank" hidden></a>
+    <input type="text" placeholder="Buscar...">
+    <div class="autocom-box">
 
-      </div>
-      <div class="icon"><i class="fas fa-search"></i></div>
     </div>
-  </div> *@
+    <div class="icon"><i class="fas fa-search"></i></div>
+    </div>
+    </div> *@
 
 
 
@@ -139,47 +150,47 @@
 
 
     @* <header>
-  <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-  <div class="container-fluid">
-  <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">AgroServices</a>
-  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
-  aria-controls="navbarSupportedContent"
-  aria-expanded="false" aria-label="Toggle navigation">
-  <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-  <ul class="navbar-nav flex-grow-1">
-  <li class="nav-item">
-  <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-  </li>
-  <li class="nav-item">
-  <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-  </li>
-  </ul>
-  </div>
-  </div>
-  </nav>
-  </header> *@
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+    <div class="container-fluid">
+    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">AgroServices</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
+    aria-controls="navbarSupportedContent"
+    aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+    <ul class="navbar-nav flex-grow-1">
+    <li class="nav-item">
+    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+    </li>
+    <li class="nav-item">
+    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    </li>
+    </ul>
+    </div>
+    </div>
+    </nav>
+    </header> *@
 
 
-    @* aca empieza las vistas  *@
+    @* aca empieza las vistas *@
     <div class="container">
-    <div class="container container-body">
+      <div class="container container-body">
         @RenderBody()
         </main>
+      </div>
+
     </div>
 
-  </div>
-
     @* <footer class="border-top footer text-muted">
-  <div class="container">
-  &copy; 2023 - AgroServices - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-  </div>
-  </footer> *@
-  <script src="~/lib/jquery/dist/jquery.min.js"></script>
-  <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="~/js/site.js" asp-append-version="true"></script>
-  <script src="~/js/sweetalerts2.js" asp-append-version="true"></script>
+    <div class="container">
+    &copy; 2023 - AgroServices - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    </div>
+    </footer> *@
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/sweetalerts2.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 
