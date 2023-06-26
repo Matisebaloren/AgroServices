@@ -34,7 +34,7 @@ body {
 }
 :root {
   --white-color: #fff;
-  --blue-color: #8fa1d1;
+  --blue-color: #c8e73f;
   --grey-color: #707070;
   --grey-color-light: #aaa;
 }
@@ -196,7 +196,7 @@ body.dark {
   display: none;
 }
 .nav_link:hover {
-  color: var(--white-color);
+  color: var(--black-color);
   background: var(--blue-color);
 }
 .sidebar.close .nav_link:hover {
@@ -495,20 +495,20 @@ body.dark {
 
 .tag {
   font-weight: bold;
-  background: #e4ff6d;
+  background: #c8e73f;
   margin-right: 7px;
   color: #000000;
   padding: 4px 7px;
   border-radius: 3px;
-  /* border-radius: 60% 40% 40% 20%; */
-  clip-path: polygon(
+  border-radius: 20%;
+  /* clip-path: polygon(
     0 40%,
     10% 0,
     100% 0%,
     100% 60%,
     90% 100%,
     0% 100%
-  )
+  ) */
 }
 
 /* container se le da un paddin izquierda si supera los 768 px */
