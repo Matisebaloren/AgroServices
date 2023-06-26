@@ -1,6 +1,6 @@
 @{
 
-    ViewData["Title"] = "Home Page";
+  ViewData["Title"] = "Home Page";
 }
 
 
@@ -15,9 +15,10 @@
       <div class="modal-body">
         <input type="hidden" id="ServicioID" value="0" />
         <div>
-            <label class="control-label">Servicio</label>
-            <input type="text" class="form-control" id="descripcion" autocomplete="off" onkeyup="this.value = this.value.toUpperCase()"/>
-            <p class="text-danger" id="alerta"></p>
+          <label class="control-label">Servicio</label>
+          <input type="text" class="form-control" id="descripcion" autocomplete="off"
+            onkeyup="this.value = this.value.toUpperCase()" />
+          <p class="text-danger" id="alerta"></p>
         </div>
       </div>
       <div class="modal-footer">
@@ -30,26 +31,36 @@
 
 
 <div class="fondoTablas">
-    <h1 class="display-4">Servicios</h1>
+  
 
-      <!-- Button trigger modal -->
-      
+  <!-- Button trigger modal -->
+
 
   @* Tabla con los datos de cada elemento *@
- 
-  <table class="table table-bordered table-hover table-light table-condensed text-uppercase">
-    <thead>
+  <div class="FondoGlass-1 my-5">
+    <h1 class="display-4">Servicios</h1>
+    <table class="table table__body">
+      <thead>
         <tr>
-            <th>Nombre</th>
-            <th class="text-end">
-              <button type="button" onclick="VaciarFormulario()" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ModalServicio">
-              Nuevo</button>
-            </th>
+          <th>Nombre</th>
+          <th class="text-end">
+            <button type="button" onclick="VaciarFormulario()" class="btn btn-primary" data-bs-toggle="modal"
+              data-bs-target="#ModalServicio">
+              Nuevo
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                class="bi bi-plus-square-fill" viewBox="0 0 16 16">
+                <path
+                d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z" />
+              </svg>
+              </button>
+          </th>
         </tr>
-    </thead>
-        <tbody id="tbody-servicios">        
-        </tbody>
-  </table>
+      </thead>
+      <tbody id="tbody-servicios">
+      </tbody>
+    </table>
+  </div>
+
 </div>
 
 
@@ -57,5 +68,5 @@
 
 
 @section Scripts{
-    <script src="~/js/tablas/servicio-1.0.0.js"></script>
+  <script src="~/js/tablas/servicio-1.0.0.js"></script>
 }
