@@ -1,34 +1,63 @@
 <div class="FondoGlass-1 my-5">
 
-<input type="" id="PublicacionID" value=@ViewBag.publicacionID></input>
 
-@* titulo *@
-<h2 id=titulo></h2>
+<input type="hidden" id="PublicacionID" value=@ViewBag.publicacionID></input>
 
-@* carosel de imagenes *@
+<div class="row">
+        @* carosel de imagenes *@
+    <div class="col-12 col-md-6">
+        <div id="carouselExampleFade" class="carousel slide my-3" data-bs-ride="carousel" data-bs-touch="true" data-bs-interval="false">
+            <div class="carousel-inner" style="height: 25vh;" id="Lista_imagenes">
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+        @* datos *@
+    <div class="col-12 col-md-6">
+            @* titulo *@
+            <h2 id=titulo></h2>
+
+    </div>
 
 
-@* descripcion *@
+
+
+
+
+        @* descripcion *@
 <p id="descripcion"></p>
 
-@* usuario *@
+        @* usuario *@
 <div>
     <p id=User-name></p>
 </div>
 
-@* caja valoraciones y Valoracion general de 1 a 5 estrellas *@
+        @* caja valoraciones y Valoracion general de 1 a 5 estrellas *@
 <div>
     <h2>Valoracion:</h2>
     <textarea id="contenido" cols="30" rows="10"></textarea>
 </div>
 
 
-@* boton de solicitud (solo para los usuarios registrados - el dueño de la publi)*@
+        @* boton de solicitud (solo para los usuarios registrados - el dueño de la publi)*@
 
 
-@* sadas *@
+        @* sadas *@
+</div>
+
+
+
 </div>
 
 @section Scripts{
-    <script src="~/js/tablas/vista-1.0.0.js"></script>
+<script src="~/js/tablas/vista-1.0.0.js"></script>
 }

@@ -74,7 +74,7 @@ public class PublicacionesController : Controller
 
     public JsonResult BuscarPublicaciones(int publicacionID = 0)
     {
-        var publicaciones = _contexto.Publicaciones.ToList();
+        var publicaciones = _contexto.Publicaciones.OrderBy(p => p.Fecha).ToList();
 
         if (publicacionID > 0)
         {

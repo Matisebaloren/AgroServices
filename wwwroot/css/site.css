@@ -198,7 +198,7 @@ body.dark {
   display: none;
 }
 .nav_link:hover {
-  color: var(--black-color);
+  color: black;
   background: var(--blue-color);
 }
 .sidebar.close .nav_link:hover {
@@ -699,8 +699,7 @@ td img {
   width: 36px;
   height: 36px;
   margin-right: .5rem;
-  border-radius: 50%;
-
+  /* border-radius: 50%; */
   vertical-align: middle;
 }
 
@@ -925,4 +924,11 @@ thead th.active,tbody td.active {
   box-shadow: 0 2px 5px #0000004d;
   color: #596d8f;    
 }
-/* TERMINACION DE CODIGO ICONO NOTIFICACION  */
+
+/* imagen de carrousel de vista publicacion */
+
+.imagen{
+  height: 100%;
+  display: block;
+  width: 100%;
+}
