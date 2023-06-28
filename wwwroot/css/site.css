@@ -23,6 +23,12 @@ body {
   background-attachment: fixed;
 }
 
+.btn-primary{
+background-color: #c8e73f;
+border-color: #c8e73f;
+}
+
+
 /* CODIGO DEL CARROUSEL */
 .carousel-inner{
   width: 100%;
