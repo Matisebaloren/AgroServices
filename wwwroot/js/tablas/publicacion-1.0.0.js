@@ -124,17 +124,22 @@ function BuscarImagenes() {
 
 function GuardarPublicacion() {
   //JAVASCRIPT
+
+
+
   let descripcion = $("#descripcion").val();
   let esOferta = null;
   let titulo = $("#Titulo").val();
   let usuarioID = $("#UsuarioID").val();
-  if ($("#EsOferta").val() == 1) {
+if ($("#EsOferta").val() == 1) {
     esOferta = true;
   } else {
     esOferta = false;
   }
 
-  $.ajax({
+  if(titulo || descripcion || esOferta > 0){
+
+$.ajax({
     // la URL para la petición
     url: "../../Publicaciones/GuardarPublicacion",
     // la información a enviar
@@ -202,6 +207,28 @@ function GuardarPublicacion() {
       alert("Disculpe, existió un problema");
     },
   });
+
+  }
+  else{
+    const Toast = Swal.mixin({
+      toast: true,
+      position: "top-end",
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener("mouseenter", Swal.stopTimer);
+        toast.addEventListener("mouseleave", Swal.resumeTimer);
+      },
+    });
+    Toast.fire({
+      icon: "error",
+      title: "Faltan Campos por Completar",
+    });
+  }
+
+  
+  
 }
 
 function GuardarTags() {

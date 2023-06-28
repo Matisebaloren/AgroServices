@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using AgroServices.Data;
 using AgroServices.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 namespace AgroServices.Controllers;
 
@@ -19,21 +20,29 @@ public class LocalidadesController : Controller
 
     public IActionResult Index()
     {
-        var provincias = _contexto.Provincias.Where(c => c.Eliminado == false).ToList(); 
-        ViewBag.ProvinciaID = new SelectList(provincias.OrderBy(p => p.Nombre), "ProvinciaID", "Nombre", 0);       
+        var provincias = _contexto.Provincias.Where(c => c.Eliminado == false).ToList();
+        ViewBag.ProvinciaID = new SelectList(provincias.OrderBy(p => p.Nombre), "ProvinciaID", "Nombre", 0);
         return View();
     }
 
-     // Busca localidades para la tabla
+    // Busca localidades para la tabla
     public JsonResult BuscarLocalidades(int localidadID = 0)
     {
         var localidades = _contexto.Localidades.ToList();
-        
+
         if (localidadID > 0)
-        {   
+        {
             localidades = localidades.Where(p => p.LocalidadID == localidadID).OrderBy(p => p.Nombre).ToList();
         }
-        
+
+        _contexto.SaveChanges();
+        return Json(localidades);
+    }
+
+    public JsonResult BuscarLocalidadesXProvincia(int provinciaID = 0)
+    {
+        var localidades = _contexto.Localidades.Where(x => x.ProvinciaID == provinciaID && x.Eliminado == false).ToList();
+
         _contexto.SaveChanges();
         return Json(localidades);
     }
@@ -45,15 +54,19 @@ public class LocalidadesController : Controller
         string resultado = "Error";
 
         //verificamos si Nombre esta completo
-        if (!string.IsNullOrEmpty(nombre)){     
-                        //SI ES 0 QUIERE DECIR QUE ESTA CREANDO EL ELEMENTO
-            if(localidadID == 0){
+        if (!string.IsNullOrEmpty(nombre))
+        {
+            //SI ES 0 QUIERE DECIR QUE ESTA CREANDO EL ELEMENTO
+            if (localidadID == 0)
+            {
                 //BUSCAMOS EN LA TABLA SI EXISTE UNA CON LA MISMO NOMBRE
                 var localidadOriginal = _contexto.Localidades.Where(c => c.Nombre == nombre).FirstOrDefault();
-                if(localidadOriginal == null){
-                
+                if (localidadOriginal == null)
+                {
+
                     //DECLARAMOS EL OBJETO DANDO EL VALOR
-                    var LocalidadGuardar = new Localidad{
+                    var LocalidadGuardar = new Localidad
+                    {
                         Nombre = nombre,
                         ProvinciaID = provinciaID
                     };
@@ -62,32 +75,38 @@ public class LocalidadesController : Controller
                     resultado = "Crear";
 
                 }
-                else{
+                else
+                {
                     resultado = "repetir";
                 }
             }
-            else{
+            else
+            {
                 //BUSCAMOS EN LA TABLA SI EXISTE UNA CON LA MISMA DESCRIPCION Y DISTINTO ID DE REGISTRO AL QUE ESTAMOS EDITANDO
                 var localidadOriginal = _contexto.Localidades.Where(c => c.Nombre == nombre && c.LocalidadID != localidadID).Count();
                 // var categoriaIguales = categoriaOriginal.Where(c => c.CategoriaID == categoriaID).Count();
-                if(localidadOriginal == 0){
+                if (localidadOriginal == 0)
+                {
                     //crear variable que guarde el objeto segun el id deseado
                     var localidadEditar = _contexto.Localidades.Find(localidadID);
-                    if(localidadEditar != null){
+                    if (localidadEditar != null)
+                    {
                         localidadEditar.Nombre = nombre;
                         localidadEditar.LocalidadID = localidadID;
                         localidadEditar.ProvinciaID = provinciaID;
                         _contexto.SaveChanges();
                         resultado = "Crear";
                     }
-                    
+
                 }
-                else{
+                else
+                {
                     resultado = "repetir";
                 }
-            }                          
+            }
         }
-        else{
+        else
+        {
             resultado = "faltas";
         }
 
@@ -95,26 +114,27 @@ public class LocalidadesController : Controller
     }
 
 
-    public JsonResult Deshabilitar(int localidadID){
-     String resultado = "error";
-     var localidad = _contexto.Localidades.Where(c => c.LocalidadID == localidadID).FirstOrDefault();
-    // var categoriaDeshabilitada = _contexto.Categorias.Where(c => c.Eliminado == true && c.CategoriaID == localidad.Categoria.CategoriaID).Count();
-    // var servicios = _contexto.Servicios.Where(s => s.Eliminado == false && s.LocalidadID == localidadID).Count();
-   
+    public JsonResult Deshabilitar(int localidadID)
+    {
+        String resultado = "error";
+        var localidad = _contexto.Localidades.Where(c => c.LocalidadID == localidadID).FirstOrDefault();
+        // var categoriaDeshabilitada = _contexto.Categorias.Where(c => c.Eliminado == true && c.CategoriaID == localidad.Categoria.CategoriaID).Count();
+        // var servicios = _contexto.Servicios.Where(s => s.Eliminado == false && s.LocalidadID == localidadID).Count();
+
         if (localidad.Eliminado == true)
         {
             localidad.Eliminado = false;
-            
+
         }
         else
         {
             localidad.Eliminado = true;
-            
+
         }
         resultado = "cambiar";
-            
+
         _contexto.SaveChanges();
-    
-     return Json(resultado);
+
+        return Json(resultado);
     }
 }

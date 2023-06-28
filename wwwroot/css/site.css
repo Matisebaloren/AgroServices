@@ -88,8 +88,8 @@ body.dark {
 }
 .search_bar {
   height: 47px;
-  max-width: 430px;
-  width: 100%;
+  /* max-width: 10vh; */
+  width: 30vw;
 }
 .search_bar input {
   height: 100%;
@@ -292,6 +292,10 @@ body.dark {
   .sidebar.close .bottom_content {
     left: -100%;
   }
+  
+}
+
+@media screen and (max-width: 444px) {
   .navbar-nav{
     display: none;
   }
@@ -534,8 +538,8 @@ body.dark {
   margin-right: 7px;
   color: #000000;
   padding: 4px 7px;
-  border-radius: 3px;
-  border-radius: 20%;
+  border-radius: 10px;
+  /* border-radius: 20%; */
   /* clip-path: polygon(
     0 40%,
     10% 0,
@@ -572,7 +576,7 @@ body.dark {
   -webkit-backdrop-filter: blur(5px);
   backdrop-filter: blur(5px);
   box-sizing: border-box;
-  background: rgba(255, 255, 255, 0.904);
+  background: rgba(246, 243, 124, 0.47);
   padding: 3vw 3vw;
   font-family: "Montserrat";
   /* z-index: 0; */
@@ -630,6 +634,7 @@ body.dark {
 }
 
 /* CSS para el buscador */
+
 
 .itemImg{
   height: 35vw;
@@ -989,6 +994,7 @@ a:hover{
 }
 
 .fondo-coment{
+  padding-top: 10px;
   background-color: rgb(255, 255, 255);
   color: black !important;
   border-radius: 10px;
@@ -1010,3 +1016,20 @@ a:hover{
 /* .div-usuario{
 
 } */
+
+h3{
+  font-family: "Times New Roman", Times, serif;
+  color: #32a64f;
+}
+
+.form-css{
+  /* position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  padding: 1rem 0.75rem;
+  pointer-events: none;
+  border: 1px solid transparent;
+  transform-origin: 0 0;
+  transition: opacity .1s ease-in-out,transform .1s ease-in-out; */
+}

@@ -8,6 +8,8 @@ namespace AgroServices.Models{
         [Key]
         public int UsuarioID { get; set; }
 
+        public string? ASP_UserID { get; set; }
+
         public string? Nombre { get; set; }
 
         public string? Apellido { get; set; }

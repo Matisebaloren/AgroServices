@@ -38,7 +38,7 @@ function BuscarPublicaciones() {
                 let search = ListaServicios.find(
                   (s) => s.servicioID == tag.servicioID
                 );
-                tagstring += " - " + search.descripcion;
+                tagstring +=  search.descripcion + " - ";
                 console.log(tagstring);
               }
             });
@@ -69,7 +69,7 @@ function BuscarPublicaciones() {
                             
                             <div class="col-12 ${col}">
                                 <h3>${publicacion.titulo}</h3>
-                                <p class="badge bg-primary text-wrap">${tagstring}</p>
+                                <p class="badge bg-success text-wrap">${tagstring}</p>
                                 <p>${publicacion.descripcion}</p>
                             </div>
                         </a>
