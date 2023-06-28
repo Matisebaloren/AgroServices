@@ -108,10 +108,6 @@ public class PublicacionesController : Controller
         {
             publicaciones = publicaciones.Where(p => p.PublicacionID == publicacionID).OrderBy(p => p.Titulo).ToList();
         }
-        // foreach (var item in publicaciones)
-        // {
-        //     var hoy = item.Fecha.ToString("d");
-        // }
 
         _contexto.SaveChanges();
         return Json(publicaciones);

@@ -22,6 +22,11 @@ function BuscarPublicaciones() {
       let arrTime = publicaciones[0].fecha.split("T");
       let dia = arrTime[0].split("-");
       let diaArmado = dia[2]+"/"+dia[1]+"/"+dia[0]
+      if(publicaciones[0].usuarioID == usuarioID) {
+        $("#btn-solicitud").hide();
+        // console.log("dueño");
+        $("#btn-editar").show();
+      }
       console.log(arrTime);
       // $("#fecha").html(arrTime[0]);
       $("#fecha").html(diaArmado);
