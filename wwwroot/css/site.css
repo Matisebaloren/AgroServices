@@ -192,9 +192,9 @@ body.dark {
   width: calc(100% + 100px);
   left: -20px;
 }
-.navlink_icon:hover {
+/* .navlink_icon:hover {
   background: var(--blue-color);
-}
+} */
 .sidebar .nav_link {
   display: flex;
   align-items: center;
@@ -209,8 +209,8 @@ body.dark {
   display: none;
 }
 .nav_link:hover {
-  color: var(--black-color);
-  background: var(--blue-color);
+  color: black;
+  background: #32a64f;
 }
 .sidebar.close .nav_link:hover {
   background: var(--white-color);
@@ -297,6 +297,9 @@ body.dark {
   }
   .sidebar.close .bottom_content {
     left: -100%;
+  }
+  .navbar-nav{
+    display: none;
   }
 }
 
@@ -571,6 +574,19 @@ body.dark {
   color: aliceblue;
 }
 
+.FondoGlass-3 {
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+  box-sizing: border-box;
+  background: rgba(255, 255, 255, 0.904);
+  padding: 3vw 3vw;
+  font-family: "Montserrat";
+  /* z-index: 0; */
+  border-radius: 15px;
+  box-shadow: 1px 10px 15px rgba(0, 0, 0, 0.3);
+  color: rgb(3, 3, 3);
+}
+
 .FondoGlass-2{
   background: rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(10px);
@@ -732,8 +748,7 @@ td img {
   width: 36px;
   height: 36px;
   margin-right: .5rem;
-  border-radius: 50%;
-
+  /* border-radius: 50%; */
   vertical-align: middle;
 }
 
@@ -931,11 +946,6 @@ thead th.active,tbody td.active {
   height: auto;
 }
 
-
-
-
-
-
 /* CODIGO ICONO NOTIFICACION  */
 
 #click {
@@ -951,11 +961,58 @@ thead th.active,tbody td.active {
   border-radius: 100px;
   background: white;
   /* border: 1px solid #d93025; */
-  color: #198754;
+  color: #32a64f;
 }
 
 #click:active {
   box-shadow: 0 2px 5px #0000004d;
   color: #596d8f;    
 }
-/* TERMINACION DE CODIGO ICONO NOTIFICACION  */
+
+/* imagen de carrousel de vista publicacion */
+
+.imagen{
+  height: 35vw;
+  width: 100%;
+}
+@media (min-width: 768px) {
+  .imagen{
+    height: 25vw;  }
+}
+
+a:hover{
+  color: rgb(25, 135, 84);
+}
+
+.logo_item{
+  background-color: white;
+  padding-left: 1%;
+  border-radius: 30px;
+}
+
+.carrousel-ajuste{
+  height: 100%;
+}
+
+.fondo-coment{
+  background-color: rgb(255, 255, 255);
+  color: black !important;
+  border-radius: 10px;
+}
+
+.div-boton-centrado{
+  display: flex;
+  justify-content: center;
+}
+
+/* .valoracion{
+  border-style: none;
+  border: 1px;
+  border-top: 1px solid black;
+  border: 1px solid #ccc!important;
+  border-color: #000;
+} */
+
+/* .div-usuario{
+
+} */

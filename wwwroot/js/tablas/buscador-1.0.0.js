@@ -5,7 +5,7 @@ function BuscarPublicaciones() {
 
   $.ajax({
     url: "../../Publicaciones/BuscarPublicaciones",
-    data: { },
+    data: {},
     type: "GET",
     dataType: "json",
     success: function (publicaciones) {
@@ -34,11 +34,13 @@ function BuscarPublicaciones() {
           success: function (tags) {
             let tagstring = "";
             $.each(tags, function (key, tag) {
-              let search = ListaServicios.find(
-                (s) => s.servicioID == tag.servicioID
-              );
-              tagstring += " - " + search.descripcion;
-              console.log(tagstring);
+              if (tag.eliminado == false) {
+                let search = ListaServicios.find(
+                  (s) => s.servicioID == tag.servicioID
+                );
+                tagstring += " - " + search.descripcion;
+                console.log(tagstring);
+              }
             });
 
             $.ajax({
