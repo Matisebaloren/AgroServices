@@ -18494,6 +18494,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "c:\\Users\\Usuario\\Desktop\\EZPELETA TRABAJOS 3ER AÑO\\PROGRAMACION III\\AgroServicios\\Views\\Perfiles\\Index.cshtml",
+      "TargetPath": "Views\\Perfiles\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Users\\Usuario\\Desktop\\EZPELETA TRABAJOS 3ER AÑO\\PROGRAMACION III\\AgroServicios\\Views\\Solicitudes\\Index.cshtml",
       "TargetPath": "Views\\Solicitudes\\Index.cshtml",
       "FileKind": "mvc"
@@ -18541,6 +18546,11 @@
     {
       "FilePath": "c:\\Users\\Usuario\\Desktop\\EZPELETA TRABAJOS 3ER AÑO\\PROGRAMACION III\\AgroServicios\\Areas\\Identity\\Pages\\Account\\ResetPassword.cshtml",
       "TargetPath": "Areas\\Identity\\Pages\\Account\\ResetPassword.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\Usuario\\Desktop\\EZPELETA TRABAJOS 3ER AÑO\\PROGRAMACION III\\AgroServicios\\Views\\NuevasSolicitudes\\Index.cshtml",
+      "TargetPath": "Views\\NuevasSolicitudes\\Index.cshtml",
       "FileKind": "mvc"
     },
     {

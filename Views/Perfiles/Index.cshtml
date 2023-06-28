@@ -1,0 +1,132 @@
+@{
+
+  ViewData["Title"] = "Home Page";
+}
+
+
+<!-- Modal -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">CentroP Inf.</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="Perfil.html">Perfil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+            </form>
+        </div>
+    </nav>
+
+    <br>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                            aria-controls="home" aria-selected="true">Datos Usuario</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+                            aria-controls="profile" aria-selected="false">Actualiazar Contraseña</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <br>
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+
+                        <div class="row">
+                            <div class="col-4">
+                                <img class="img-thumbnail"
+                                    src="https://cdn2.iconfinder.com/data/icons/website-icons/512/User_Avatar-512.png"
+                                    alt="">
+                            </div>
+                            <div class="col-8">
+                                <div class="form-group row">
+                                    <label for="codigo" class="col-2"> codigo:</label>
+                                    <div class="col-8">
+                                        <input type="text" class="form-control" value="00054DE">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="usuarop" class="col-2"> Usuario:</label>
+                                    <div class="col-8">
+                                        <input type="text" class="form-control" value="marco antonio">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="email" class="col-2"> Email:</label>
+                                    <div class="col-8">
+                                        <input type="email" class="form-control" value="marco@CentroPInf.com">
+                                    </div>
+                                </div>
+                                <div class="form-group text-center">
+                                    <button class="btn btn-info">Actualizar</button>
+                                    <button class="btn btn-danger">Actualizar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        <div class="col-md-6 offset-md-3">
+                            <h3 class="text-center">Cambio Clave -Intranet</h3>
+                            <div class="form-group row">
+                                <label for="Usuario" class="col-4">usuario:</label>
+                                <div class="col-8">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="contrasenia" class="col-4">contraseña:</label>
+                                <div class="col-8">
+                                    <input type="password" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="ncontrasenia" class="col-4">N. Contraseña:</label>
+                                <div class="col-8">
+                                    <input type="password" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="form-group text-center">
+                                <button class="btn btn-info">Actualizar</button>
+                                <button class="btn btn-danger">Actualizar</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+
+
+
+@section Scripts{
+  <script src="~/js/tablas/perfil-1.0.0.js"></script>
+}
