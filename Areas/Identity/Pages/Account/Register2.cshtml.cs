@@ -140,7 +140,7 @@ namespace AgroServices.Areas.Identity.Pages.Account
         {
             returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && Input.Password != null && Input.LocalidadID > 0)
             {
                 var user = CreateUser();
                 // Se coloca numero de telefono
@@ -156,7 +156,7 @@ namespace AgroServices.Areas.Identity.Pages.Account
                     var UsuarioGuardar = new Usuario
                     {
                         ASP_UserID = user.Id,
-                        LocalidadID = 1
+                        LocalidadID = Input.LocalidadID
                     };
                     _contexto.Add(UsuarioGuardar);
                     _contexto.SaveChanges();

@@ -11,7 +11,6 @@ function CargarLugares() {
       var optionI = document.createElement("option");
       optionI.value = 0;
       optionI.text = "Selecciona una Provincia";
-      $("#ProvinciaID").append(optionI);
       $("#LocalidadID").append(optionI);
       $.each(provincias, function (index, provincia) {
         if (provincia.eliminado != true) {
@@ -39,6 +38,17 @@ function CambiarProvincia(id) {
     dataType: "json",
     success: function (localidades) {
     $("#LocalidadID").empty();
+    console.log(localidades);
+    if(localidades.length > 0){
+        $("#LocalidadID").prop("disabled", false);
+    }
+    else{
+        $("#LocalidadID").prop("disabled", true);
+        let option = document.createElement("option");
+          option.value = "";
+          option.text = "Seleccione Provincia";
+          $("#LocalidadID").append(option);
+    }
       $.each(localidades, function (index, localidad) {
         console.log(localidad);
         if (localidad.eliminado != true) {

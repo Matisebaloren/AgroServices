@@ -1,8 +1,14 @@
 window.onload = BuscarPublicaciones();
 
-function BuscarPublicaciones() {
-  let publicacionID = $("#PublicacionID").val();
+var usuarioID = $("#usuarioID").val();
+if (usuarioID == 0) {
+  $("#btn-solicitud").hide();
+}
+var publicacionID = $("#PublicacionID").val();
 
+function BuscarPublicaciones() {
+  var publicacionID = $("#PublicacionID").val();
+  console.log(publicacionID);
   $.ajax({
     url: "../../Publicaciones/BuscarPublicaciones",
     data: { publicacionID: publicacionID },
@@ -10,9 +16,15 @@ function BuscarPublicaciones() {
     dataType: "json",
     success: function (publicaciones) {
       $("#titulo").html(publicaciones[0].titulo);
+      $("#tituloModalP").html(publicaciones[0].titulo);
+      console.log(publicaciones[0]);
+      // let time = publicaciones[0].fecha.ToString("dd/MM/yyyy")
       let arrTime = publicaciones[0].fecha.split("T");
+      let dia = arrTime[0].split("-");
+      let diaArmado = dia[2]+"/"+dia[1]+"/"+dia[0]
       console.log(arrTime);
-      $("#fecha").html(arrTime[0]);
+      // $("#fecha").html(arrTime[0]);
+      $("#fecha").html(diaArmado);
       $("#descripcion").html(publicaciones[0].descripcion);
     },
     error: function (xhr, status) {
@@ -54,8 +66,6 @@ function BuscarPublicaciones() {
         }
       });
       $("#tags").html(tagstring);
-      
-
     },
     error: function (xhr, status) {
       alert("Error al cargar tags");
@@ -100,8 +110,55 @@ function BuscarPublicaciones() {
   });
 }
 
-// function Vista(publicacionID) {
-//   console.log(publicacionID);
-//   window.location.href =
-//     `../../Publicaciones/VistaPublicacion/` + publicacionID;
-// }
+function NuevaSolicitud() {
+  $("#ModalSolicitud").modal("show");
+}
+
+function EnviarSolicitud() {
+  var mensaje = $("#mensaje").val();
+  $.ajax({
+    url: "../../Solicitudes/GuardarSolicitud",
+    data: {
+      publicacionID: publicacionID,
+      descripcion: mensaje,
+      usuarioID: usuarioID,
+    },
+    type: "POST",
+    dataType: "json",
+
+    success: function (resultado) {
+      console.log(resultado);
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener("mouseenter", Swal.stopTimer);
+          toast.addEventListener("mouseleave", Swal.resumeTimer);
+        },
+      });
+      if (resultado < -1) {
+        Toast.fire({
+          icon: "error",
+          title: "error",
+        });
+      }
+      if (resultado > 1) {
+        Toast.fire({
+          icon: "success",
+          title: "Se creo correctamente",
+        });
+        console.log("el id ahora es: " + resultado);
+        $("#ModalSolicitud").modal("hide");
+      }
+    },
+
+    // código a ejecutar si la petición falla;
+
+    error: function (xhr, status) {
+      alert("Disculpe, existió un problema");
+    },
+  });
+}

@@ -35,12 +35,13 @@
     <form id="formulario" method="post">
 
         <input type="hidden" id="PublicacionID" value=@ViewBag.publicacionID></input>
-        <input type="hidden" id="UsuarioID" value="1"></input>
+        <input type="hidden" id="usuarioID" value=@ViewBag.usuarioID></input>
+        @* <input type="hidden" id="UsuarioID" value="1"></input> *@
 
         <div class="row">
-            <div class="col-12 col-md-6">
+            
                     @* Select para elegir TIPO *@
-                <div class="mb-3 col-12 col-md-8">
+                <div class="mb-3 col-4">
                     <label class="form-label fw-bold">Tipo de publicación:</label>
                     <Select class="form-control" id="EsOferta" onchange=seleccionarTipo(this.value)>
                         <option value="0">- Seleccionar -</option>
@@ -56,17 +57,17 @@
                 </div>
 
                     @* lista de etiquetas *@
-                <div class="mb-3 col-12 col-md-8">
+                <div class="mb-3 col-12 col-md-6">
                     <label class="form-label fw-bold">Etiquetas:</label>
                     <select disabled class="form-control mb-2" id="ServicioID" onchange=AñadirEtiqueta(this.value)></select>
                 </div>
-                <div id="Etiqueta-List" class="tags col-12 mb-3"></div>
+                <div id="Etiqueta-List" class="tags col-12 col-md-6"></div>
 
-            </div>
+            
                 @* Imagen descriptiva *@
-            <div class="col-12 col-md-6 FondoGlass-1">
+            @* <div class="col-12 col-md-6 FondoGlass-1">
                 <img src="" alt="" style="height: auto;">
-            </div>
+            </div> *@
         </div>
 
 

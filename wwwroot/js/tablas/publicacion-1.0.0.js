@@ -1,8 +1,10 @@
 let tagsActive = new Array();
 let serviciosDisp = new Array();
 let publicacionID = $("#PublicacionID").val();
+let usuarioID = $("#usuarioID").val();
 console.log(publicacionID + " este es el id de publicacion");
-window.onload = BuscarPublicacion(publicacionID);
+console.log(usuarioID + " este es el id del usuario");
+window.onload = BuscarPublicacion(publicacionID[0]);
 
 function BuscarPublicacion(publicacionID = 0) {
   console.log(publicacionID);
@@ -130,7 +132,6 @@ function GuardarPublicacion() {
   let descripcion = $("#descripcion").val();
   let esOferta = null;
   let titulo = $("#Titulo").val();
-  let usuarioID = $("#UsuarioID").val();
 if ($("#EsOferta").val() == 1) {
     esOferta = true;
   } else {

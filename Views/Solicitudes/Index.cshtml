@@ -1,6 +1,6 @@
 @{
 
-    ViewData["Title"] = "Home Page";
+  ViewData["Title"] = "Home Page";
 }
 
 
@@ -32,11 +32,10 @@
 <div class="fondoTablas">
     <h1 class="display-4">Solicitudes</h1>
 
-      <!-- Button trigger modal -->
-      
+    <input type="hidden" id="usuarioID" value=@ViewBag.usuarioID></input>
 
   @* Tabla con los datos de cada elemento *@
- 
+
   <table class="table table-bordered table-hover table-light table-condensed text-uppercase">
     <thead>
         <tr>
@@ -51,3 +50,7 @@
         </tbody>
   </table>
 </div>
+
+@section Scripts{
+      <script src="~/js/tablas/solicitud-1.0.0.js"></script>
+}

@@ -26,6 +26,11 @@ public class UsuariosController : Controller
         return View();
     }
 
+    public IActionResult Perfil()
+    {
+        return View();
+    }
+
     // Busca usuarios para la tabla
     public JsonResult BuscarUsuarios(int usuarioID = 0)
     {

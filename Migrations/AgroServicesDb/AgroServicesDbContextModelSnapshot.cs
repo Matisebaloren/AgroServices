@@ -41,7 +41,7 @@ namespace AgroServices.Migrations.AgroServicesDb
 
                     b.HasKey("EtiquetaID");
 
-                    b.ToTable("Etiquetas");
+                    b.ToTable("Etiquetas", (string)null);
                 });
 
             modelBuilder.Entity("AgroServices.Models.Imagen", b =>
@@ -71,7 +71,7 @@ namespace AgroServices.Migrations.AgroServicesDb
 
                     b.HasIndex("PublicacionID");
 
-                    b.ToTable("Imagenes");
+                    b.ToTable("Imagenes", (string)null);
                 });
 
             modelBuilder.Entity("AgroServices.Models.Localidad", b =>
@@ -95,7 +95,7 @@ namespace AgroServices.Migrations.AgroServicesDb
 
                     b.HasIndex("ProvinciaID");
 
-                    b.ToTable("Localidades");
+                    b.ToTable("Localidades", (string)null);
                 });
 
             modelBuilder.Entity("AgroServices.Models.Notificacion", b =>
@@ -123,7 +123,7 @@ namespace AgroServices.Migrations.AgroServicesDb
 
                     b.HasKey("NotificacionID");
 
-                    b.ToTable("Notificaciones");
+                    b.ToTable("Notificaciones", (string)null);
                 });
 
             modelBuilder.Entity("AgroServices.Models.Provincia", b =>
@@ -142,7 +142,7 @@ namespace AgroServices.Migrations.AgroServicesDb
 
                     b.HasKey("ProvinciaID");
 
-                    b.ToTable("Provincias");
+                    b.ToTable("Provincias", (string)null);
                 });
 
             modelBuilder.Entity("AgroServices.Models.Publicacion", b =>
@@ -178,7 +178,7 @@ namespace AgroServices.Migrations.AgroServicesDb
 
                     b.HasIndex("UsuarioID");
 
-                    b.ToTable("Publicaciones");
+                    b.ToTable("Publicaciones", (string)null);
                 });
 
             modelBuilder.Entity("AgroServices.Models.Servicio", b =>
@@ -197,7 +197,7 @@ namespace AgroServices.Migrations.AgroServicesDb
 
                     b.HasKey("ServicioID");
 
-                    b.ToTable("Servicios");
+                    b.ToTable("Servicios", (string)null);
                 });
 
             modelBuilder.Entity("AgroServices.Models.Solicitud", b =>
@@ -227,7 +227,7 @@ namespace AgroServices.Migrations.AgroServicesDb
 
                     b.HasIndex("PublicacionID");
 
-                    b.ToTable("Solicitudes");
+                    b.ToTable("Solicitudes", (string)null);
                 });
 
             modelBuilder.Entity("AgroServices.Models.Usuario", b =>
@@ -260,7 +260,7 @@ namespace AgroServices.Migrations.AgroServicesDb
 
                     b.HasIndex("LocalidadID");
 
-                    b.ToTable("Usuarios");
+                    b.ToTable("Usuarios", (string)null);
                 });
 
             modelBuilder.Entity("AgroServices.Models.Valoracion", b =>
@@ -290,7 +290,7 @@ namespace AgroServices.Migrations.AgroServicesDb
 
                     b.HasIndex("PublicacionID");
 
-                    b.ToTable("Valoraciones");
+                    b.ToTable("Valoraciones", (string)null);
                 });
 
             modelBuilder.Entity("AgroServices.Models.Imagen", b =>

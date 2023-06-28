@@ -1,0 +1,87 @@
+.img-car-1 {
+  background-image: url(../img/fondoAzul.jpg);
+  height: 30vw;
+  width: auto !important;
+}
+
+.car-inner {
+  height: 30vw;
+}
+
+/* .mensaje1 {
+  padding: 5%;
+  padding-left: 10vw;
+  padding-right: 10vw;
+  color: rgb(0, 0, 0);
+  font-size: 1.7vw;
+}
+
+.cartel1 {
+  background-color: white;
+  border-radius: 10px;
+  height: 4vw;
+  width: 95%;
+}
+
+.marquee {
+  height: 25px;
+  width: 100%;
+
+  overflow: hidden;
+  position: relative;
+}
+
+.marquee div {
+  display: block;
+  width: 200%;
+  height: 30px;
+
+  position: absolute;
+  overflow: hidden;
+
+  animation: marquee 25s linear infinite;
+}
+
+.marquee span {
+  float: left;
+  width: 50%;
+  color: black;
+}
+
+@keyframes marquee {
+  0% {
+    left: 0;
+  }
+  100% {
+    left: -100%;
+  }
+} */
+
+marquee {
+  -webkit-animation: caption 50s linear 0s infinite;
+  font-family: "Segoe ui";
+  padding: 20px 0;
+  border: 1px solid #000;
+  /* background-color: #; */
+  -webkit-box-shadow: inset 0px 2px 2px rgba(0, 0, 0, 0.5),
+    0px 1px 0px rgba(250, 250, 250, 0.2);
+  box-shadow: inset 0px 2px 2px rgba(0, 0, 0, 0.5),
+    0px 1px 0px rgba(250, 250, 250, 0.2);
+  -webkit-transition: background-color 350ms;
+  -moz-transition: background-color 350ms;
+  transition: background-color 350ms;
+  overflow: hidden;
+  overflow-x: -webkit-marquee;
+  -webkit-marquee-direction: right;
+  -webkit-marquee-style: scroll;
+  -webkit-marquee-speed: normal;
+  -webkit-marquee-increment: small;
+  -webkit-marquee-repetition: 5;
+  overflow-x: marquee-line;
+  marquee-direction: forward;
+  marquee-style: loop;
+  marquee-speed: slow;
+  marquee-play-count: 5;
+  color: #28282a;
+  background: #ffeb95;
+}

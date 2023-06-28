@@ -40,12 +40,12 @@
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
             <div class="form-floating">    
-                <select name="Provincias" class="form-control" id="ProvinciaID" onchange=CambiarProvincia(this.value)></select>
+                <select name="Provincias" class="form-control" id="ProvinciaID" onchange=CambiarProvincia(this.value)>
+                    <option value="0">Elija una provincia</option>
+                </select>
                 <label >Provincias:</label>
             </div>  
-            <div>
-
-            </div>              
+             
 
             <div class="form-floating">
                 <select id="LocalidadID" asp-for="Input.LocalidadID" class="form-control" autocomplete="new-password" aria-required="true"></select>

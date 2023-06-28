@@ -65,7 +65,8 @@ namespace AgroServices.Areas.Identity.Pages.Account
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [Required]
-            [EmailAddress]
+             [Display(Name = "Usuario")]
+            // [EmailAddress    ]
             public string Email { get; set; }
 
             /// <summary>
@@ -73,6 +74,7 @@ namespace AgroServices.Areas.Identity.Pages.Account
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [Required]
+             [Display(Name = "Contraseña")]
             [DataType(DataType.Password)]
             public string Password { get; set; }
 

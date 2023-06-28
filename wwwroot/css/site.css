@@ -24,10 +24,14 @@ body {
 }
 
 .btn-primary{
-background-color: #c8e73f;
-border-color: #c8e73f;
+background-color: #1ba117;
+border-color: #000000;
 }
 
+.btn-primary:hover{
+  background-color: #175715;
+  border-color: #000000;
+  }
 
 /* CODIGO DEL CARROUSEL */
 .carousel-inner{
@@ -209,7 +213,7 @@ body.dark {
   display: none;
 }
 .nav_link:hover {
-  color: black;
+  color: rgb(255, 255, 255);
   background: #32a64f;
 }
 .sidebar.close .nav_link:hover {
@@ -538,12 +542,19 @@ body.dark {
   width: auto;
 }
 
+.tags{
+  /* vertical-align: center; */
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
 .tag {
   font-weight: bold;
   background: #c8e73f;
   margin-right: 7px;
   color: #000000;
   padding: 4px 7px;
+  margin-bottom: 0.5em;
   border-radius: 10px;
   /* border-radius: 20%; */
   /* clip-path: polygon(
@@ -558,9 +569,14 @@ body.dark {
 
 /* container se le da un paddin izquierda si supera los 768 px */
 @media (min-width: 768px) {
-  .container-body {
+  .container-body-2 {
     padding-left: 6rem;
+    max-width: none;
   }
+}
+
+.container2{
+  max-width: none !important;
 }
 
 /* Fondo de tablas */
@@ -582,7 +598,7 @@ body.dark {
   -webkit-backdrop-filter: blur(5px);
   backdrop-filter: blur(5px);
   box-sizing: border-box;
-  background: rgba(246, 243, 124, 0.47);
+  background: rgb(255, 255, 255);
   padding: 3vw 3vw;
   font-family: "Montserrat";
   /* z-index: 0; */
@@ -1003,12 +1019,19 @@ a:hover{
   padding-top: 10px;
   background-color: rgb(255, 255, 255);
   color: black !important;
-  border-radius: 10px;
+  border-radius: 5px;
+  border: 1px solid black;
+
 }
 
 .div-boton-centrado{
   display: flex;
   justify-content: center;
+}
+
+.div-boton-der{
+  display: flex;
+  justify-content: end;
 }
 
 /* .valoracion{
@@ -1038,4 +1061,15 @@ h3{
   border: 1px solid transparent;
   transform-origin: 0 0;
   transition: opacity .1s ease-in-out,transform .1s ease-in-out; */
+}
+
+.modalSolicitud{
+  max-width: 800px;
+  margin: 1.75rem auto;
+  background-color: white;
+  border: 1px solid black;
+  color: black;
+}
+.modal-header-socilicitud{
+  background-color: #0249083d;
 }

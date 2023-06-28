@@ -5,24 +5,42 @@ using AgroServices.Data;
 using AgroServices.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 // using Microsoft.AspNet.Identity;
+using Microsoft.AspNetCore.Identity;
+
+
+
+// private readonly NombreProyectoContext _context;
 
 
 namespace AgroServices.Controllers;
 
 public class PublicacionesController : Controller
 {
+    private readonly UserManager<IdentityUser> _userManager;
     private readonly ILogger<PublicacionesController> _logger;
     private AgroServicesDbContext _contexto;
 
-    public PublicacionesController(ILogger<PublicacionesController> logger, AgroServicesDbContext contexto)
+    public PublicacionesController(ILogger<PublicacionesController> logger, AgroServicesDbContext contexto, UserManager<IdentityUser> userManager
+    )
     {
         _logger = logger;
         _contexto = contexto;
+        _userManager = userManager;
     }
-    
+
 
     public async Task<IActionResult> Formulario(int? id = 0)
     {
+        var usuarioIDActual = _userManager.GetUserId(HttpContext.User);
+        if (usuarioIDActual != null)
+        {
+            var usuarios = _contexto.Usuarios.Where(u => u.ASP_UserID == usuarioIDActual).FirstOrDefault();
+            ViewBag.usuarioID = usuarios.UsuarioID;
+        }
+        else
+        {
+            ViewBag.usuarioID = 0;
+        }
         ViewBag.publicacionID = id;
 
         var servicios = _contexto.Servicios.Where(x => x.Eliminado == false).ToList();
@@ -38,6 +56,16 @@ public class PublicacionesController : Controller
 
     public IActionResult VistaPublicacion(int? id = 0)
     {
+        var usuarioIDActual = _userManager.GetUserId(HttpContext.User);
+        if (usuarioIDActual != null)
+        {
+            var usuarioID = _contexto.Usuarios.Where(u => u.ASP_UserID == usuarioIDActual).FirstOrDefault();
+            ViewBag.usuarioID = usuarioID.UsuarioID;
+        }
+        else
+        {
+            ViewBag.usuarioID = 0;
+        }
         ViewBag.publicacionID = id;
         return View();
     }
@@ -80,6 +108,10 @@ public class PublicacionesController : Controller
         {
             publicaciones = publicaciones.Where(p => p.PublicacionID == publicacionID).OrderBy(p => p.Titulo).ToList();
         }
+        // foreach (var item in publicaciones)
+        // {
+        //     var hoy = item.Fecha.ToString("d");
+        // }
 
         _contexto.SaveChanges();
         return Json(publicaciones);
