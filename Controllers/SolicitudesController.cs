@@ -4,6 +4,7 @@ using AgroServices.Data;
 using AgroServices.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 
 
@@ -48,25 +49,9 @@ public class SolicitudesController : Controller
     // }
 
     // Busca solicitudes para la tabla
-    public JsonResult BuscarSolicitudes(int solicitudID = 0, int usuarioID = 0)
+    public JsonResult BuscarSolicitudes(int solicitudID = 0)
     {
-        List<Solicitud> lista_Solicitudes = new List<Solicitud>();
         var solicitudes = _contexto.Solicitudes.ToList();
-        // var publicaciones = _contexto.Publicaciones.ToList();
-
-        if (usuarioID > 0)
-        {
-            // foreach (var item in publicaciones)
-            // {
-            //     var seleccion = solicitudes.Where(s => s.PublicacionID == item.PublicacionID).FirstOrDefault();
-            //     if (seleccion != null)
-            //     {
-            //         // solicitudes = solicitudes.Where(s => s.PublicacionID != item.PublicacionID).ToList();
-            //         lista_Servicios.Add(seleccion);
-            //     }
-            // }
-            // solicitudes = lista_Servicios;
-        }
         if (solicitudID > 0)
         {
             solicitudes = solicitudes.Where(p => p.SolicitudID == solicitudID).OrderBy(p => p.Descripcion).ToList();

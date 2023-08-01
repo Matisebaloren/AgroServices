@@ -4,7 +4,7 @@ let publicacionID = $("#PublicacionID").val();
 let usuarioID = $("#usuarioID").val();
 console.log(publicacionID + " este es el id de publicacion");
 console.log(usuarioID + " este es el id del usuario");
-window.onload = BuscarPublicacion(publicacionID[0]);
+window.onload = BuscarPublicacion(publicacionID);
 
 function BuscarPublicacion(publicacionID = 0) {
   console.log(publicacionID);
@@ -61,7 +61,7 @@ function BuscarPublicacion(publicacionID = 0) {
       type: "GET",
       dataType: "json",
       success: function (publicaciones) {
-        console.log(publicaciones);
+        console.log("INFO DE PUBLI: "+publicaciones[0]);
         if (publicaciones.length > 0) {
           if (publicaciones[0].esOferta == true) {
             $("#EsOferta").val(1);
