@@ -43,7 +43,7 @@ public class ServiciosController : Controller
 
         //verificamos si Nombre esta completo
         if (!string.IsNullOrEmpty(descripcion)){     
-                        //SI ES 0 QUIERE DECIR QUE ESTA CREANDO EL ELEMENTO
+            //SI ES 0 QUIERE DECIR QUE ESTA CREANDO EL ELEMENTO
             if(servicioID == 0){
                 //BUSCAMOS EN LA TABLA SI EXISTE UNA CON LA MISMO NOMBRE
                 var servicioOriginal = _contexto.Servicios.Where(c => c.descripcion == descripcion).FirstOrDefault();
@@ -112,3 +112,4 @@ public class ServiciosController : Controller
      return Json(resultado);
 }
 }
+

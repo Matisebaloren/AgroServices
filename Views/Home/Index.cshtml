@@ -1,7 +1,9 @@
 ﻿@{
   ViewData["Title"] = "Home Page";
 }
-<marquee style="border-radius: 15px;" behavior="scroll" direction="left" scrollamount="6">Hola productor. ¡Bienvenido a AgroServices! Aquí podrás buscar y publicar tus propios servicios agrícolas en todo el país.¿Qué esperas? Únete a nuestra comunidad y disfruta de los beneficios que ofrecemos.</marquee>
+<marquee style="border-radius: 15px;" behavior="scroll" direction="left" scrollamount="6">Hola productor. ¡Bienvenido a
+  AgroServices! Aquí podrás buscar y publicar tus propios servicios agrícolas en todo el país.¿Qué esperas? Únete a
+  nuestra comunidad y disfruta de los beneficios que ofrecemos.</marquee>
 
 @* COMIENZO DE CODIGO DE CARROUSEL--------------- *@
 <div id="carouselExample" class="carousel slide">
@@ -26,40 +28,62 @@
   </button>
 </div>
 @* FIN DE CODIGO DE CARROUSEL-------------- *@
-@* </div> *@
 
 
+@*CODIGO CARDS NUEVAS CON MOVIMIENTO*@
 
+<div class="mb-3">
+  <div style="width: 100%; height: 360px !important></div>
+    </div>
 
-@* COMIENZO DE CODIGO DE TARJETAS PARA DIFERENTES FILTROS------------------- *@
-<section class="main-course">
-  <div class="course-box FondoGlass-1">
-    <div class="course">
-      <div class="box">
-        <div class="img1">
+<!-- Inicio container -->
+<div class=" container" style="margin-top: -310px;">
+    <div class="d-flex flex-column text-white py-3 align-items-center">
+    </div>
+
+    <!-- itens em blocos -->
+    <div class="row py-4">
+      <div class="col-md-3 col-sm-6 pb-3 px-2 card-mobile">
+        <div class="card shadow rounded-lg">
+          <a href="#" class="card-body text-center">
+            <p><i class="grey-text fas fa-graduation-cap fa-3x"></i></p>
+            <h4 class="grey-text">Courses</h4>
+            <p></p>
+          </a>
         </div>
-        <i class="fab fa-html5 html"></i>
       </div>
-      <div class="box">
-        <div class="img2">
+      <div class="col-md-3 col-sm-6 pb-3 px-2 card-mobile">
+        <div class="card shadow rounded-lg">
+          <a href="#" class="card-body text-center">
+            <p><i class="grey-text far fa-calendar-alt fa-3x"></i></p>
+            <h4 class="grey-text">Calendar</h4>
+            <p></p>
+          </a>
         </div>
-        <i class="fab fa-css3-alt css"></i>
       </div>
-      <div class="box">
-        <div class="img3">
+      <div class="col-md-3 col-sm-6 pb-3 px-2 card-mobile">
+        <div class="card shadow rounded-lg">
+          <a href="#" class="card-body text-center">
+            <p><i class="grey-text fas fa-book fa-3x"></i></p>
+            <h4 class="grey-text">E-books</h4>
+
+          </a>
         </div>
-        <i class="fab fa-js-square js"></i>
+      </div>
+      <div class="col-md-3 col-sm-6 pb-3 px-2 card-mobile">
+        <div class="card shadow rounded-lg">
+          <a href="#" class="card-body text-center">
+            <p><i class="grey-text fas fa-clipboard-check fa-3x"></i></p>
+            <h4 class="grey-text">Access</h4>
+
+          </a>
+        </div>
       </div>
     </div>
+    <!-- Fim itens em blocos -->
   </div>
-</section>
-@* </section> *@
-@* FIN DE CODIGO DE TARJETAS PARA DIFERENTES FILTROS -----------------*@
-
-
-
-
-
+  
+@* FIN CODIGO CARDS NUEVAS CON MOVIMIENTO*@
 
 
 
