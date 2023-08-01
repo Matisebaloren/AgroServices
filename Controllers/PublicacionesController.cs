@@ -31,17 +31,37 @@ public class PublicacionesController : Controller
 
     public async Task<IActionResult> Formulario(int? id = 0)
     {
+
         var usuarioIDActual = _userManager.GetUserId(HttpContext.User);
         if (usuarioIDActual != null)
         {
             var usuarios = _contexto.Usuarios.Where(u => u.ASP_UserID == usuarioIDActual).FirstOrDefault();
-            ViewBag.usuarioID = usuarios.UsuarioID;
+            if (usuarios != null)
+            {
+                if (id != 0)
+                {
+                    // se confirma si la publicacion le pertenece al usuario
+                    var publicacion = _contexto.Publicaciones.Where(p => p.PublicacionID == id && p.UsuarioID == usuarios.UsuarioID).SingleOrDefault();
+                    if (publicacion == null)
+                    {
+                        // return View("Index");
+                        return RedirectToAction("Index", "Home");
+                    }
+                    ViewBag.publicacionID = id;
+                }
+                ViewBag.usuarioID = usuarios.UsuarioID;
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
         }
         else
         {
-            ViewBag.usuarioID = 0;
+            return RedirectToAction("Index", "Home");
         }
-        ViewBag.publicacionID = id;
+
 
         var servicios = _contexto.Servicios.Where(x => x.Eliminado == false).ToList();
         var seleccionServicio = new Servicio()
@@ -113,7 +133,7 @@ public class PublicacionesController : Controller
         return Json(publicaciones);
     }
 
-
+    // anexar publi, img, tags
     public JsonResult GuardarPublicacion(int publicacionID, string titulo, string descripcion, bool esOferta, int usuarioID)
     {
         // >0: crear   0: editar   -1: faltan rellenar campos  -2: error
@@ -137,12 +157,8 @@ public class PublicacionesController : Controller
                 };
                 _contexto.Add(PublicacionGuardar);
                 _contexto.SaveChanges();
+                resultado = PublicacionGuardar.PublicacionID;
 
-                var recienCreado = _contexto.Publicaciones.OrderByDescending(p => p.PublicacionID).FirstOrDefault();
-                if (recienCreado != null)
-                {
-                    resultado = recienCreado.PublicacionID;
-                };
             }
             else
             {
@@ -258,10 +274,11 @@ public class PublicacionesController : Controller
         else
         {
             //crear variable que guarde el objeto segun el id deseado
-            var ImagenEditar = _contexto.Imagenes.Find(ImagenID);
-            if (ImagenEditar != null)
+            var ImagenEliminar = _contexto.Imagenes.Find(ImagenID);
+            if (ImagenEliminar != null)
             {
-                ImagenEditar.Eliminado = true;
+                _contexto.Imagenes.Remove(ImagenEliminar);
+                ImagenEliminar.Eliminado = true;
                 _contexto.SaveChanges();
                 resultado = true;
             }

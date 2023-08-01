@@ -1,5 +1,7 @@
 window.onload = CargarLugares();
 var provinciasList = new Array();
+$("#LocalidadID").prop("disabled", true);
+
 
 function CargarLugares() {
   $.ajax({

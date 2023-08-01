@@ -99,7 +99,7 @@ namespace AgroServices.Areas.Identity.Pages.Account
             [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
-            [Display(Name = "Password")]
+            [Display(Name = "Contraseña")]
             public string Password { get; set; }
 
             /// <summary>
@@ -107,18 +107,18 @@ namespace AgroServices.Areas.Identity.Pages.Account
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [DataType(DataType.Password)]
-            [Display(Name = "Confirm password")]
+            [Display(Name = "Confirmar Contraseña")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
 
             // desde aca toco
             [Required]
-            [Display(Name = "UserName")]
+            [Display(Name = "Usuario")]
             [Compare("UserName", ErrorMessage = "No user name is specified.")]
             public string UserName { get; set; }
 
             // [StringLength(10, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 9)]
-            [Display(Name = "PhoneNumber")]
+            [Display(Name = "Telefono")]
             [Compare("PhoneNumber", ErrorMessage = "No PhoneNumber is specified.")]
             public string PhoneNumber { get; set; }
 

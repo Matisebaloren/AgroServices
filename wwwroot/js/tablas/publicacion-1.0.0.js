@@ -352,7 +352,7 @@ function actualizarTag() {
 }
 
 function AñadirEtiqueta(id) {
-  // console.log(resultado);
+  console.log(resultado);
   if (tagsActive.find((tags) => tags.servicioID == id)) {
     let resultado = serviciosDisp.find((tags) => tags.servicioID == id);
     resultado.eliminado = false;

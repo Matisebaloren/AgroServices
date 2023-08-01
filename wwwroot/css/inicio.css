@@ -60,7 +60,7 @@
 marquee {
   -webkit-animation: caption 50s linear 0s infinite;
   font-family: "Segoe ui";
-  padding: 20px 0;
+  padding: 1em 0;
   border: 1px solid #000;
   /* background-color: #; */
   -webkit-box-shadow: inset 0px 2px 2px rgba(0, 0, 0, 0.5),
@@ -83,5 +83,6 @@ marquee {
   marquee-speed: slow;
   marquee-play-count: 5;
   color: #28282a;
-  background: #ffeb95;
+  background: #d5f9ff;
+  font-size: 1.1em;
 }
