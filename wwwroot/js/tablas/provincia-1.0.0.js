@@ -25,8 +25,8 @@ $("#tbody-provincias").empty();
             $.each(provincias, function(index, provincia) {
                 if(provincia.eliminado == true){
                     BotonDeshabilitado = `
-                    <tr class="table-danger" >
-                        <td> ${provincia.nombre}</td>
+                    <tr>
+                        <td class="text-danger"><b>${provincia.nombre}</b></td>
                         <td class=" text-end">
                             <a class="btn btn-eliminar btn-habilitar" onClick="DeshabilitarProvincia('${provincia.provinciaID}')" role="button"></a>
                         </td>
@@ -36,7 +36,7 @@ $("#tbody-provincias").empty();
                 else{
                     BotonDeshabilitado = `
                     <tr>
-                        <td class=" danger" >${provincia.nombre} </td>
+                        <td><b>${provincia.nombre}</b></td>
                         <td class=" text-end">
                             <a class="btn btn-eliminar btn-editar" onClick="BuscarProvincia(${provincia.provinciaID})" role="button"></a>
                             <a class="btn btn-eliminar" onClick="DeshabilitarProvincia('${provincia.provinciaID}')" role="button"></a>

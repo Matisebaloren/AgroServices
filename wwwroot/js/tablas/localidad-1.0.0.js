@@ -24,8 +24,8 @@ $("#tbody-localidades").empty();
             $.each(localidades, function(index, localidad) {
                 if(localidad.eliminado == true){
                     BotonDeshabilitado = `
-                    <tr class="table-danger" >
-                        <td> ${localidad.nombre}</td>
+                    <tr>
+                        <td class="text-danger"><b>${localidad.nombre}</b></td>
                         <td class=" text-end">
                             <a class="btn btn-eliminar btn-habilitar" onClick="DeshabilitarLocalidad('${localidad.localidadID}')" role="button"></a>
                         </td>
@@ -35,7 +35,7 @@ $("#tbody-localidades").empty();
                 else{
                     BotonDeshabilitado = `
                     <tr>
-                        <td class=" danger" >${localidad.nombre} </td>
+                        <td><b>${localidad.nombre}</b></td>
                         <td class=" text-end">
                             <a class="btn btn-eliminar btn-editar" onClick="BuscarLocalidad(${localidad.localidadID})" role="button"></a>
                             <a class="btn btn-eliminar" onClick="DeshabilitarLocalidad('${localidad.localidadID}')" role="button"></a>

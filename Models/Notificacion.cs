@@ -13,6 +13,8 @@ namespace AgroServices.Models
 
         public string? Descripcion { get; set; }
 
+        // public string? Link { get; set; }
+
         //para que cuando clickes en la noti te envie a la publicación
         public int PublicacionID { get; set; }
 
