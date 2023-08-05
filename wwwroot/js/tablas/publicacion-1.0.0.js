@@ -7,7 +7,7 @@ console.log(usuarioID + " este es el id del usuario");
 window.onload = BuscarPublicacion(publicacionID);
 
 function BuscarPublicacion(publicacionID = 0) {
-  console.log(publicacionID);
+  /* console.log(publicacionID); */
   // Se buscan los servicis disponibles
   $.ajax({
     url: "../../Publicaciones/BuscarServicios",
@@ -61,7 +61,7 @@ function BuscarPublicacion(publicacionID = 0) {
       type: "GET",
       dataType: "json",
       success: function (publicaciones) {
-        console.log("INFO DE PUBLI: "+publicaciones[0]);
+        console.log("INFO DE PUBLI: " + publicaciones[0]);
         if (publicaciones.length > 0) {
           if (publicaciones[0].esOferta == true) {
             $("#EsOferta").val(1);
@@ -107,7 +107,7 @@ function BuscarImagenes() {
         console.log("id de item" + item.imagenID);
         let imagen = "<td></td>";
         if (item.imagenBase64) {
-          imagen = `<input hidden name="id" value="${item.imagenID}"></input><img src="data:${item.tipoImagen};base64, ${item.imagenBase64}" style="width: 100%; height: 35vw; display: block"/>`;
+          imagen = `<center><input hidden name="id" value="${item.imagenID}"></input><img src="data:${item.tipoImagen};base64, ${item.imagenBase64}" style="height: 35vw; display: block"/></center>`;
         }
         $("#Lista_imagenes").append(
           `<div class="carousel-item ${clase}" >
@@ -127,90 +127,85 @@ function BuscarImagenes() {
 function GuardarPublicacion() {
   //JAVASCRIPT
 
-
-
   let descripcion = $("#descripcion").val();
   let esOferta = null;
   let titulo = $("#Titulo").val();
-if ($("#EsOferta").val() == 1) {
+  if ($("#EsOferta").val() == 1) {
     esOferta = true;
   } else {
     esOferta = false;
   }
 
-  if(titulo || descripcion || esOferta > 0){
-
-$.ajax({
-    // la URL para la petición
-    url: "../../Publicaciones/GuardarPublicacion",
-    // la información a enviar
-    // (también es posible utilizar una cadena de datos)
-    data: {
-      publicacionID: publicacionID,
-      descripcion: descripcion,
-      esOferta: esOferta,
-      titulo: titulo,
-      usuarioID: usuarioID,
-    },
-    // especifica si será una petición POST o GET
-    type: "POST",
-    // el tipo de información que se espera de respuesta
-    dataType: "json",
-    // código a ejecutar si la petición es satisfactoria;
-    // la respuesta es pasada como argumento a la función
-    success: function (resultado) {
-      console.log(resultado);
-      const Toast = Swal.mixin({
-        toast: true,
-        position: "top-end",
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-          toast.addEventListener("mouseenter", Swal.stopTimer);
-          toast.addEventListener("mouseleave", Swal.resumeTimer);
-        },
-      });
-      // if (resultado == -1) {
-      //   Toast.fire({
-      //     icon: "error",
-      //     title: "Complete el campo",
-      //   });
-      // }
-      if (resultado < 0) {
-        Toast.fire({
-          icon: "error",
-          title: "error",
+  if (titulo || descripcion || esOferta > 0) {
+    $.ajax({
+      // la URL para la petición
+      url: "../../Publicaciones/GuardarPublicacion",
+      // la información a enviar
+      // (también es posible utilizar una cadena de datos)
+      data: {
+        publicacionID: publicacionID,
+        descripcion: descripcion,
+        esOferta: esOferta,
+        titulo: titulo,
+        usuarioID: usuarioID,
+      },
+      // especifica si será una petición POST o GET
+      type: "POST",
+      // el tipo de información que se espera de respuesta
+      dataType: "json",
+      // código a ejecutar si la petición es satisfactoria;
+      // la respuesta es pasada como argumento a la función
+      success: function (resultado) {
+        console.log(resultado);
+        const Toast = Swal.mixin({
+          toast: true,
+          position: "top-end",
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener("mouseenter", Swal.stopTimer);
+            toast.addEventListener("mouseleave", Swal.resumeTimer);
+          },
         });
-      }
-      if (resultado == 0) {
-        Toast.fire({
-          icon: "success",
-          title: "Se modifico correctamente",
-        });
-        GuardarTags();
-      }
-      if (resultado > 0) {
-        Toast.fire({
-          icon: "success",
-          title: "Se creo correctamente",
-        });
-        publicacionID = resultado;
-        console.log("el id ahora es: " + resultado);
-        GuardarTags();
-        $("#btn-cambiar").show();
-      }
-    },
+        // if (resultado == -1) {
+        //   Toast.fire({
+        //     icon: "error",
+        //     title: "Complete el campo",
+        //   });
+        // }
+        if (resultado < 0) {
+          Toast.fire({
+            icon: "error",
+            title: "error",
+          });
+        }
+        if (resultado == 0) {
+          Toast.fire({
+            icon: "success",
+            title: "Se modifico correctamente",
+          });
+          GuardarTags();
+        }
+        if (resultado > 0) {
+          Toast.fire({
+            icon: "success",
+            title: "Se creo correctamente",
+          });
+          publicacionID = resultado;
+          console.log("el id ahora es: " + resultado);
+          GuardarTags();
+          $("#btn-cambiar").show();
+        }
+      },
 
-    // código a ejecutar si la petición falla;
+      // código a ejecutar si la petición falla;
 
-    error: function (xhr, status) {
-      alert("Disculpe, existió un problema");
-    },
-  });
-
-  }
-  else{
+      error: function (xhr, status) {
+        alert("Disculpe, existió un problema");
+      },
+    });
+  } else {
     const Toast = Swal.mixin({
       toast: true,
       position: "top-end",
@@ -227,9 +222,6 @@ $.ajax({
       title: "Faltan Campos por Completar",
     });
   }
-
-  
-  
 }
 
 function GuardarTags() {
@@ -286,7 +278,6 @@ function seleccionarTipo(value) {
   }
   actualizarTag();
 }
-
 
 // Crear Imagen
 $("#files").submit(function () {
@@ -352,7 +343,7 @@ function actualizarTag() {
 }
 
 function AñadirEtiqueta(id) {
-  console.log(resultado);
+  /*   console.log(resultado);*/
   if (tagsActive.find((tags) => tags.servicioID == id)) {
     let resultado = serviciosDisp.find((tags) => tags.servicioID == id);
     resultado.eliminado = false;
