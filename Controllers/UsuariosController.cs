@@ -12,11 +12,13 @@ public class UsuariosController : Controller
 {
     private readonly ILogger<UsuariosController> _logger;
     private AgroServicesDbContext _contexto;
+    private ApplicationDbContext _user;
 
-    public UsuariosController(ILogger<UsuariosController> logger, AgroServicesDbContext contexto)
+    public UsuariosController(ILogger<UsuariosController> logger, AgroServicesDbContext contexto, ApplicationDbContext user)
     {
         _logger = logger;
         _contexto = contexto;
+        _user = user;
     }
 
     public IActionResult Index()
@@ -43,23 +45,22 @@ public class UsuariosController : Controller
         {
             usuarios = usuarios.Where(p => p.UsuarioID == usuarioID).OrderBy(p => p.Nombre).ToList();
         }
-        foreach (var usuario in usuarios)
-        {
-            var UsuarioMostrar = new VistaUsuario
+        else{
+            foreach (var usuario in usuarios)
             {
-                UsuarioID = usuario.UsuarioID,
-                Nombre = usuario.Nombre,
-                Apellido = usuario.Apellido,
-                LocalidadDescripcion = usuario.Localidades.Nombre,
-                LocalidadID = usuario.LocalidadID,
-                ProvinciaDescripcion = usuario.Localidades.provincias.Nombre,
-                Eliminado = usuario.Eliminado
+                var UsuarioMostrar = new VistaUsuario
+                {
+                    UsuarioID = usuario.UsuarioID,
+                    Nombre = usuario.Nombre,
+                    Apellido = usuario.Apellido,
+                    LocalidadDescripcion = usuario.Localidades.Nombre,
+                    LocalidadID = usuario.LocalidadID,
+                    ProvinciaDescripcion = usuario.Localidades.provincias.Nombre,
+                    Eliminado = usuario.Eliminado
+                };
+                UsuariosMostrar.Add(UsuarioMostrar);
             };
-            UsuariosMostrar.Add(UsuarioMostrar);
-        };
-
-
-
+        }
         return Json(UsuariosMostrar);
     }
 

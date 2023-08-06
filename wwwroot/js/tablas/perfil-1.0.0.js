@@ -91,32 +91,18 @@ function BuscarUsuario(usuarioID){
     dataType : 'json',
     // código a ejecutar si la petición es satisfactoria;
     // la respuesta es pasada como argumento a la función
-    success : function(usuarios) {
-       
-        if (usuarios.length == 1){
+    success : function(usuario) {
+        if (usuario){
             let usuario = usuarios[0];
             console.log(usuario);
-            $("#UsuarioID").val(usuario.usuarioID);
-            $("#Nombre").val(usuario.nombre);
-            $("#Apellido").val(usuario.apellido);
-            // $("#Telefono").val(usuario.telefono);
-            $("#LocalidadID").val(usuario.localidadID);
-            document.getElementById("tituloModal").innerHTML = "Editar Usuario";
-            $("#ModalUsuario").modal("show");
+            $("#age").val(usuario.usuarioID);
+            $("#userName").val(usuario.nombre);
+            $("#ubication").val(usuario.apellido);            
         }
     },
-
-    // código a ejecutar si la petición falla;
-    // son pasados como argumentos a la función
-    // el objeto de la petición en crudo y código de estatus de la petición
     error : function(xhr, status) {
         alert('Error al cargar servicios');
         document.getElementById("alerta").innerHTML = "Error al cargar usuario";
-    },
-
-    // código a ejecutar sin importar si la petición falló o no
-    complete : function(xhr, status) {
-        //alert('Petición realizada');
     }
 });
 }

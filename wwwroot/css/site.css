@@ -136,11 +136,14 @@ body.dark {
   overflow-y: scroll;
   box-shadow: 0 0 1px var(--grey-color-light);
   transition: all 0.5s ease;
+  scrollbar-width: none;
 }
+
 .sidebar.close {
   padding: 80px 0;
   width: 80px;
 }
+
 .sidebar::-webkit-scrollbar {
   display: none;
 }
@@ -1048,7 +1051,7 @@ a:hover {
 } */
 
 h3 {
-  font-family: "Times New Roman", Times, serif;
+  font-family: sans-serif;
   color: #32a64f;
 }
 

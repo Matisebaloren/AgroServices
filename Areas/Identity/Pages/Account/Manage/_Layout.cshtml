@@ -1,5 +1,5 @@
 ﻿@{
-    if (ViewData.TryGetValue("ParentLayout", out var parentLayout) && parentLayout !=  null)
+    if (ViewData.TryGetValue("ParentLayout", out var parentLayout) && parentLayout != null)
     {
         Layout = parentLayout.ToString();
     }
@@ -9,11 +9,7 @@
     }
 }
 
-<h1>Perfil de Usuario</h1>
-
-<div>
-    <h2>Configuracion personal</h2>
-    <hr />
+<div class="mt-5">
     <div class="row">
         <div class="col-md-3">
             <partial name="_ManageNav" />

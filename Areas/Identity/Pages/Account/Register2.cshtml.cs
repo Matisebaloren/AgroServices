@@ -118,9 +118,9 @@ namespace AgroServices.Areas.Identity.Pages.Account
             public string UserName { get; set; }
 
             // [StringLength(10, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 9)]
-            [Display(Name = "Telefono")]
+          /*   [Display(Name = "Telefono")]
             [Compare("PhoneNumber", ErrorMessage = "No PhoneNumber is specified.")]
-            public string PhoneNumber { get; set; }
+            public string PhoneNumber { get; set; } */
 
             [Required]
             [Display(Name = "Localidad")]
@@ -144,7 +144,7 @@ namespace AgroServices.Areas.Identity.Pages.Account
             {
                 var user = CreateUser();
                 // Se coloca numero de telefono
-                user.PhoneNumber = Input.PhoneNumber;
+               /*  user.PhoneNumber = Input.PhoneNumber; */
                 // hasta aca
                 await _userStore.SetUserNameAsync(user, Input.UserName, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
@@ -156,7 +156,8 @@ namespace AgroServices.Areas.Identity.Pages.Account
                     var UsuarioGuardar = new Usuario
                     {
                         ASP_UserID = user.Id,
-                        LocalidadID = Input.LocalidadID
+                        LocalidadID = Input.LocalidadID,
+                        Fecha = DateTime.Now
                     };
                     _contexto.Add(UsuarioGuardar);
                     _contexto.SaveChanges();

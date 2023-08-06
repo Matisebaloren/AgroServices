@@ -1,0 +1,100 @@
+.fUser {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 6px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.fUser h1 {
+  color: #47a847;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.fUser h2 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.fUser .form-group {
+  margin-bottom: 5px;
+}
+
+.fUser label {
+  color: #6b8e23;
+  font-weight: bold;
+}
+
+.fUser .form-control {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #c3d5ab;
+  border-radius: 4px;
+  background-color: #d7eab5;
+}
+
+.fUser .btn-success {
+  width: 100%;
+  padding: 12px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #47a847;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.fUser .btn-success:hover {
+  background-color: #3d8d3d;
+}
+
+.fUser .note {
+  text-align: center;
+  color: #888;
+}
+
+.fUser .back-link {
+  display: block;
+  text-align: center;
+  color: #47a847;
+  text-decoration: none;
+  margin-top: 10px;
+}
+
+.fUser .back-link:hover {
+  text-decoration: underline;
+}
+
+/* --menu manage-- */
+.nav-pills .nav-link {
+  color: #fff;
+  font-weight: bold;
+  padding: 8px 16px;
+  border-radius: 4px;
+}
+
+.nav-pills .nav-link:hover {
+  background-color: #3d8d3d;
+}
+
+.nav-pills .nav-link.active {
+  background-color: #47a847;
+  color: #fff;
+}
+
+.nav-pills .nav-item:not(:last-child) {
+  margin-bottom: 5px;
+}
+
+.nav-pills {
+  background-color: #333;
+  padding: 10px;
+  border-radius: 6px;
+}
+
+.menuTitle{
+  text-align: center;
+}

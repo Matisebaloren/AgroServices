@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
   <link rel="stylesheet" href="~/node_modules/animate/animate.min.css" />
   <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+  <link rel="stylesheet" href="~/css/formUser.css" asp-append-version="true" />
   <link rel="stylesheet" href="~/css/siteCopiar.css" asp-append-version="true" />
   <link rel="stylesheet" href="~/css/inicio.css" asp-append-version="true" />
   <link rel="stylesheet" href="~/css/botonesInicio.css" asp-append-version="true" />
@@ -54,67 +55,100 @@
     <nav class="sidebar FondoGlass-Navbar hoverable close">
       <div class="menu_content">
         <ul class="menu_items">
-          <li class="item"> 
-          <a asp-controller="" asp-action="" class="nav_link">
-            <span class="navlink_icon">
-              <i class="bx bx-home-alt"></i>
-            </span>
-            <span class="navlink">Inicio</span>
-          </a>
-          </li>
-          <!-- end -->
+
+          <!-- inicio -->
 
           <li class="item"> 
-            <a asp-controller="Usuarios" asp-action="Index" class="nav_link">
+            <a asp-area="" asp-controller="Home" asp-action="Index" class="nav_link">
               <span class="navlink_icon">
-                <i class="bx bx-layer"></i>
+                <i class="bx bx-home-alt"></i>
               </span>
-              <span class="navlink">Mi Perfil</span>
+              <span class="navlink">Inicio</span>
             </a>
           </li>
+          <!-- perfil solo si estoy registrado -->
+          @if (User.Identity.IsAuthenticated)
+          {
+              <li class="item"> 
+              <a asp-controller="Usuarios" asp-action="Perfil" class="nav_link">
+                <span class="navlink_icon">
+                  <i class="bx bxs-user"></i>
+                </span>
+                <span class="navlink">Mi Perfil</span>
+              </a>
+            </li>
+          }
+
 
           <li class="item"> 
             <hr>
           </li>
 
-          <li class="item"> 
-            <a asp-controller="Publicaciones" asp-action="Formulario" asp-route-id="0" class="nav_link">
-              <span class="navlink_icon">
-                <i class="bx bx-layer"></i>
-              </span>
-              <span class="navlink">Publicar</span>
-            </a>
-          </li>
-
+          @if (User.Identity.IsAuthenticated)
+          {
+            <!-- publicar -->
+            <li class="item"> 
+              <a asp-controller="Publicaciones" asp-action="Formulario" asp-route-id="0" class="nav_link">
+                <span class="navlink_icon">
+                  <i class="bx bx-add-to-queue"></i>
+                </span>
+                <span class="navlink">Publicar</span>
+              </a>
+            </li>
+          }
           <!-- Start -->
           <li class="item">
             <div href="#" class="nav_link submenu_item">
               <span class="navlink_icon">
                 <i class="bx bx-grid-alt"></i>
               </span>
-              <span class="navlink">Publicación</span>
+              <span class="navlink">Publicaciones</span>
               <i class="bx bx-chevron-right arrow-left"></i>
             </div>
 
             <ul class="menu_items submenu">
-              <a asp-controller="Publicaciones" asp-action="Index" class="nav_link sublink">Lista</a>
+              <a asp-controller="Publicaciones" asp-action="Index" class="nav_link sublink">General</a>
             </ul>
-
-
           </li>
 
           <li class="item"> 
             <hr>
           </li>
 
-           <li class="item"> 
-          <a asp-controller="Provincias" asp-action="Index" class="nav_link">
-            <span class="navlink_icon">
-              <i class="bx bx-layer"></i>
-            </span>
-            <span class="navlink">Provincias</span>
-          </a>
+          <li class="item">
+            <div href="#" class="nav_link submenu_item">
+              <span class="navlink_icon">
+                <i class="bx bx-layer"></i>
+              </span>
+              <span class="navlink">Moderar</span>
+              <i class="bx bx-chevron-right arrow-left"></i>
+            </div>
+
+            <ul class="menu_items submenu">
+              <a asp-controller="Provincias" asp-action="Index" class="nav_link sublink">
+                Provincias</a>
+            </ul>
+            <ul class="menu_items submenu">
+              <a asp-controller="Localidades" asp-action="Index" class="nav_link sublink">
+                Localidades</a>
+            </ul>
+            <ul class="menu_items submenu">
+              <a asp-controller="Servicios" asp-action="Index" class="nav_link sublink">
+                Servicios</a>
+            </ul>
+            <ul class="menu_items submenu">
+              <a asp-controller="Usuarios" asp-action="Index" class="nav_link sublink">
+                Usuarios</a>
+            </ul>
+
           </li>
+
+          @* <li class="item"> 
+              <a asp-controller="Provincias" asp-action="Index" class="nav_link">
+
+                <span class="navlink">Provincias</span>
+              </a>
+            </li>
            <li class="item"> 
           <a asp-controller="Localidades" asp-action="Index" class="nav_link">
             <span class="navlink_icon">
@@ -138,7 +172,7 @@
             </span>
             <span class="navlink">Usuarios</span>
           </a>
-          </li>
+          </li> *@
 
         </ul> <!-- End -->
       </div>

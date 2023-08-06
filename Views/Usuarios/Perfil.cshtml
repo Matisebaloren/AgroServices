@@ -1,100 +1,48 @@
 @{
-
   ViewData["Title"] = "Home Page";
 }
 
+  <link rel="stylesheet" href="~/css/perfil.css" asp-append-version="true" />
 
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 offset-md-2">
-                <ul class="nav nav-tabs" id="myTab" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
-                            aria-controls="home" aria-selected="true">Datos Usuario</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
-                            aria-controls="profile" aria-selected="false">Actualiazar Contraseña</a>
-                    </li>
-                </ul>
-                <div class="tab-content" id="myTabContent">
-                    <br>
-                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-
-                        <div class="row">
-                            <div class="col-4">
-                                <img class="img-thumbnail"
-                                    src="https://cdn2.iconfinder.com/data/icons/website-icons/512/User_Avatar-512.png"
-                                    alt="">
-                            </div>
-                            <div class="col-8">
-                                <div class="form-group row">
-                                    <label for="codigo" class="col-2"> codigo:</label>
-                                    <div class="col-8">
-                                        <input type="text" class="form-control" value="00054DE">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="usuarop" class="col-2"> Usuario:</label>
-                                    <div class="col-8">
-                                        <input type="text" class="form-control" value="marco antonio">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="email" class="col-2"> Email:</label>
-                                    <div class="col-8">
-                                        <input type="email" class="form-control" value="marco@CentroPInf.com">
-                                    </div>
-                                </div>
-                                <div class="form-group text-center">
-                                    <button class="btn btn-info">Actualizar</button>
-                                    <button class="btn btn-danger">Actualizar</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                        <div class="col-md-6 offset-md-3">
-                            <h3 class="text-center">Cambio Clave -Intranet</h3>
-                            <div class="form-group row">
-                                <label for="Usuario" class="col-4">usuario:</label>
-                                <div class="col-8">
-                                    <input type="text" class="form-control">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="contrasenia" class="col-4">contraseña:</label>
-                                <div class="col-8">
-                                    <input type="password" class="form-control">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="ncontrasenia" class="col-4">N. Contraseña:</label>
-                                <div class="col-8">
-                                    <input type="password" class="form-control">
-                                </div>
-                            </div>
-
-                            <div class="form-group text-center">
-                                <button class="btn btn-info">Actualizar</button>
-                                <button class="btn btn-danger">Actualizar</button>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-        </div>
-
+<div>
+  <!-- Card 1 - Información del Usuario -->
+  <div class="card-perfil">
+    <div class="card-header">Información del Usuario</div>
+    <div class="row">
+      <div class="user-info col-6">
+        <p><strong>Nombre de usuario: </strong><p id="userName"></p></p>
+        <p><strong>6 años utilizando AgroServices</strong><p id="age"></p></p>
+        <p><strong>Localidad: </strong><p id="ubication"></p></p>
+      </div>
+      <div class="user-info col-6">
+        <p><strong>Valoracion Promedio:</strong></p>
+      </div>
     </div>
+  </div>
 
+  <!-- Card 2 - Lista de publicaciones asociadas a la cuenta -->
+  <div class="card-perfil">
+    <div class="card-header">Publicaciones Relacionadas</div>
+    <div class="user-photo">
+      <p><center>La cuenta no poseé ninguna publicación disponible.</center></p>
+    </div>
+  </div>
 
+  <!-- Card 3 - Otra información del Usuario -->
+  <div class="card-perfil">
+    <div class="card-header">Contactar</div>
+    <div class="user-details">
+      <!-- Aquí puedes mostrar otra información del usuario, por ejemplo: -->
+      <label for="">Consultar Sobre:</label>
+      <select name="" id=""></select>
 
-
-
+<button>buton</button>
+      <!-- Puedes añadir más detalles aquí -->
+    </div>
+  </div>
+</div>
 
 @section Scripts{
-  <script src="~/js/    /perfil-1.0.0.js"></script>
-}
+      <script src="~/js/tablas/perfil-1.0.0.js"></script>
+} 
