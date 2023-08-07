@@ -1,3 +1,8 @@
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
 @{
   ViewData["Title"] = "Home Page";
 }
@@ -8,15 +13,29 @@
 <div>
   <!-- Card 1 - Información del Usuario -->
   <div class="card-perfil">
+    <div class="card-header">Información de la Cuenta (Publica)</div>
+    <div class="row">
+      <div class="user-info col-12 col-md-6">
+        <p class="btn-info-perfil"><strong>Nombre de usuario: </strong>@ViewBag.UserName</p>
+        <p>@ViewBag.Age siendo parte de AgroServices</p>
+        <p><strong>Localidad: </strong>@ViewBag.Ubication</p>
+      </div>
+      <div class="user-info col-12 col-md-6">
+        <p><strong>Valoracion Promedio:</strong></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-perfil">
     <div class="card-header">Información del Usuario</div>
     <div class="row">
       <div class="user-info col-6">
-        <p><strong>Nombre de usuario: </strong><p id="userName"></p></p>
-        <p><strong>6 años utilizando AgroServices</strong><p id="age"></p></p>
-        <p><strong>Localidad: </strong><p id="ubication"></p></p>
+        <p><strong>Nombre Completo: </strong>@ViewBag.PersonalName</p>
+        <p><strong>Telefono: </strong>@ViewBag.PhoneNumber</p>
+        <p><strong>Email: </strong>@ViewBag.Email</p>
       </div>
       <div class="user-info col-6">
-        <p><strong>Valoracion Promedio:</strong></p>
+        
       </div>
     </div>
   </div>

@@ -5,20 +5,21 @@ using AgroServices.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace AgroServices.Controllers;
 
 public class UsuariosController : Controller
 {
+    private readonly UserManager<IdentityUser> _userManager;
     private readonly ILogger<UsuariosController> _logger;
     private AgroServicesDbContext _contexto;
-    private ApplicationDbContext _user;
 
-    public UsuariosController(ILogger<UsuariosController> logger, AgroServicesDbContext contexto, ApplicationDbContext user)
+    public UsuariosController(ILogger<UsuariosController> logger, AgroServicesDbContext contexto, UserManager<IdentityUser> userManager)
     {
         _logger = logger;
         _contexto = contexto;
-        _user = user;
+        _userManager = userManager;
     }
 
     public IActionResult Index()
@@ -28,24 +29,86 @@ public class UsuariosController : Controller
         return View();
     }
 
-    public IActionResult Perfil()
+
+    public async Task<IActionResult> Perfil(string? username = null)
     {
+        if (username == null)
+        {
+            var usuarioAsp = await _userManager.GetUserAsync(User);
+            if (usuarioAsp != null)
+            {
+                var usuario = _contexto.Usuarios
+                .Include(s => s.Localidades)
+                .Include(s => s.Localidades.provincias)
+                .Where(u => u.ASP_UserID == usuarioAsp.Id)
+                .FirstOrDefault();
+
+                var ageDiff = DateTime.Now - usuario.Fecha;
+                var age = "";
+                if (ageDiff.TotalDays > 365)
+                {
+                    var years = ageDiff.Days / 365;
+                    if (years < 2)
+                    {
+                        age = years + " Año";
+                    }
+                    else
+                    {
+                        age = years + " Años";
+                    }
+                }
+                else{ 
+                    age = ageDiff.Days + " dias y " + ageDiff.Hours + " horas";
+                }
+
+                // pasa la información del usuario a la vista si es necesario
+                ViewBag.PersonalName = usuario.Apellido + " " + usuario.Nombre;
+                ViewBag.Ubication = usuario.Localidades.Nombre + ", " + usuario.Localidades.provincias.Nombre;
+                ViewBag.UserName = usuarioAsp.UserName;
+                ViewBag.Email = usuarioAsp.Email;
+                ViewBag.PhoneNumber = usuarioAsp.PhoneNumber;
+                ViewBag.Age = age;
+            }
+        }
+
+
+        return View("Perfil");
+    }
+
+    public IActionResult VistaPublicacion(int? id = 0)
+    {
+        var usuarioIDActual = _userManager.GetUserId(HttpContext.User);
+        if (usuarioIDActual != null)
+        {
+            var usuarioID = _contexto.Usuarios.Where(u => u.ASP_UserID == usuarioIDActual).FirstOrDefault();
+            ViewBag.usuarioID = usuarioID.UsuarioID;
+        }
+        else
+        {
+            ViewBag.usuarioID = 0;
+        }
+        ViewBag.publicacionID = id;
         return View();
     }
+    /* public IActionResult Perfil()
+    {
+        return View();
+    } */
 
     // Busca usuarios para la tabla
     public JsonResult BuscarUsuarios(int usuarioID = 0)
     {
         List<VistaUsuario> UsuariosMostrar = new List<VistaUsuario>();
-        var usuarios = _contexto.Usuarios.Include(s => s.Localidades)
-            .Include(s => s.Localidades.provincias)
+        var usuarios = _contexto.Usuarios.Include(u => u.Localidades)
+            .Include(u => u.Localidades.provincias)
             .ToList();
 
         if (usuarioID > 0)
         {
             usuarios = usuarios.Where(p => p.UsuarioID == usuarioID).OrderBy(p => p.Nombre).ToList();
         }
-        else{
+        else
+        {
             foreach (var usuario in usuarios)
             {
                 var UsuarioMostrar = new VistaUsuario

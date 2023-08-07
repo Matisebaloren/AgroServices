@@ -17,3 +17,19 @@
   .user-info {
     margin-bottom: 10px;
   }
+
+  .user-info p{
+    width: 100%;
+    text-align:left;
+    border: none;
+    background-color: white;
+    margin: 0.2rem;
+  }
+
+  .user-info p:hover{
+    background-color: rgb(245, 245, 245);
+  }
+
+  .btn-info-perfil{
+    cursor:pointer;
+  }

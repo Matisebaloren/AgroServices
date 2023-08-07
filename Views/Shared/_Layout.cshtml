@@ -67,16 +67,18 @@
             </a>
           </li>
           <!-- perfil solo si estoy registrado -->
+          
           @if (User.Identity.IsAuthenticated)
           {
-              <li class="item"> 
-              <a asp-controller="Usuarios" asp-action="Perfil" class="nav_link">
+            <partial name="_PerfilOption" />
+              @* <li class="item"> 
+              <a onclick="perfil()" class="nav_link">
                 <span class="navlink_icon">
                   <i class="bx bxs-user"></i>
                 </span>
                 <span class="navlink">Mi Perfil</span>
               </a>
-            </li>
+            </li> *@
           }
 
 
@@ -198,6 +200,7 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/vistaPerfil.js" asp-append-version="true"></script>
     <script src="~/js/sweetalerts2.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>

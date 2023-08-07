@@ -1,10 +1,9 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using AgroServices.Data;
 using AgroServices.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
-// using Microsoft.AspNet.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 
 
@@ -61,8 +60,6 @@ public class PublicacionesController : Controller
         {
             return RedirectToAction("Index", "Home");
         }
-
-
         var servicios = _contexto.Servicios.Where(x => x.Eliminado == false).ToList();
         var seleccionServicio = new Servicio()
         {

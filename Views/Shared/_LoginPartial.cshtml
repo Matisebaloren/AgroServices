@@ -9,19 +9,14 @@
     @if (SignInManager.IsSignedIn(User))
     {
         <li class="nav-item">
-            @* <a id="manage" class=" btn btn-success me-2 text-light" asp-area="Identity" asp-page="/Account/Manage/Index"
-                title="Manage"> @UserManager.GetUserName(User)!</a> *@
-                <a class=" btn btn-success me-2 text-light"
-                title="Manage"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
-                    <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"></path>
-                </svg> @UserManager.GetUserName(User)
-                
+                <a id="manage" class="btn btn-success me-2 text-light" asp-area="Identity" asp-page="/Account/Manage/Index"
+                    title="Perfil"><i class="bx bxs-user"></i> @UserManager.GetUserName(User)
                 </a>
         </li>
         <li class="nav-item">
             <form id="logoutForm" class="form-inline btn-salir" asp-area="Identity" asp-page="/Account/Logout"
                 asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                <button id="logout" type="submit" class="btn btn-danger me-2 text-light">Desconectarse</button>
+                <button id="logout" type="submit" class="btn btn-danger me-2 text-light"><i class="bx bx-exit"></i> Desconectarse</button>
             </form>
         </li>
     }
