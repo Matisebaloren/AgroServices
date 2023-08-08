@@ -57,21 +57,17 @@
     </div>
     @* datos principales*@
     <div class="col-12 col-md-4">
-      @* titulo *@
+      @* fecha *@
             <h2 id=titulo></h2>
-            <p class="mt-2" id=fecha>fecha</p>
+            <p class="mt-2">@ViewBag.Fecha</p>
             <hr>
       @* tags *@
-      @* <h3 id=tags>tags</h3> *@
             <spam style="display: none;" id="tags" class="tag"></spam>
-      @* fecha *@
-
             <hr>
       @* usuario *@
             <div class="div-usuario">
                 <span>
-                <p id=User-name><svg xmlns="http://www.w3.org/2000/svg" height="3em" viewBox="0 0 512 512"><path d="M399 384.2C376.9 345.8 335.4 320 288 320H224c-47.4 0-88.9 25.8-111 64.2c35.2 39.2 86.2 63.8 143 63.8s107.8-24.7 143-63.8zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm256 16a72 72 0 1 0 0-144 72 72 0 1 0 0 144z"/></svg>
-Jorgito86</p>
+                <p id=User-name><i class="bx bx-user"></i>@ViewBag.username</p>
                 </span>
             </div>
     </div>
@@ -88,7 +84,7 @@ Jorgito86</p>
 
 <div id="btn-editar" style="display: none;" class="div-boton-der my-3">
   <a class="btn btn-success" asp-controller="Publicaciones" asp-action="Formulario" asp-route-id=@ViewBag.publicacionID>EDITAR</a>
-  @* <button onclick=Editar() class="btn btn-success">EDITAR</button> *@
+      @* <button onclick=Editar() class="btn btn-success">EDITAR</button> *@
 </div>
 
     @* caja valoraciones y Valoracion general de 1 a 5 estrellas *@
@@ -120,11 +116,8 @@ Jorgito86</p>
 
     @* sadas *@
     </div>
-
-
-
 </div>
 
 @section Scripts{
-              <script src="~/js/tablas/vista-1.0.0.js"></script>
+<script src="~/js/tablas/vista-1.0.0.js"></script>
 }

@@ -127,7 +127,7 @@ function BuscarImagenes() {
 function GuardarPublicacion() {
   //JAVASCRIPT
 
-  let descripcion = $("#descripcion").val();
+  let descripcion = $("#descripcion").html();
   let esOferta = null;
   let titulo = $("#Titulo").val();
   if ($("#EsOferta").val() == 1) {

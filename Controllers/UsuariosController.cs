@@ -57,7 +57,8 @@ public class UsuariosController : Controller
                         age = years + " Años";
                     }
                 }
-                else{ 
+                else
+                {
                     age = ageDiff.Days + " dias y " + ageDiff.Hours + " horas";
                 }
 
@@ -75,7 +76,7 @@ public class UsuariosController : Controller
         return View("Perfil");
     }
 
-    public IActionResult VistaPublicacion(int? id = 0)
+    /* public IActionResult VistaPublicacion(int? id = 0)
     {
         var usuarioIDActual = _userManager.GetUserId(HttpContext.User);
         if (usuarioIDActual != null)
@@ -89,15 +90,16 @@ public class UsuariosController : Controller
         }
         ViewBag.publicacionID = id;
         return View();
-    }
+    } */
     /* public IActionResult Perfil()
     {
         return View();
     } */
 
     // Busca usuarios para la tabla
-    public JsonResult BuscarUsuarios(int usuarioID = 0)
+    public async Task<JsonResult> BuscarUsuarios(int usuarioID = 0)
     {
+        var allUsers = await _userManager.Users.ToListAsync();
         List<VistaUsuario> UsuariosMostrar = new List<VistaUsuario>();
         var usuarios = _contexto.Usuarios.Include(u => u.Localidades)
             .Include(u => u.Localidades.provincias)
@@ -107,9 +109,11 @@ public class UsuariosController : Controller
         {
             usuarios = usuarios.Where(p => p.UsuarioID == usuarioID).OrderBy(p => p.Nombre).ToList();
         }
-        else
+
+        foreach (var usuario in usuarios)
         {
-            foreach (var usuario in usuarios)
+            var user = allUsers.Where(u => u.Id == usuario.ASP_UserID).FirstOrDefault();
+            if (user != null)
             {
                 var UsuarioMostrar = new VistaUsuario
                 {
@@ -119,11 +123,18 @@ public class UsuariosController : Controller
                     LocalidadDescripcion = usuario.Localidades.Nombre,
                     LocalidadID = usuario.LocalidadID,
                     ProvinciaDescripcion = usuario.Localidades.provincias.Nombre,
-                    Eliminado = usuario.Eliminado
+                    Eliminado = usuario.Eliminado,
+                    Telefono = user.PhoneNumber,
+                    Email = user.Email,
+                    Username = user.UserName
+
+
                 };
                 UsuariosMostrar.Add(UsuarioMostrar);
-            };
-        }
+            }
+
+        };
+
         return Json(UsuariosMostrar);
     }
 

@@ -71,8 +71,13 @@ public class PublicacionesController : Controller
         return View("Formulario");
     }
 
-    public IActionResult VistaPublicacion(int? id = 0)
+    public async Task<IActionResult> VistaPublicacion(int? id = 0)
     {
+        var publicacion = _contexto.Publicaciones.Where(p => p.PublicacionID == id).FirstOrDefault();
+        var usuario = _contexto.Usuarios.Where(u => u.UsuarioID == publicacion.UsuarioID).FirstOrDefault();
+        var userAsp = await _userManager.FindByIdAsync(usuario.ASP_UserID);
+        ViewBag.username = userAsp.UserName;
+        // Comprueba si el usuario esta registrado
         var usuarioIDActual = _userManager.GetUserId(HttpContext.User);
         if (usuarioIDActual != null)
         {
@@ -126,7 +131,6 @@ public class PublicacionesController : Controller
             publicaciones = publicaciones.Where(p => p.PublicacionID == publicacionID).OrderBy(p => p.Titulo).ToList();
         }
 
-        _contexto.SaveChanges();
         return Json(publicaciones);
     }
 

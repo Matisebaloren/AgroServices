@@ -32,8 +32,6 @@ namespace AgroServices.Areas.Identity.Pages.Account
     {
 
         private AgroServicesDbContext _contexto;
-
-
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly IUserStore<IdentityUser> _userStore;

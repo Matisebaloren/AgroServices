@@ -55,8 +55,9 @@ body {
   --grey-color: #707070;
   --grey-color-light: #aaa;
 }
+/* CAMBIA EL COLOR DE FONDO */
 body {
-  background-color: #e7f2fd;
+  background-color: #817d7d8f;
   transition: all 0.5s ease;
 }
 body.dark {
@@ -334,189 +335,6 @@ body.dark {
   color: aliceblue;
 }
 
-/* COMIENZO DE CODIGO DE TARJETAS */
-
-/*  import google fonts */
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700");
-.logo {
-  text-align: center;
-  display: flex;
-  margin: 10px 0 0 10px;
-}
-.logo img {
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
-}
-.logo span {
-  font-weight: bold;
-  padding-left: 15px;
-  font-size: 18px;
-  text-transform: uppercase;
-}
-
-/* Main Section */
-.main {
-  position: relative;
-  padding: 20px;
-  width: 100%;
-}
-.main-top {
-  display: flex;
-  width: 100%;
-}
-.main-top i {
-  position: absolute;
-  right: 0;
-  margin: 10px 30px;
-  color: rgb(110, 109, 109);
-  cursor: pointer;
-}
-.main-skills {
-  display: flex;
-  margin-top: 20px;
-}
-.main-skills .card {
-  width: 25%;
-  margin: 10px;
-  background: #fff;
-  text-align: center;
-  border-radius: 20px;
-  padding: 10px;
-  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
-}
-.main-skills .card h3 {
-  margin: 10px;
-  text-transform: capitalize;
-}
-.main-skills .card p {
-  font-size: 12px;
-}
-.main-skills .card button {
-  background: orangered;
-  color: #fff;
-  padding: 7px 15px;
-  border-radius: 10px;
-  margin-top: 15px;
-  cursor: pointer;
-}
-.main-skills .card button:hover {
-  background: rgba(223, 70, 15, 0.856);
-}
-.main-skills .card i {
-  font-size: 22px;
-  padding: 10px;
-}
-
-/* Courses */
-.main-course {
-  margin-top: 20px;
-  text-transform: capitalize;
-}
-.course-box {
-  width: 100%;
-  height: 300px;
-  padding: 10px 10px 30px 10px;
-  margin-top: 10px;
-  /* background: #fff; */
-  border-radius: 10px;
-  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 5px;
-  /* filter: blur(10px); */
-  backdrop-filter: burl(10px);
-}
-.course-box ul {
-  list-style: none;
-  display: flex;
-}
-.course-box ul li {
-  margin: 10px;
-  color: gray;
-  cursor: pointer;
-}
-.course-box ul .active {
-  color: #000;
-  border-bottom: 1px solid #000;
-}
-.course-box .course {
-  display: flex;
-}
-.box {
-  width: 33%;
-  padding: 10px;
-  margin: 10px;
-  border-radius: 10px;
-  background: rgb(235, 233, 233);
-  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
-}
-.img1 {
-  border-radius: 10px;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
-  cursor: pointer;
-  height: 14vw;
-  max-height: 240px;
-  position: relative;
-  background: no-repeat center center;
-  width: 100%;
-  background-image: url(https://img.interempresas.net/FotosArtProductos/P94246.jpg);
-}
-.img2 {
-  border-radius: 10px;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
-  cursor: pointer;
-  height: 14vw;
-  max-height: 240px;
-  position: relative;
-  background: no-repeat center center;
-  width: 100%;
-  background-image: url(https://img.interempresas.net/FotosArtProductos/P94246.jpg);
-}
-.img3 {
-  border-radius: 10px;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
-  cursor: pointer;
-  height: 14vw;
-  max-height: 240px;
-  position: relative;
-  background: no-repeat center center;
-  width: 100%;
-  background-image: url(https://www.casatoromaquinaria.com.co/sites/casatoromaquinaria.com.co/files/98679fdb5f4ae8b7136a7d0b76bc5394.jpg);
-}
-.box p {
-  font-size: 12px;
-  margin-top: 5px;
-}
-.box button {
-  background: #000;
-  color: #fff;
-  padding: 7px 10px;
-  border-radius: 10px;
-  margin-top: 3rem;
-  cursor: pointer;
-  width: 300px;
-  height: 146px;
-  backdrop-filter: burl(10px);
-}
-.box button:hover {
-  background: rgba(0, 0, 0, 0.842);
-}
-.box i {
-  font-size: 7rem;
-  float: right;
-  margin: -20px 20px 20px 0;
-}
-.html {
-  color: rgb(25, 94, 54);
-}
-.css {
-  color: rgb(104, 179, 35);
-}
-.js {
-  color: rgb(28, 98, 179);
-}
-/* FIN DE CODIGO CARDS BUTTONS*/
-
 /* clases para publicacion */
 
 #TipoSeleccionado {
@@ -579,11 +397,18 @@ body.dark {
 
 /* Fondo de tablas */
 
+.display-4 {
+  font-size: calc(1.475rem + 2.7vw);
+  font-weight: 300;
+  line-height: 1.2;
+  color: #000000;
+}
+
 .FondoGlass-1 {
   -webkit-backdrop-filter: blur(5px);
   backdrop-filter: blur(5px);
   box-sizing: border-box;
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(255, 255, 255, 0.904);
   padding: 3vw 3vw;
   font-family: "Montserrat";
   /* z-index: 0; */
@@ -970,28 +795,8 @@ tbody td.active {
   height: auto;
 }
 
-/* CODIGO ICONO NOTIFICACION  */
+/* FIN CODIGO DE TABLAS PARA LAS DIFERENTES VISTAS */
 
-#click {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 70px;
-  height: 40px;
-  width: 40px;
-  transition: 0.5s;
-  cursor: pointer;
-  box-shadow: 0 10px 15px #0000004d;
-  border-radius: 100px;
-  background: white;
-  /* border: 1px solid #d93025; */
-  color: #32a64f;
-}
-
-#click:active {
-  box-shadow: 0 2px 5px #0000004d;
-  color: #596d8f;
-}
 
 /* imagen de carrousel de vista publicacion */
 

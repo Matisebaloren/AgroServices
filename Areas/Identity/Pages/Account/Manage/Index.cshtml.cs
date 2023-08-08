@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using AgroServices.Data;
+using AgroServices.Models;
 
 namespace AgroServices.Areas.Identity.Pages.Account.Manage
 {
@@ -16,13 +18,16 @@ namespace AgroServices.Areas.Identity.Pages.Account.Manage
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
+        private AgroServicesDbContext _contexto;
 
         public IndexModel(
             UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager)
+            SignInManager<IdentityUser> signInManager,
+            AgroServicesDbContext contexto)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _contexto = contexto;
         }
 
         /// <summary>
@@ -58,6 +63,12 @@ namespace AgroServices.Areas.Identity.Pages.Account.Manage
             [Phone]
             [Display(Name = "Telefono")]
             public string PhoneNumber { get; set; }
+
+            [Display(Name = "Nombre")]
+            public string Nombre { get; set; }
+
+            [Display(Name = "Apellido")]
+            public string Apellido { get; set; }
         }
 
         private async Task LoadAsync(IdentityUser user)
@@ -81,7 +92,14 @@ namespace AgroServices.Areas.Identity.Pages.Account.Manage
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
 
+            var usuario = _contexto.Usuarios.Where(u => u.ASP_UserID == user.Id).FirstOrDefault();
+            // Nombre = usuario.Nombre;
+            // Apellido = usuario.Apellido;
+
             await LoadAsync(user);
+
+            Input.Apellido = usuario.Apellido;
+            Input.Nombre = usuario.Nombre;
             return Page();
         }
 
@@ -100,6 +118,8 @@ namespace AgroServices.Areas.Identity.Pages.Account.Manage
             }
 
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
+            // var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
+            // var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
             if (Input.PhoneNumber != phoneNumber)
             {
                 var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);

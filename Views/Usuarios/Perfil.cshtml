@@ -13,10 +13,12 @@
 <div>
   <!-- Card 1 - Información del Usuario -->
   <div class="card-perfil">
-    <div class="card-header">Información de la Cuenta (Publica)</div>
+    <div class="card-header">Información de la Cuenta <i class="bx bx-show" title="Información Publica"></i></div>
     <div class="row">
       <div class="user-info col-12 col-md-6">
-        <p class="btn-info-perfil"><strong>Nombre de usuario: </strong>@ViewBag.UserName</p>
+        <div class="div-select">
+          <a href="../../Identity/Account/manage" class="nav_link sublink" class="btn-info-perfil"><strong>Nombre de usuario: </strong>@ViewBag.UserName</a>
+        </div>
         <p>@ViewBag.Age siendo parte de AgroServices</p>
         <p><strong>Localidad: </strong>@ViewBag.Ubication</p>
       </div>
@@ -27,7 +29,7 @@
   </div>
 
   <div class="card-perfil">
-    <div class="card-header">Información del Usuario</div>
+    <div class="card-header">Información del Usuario <i class="bx bx-hide" title="informacion Privada"></i></div>
     <div class="row">
       <div class="user-info col-6">
         <p><strong>Nombre Completo: </strong>@ViewBag.PersonalName</p>
