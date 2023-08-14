@@ -8,10 +8,3 @@ tinymce.init({
 	statusbar: false
 });
 
-const formulario = document.getElementById('formulario');
-formulario.addEventListener('submit', (e) => {
-	e.preventDefault();
-
-	const contenido = tinymce.activeEditor.getContent();
-	console.log(contenido);
-});

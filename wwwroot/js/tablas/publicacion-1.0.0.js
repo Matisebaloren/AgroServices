@@ -127,7 +127,8 @@ function BuscarImagenes() {
 function GuardarPublicacion() {
   //JAVASCRIPT
 
-  let descripcion = $("#descripcion").html();
+  var contenido = tinymce.activeEditor.getContent();
+	console.log("descripcion:"+contenido);
   let esOferta = null;
   let titulo = $("#Titulo").val();
   if ($("#EsOferta").val() == 1) {
@@ -144,7 +145,7 @@ function GuardarPublicacion() {
       // (también es posible utilizar una cadena de datos)
       data: {
         publicacionID: publicacionID,
-        descripcion: descripcion,
+        descripcion: contenido,
         esOferta: esOferta,
         titulo: titulo,
         usuarioID: usuarioID,
