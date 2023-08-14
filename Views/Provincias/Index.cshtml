@@ -39,7 +39,7 @@
   @* Tabla con los datos de cada elemento *@
   <div class="FondoGlass-1 my-5">
     <h1 class="display-4">Provincias</h1>
-    <table class="table table__body">
+        <table id="example" class="table table-striped" style="width:100%">
       <thead>
         <tr>
           <th>Nombre</th>
@@ -68,4 +68,7 @@
 
 @section Scripts{
   <script src="~/js/tablas/provincia-1.0.0.js"></script>
+
+  @* SCRIPT DATATABLE *@
+  <script defer src="~/js/dataTable.js"></script>
 }

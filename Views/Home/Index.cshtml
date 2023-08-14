@@ -1,34 +1,13 @@
 ﻿@{
   ViewData["Title"] = "Home Page";
 }
+
+<link rel="stylesheet" href="~/css/notices.css" asp-append-version="true" />
+
+
 <marquee style="border-radius: 15px;" behavior="scroll" direction="left" scrollamount="6">Hola productor. ¡Bienvenido a
   AgroServices! Aquí podrás buscar y publicar tus propios servicios agrícolas en todo el país.¿Qué esperas? Únete a
   nuestra comunidad y disfruta de los beneficios que ofrecemos.</marquee>
-
-@* COMIENZO DE CODIGO DE CARROUSEL--------------- *@
-<div id="carouselExample" class="carousel slide">
-  <div class="carousel-inner car-inner">
-    <div class="carousel-item active">
-      <img src="img/car1.jpg" class="d-block w-100 h-100" alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="img/cosechadora.jpg" class="d-block w-100" alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="img/picadora.webp" class="d-block w-100" alt="...">
-    </div>
-  </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div>
-@* FIN DE CODIGO DE CARROUSEL-------------- *@
-
 
 @*CODIGO CARDS NUEVAS CON MOVIMIENTO*@
 
@@ -47,7 +26,7 @@
         <div class="card shadow rounded-lg">
           <a href="#" class="card-body text-center">
             <p><i class="grey-text fas fa-graduation-cap fa-3x"></i></p>
-            <h4 class="grey-text">Courses</h4>
+            <h4 class="grey-text">COSECHA</h4>
             <p></p>
           </a>
         </div>
@@ -56,7 +35,7 @@
         <div class="card shadow rounded-lg">
           <a href="#" class="card-body text-center">
             <p><i class="grey-text far fa-calendar-alt fa-3x"></i></p>
-            <h4 class="grey-text">Calendar</h4>
+            <h4 class="grey-text">SEMBRADO</h4>
             <p></p>
           </a>
         </div>
@@ -64,26 +43,176 @@
       <div class="col-md-3 col-sm-6 pb-3 px-2 card-mobile">
         <div class="card shadow rounded-lg">
           <a href="#" class="card-body text-center">
-            <p><i class="grey-text fas fa-book fa-3x"></i></p>
-            <h4 class="grey-text">E-books</h4>
-
+            <p><i class="grey-text far fa-calendar-alt fa-3x"></i></p>
+            <h4 class="grey-text">OTROS</h4>
+            <p></p>
           </a>
         </div>
       </div>
       <div class="col-md-3 col-sm-6 pb-3 px-2 card-mobile">
         <div class="card shadow rounded-lg">
           <a href="#" class="card-body text-center">
-            <p><i class="grey-text fas fa-clipboard-check fa-3x"></i></p>
-            <h4 class="grey-text">Access</h4>
-
+            <p><i class="grey-text far fa-calendar-alt fa-3x"></i></p>
+            <h4 class="grey-text">OTROS</h4>
+            <p></p>
           </a>
         </div>
       </div>
+
     </div>
     <!-- Fim itens em blocos -->
   </div>
-  
-@* FIN CODIGO CARDS NUEVAS CON MOVIMIENTO*@
+
+  @* FIN CODIGO CARDS NUEVAS CON MOVIMIENTO*@
+
+  @* COMIENZO DE CODIGO DE CARROUSEL--------------- *@
+  <div id="carouselExample" class="carousel slide">
+    <div class="carousel-inner car-inner">
+      <div class="carousel-item active">
+        <img src="img/car1.jpg" class="d-block w-100 h-100" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img src="img/cosechadora.jpg" class="d-block w-100" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img src="img/picadora.webp" class="d-block w-100" alt="...">
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+  @* FIN DE CODIGO DE CARROUSEL-------------- *@
+
+<div class="site__wrapper">
+      <div class="grid">
+          <div class="card">
+            <div class="card__image">
+              <img src="https://unsplash.it/400/608?image=123" alt="">
+
+              <div class="card__overlay card__overlay--indigo">
+                <div class="card__overlay-content">
+                  <ul class="card__meta">
+                    <li><a href="#0"><i class="fa fa-tag"></i> Html5/Css3</a></li>
+                    <li><a href="#0"><i class="fa fa-clock-o"></i> 2 min ago</a></li>
+                  </ul>
+
+                  <a href="#0" class="card__title">How to create a card based article with HTML5 &amp; CSS3</a>
+
+                  <ul class="card__meta card__meta--last">
+                    <li><a href="#0"><i class="fa fa-user"></i> Mithicher</a></li>
+                    <li><a href="#0"><i class="fa fa-facebook-square"></i> Share</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+
+      <div class="grid">
+          <div class="card">
+            <div class="card__image">
+              <img src="https://images.pexels.com/photos/2933243/pexels-photo-2933243.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="">
+
+              <div class="card__overlay card__overlay--blue">
+                <div class="card__overlay-content">
+                  <ul class="card__meta">
+                    <li><a href="#0"><i class="fa fa-tag"></i> UI/UX</a></li>
+                    <li><a href="#0"><i class="fa fa-clock-o"></i> 2 days ago</a></li>
+                  </ul>
+
+                  <a href="#0" class="card__title">How to create a card based article with HTML5 &amp; CSS3</a>
+
+                  <ul class="card__meta card__meta--last">
+                    <li><a href="#0"><i class="fa fa-user"></i> Mithicher</a></li>
+                    <li><a href="#0"><i class="fa fa-facebook-square"></i> Share</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+
+      <div class="grid">
+          <div class="card">
+            <div class="card__image">
+              <img src="https://unsplash.it/400/300?image=200" alt="">
+
+              <div class="card__overlay card__overlay--indigo">
+                <div class="card__overlay-content">
+                <ul class="card__meta">
+                    <li><a href="#0"><i class="fa fa-tag"></i> UI/UX</a></li>
+                    <li><a href="#0"><i class="fa fa-clock-o"></i> 2 days ago</a></li>
+                  </ul>
+
+                  <a href="#0" class="card__title">How to create a card based article with HTML5 &amp; CSS3</a>
+
+                  <ul class="card__meta card__meta--last">
+                    <li><a href="#0"><i class="fa fa-user"></i> Mithicher</a></li>
+                    <li><a href="#0"><i class="fa fa-facebook-square"></i> Share</a></li>
+                  </ul>    
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+
+      <div class="grid">
+          <div class="card">
+            <div class="card__image">
+              <img src="https://unsplash.it/400/300?image=300" alt="">
+
+              <div class="card__overlay card__overlay--indigo">
+                <div class="card__overlay-content">
+                  <ul class="card__meta">
+                    <li><a href="#0"><i class="fa fa-tag"></i> Tutorials</a></li>
+                    <li><a href="#0"><i class="fa fa-clock-o"></i> 2 days ago</a></li>
+                  </ul>
+
+                  <a href="#0" class="card__title">How to create a card based article with HTML5 &amp; CSS3</a>
+
+                  <ul class="card__meta card__meta--last">
+                    <li><a href="#0"><i class="fa fa-user"></i> Mithicher</a></li>
+                    <li><a href="#0"><i class="fa fa-facebook-square"></i> Share</a></li>
+                  </ul>   
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+
+      <div class="grid">
+          <div class="card">
+            <div class="card__image">
+              <img src="https://unsplash.it/400/300?image=400" alt="">
+
+              <div class="card__overlay card__overlay--blue">
+                <div class="card__overlay-content">
+                  <ul class="card__meta">
+                    <li><a href="#0"><i class="fa fa-tag"></i> Tutorials</a></li>
+                    <li><a href="#0"><i class="fa fa-clock-o"></i> 2 days ago</a></li>
+                  </ul>
+
+                  <a href="#0" class="card__title">How to create a card based article with HTML5 &amp; CSS3</a>
+
+                  <ul class="card__meta card__meta--last">
+                    <li><a href="#0"><i class="fa fa-user"></i> Mithicher</a></li>
+                    <li><a href="#0"><i class="fa fa-facebook-square"></i> Share</a></li>
+                  </ul>   
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>		
+
+</div>
+
+
 
 
 

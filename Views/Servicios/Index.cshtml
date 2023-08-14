@@ -3,6 +3,13 @@
   ViewData["Title"] = "Home Page";
 }
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+
+<script defer src="https://code.jquery.com/jquery-3.7.0.js"></script>
+<script defer src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script defer src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+
 
 <!-- Modal -->
 <div class="modal fade" id="ModalServicio" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -31,7 +38,7 @@
 
 
 <div class="fondoTablas">
-  
+
 
   <!-- Button trigger modal -->
 
@@ -39,7 +46,7 @@
   @* Tabla con los datos de cada elemento *@
   <div class="FondoGlass-1 my-5">
     <h1 class="display-4">Servicios</h1>
-    <table class="table table__body">
+    <table id="example" class="table table-striped" style="width:100%">
       <thead>
         <tr>
           <th>Nombre</th>
@@ -50,9 +57,9 @@
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                 class="bi bi-plus-square-fill" viewBox="0 0 16 16">
                 <path
-                d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z" />
+                  d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z" />
               </svg>
-              </button>
+            </button>
           </th>
         </tr>
       </thead>
@@ -69,4 +76,8 @@
 
 @section Scripts{
   <script src="~/js/tablas/servicio-1.0.0.js"></script>
+
+   @* SCRIPT DATATABLE *@
+  <script defer src="~/js/dataTable.js"></script>
+
 }
