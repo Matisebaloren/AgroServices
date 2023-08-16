@@ -17,10 +17,14 @@
     <div class="row">
       <div class="user-info col-12 col-md-6">
         <div class="div-select">
-          <a href="../../Identity/Account/manage" class="nav_link sublink" class="btn-info-perfil"><strong>Nombre de usuario: </strong>@ViewBag.UserName</a>
+          <a href="../../Identity/Account/manage" class="btn-info-perfil"><strong>Nombre de usuario: </strong>@ViewBag.UserName</a>
         </div>
-        <p>@ViewBag.Age siendo parte de AgroServices</p>
-        <p><strong>Localidad: </strong>@ViewBag.Ubication</p>
+        <div class="div-select">
+          <p>@ViewBag.Age siendo parte de AgroServices</p>
+        </div>
+        <div class="div-select">
+          <p><strong>Localidad: </strong>@ViewBag.Ubication</p>
+        </div>
       </div>
       <div class="user-info col-12 col-md-6">
         <p><strong>Valoracion Promedio:</strong></p>
@@ -31,14 +35,18 @@
   <div class="card-perfil">
     <div class="card-header">Información del Usuario <i class="bx bx-hide" title="informacion Privada"></i></div>
     <div class="row">
-      <div class="user-info col-6">
-        <p><strong>Nombre Completo: </strong>@ViewBag.PersonalName</p>
-        <p><strong>Telefono: </strong>@ViewBag.PhoneNumber</p>
-        <p><strong>Email: </strong>@ViewBag.Email</p>
+      <div class="user-info col-12 col-md-6">
+        <div class="div-select">
+          <a class="btn-info-perfil"  href="../../Identity/Account/manage"><strong>Nombre Completo: </strong>@ViewBag.PersonalName</a>
+        </div>
+        <div class="div-select">
+          <a class="btn-info-perfil"  href="../../Identity/Account/manage"><strong>Telefono: </strong>@ViewBag.PhoneNumber</a>
+        </div>
+        <div class="div-select">
+          <a class="btn-info-perfil"  href="../../Identity/Account/manage/ChangeEmail"><strong>Email: </strong>@ViewBag.Email</a>
+          </div>
       </div>
-      <div class="user-info col-6">
-        
-      </div>
+      
     </div>
   </div>
 

@@ -15,9 +15,10 @@ function BuscarPublicaciones() {
     type: "GET",
     dataType: "json",
     success: function (publicaciones) {
+      
       $("#titulo").html(publicaciones[0].titulo);
-      $("#tituloModalP").html(publicaciones[0].titulo);
-      console.log(publicaciones[0]);
+      $("#tituloModal").html(publicaciones[0].titulo);
+      
       // let time = publicaciones[0].fecha.ToString("dd/MM/yyyy")
       let arrTime = publicaciones[0].fecha.split("T");
       let dia = arrTime[0].split("-");
@@ -164,6 +165,35 @@ function EnviarSolicitud() {
 
     error: function (xhr, status) {
       alert("Disculpe, existió un problema");
+    },
+  });
+}
+
+function enviarValoracion(){
+  contenido = $("contenido").val();
+  $.ajax({
+    url: "../../Valoraciones/crearValoracion",
+    data: { publicacionID: publicacionID, contenido: contenido, usuarioID: usuarioID},
+    type: "GET",
+    dataType: "json",
+    success: function (tags) {
+    },
+    error: function (xhr, status) {
+      alert("Error al cargar valoracion");
+    },
+  });
+}
+function enviarSolicitud(){
+  descripcion = $("RequestDesc").val();
+  $.ajax({
+    url: "../../Valoraciones/crearValoracion",
+    data: { publicacionID: publicacionID, contenido: contenido, usuarioID: usuarioID},
+    type: "GET",
+    dataType: "json",
+    success: function (tags) {
+    },
+    error: function (xhr, status) {
+      alert("Error al cargar valoracion");
     },
   });
 }

@@ -78,14 +78,6 @@
           @if (User.Identity.IsAuthenticated)
           {
             <partial name="_PerfilOption" />
-              @* <li class="item"> 
-              <a onclick="perfil()" class="nav_link">
-                <span class="navlink_icon">
-                  <i class="bx bxs-user"></i>
-                </span>
-                <span class="navlink">Mi Perfil</span>
-              </a>
-            </li> *@
           }
 
 
@@ -143,7 +135,7 @@
             </ul>
             <ul class="menu_items submenu">
               <a asp-controller="Servicios" asp-action="Index" class="nav_link sublink">
-                <i class="bx bx-cog"> </i>Servicios</a>
+                <i class="bx bx-cog"></i> Servicios</a>
             </ul>
             <ul class="menu_items submenu">
               <a asp-controller="Usuarios" asp-action="Index" class="nav_link sublink">
@@ -151,36 +143,6 @@
             </ul>
           </li>
 
-          @* <li class="item"> 
-              <a asp-controller="Provincias" asp-action="Index" class="nav_link">
-
-                <span class="navlink">Provincias</span>
-              </a>
-            </li>
-           <li class="item"> 
-          <a asp-controller="Localidades" asp-action="Index" class="nav_link">
-            <span class="navlink_icon">
-              <i class="bx bx-layer"></i>
-            </span>
-            <span class="navlink">Localidades</span>
-          </a>
-          </li>
-           <li class="item"> 
-          <a asp-controller="Servicios" asp-action="Index" class="nav_link">
-            <span class="navlink_icon">
-              <i class="bx bx-layer"></i>
-            </span>
-            <span class="navlink">Servicios</span>
-          </a>
-          </li>
-           <li class="item"> 
-          <a asp-controller="Usuarios" asp-action="Index" class="nav_link">
-            <span class="navlink_icon">
-              <i class="bx bx-layer"></i>
-            </span>
-            <span class="navlink">Usuarios</span>
-          </a>
-          </li> *@
 
         </ul> <!-- End -->
       </div>

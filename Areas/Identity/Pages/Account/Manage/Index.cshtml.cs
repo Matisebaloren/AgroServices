@@ -110,6 +110,20 @@ namespace AgroServices.Areas.Identity.Pages.Account.Manage
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
+            var usuario = _contexto.Usuarios.Where(u => u.ASP_UserID == user.Id).FirstOrDefault();
+            if (usuario != null)
+            {
+                if (usuario.Apellido != Input.Apellido)
+                {
+                    usuario.Apellido = Input.Apellido;
+                }
+                if (usuario.Nombre != Input.Nombre)
+                {
+                    usuario.Nombre = Input.Nombre;
+                }
+                _contexto.SaveChanges();
+            }
+
 
             if (!ModelState.IsValid)
             {

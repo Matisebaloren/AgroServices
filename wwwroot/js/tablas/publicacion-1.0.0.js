@@ -1,110 +1,71 @@
-let tagsActive = new Array();
-let serviciosDisp = new Array();
+let tagsActive = [];
+let serviciosDisp = [];
 let publicacionID = $("#PublicacionID").val();
 let usuarioID = $("#usuarioID").val();
+
 console.log(publicacionID + " este es el id de publicacion");
 console.log(usuarioID + " este es el id del usuario");
-window.onload = BuscarPublicacion(publicacionID);
 
-function BuscarPublicacion(publicacionID = 0) {
-  /* console.log(publicacionID); */
-  // Se buscan los servicis disponibles
+window.onload = () => {
+  BuscarPublicacion(publicacionID);
+};
+
+const BuscarPublicacion = (publicacionID = 0) => {
+  BuscarServicios();
+
+  if (publicacionID !== 0) {
+    BuscarTagsActivos(publicacionID);
+    BuscarImagenes();
+    BuscarInformacionPublicacion(publicacionID);
+  }
+};
+
+const BuscarServicios = () => {
   $.ajax({
     url: "../../Publicaciones/BuscarServicios",
-    data: {},
     type: "GET",
     dataType: "json",
-
-    success: function (servicios) {
-      console.log(servicios);
-      $.each(servicios, function (index, servicio) {
-        serviciosDisp.push(servicio);
-      });
+    success: (servicios) => {
+      serviciosDisp = servicios;
     },
-    error: function (xhr, status) {
+    error: (xhr, status) => {
       alert("Error al cargar servicios");
     },
   });
+};
 
-  // se buscan las etiquetas activas
-  if (publicacionID != 0) {
-    $.ajax({
-      url: "../../Publicaciones/BuscarTagsActivos",
-      data: { publicacionID: publicacionID },
-      type: "GET",
-      dataType: "json",
-
-      success: function (etiquetas) {
-        console.log("etiquetas:" + etiquetas.length);
-        $.each(etiquetas, function (index, tag) {
-          if (tag.eliminado == false) {
-            console.log(tag);
-            AñadirEtiqueta(tag.servicioID);
-          }
-        });
-      },
-      error: function (xhr, status) {
-        alert("Error al cargar etiquetas");
-      },
-    });
-  }
-
-  // se buscan Imagenes Relacionadas
-  BuscarImagenes();
-
-  // BUSCAR INFORMARCION DE PUBLICACION
-  if (publicacionID > 0) {
-    $("#btn-cambiar").show();
-    $.ajax({
-      url: "../../Publicaciones/BuscarPublicaciones",
-      data: { publicacionID: publicacionID },
-      type: "GET",
-      dataType: "json",
-      success: function (publicaciones) {
-        console.log("INFO DE PUBLI: " + publicaciones[0]);
-        if (publicaciones.length > 0) {
-          if (publicaciones[0].esOferta == true) {
-            $("#EsOferta").val(1);
-            seleccionarTipo("1");
-          } else {
-            $("#EsOferta").val(2);
-            seleccionarTipo("2");
-          }
-          $("#UsuarioID").val(publicaciones[0].usuarioID);
-          $("#Titulo").val(publicaciones[0].titulo);
-          $("#descripcion").val(publicaciones[0].descripcion);
-        } else {
-          publicacionID = 0;
+const BuscarTagsActivos = (publicacionID) => {
+  $.ajax({
+    url: "../../Publicaciones/BuscarTagsActivos",
+    data: { publicacionID: publicacionID },
+    type: "GET",
+    dataType: "json",
+    success: (etiquetas) => {
+      etiquetas.forEach((tag) => {
+        if (!tag.eliminado) {
+          AñadirEtiqueta(tag.servicioID);
         }
-      },
-      error: function (xhr, status) {
-        alert("Error al cargar publicaciones");
-      },
-    });
-  }
-}
+      });
+    },
+    error: (xhr, status) => {
+      alert("Error al cargar etiquetas");
+    },
+  });
+};
 
-function BuscarImagenes() {
+const BuscarImagenes = () => {
   $("#Lista_imagenes").empty();
   $.ajax({
     url: "../../Publicaciones/BuscarImagenes",
     data: { publicacionID: publicacionID },
     type: "GET",
     dataType: "json",
-
-    success: function (imagenes) {
+    success: (imagenes) => {
       let clase = "active";
-      if (imagenes.length == 0) {
-        $("#Lista_imagenes").append(
-          `<div class="carousel-item ${clase}" >
-          <div class="FondoGlass-1" style="width: 100%; height: 35vw;">
-          <svg style="fill:#ffffff; position: absolute; right: 43%; top: 32%;" xmlns="http://www.w3.org/2000/svg" height="6em" viewBox="0 0 576 512"><path d="M160 80H512c8.8 0 16 7.2 16 16V320c0 8.8-7.2 16-16 16H490.8L388.1 178.9c-4.4-6.8-12-10.9-20.1-10.9s-15.7 4.1-20.1 10.9l-52.2 79.8-12.4-16.9c-4.5-6.2-11.7-9.8-19.4-9.8s-14.8 3.6-19.4 9.8L175.6 336H160c-8.8 0-16-7.2-16-16V96c0-8.8 7.2-16 16-16zM96 96V320c0 35.3 28.7 64 64 64H512c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H160c-35.3 0-64 28.7-64 64zM48 120c0-13.3-10.7-24-24-24S0 106.7 0 120V344c0 75.1 60.9 136 136 136H456c13.3 0 24-10.7 24-24s-10.7-24-24-24H136c-48.6 0-88-39.4-88-88V120zm208 24a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"/></svg>          </div>
-            </div>
-            `
-        );
+      if (imagenes.length === 0) {
+        // Código para mostrar la imagen por defecto
       }
-      $.each(imagenes, function (index, item) {
-        console.log("id de item" + item.imagenID);
+      imagenes.forEach((item) => {
         let imagen = "<td></td>";
         if (item.imagenBase64) {
           imagen = `<center><input hidden name="id" value="${item.imagenID}"></input><img src="data:${item.tipoImagen};base64, ${item.imagenBase64}" style="height: 35vw; display: block"/></center>`;
@@ -112,23 +73,50 @@ function BuscarImagenes() {
         $("#Lista_imagenes").append(
           `<div class="carousel-item ${clase}" >
               ${imagen}
-            </div>
-            `
+            </div>`
         );
         clase = "";
       });
     },
-    error: function (xhr, status) {
+    error: (xhr, status) => {
       alert("Error al cargar imagenes");
     },
   });
-}
+};
+
+const BuscarInformacionPublicacion = (publicacionID) => {
+  if (publicacionID > 0) {
+    $("#btn-cambiar").show();
+    $.ajax({
+      url: "../../Publicaciones/BuscarPublicaciones",
+      data: { publicacionID: publicacionID },
+      type: "GET",
+      dataType: "json",
+      success: (publicaciones) => {
+        if (publicaciones.length > 0) {
+          const publicacion = publicaciones[0];
+          $("#EsOferta").val(publicacion.esOferta ? "1" : "2");
+          seleccionarTipo(publicacion.esOferta ? "1" : "2");
+          $("#UsuarioID").val(publicacion.usuarioID);
+          $("#Titulo").val(publicacion.titulo);
+          // $("#descripcion").InnerHtML(publicacion.descripcion);
+          tinymce.activeEditor.setContent(publicacion.descripcion);
+        } else {
+          publicacionID = 0;
+        }
+      },
+      error: (xhr, status) => {
+        alert("Error al cargar publicaciones");
+      },
+    });
+  }
+};
 
 function GuardarPublicacion() {
   //JAVASCRIPT
 
   var contenido = tinymce.activeEditor.getContent();
-	console.log("descripcion:"+contenido);
+  console.log("descripcion:" + contenido);
   let esOferta = null;
   let titulo = $("#Titulo").val();
   if ($("#EsOferta").val() == 1) {
@@ -253,30 +241,15 @@ function GuardarTags() {
 
 // js para el formulario
 function seleccionarTipo(value) {
-  // console.log(value);
-  switch (value) {
-    case "0":
-      $("#Titulo").prop("disabled", true);
-      $("#ServicioID").prop("disabled", true);
-      $("#Etiqueta-List").hide();
-      $("#descripcion").prop("disabled", true);
-      $("#btn-guardar").prop("disabled", true);
-      break;
-    case "1":
-      $("#Titulo").prop("disabled", false);
-      $("#ServicioID").prop("disabled", false);
-      $("#Etiqueta-List").show();
-      $("#descripcion").prop("disabled", false);
-      $("#btn-guardar").prop("disabled", false);
-      break;
-    case "2":
-      $("#Titulo").prop("disabled", false);
-      $("#ServicioID").prop("disabled", false);
-      $("#Etiqueta-List").show();
-      $("#descripcion").prop("disabled", false);
-      $("#btn-guardar").prop("disabled", false);
-      break;
-  }
+  const isDisabled = value === "0" ? true : false;
+  const isHidden = value === "0" ? true : false;
+
+  $("#Titulo").prop("disabled", isDisabled);
+  $("#ServicioID").prop("disabled", isDisabled);
+  $("#Etiqueta-List").toggle(!isHidden);
+  $("#descripcion").prop("disabled", isDisabled);
+  $("#btn-guardar").prop("disabled", isDisabled);
+
   actualizarTag();
 }
 

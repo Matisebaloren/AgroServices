@@ -1,0 +1,28 @@
+/* Estilos para el fondo blanco */
+.FondoBlanco {
+  background-color: white;
+}
+
+/* Estilos para el botón "Enviar" */
+.btn-verde-rural {
+  background-color: #198754; /* Color verde definido por ti */
+  color: white;
+  border: none;
+}
+
+.btn-verde-rural:hover {
+  background-color: #106c3f; /* Color verde oscuro al pasar el mouse */
+}
+
+/* Estilos para el área de mensaje */
+.mensaje-textarea {
+  border: 1px solid #198754; /* Borde verde definido por ti */
+}
+
+/* Estilos para el mensaje introductorio */
+.mensaje-intro {
+  color: #106c3f; /* Color de texto verde oscuro */
+  font-style: italic;
+  font-weight:600;
+}
+
