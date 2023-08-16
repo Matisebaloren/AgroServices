@@ -43,7 +43,7 @@
 
 <div id="div-main" class="FondoGlass-1 my-5 animate__animated animate__delay-0s">
     <div id="div-datos">
-    <h2 class="fw-bold"> Nueva Publicación</h2>
+    <h2 class="fw-bold text-black" > Nueva Publicación</h2>
     <hr>
     <form id="formulario" method="post">
 
@@ -54,7 +54,7 @@
             
                     @* Select para elegir TIPO *@
                 <div class="mb-3 col-4">
-                    <label class="form-label fw-bold">Tipo de publicación:</label>
+                    <label class="form-label fw-bold text-black">Tipo de publicación:</label>
                     <Select class="form-control" id="EsOferta" onchange=seleccionarTipo(this.value)>
                         <option value="0">- Seleccionar -</option>
                         <option value="1">Ofertar un Servicio</option>
@@ -64,13 +64,13 @@
 
                     @* imput del titulo *@
                 <div class="mb-3 col-12 col-md-8">
-                    <label class="form-label fw-bold">Título</label>
+                    <label class="form-label fw-bold text-black">Título</label>
                     <input disabled type="text" class="form-control" id="Titulo">
                 </div>
 
                     @* lista de etiquetas *@
                 <div class="mb-3 col-12 col-md-6">
-                    <label class="form-label fw-bold">Etiquetas:</label>
+                    <label class="form-label fw-bold text-black">Etiquetas:</label>
                     <select disabled class="form-control mb-2" id="ServicioID" onchange=AñadirEtiqueta(this.value)></select><div id="Etiqueta-List" class="tags col-12 col-md-6"></div>
                 </div>
                 
