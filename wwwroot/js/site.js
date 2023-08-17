@@ -426,3 +426,8 @@ const notify = () => {
     audio.play();
   }
 };
+
+
+function volver(){
+    window.history.back();
+  }
