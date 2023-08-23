@@ -113,9 +113,7 @@
     </div>
 
     @*BOTON PARA VOLVER A LA LISTA PUBLICACIONES GENERAL*@
-    <div id="btn-volver" class="div-boton-der my-3">
-      <a class="btn btn-success" ><i class='bx bx-arrow-back'></i>VOLVER</a>
-    </div>
+    <button class="div-boton-der my-3" onclick="volverAtras()">VOLVER</button>
    
 
     @* boton de solicitud (solo para los usuarios registrados - el dueño de la publi)*@
@@ -130,4 +128,10 @@
 
 @section Scripts{
 <script src="~/js/tablas/vista-1.0.0.js"></script>
+
+ <script>
+        function volverAtras() {
+            window.history.back();
+        }
+  </script>
 }

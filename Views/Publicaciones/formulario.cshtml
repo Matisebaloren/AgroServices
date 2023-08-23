@@ -4,17 +4,16 @@
     ViewData["Title"] = "Home Page";
     Layout = "_layout";
 }
-        @*LINKS EDITOR DE TEXTO*@
-  	    <link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet" />
-		<link rel="stylesheet" href="~/css/textEditor.css" />
+@*LINKS EDITOR DE TEXTO*@
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="~/css/textEditor.css" />
 
 
-        @*SCRIPT EDITOR DE TEXTO *@
-        <script defer src="~/js/textEditor.js"></script>
-        <script src="~/lib/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
-
+@*SCRIPT EDITOR DE TEXTO *@
+<script defer src="~/js/textEditor.js"></script>
+<script src="~/lib/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
 
 <!-- Modal -->
 <div class="modal fade" id="ModalImagen" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -43,17 +42,17 @@
 
 <div id="div-main" class="FondoGlass-1 my-5 animate__animated animate__delay-0s">
     <div id="div-datos">
-    <h2 class="fw-bold text-black" > Nueva Publicación</h2>
-    <hr>
-    <form id="formulario" method="post">
+        <h2 class="fw-bold text-black"> Nueva Publicación</h2>
+        <hr>
+        <form id="formulario" method="post">
 
-        <input type="hidden" id="PublicacionID" value=@ViewBag.publicacionID></input>
-        <input type="hidden" id="usuarioID" value=@ViewBag.usuarioID></input>
-        @* <input type="hidden" id="UsuarioID" value="1"></input> *@
+            <input type="hidden" id="PublicacionID" value=@ViewBag.publicacionID></input>
+            <input type="hidden" id="usuarioID" value=@ViewBag.usuarioID></input>
+            @* <input type="hidden" id="UsuarioID" value="1"></input> *@
 
-        <div class="row">
-            
-                    @* Select para elegir TIPO *@
+            <div class="row">
+
+                @* Select para elegir TIPO *@
                 <div class="mb-3 col-4">
                     <label class="form-label fw-bold text-black">Tipo de publicación:</label>
                     <Select class="form-control" id="EsOferta" onchange=seleccionarTipo(this.value)>
@@ -63,48 +62,55 @@
                     </Select>
                 </div>
 
-                    @* imput del titulo *@
+                @* imput del titulo *@
                 <div class="mb-3 col-12 col-md-8">
                     <label class="form-label fw-bold text-black">Título</label>
                     <input disabled type="text" class="form-control" id="Titulo">
                 </div>
 
-                    @* lista de etiquetas *@
+                @* lista de etiquetas *@
                 <div class="mb-3 col-12 col-md-6">
                     <label class="form-label fw-bold text-black">Etiquetas:</label>
-                    <select disabled class="form-control mb-2" id="ServicioID" onchange=AñadirEtiqueta(this.value)></select><div id="Etiqueta-List" class="tags col-12 col-md-6"></div>
+                    <select disabled class="form-control mb-2" id="ServicioID"
+                        onchange=AñadirEtiqueta(this.value)></select>
+                    <div id="Etiqueta-List" class="tags col-12 col-md-6"></div>
                 </div>
-                
 
-            
+
+
                 @* Imagen descriptiva *@
-            @* <div class="col-12 col-md-6 FondoGlass-1">
+                @* <div class="col-12 col-md-6 FondoGlass-1">
                 <img src="" alt="" style="height: auto;">
-            </div> *@
-        </div>
+                </div> *@
+            </div>
 
 
             @* imput de la descripcion *@
-        <div class="my-3 col-12">
-            <label class="form-label fw-bold">Descripción</label>
-            <textarea disabled type="text" class="form-control" id="descripcion"></textarea>
-        </div>
+            <div class="my-3 col-12">
+                <label class="form-label fw-bold">Descripción</label>
+                <textarea disabled type="text" class="form-control" id="descripcion"></textarea>@*Texto enriquecido*@
 
-        <div class="btn-formulario px-auto">
-            <button id="btn-guardar" type="button" onclick=GuardarPublicacion() class="btn btn-primary">Guardar Datos</button>
-            <button id="btn-cambiar" style="display: none;" type="button" onclick=CambiarSeccion() class="btn btn-cambiar">
-              <svg xmlns="http://www.w3.org/2000/svg" height="2em" viewBox="0 0 512 512"><path d="M448 80c8.8 0 16 7.2 16 16V415.8l-5-6.5-136-176c-4.5-5.9-11.6-9.3-19-9.3s-14.4 3.4-19 9.3L202 340.7l-30.5-42.7C167 291.7 159.8 288 152 288s-15 3.7-19.5 10.1l-80 112L48 416.3l0-.3V96c0-8.8 7.2-16 16-16H448zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm80 192a48 48 0 1 0 0-96 48 48 0 1 0 0 96z"/></svg>
+            <div class="btn-formulario px-auto">
+                <button id="btn-guardar" type="button" onclick=GuardarPublicacion() class="btn btn-primary">Guardar
+                    Datos</button>
+                <button id="btn-cambiar" style="display: none;" type="button" onclick=CambiarSeccion()
+                    class="btn btn-cambiar">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="2em" viewBox="0 0 512 512">
+                        <path
+                            d="M448 80c8.8 0 16 7.2 16 16V415.8l-5-6.5-136-176c-4.5-5.9-11.6-9.3-19-9.3s-14.4 3.4-19 9.3L202 340.7l-30.5-42.7C167 291.7 159.8 288 152 288s-15 3.7-19.5 10.1l-80 112L48 416.3l0-.3V96c0-8.8 7.2-16 16-16H448zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm80 192a48 48 0 1 0 0-96 48 48 0 1 0 0 96z" />
+                    </svg>
                     @* Imagenes *@
-            </button>
+                </button>
 
-        </div>
-    </form>
-</div>
+            </div>
+        </form>
+    </div>
 
     @* Seccion Imagenes *@
     <div id="div-imagenes">
         <h2>Imagenes Asociadas</h2>
-        <div id="carouselExampleFade" class="carousel slide my-3" data-bs-ride="carousel" data-bs-touch="true" data-bs-interval="false">
+        <div id="carouselExampleFade" class="carousel slide my-3" data-bs-ride="carousel" data-bs-touch="true"
+            data-bs-interval="false">
             <div class="carousel-inner" id="Lista_imagenes">
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade"
@@ -120,14 +126,18 @@
         </div>
         <div class="btn-formulario pt-3">
             <button id="btn-guardar" type="button" onclick=NuevaImagen() class="btn btn-añadir-img hstack">
-               <span class="fs-5">Añadir</span>
+                <span class="fs-5">Añadir</span>
             </button>
-            @* <a asp-controller="Publicaciones" asp-action="Formulario" asp-route-id="0" class="nav_link sublink">Nueva Publicación</a> *@
+            @* <a asp-controller="Publicaciones" asp-action="Formulario" asp-route-id="0" class="nav_link sublink">Nueva
+            Publicación</a> *@
             <button id="btn-guardar" type="button" onclick=EliminarImagen() class="btn btn-eliminar-img hstack">
-            <span class="fs-5">Eliminar</span>
+                <span class="fs-5">Eliminar</span>
             </button>
             <button type="button" onclick=CambiarSeccion2() class="btn btn-cambiar2">
-              <svg xmlns="http://www.w3.org/2000/svg" height="2em" viewBox="0 0 512 512"><path d="M0 96C0 60.7 28.7 32 64 32H448c35.3 0 64 28.7 64 64V416c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V96zm64 0v64h64V96H64zm384 0H192v64H448V96zM64 224v64h64V224H64zm384 0H192v64H448V224zM64 352v64h64V352H64zm384 0H192v64H448V352z"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" height="2em" viewBox="0 0 512 512">
+                    <path
+                        d="M0 96C0 60.7 28.7 32 64 32H448c35.3 0 64 28.7 64 64V416c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V96zm64 0v64h64V96H64zm384 0H192v64H448V96zM64 224v64h64V224H64zm384 0H192v64H448V224zM64 352v64h64V352H64zm384 0H192v64H448V352z" />
+                </svg>
             </button>
 
         </div>
