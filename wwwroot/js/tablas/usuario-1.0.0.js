@@ -27,7 +27,7 @@ function BuscarUsuarios() {
                     <tr class="table-danger" >
                         <td> ${usuario.username} </td>
                         <td> ${usuario.email} </td>
-                        <td> ${usuario.apellido}, ${usuario.nombre}</td>
+                        <td> ${usuario.apellido ? usuario.apellido : ''}, ${usuario.nombre ? usuario.nombre : ''}</td>
                         <td> ${usuario.telefono}</td>
                         <td> ${usuario.localidadDescripcion}, ${usuario.provinciaDescripcion}</td>
                         <td class=" text-end">
@@ -40,8 +40,8 @@ function BuscarUsuarios() {
                     <tr>
                         <td class=" danger" > ${usuario.username} </td>
                         <td class=" danger" > ${usuario.email} </td>
-                        <td class=" danger"> ${usuario.apellido}, ${usuario.nombre}</td>
-                        <td class=" danger"> ${usuario.telefono}</td>
+                        <td class=" danger"> ${usuario.apellido ? usuario.apellido+"," : '----'}${usuario.nombre ? usuario.nombre : ''}</td>
+                        <td class=" danger"> ${usuario.telefono ? usuario.telefono : ""}</td>
                         <td class=" danger"> ${usuario.localidadDescripcion}, ${usuario.provinciaDescripcion}</td>
                         
                         <td class=" text-end">

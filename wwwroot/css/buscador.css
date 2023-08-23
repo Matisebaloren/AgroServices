@@ -7,8 +7,14 @@ section{
     align-items: center;
 }
 
-input{
-    width: 50vw;
+@media (max-width: 768px) {
+    #buscador{
+       display: none;
+    }
+  }
+
+#buscador{
+    width: calc(100vw - 40rem);
     padding: 10px;
     outline: none;
     border: 5px solid #CCD1E4;
@@ -23,6 +29,7 @@ input{
     color: #ffffff;
     text-align: center;
 }
+
 li{
     margin: 5px 0;
 }

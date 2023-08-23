@@ -21,6 +21,6 @@ namespace AgroServices.Models
 
         public int UsuarioID { get; set; }
 
-        public int estado { get; set; }
+        public int Estado { get; set; } //0: Creado, 1: Rechazado, 2: Aceptado, 3: Terminado
     }
 }

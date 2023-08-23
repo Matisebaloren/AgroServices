@@ -12,7 +12,6 @@
     }
 
     .container-form {
-        max-width: 400px;
         margin: 0 auto;
         padding: 20px;
         border-radius: 6px;
@@ -44,7 +43,7 @@
     .form-control {
         width: 100%;
         padding: 12px;
-        border: 1px solid #c3d5ab;
+        border: 1px solid #d7fda6;
         border-radius: 4px;
         background-color: #d7eab5;
         color: #555;
@@ -84,51 +83,55 @@
     }
 </style>
 
-<div class="container-form">
-    <h1><i class="bx bxs-user-plus"></i>@ViewData["Title"]</h1>
-    <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-       
-        <hr />
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <div class="form-group">
-            <label for="inputEmail">Correo electrónico</label>
-            <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" />
-            <span asp-validation-for="Input.Email" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label for="inputUserName">Nombre de usuario</label>
-            <input asp-for="Input.UserName" class="form-control" autocomplete="username" aria-required="true" />
-            <span asp-validation-for="Input.UserName" class="text-danger"></span>
-        </div>
-       @*  <div class="form-group">
-            <label for="inputPhoneNumber">Número de teléfono</label>
-            <input asp-for="Input.PhoneNumber" class="form-control" autocomplete="PhoneNumber" aria-required="true" />
-            <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
-        </div> *@
-        <div class="form-group">
-            <label for="inputPassword">Contraseña</label>
-            <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" />
-            <span asp-validation-for="Input.Password" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label for="inputConfirmPassword">Confirmar contraseña</label>
-            <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" />
-            <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label for="selectProvincias">Provincias</label>
-            <select name="Provincias" class="form-control" id="ProvinciaID" onchange=CambiarProvincia(this.value)>
-                <option value="0">Elija una provincia</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="selectLocalidad">Localidad</label>
-            <select id="LocalidadID" asp-for="Input.LocalidadID" class="form-control" autocomplete="new-password" aria-required="true"></select>
-            <span asp-validation-for="Input.LocalidadID" class="text-danger"></span>
-        </div>
-        <hr>
-        <button id="registerSubmit" class="btn btn-primary" type="submit">Registrarse</button>
-    </form>
+<div class="container-form col-12 col-md-10">
+        <h1><i class="bx bxs-user-plus"></i>@ViewData["Title"]</h1>
+        <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+            
+            <hr />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row">
+                <div class="form-group col-12 col-md-6">
+                    <label for="inputEmail">Correo electrónico</label>
+                    <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" />
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                </div>
+                <div class="form-group col-12 col-md-6">
+                    <label for="inputUserName">Nombre de usuario</label>
+                    <input asp-for="Input.UserName" class="form-control" autocomplete="username" aria-required="true" />
+                    <span asp-validation-for="Input.UserName" class="text-danger"></span>
+                </div>
+            @*  <div class="form-group">
+                    <label for="inputPhoneNumber">Número de teléfono</label>
+                    <input asp-for="Input.PhoneNumber" class="form-control" autocomplete="PhoneNumber" aria-required="true" />
+                    <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                </div> *@
+                <div class="form-group col-12 col-md-6">
+                    <label for="inputPassword">Contraseña</label>
+                    <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" />
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                </div>
+                <div class="form-group col-12 col-md-6">
+                    <label for="inputConfirmPassword">Confirmar contraseña</label>
+                    <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" />
+                    <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                </div>
+                <div class="form-group col-12 col-md-6">
+                    <label for="selectProvincias">Provincias</label>
+                    <select name="Provincias" class="form-control" id="ProvinciaID" onchange=CambiarProvincia(this.value)>
+                        <option value="0">Elija una provincia</option>
+                    </select>
+                </div>
+                <div class="form-group col-12 col-md-6">
+                    <label for="selectLocalidad">Localidad</label>
+                    <select id="LocalidadID" asp-for="Input.LocalidadID" class="form-control" autocomplete="new-password" aria-required="true"></select>
+                    <span asp-validation-for="Input.LocalidadID" class="text-danger"></span>
+                </div>
+                
+            </div>
+            <hr>
+            <button id="registerSubmit" class="btn btn-primary" type="submit">Registrarse</button>
+        </form>
+    
 </div>
 
 @section Scripts {
