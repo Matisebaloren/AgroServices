@@ -30,23 +30,22 @@ function BuscarUsuarios() {
                         <td> ${usuario.apellido ? usuario.apellido : ''}, ${usuario.nombre ? usuario.nombre : ''}</td>
                         <td> ${usuario.telefono}</td>
                         <td> ${usuario.localidadDescripcion}, ${usuario.provinciaDescripcion}</td>
-                        <td class=" text-end">
-                            <a class="btn btn-eliminar btn-habilitar" onClick="DeshabilitarUsuario('${usuario.usuarioID}')" role="button"></a>
-                        </td>
+                        
                     </tr>
                     `;
-        } else {
+        }
+        // <td class=" text-end">
+        //                     <a class="btn btn-eliminar btn-habilitar" onClick="DeshabilitarUsuario('${usuario.usuarioID}')" role="button"></a>
+        //                 </td>
+        else {
           BotonDeshabilitado = `
                     <tr>
                         <td class=" danger" > ${usuario.username} </td>
                         <td class=" danger" > ${usuario.email} </td>
-                        <td class=" danger"> ${usuario.apellido ? usuario.apellido+"," : '----'}${usuario.nombre ? usuario.nombre : ''}</td>
-                        <td class=" danger"> ${usuario.telefono ? usuario.telefono : ""}</td>
+                        <td class=" danger"> ${usuario.apellido ? usuario.apellido+"," : ' - '}${usuario.nombre ? usuario.nombre : ' -'}</td>
+                        <td class=" danger"> ${usuario.telefono ? usuario.telefono : "-"}</td>
                         <td class=" danger"> ${usuario.localidadDescripcion}, ${usuario.provinciaDescripcion}</td>
-                        
-                        <td class=" text-end">
-                            <a class="btn btn-eliminar" onClick="DeshabilitarUsuario('${usuario.usuarioID}')" role="button"></a>
-                        </td>
+                       
                     </tr>
                     `;
 // boton editar: <a class="btn btn-eliminar btn-editar" onClick="BuscarUsuario(${usuario.usuarioID})" role="button"></a>

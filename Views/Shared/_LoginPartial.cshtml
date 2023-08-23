@@ -8,20 +8,9 @@
     @if (SignInManager.IsSignedIn(User))
     {
         <li class="nav-item">
-            <a class="nav-link" href="#">
-                <i class="bx bx-bell"></i> 
-                <span class="badge badge-pill badge-danger">3</span>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="notiDropdown">
-                    <a class="dropdown-item" href="#">Notificación 1</a>
-                    <a class="dropdown-item" href="#">Notificación 2</a>
-                    <a class="dropdown-item" href="#">Notificación 3</a>
-                </div>
+            <a id="manage" class="btn btn-success me-2 text-light" asp-area="Identity" asp-page="/Account/Manage/Index"
+                title="Perfil"><i class="bx bxs-user"></i> @UserManager.GetUserName(User)
             </a>
-        </li>
-        <li class="nav-item">
-                <a id="manage" class="btn btn-success me-2 text-light" asp-area="Identity" asp-page="/Account/Manage/Index"
-                    title="Perfil"><i class="bx bxs-user"></i> @UserManager.GetUserName(User)
-                </a>
         </li>
         <li class="nav-item">
             <form id="logoutForm" class="form-inline btn-salir" asp-area="Identity" asp-page="/Account/Logout"

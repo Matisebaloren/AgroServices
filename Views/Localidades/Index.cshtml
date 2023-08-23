@@ -4,7 +4,9 @@
 
     ViewData["Title"] = "Home Page";
 }
-
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Mukta:wght@300;400;600;700;800&family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="~/css/tables.css" asp-append-version="true" />
 
 <!-- Modal -->
 <div class="modal fade" id="ModalLocalidad" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -43,8 +45,8 @@
   @* Tabla con los datos de cada elemento *@
  <div class="FondoGlass-1 my-5">
   <h1 class="display-4">Localidades</h1>
-    <table id="example" class="table table-striped" style="width:100%">
-    <thead>
+    <table id="example" class="table table-hover" style="width:100%">
+    <thead class="table-dark">
         <tr>
             <th>Nombre</th>
             <th class="text-end">
