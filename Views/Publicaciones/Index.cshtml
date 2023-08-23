@@ -2,6 +2,7 @@
 
     ViewData["Title"] = "Home Page";
 }
+<link rel="stylesheet" href="~/css/publicacionList.css" />
 
 
 <!-- Modal -->
@@ -36,6 +37,21 @@
   <table class="table table-bordered table-hover table-light table-condensed text-uppercase">
     <tbody id="tbody-publicaciones"></tbody>
   </table>
+  <div id="paginationContainer" class="row">
+    <div id="pagination" class="col-12 col-md-6">
+    </div>
+    
+    <div id="paginationInfo" class="col-12 col-md-6">
+      <p id="paginationText"></p>
+      <label for="selectElementosPorPagina">Mostrar por página:</label>
+      <select id="selectElementosPorPagina" onchange="PublicacionesPorPagina(this.value)">
+        <!-- ...opciones... -->
+        <option value="10">10</option>
+        <option value="20">20</option>
+        <option value="30">30</option>
+      </select>
+    </div>
+  </div>
 </div>
 
 @section Scripts{

@@ -28,13 +28,13 @@
 
 .div-select {
   width: 100%;
-  margin-bottom: 5px;
+  margin-bottom: 1rem;
   /* background-color: rgb(231, 231, 231); */
 }
 
 .div-select:hover {
   background-color: rgb(231, 255, 226);
-  color: white;
+  color: rgb(2, 15, 0);
 }
 
 .btn-info-perfil {

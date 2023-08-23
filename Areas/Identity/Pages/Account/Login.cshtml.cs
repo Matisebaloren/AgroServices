@@ -20,12 +20,13 @@ namespace AgroServices.Areas.Identity.Pages.Account
 
     public class LoginModel : PageModel
     {
-        
+        private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
 
-        public LoginModel(SignInManager<IdentityUser> signInManager, ILogger<LoginModel> logger)
+        public LoginModel(SignInManager<IdentityUser> signInManager, ILogger<LoginModel> logger, UserManager<IdentityUser> userManager)
         {
+            _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
         }
@@ -56,13 +57,13 @@ namespace AgroServices.Areas.Identity.Pages.Account
             /// </summary>
             [Required]
             [Display(Name = "Email")]
-            // [EmailAddress]
+            [EmailAddress]
             public string Email { get; set; }
 
             /// <summary>
             /// </summary>
             [Required]
-             [Display(Name = "Contraseña")]
+            [Display(Name = "Contraseña")]
             [DataType(DataType.Password)]
             public string Password { get; set; }
 
@@ -71,10 +72,10 @@ namespace AgroServices.Areas.Identity.Pages.Account
             [Display(Name = "Recordarme?")]
             public bool RememberMe { get; set; }
         }
-[AllowAnonymous]
+        [AllowAnonymous]
         public async Task OnGetAsync(string returnUrl = null)
         {
-            
+
             if (!string.IsNullOrEmpty(ErrorMessage))
             {
                 ModelState.AddModelError(string.Empty, ErrorMessage);
@@ -89,7 +90,7 @@ namespace AgroServices.Areas.Identity.Pages.Account
 
             ReturnUrl = returnUrl;
         }
-[AllowAnonymous]
+        [AllowAnonymous]
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl ??= Url.Content("~/");
@@ -98,24 +99,34 @@ namespace AgroServices.Areas.Identity.Pages.Account
 
             if (ModelState.IsValid)
             {
-                var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
-                if (result.Succeeded)
+
+                var user = await _userManager.FindByEmailAsync(Input.Email); // Buscar usuario por email
+                if (user != null)
                 {
-                    _logger.LogInformation("Usuario Ingresado");
-                    return LocalRedirect(returnUrl);
-                }
-                if (result.RequiresTwoFactor)
-                {
-                    return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = Input.RememberMe });
-                }
-                if (result.IsLockedOut)
-                {
-                    _logger.LogWarning("User account locked out.");
-                    return RedirectToPage("./Lockout");
+                    var result = await _signInManager.PasswordSignInAsync(user, Input.Password, Input.RememberMe, lockoutOnFailure: false);
+                    if (result.Succeeded)
+                    {
+                        _logger.LogInformation("Usuario Ingresado");
+                        return LocalRedirect(returnUrl);
+                    }
+                    if (result.RequiresTwoFactor)
+                    {
+                        return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = Input.RememberMe });
+                    }
+                    if (result.IsLockedOut)
+                    {
+                        _logger.LogWarning("User account locked out.");
+                        return RedirectToPage("./Lockout");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, "Intento de ingreso invalido.");
+                        return Page();
+                    }
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Intento de ingreso invalido.");
+                    ModelState.AddModelError(string.Empty, "Usuario no encontrado.");
                     return Page();
                 }
             }

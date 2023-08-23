@@ -8,161 +8,161 @@ build_property.PlatformNeutralAssembly =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = AgroServices
 build_property.RootNamespace = AgroServices
-build_property.ProjectDir = C:\Users\Usuario\Desktop\AgroServices\AgroServices\
+build_property.ProjectDir = c:\Users\MSL\Desktop\Repositorio\AgroServices\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\Usuario\Desktop\AgroServices\AgroServices
+build_property.MSBuildProjectDirectory = c:\Users\MSL\Desktop\Repositorio\AgroServices
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/Usuario/Desktop/AgroServices/AgroServices/Areas/Identity/Pages/Account/Acceder.cshtml]
+[c:/Users/MSL/Desktop/Repositorio/AgroServices/Areas/Identity/Pages/Account/Acceder.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxBY2NlZGVyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Usuario/Desktop/AgroServices/AgroServices/Areas/Identity/Pages/Account/AccessDenied.cshtml]
+[c:/Users/MSL/Desktop/Repositorio/AgroServices/Areas/Identity/Pages/Account/AccessDenied.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxBY2Nlc3NEZW5pZWQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Usuario/Desktop/AgroServices/AgroServices/Areas/Identity/Pages/Account/ForgotPassword.cshtml]
+[c:/Users/MSL/Desktop/Repositorio/AgroServices/Areas/Identity/Pages/Account/ForgotPassword.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxGb3Jnb3RQYXNzd29yZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Usuario/Desktop/AgroServices/AgroServices/Areas/Identity/Pages/Account/Login.cshtml]
+[c:/Users/MSL/Desktop/Repositorio/AgroServices/Areas/Identity/Pages/Account/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Usuario/Desktop/AgroServices/AgroServices/Areas/Identity/Pages/Account/Logout.cshtml]
+[c:/Users/MSL/Desktop/Repositorio/AgroServices/Areas/Identity/Pages/Account/Logout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxMb2dvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Usuario/Desktop/AgroServices/AgroServices/Areas/Identity/Pages/Account/Manage/ChangeEmail.cshtml]
+[c:/Users/MSL/Desktop/Repositorio/AgroServices/Areas/Identity/Pages/Account/Manage/ChangeEmail.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcQ2hhbmdlRW1haWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Usuario/Desktop/AgroServices/AgroServices/Areas/Identity/Pages/Account/Manage/ChangePassword.cshtml]
+[c:/Users/MSL/Desktop/Repositorio/AgroServices/Areas/Identity/Pages/Account/Manage/ChangePassword.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcQ2hhbmdlUGFzc3dvcmQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Usuario/Desktop/AgroServices/AgroServices/Areas/Identity/Pages/Account/Manage/Index.cshtml]
+[c:/Users/MSL/Desktop/Repositorio/AgroServices/Areas/Identity/Pages/Account/Manage/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Usuario/Desktop/AgroServices/AgroServices/Areas/Identity/Pages/Account/Manage/_Layout.cshtml]
+[c:/Users/MSL/Desktop/Repositorio/AgroServices/Areas/Identity/Pages/Account/Manage/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcX0xheW91dC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Usuario/Desktop/AgroServices/AgroServices/Areas/Identity/Pages/Account/Manage/_ManageNav.cshtml]
+[c:/Users/MSL/Desktop/Repositorio/AgroServices/Areas/Identity/Pages/Account/Manage/_ManageNav.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcX01hbmFnZU5hdi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Usuario/Desktop/AgroServices/AgroServices/Areas/Identity/Pages/Account/Manage/_ViewImports.cshtml]
+[c:/Users/MSL/Desktop/Repositorio/AgroServices/Areas/Identity/Pages/Account/Manage/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Usuario/Desktop/AgroServices/AgroServices/Areas/Identity/Pages/Account/Register.cshtml]
+[c:/Users/MSL/Desktop/Repositorio/AgroServices/Areas/Identity/Pages/Account/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Usuario/Desktop/AgroServices/AgroServices/Areas/Identity/Pages/Account/Registrar.cshtml]
+[c:/Users/MSL/Desktop/Repositorio/AgroServices/Areas/Identity/Pages/Account/Registrar.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxSZWdpc3RyYXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Usuario/Desktop/AgroServices/AgroServices/Areas/Identity/Pages/Account/ResetPassword.cshtml]
+[c:/Users/MSL/Desktop/Repositorio/AgroServices/Areas/Identity/Pages/Account/ResetPassword.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxSZXNldFBhc3N3b3JkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Usuario/Desktop/AgroServices/AgroServices/Areas/Identity/Pages/Account/_ViewImports.cshtml]
+[c:/Users/MSL/Desktop/Repositorio/AgroServices/Areas/Identity/Pages/Account/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxfVmlld0ltcG9ydHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Usuario/Desktop/AgroServices/AgroServices/Areas/Identity/Pages/_ValidationScriptsPartial.cshtml]
+[c:/Users/MSL/Desktop/Repositorio/AgroServices/Areas/Identity/Pages/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZhbGlkYXRpb25TY3JpcHRzUGFydGlhbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Usuario/Desktop/AgroServices/AgroServices/Areas/Identity/Pages/_ViewImports.cshtml]
+[c:/Users/MSL/Desktop/Repositorio/AgroServices/Areas/Identity/Pages/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Usuario/Desktop/AgroServices/AgroServices/Areas/Identity/Pages/_ViewStart.cshtml]
+[c:/Users/MSL/Desktop/Repositorio/AgroServices/Areas/Identity/Pages/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Usuario/Desktop/AgroServices/AgroServices/Views/Home/Index.cshtml]
+[c:/Users/MSL/Desktop/Repositorio/AgroServices/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Usuario/Desktop/AgroServices/AgroServices/Views/Home/Privacy.cshtml]
+[c:/Users/MSL/Desktop/Repositorio/AgroServices/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Usuario/Desktop/AgroServices/AgroServices/Views/Localidades/Index.cshtml]
+[c:/Users/MSL/Desktop/Repositorio/AgroServices/Views/Localidades/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9jYWxpZGFkZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Usuario/Desktop/AgroServices/AgroServices/Views/Notificaciones/Index.cshtml]
+[c:/Users/MSL/Desktop/Repositorio/AgroServices/Views/Notificaciones/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTm90aWZpY2FjaW9uZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Usuario/Desktop/AgroServices/AgroServices/Views/Provincias/Index.cshtml]
+[c:/Users/MSL/Desktop/Repositorio/AgroServices/Views/Provincias/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvdmluY2lhc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Usuario/Desktop/AgroServices/AgroServices/Views/Publicaciones/formulario.cshtml]
+[c:/Users/MSL/Desktop/Repositorio/AgroServices/Views/Publicaciones/formulario.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHVibGljYWNpb25lc1xmb3JtdWxhcmlvLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Usuario/Desktop/AgroServices/AgroServices/Views/Publicaciones/Index.cshtml]
+[c:/Users/MSL/Desktop/Repositorio/AgroServices/Views/Publicaciones/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHVibGljYWNpb25lc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Usuario/Desktop/AgroServices/AgroServices/Views/Publicaciones/VistaPublicacion.cshtml]
+[c:/Users/MSL/Desktop/Repositorio/AgroServices/Views/Publicaciones/VistaPublicacion.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHVibGljYWNpb25lc1xWaXN0YVB1YmxpY2FjaW9uLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Usuario/Desktop/AgroServices/AgroServices/Views/Servicios/Index.cshtml]
+[c:/Users/MSL/Desktop/Repositorio/AgroServices/Views/Servicios/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VydmljaW9zXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Usuario/Desktop/AgroServices/AgroServices/Views/Shared/Error.cshtml]
+[c:/Users/MSL/Desktop/Repositorio/AgroServices/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Usuario/Desktop/AgroServices/AgroServices/Views/Shared/_LoginPartial.cshtml]
+[c:/Users/MSL/Desktop/Repositorio/AgroServices/Views/Shared/_LoginPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Mb2dpblBhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Usuario/Desktop/AgroServices/AgroServices/Views/Shared/_PerfilOption.cshtml]
+[c:/Users/MSL/Desktop/Repositorio/AgroServices/Views/Shared/_PerfilOption.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9QZXJmaWxPcHRpb24uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Usuario/Desktop/AgroServices/AgroServices/Views/Shared/_ValidationScriptsPartial.cshtml]
+[c:/Users/MSL/Desktop/Repositorio/AgroServices/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Usuario/Desktop/AgroServices/AgroServices/Views/Solicitudes/Index.cshtml]
+[c:/Users/MSL/Desktop/Repositorio/AgroServices/Views/Solicitudes/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU29saWNpdHVkZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Usuario/Desktop/AgroServices/AgroServices/Views/Usuarios/Index.cshtml]
+[c:/Users/MSL/Desktop/Repositorio/AgroServices/Views/Usuarios/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb3NcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Usuario/Desktop/AgroServices/AgroServices/Views/Usuarios/Perfil.cshtml]
+[c:/Users/MSL/Desktop/Repositorio/AgroServices/Views/Usuarios/Perfil.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb3NcUGVyZmlsLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Usuario/Desktop/AgroServices/AgroServices/Views/Valoraciones/Index.cshtml]
+[c:/Users/MSL/Desktop/Repositorio/AgroServices/Views/Valoraciones/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmFsb3JhY2lvbmVzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Usuario/Desktop/AgroServices/AgroServices/Views/_ViewImports.cshtml]
+[c:/Users/MSL/Desktop/Repositorio/AgroServices/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Usuario/Desktop/AgroServices/AgroServices/Views/_ViewStart.cshtml]
+[c:/Users/MSL/Desktop/Repositorio/AgroServices/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Usuario/Desktop/AgroServices/AgroServices/Views/Shared/_Layout.cshtml]
+[c:/Users/MSL/Desktop/Repositorio/AgroServices/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-fzl08vfqq1

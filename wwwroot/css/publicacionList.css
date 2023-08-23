@@ -1,0 +1,77 @@
+/* Estilos para el contenedor de la paginación */
+#paginationContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#pagination{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Estilos para los botones de la paginación y el selector */
+#prevButton,
+#nextButton,
+#firstButton,
+#endButton,
+.pageButton,
+#selectElementosPorPagina {
+  background-color: white;
+  color: #198754;
+  border: none;
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+/* Estilos de hover */
+#prevButton:hover,
+#nextButton:hover,
+#firstButton:hover,
+#endButton:hover,
+.pageButton:hover,
+#selectElementosPorPagina:hover {
+  background-color: #155e3c;
+  color: white;
+}
+
+/* Estilos para el contenedor de información */
+#paginationInfo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+/* Estilos para el texto de información */
+#paginationInfo p {
+  margin: 0;
+  color: #198754;
+  font-weight: bold;
+}
+
+/* Estilos para el label y el select */
+#paginationInfo label,
+#selectElementosPorPagina {
+  color: #198754;
+}
+
+#pagination .current {
+  background-color: #198754;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 5px;
+  margin: 0 5px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+#pagination .current:hover {
+  background-color: #155d3c;
+}

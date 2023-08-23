@@ -27,47 +27,49 @@ public class PublicacionesController : Controller
         _userManager = userManager;
     }
 
-
     public async Task<IActionResult> Formulario(int? id = 0)
     {
-
         var usuarioIDActual = _userManager.GetUserId(HttpContext.User);
-        if (usuarioIDActual != null)
+
+        if (usuarioIDActual == null)
         {
-            var usuarios = _contexto.Usuarios.Where(u => u.ASP_UserID == usuarioIDActual).FirstOrDefault();
-            if (usuarios != null)
-            {
-                if (id != 0)
-                {
-                    // se confirma si la publicacion le pertenece al usuario
-                    var publicacion = _contexto.Publicaciones.Where(p => p.PublicacionID == id && p.UsuarioID == usuarios.UsuarioID).SingleOrDefault();
-                    if (publicacion == null)
-                    {
-                        // return View("Index");
-                        return RedirectToAction("Index", "Home");
-                    }
-                    ViewBag.publicacionID = id;
-                }
-                ViewBag.usuarioID = usuarios.UsuarioID;
-            }
-            else
+            return RedirectToAction("Index", "Home");
+        }
+
+        var usuario = _contexto.Usuarios.FirstOrDefault(u => u.ASP_UserID == usuarioIDActual);
+
+        if (usuario == null)
+        {
+            return RedirectToAction("Index", "Home");
+        }
+
+        var servicios = _contexto.Servicios
+            .Where(x => x.Eliminado == false)
+            .OrderBy(p => p.descripcion)
+            .ToList();
+
+        servicios.Insert(0, new Servicio
+        {
+            ServicioID = 0,
+            descripcion = "[SELECCIONE UN SERVICIO]"
+        });
+
+        ViewBag.usuarioID = usuario.UsuarioID;
+        ViewBag.ServicioID = new SelectList(servicios, "ServicioID", "descripcion", 0);
+
+        if (id != 0)
+        {
+            var publicacion = _contexto.Publicaciones
+                .FirstOrDefault(p => p.PublicacionID == id && p.UsuarioID == usuario.UsuarioID);
+
+            if (publicacion == null)
             {
                 return RedirectToAction("Index", "Home");
             }
 
+            ViewBag.publicacionID = id;
         }
-        else
-        {
-            return RedirectToAction("Index", "Home");
-        }
-        var servicios = _contexto.Servicios.Where(x => x.Eliminado == false).ToList();
-        var seleccionServicio = new Servicio()
-        {
-            ServicioID = 0,
-            descripcion = "[SELECCIONE UN SERVICIO]",
-        };
-        servicios.Add(seleccionServicio);
-        ViewBag.ServicioID = new SelectList(servicios.OrderBy(p => p.descripcion), "ServicioID", "descripcion", 0);
+
         return View("Formulario");
     }
 
@@ -81,8 +83,8 @@ public class PublicacionesController : Controller
         var usuarioIDActual = _userManager.GetUserId(HttpContext.User);
         if (usuarioIDActual != null)
         {
-            var usuarioID = _contexto.Usuarios.Where(u => u.ASP_UserID == usuarioIDActual).FirstOrDefault();
-            ViewBag.usuarioID = usuarioID.UsuarioID;
+            var usuarioAspID = _contexto.Usuarios.Where(u => u.ASP_UserID == usuarioIDActual).FirstOrDefault();
+            ViewBag.usuarioID = usuarioAspID.UsuarioID;
         }
         else
         {
@@ -122,16 +124,28 @@ public class PublicacionesController : Controller
 
 
 
-    public JsonResult BuscarPublicaciones(int publicacionID = 0)
+    public JsonResult BuscarPublicaciones(int publicacionID = 0, int pagina = 1, int elementosPorPagina = 10)
     {
-        var publicaciones = _contexto.Publicaciones.OrderBy(p => p.Fecha).ToList();
-
+        var publicaciones = _contexto.Publicaciones.ToList();
+        publicaciones = publicaciones.OrderByDescending(p => p.Fecha).ToList();
         if (publicacionID > 0)
         {
-            publicaciones = publicaciones.Where(p => p.PublicacionID == publicacionID).OrderBy(p => p.Titulo).ToList();
+            publicaciones = publicaciones.Where(p => p.PublicacionID == publicacionID).ToList();
+            return Json(publicaciones);
         }
+        // Calcular los índices para la paginación
+        int totalPublicaciones = publicaciones.Count;
+        int totalPaginas = (int)Math.Ceiling((double)totalPublicaciones / elementosPorPagina);
+        int indiceInicial = (pagina - 1) * elementosPorPagina;
 
-        return Json(publicaciones);
+        // Obtener las publicaciones de la página actual
+        var publicacionesPagina = publicaciones.Skip(indiceInicial).Take(elementosPorPagina).ToList();
+
+        return Json(new
+        {
+            lista = publicacionesPagina,
+            TotalPaginas = totalPaginas
+        });
     }
 
     // anexar publi, img, tags
