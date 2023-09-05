@@ -149,13 +149,13 @@ public class PublicacionesController : Controller
     }
 
     // anexar publi, img, tags
-    public JsonResult GuardarPublicacion(int publicacionID, string titulo, string descripcion, bool esOferta, int usuarioID)
+    public JsonResult GuardarPublicacion(int publicacionID, string titulo, string descripcion, bool esOferta, int usuarioID, string resumen)
     {
         // >0: crear   0: editar   -1: faltan rellenar campos  -2: error
         int resultado = -2;
 
         //verificamos si Nombre esta completo
-        if (!string.IsNullOrEmpty(titulo) || !string.IsNullOrEmpty(descripcion) || !esOferta)
+        if (!string.IsNullOrEmpty(titulo) || !string.IsNullOrEmpty(descripcion) || !esOferta || !string.IsNullOrEmpty(resumen))
         {
             //SI ES 0 QUIERE DECIR QUE ESTA CREANDO EL ELEMENTO
             if (publicacionID == 0)
@@ -168,7 +168,8 @@ public class PublicacionesController : Controller
                     Descripcion = descripcion,
                     EsOferta = esOferta,
                     UsuarioID = usuarioID,
-                    Fecha = hoy
+                    Fecha = hoy,
+                    Resumen = resumen
                 };
                 _contexto.Add(PublicacionGuardar);
                 _contexto.SaveChanges();
@@ -185,6 +186,7 @@ public class PublicacionesController : Controller
                     publicacionEditar.PublicacionID = publicacionID;
                     publicacionEditar.EsOferta = esOferta;
                     publicacionEditar.Descripcion = descripcion;
+                    publicacionEditar.Resumen = resumen;
                     _contexto.SaveChanges();
                     resultado = 0;
                 }
@@ -276,8 +278,6 @@ public class PublicacionesController : Controller
                 imagenGuardar.Img = imagenBinaria;
                 imagenGuardar.TipoImagen = imagen.ContentType;
                 imagenGuardar.NombreImagen = imagen.FileName;
-
-
 
                 _contexto.Add(imagenGuardar);
                 _contexto.SaveChanges();

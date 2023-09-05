@@ -13,57 +13,69 @@
 
   <!-- Card 1 - Información del Usuario -->
 <div class="card-perfil row mx-auto">
-  <div class="col-12 col-md-6">
-    <div class="card-header">Información de la Cuenta <i class="bx bx-show" title="Información Publica"></i></div>
-    <div class="user-info">
-      <div class="div-select">
-        <a href="../../Identity/Account/manage" class="btn-info-perfil"><strong>Nombre de usuario: </strong>@ViewBag.UserName</a>
+  @{
+    var col6 = "";
+    if (ViewBag.Email != null)
+    {
+      col6 = "col-md-6";
+    }
+  }
+    
+<div class="col-12 @col6 ">
+
+        <div class="card-header">Información de la Cuenta <i class="bx bx-show" title="Información Publica"></i></div>
+        <div class="user-info">
+          <div class="div-select">
+            <a href="../../Identity/Account/manage" class="btn-info-perfil"><strong>Nombre de usuario: </strong>@ViewBag.UserName</a>
+          </div>
+          <div class="div-select">
+            <p>@ViewBag.Age siendo parte de AgroServices</p>
+          </div>
+          <div class="div-select">
+            <p><strong>Localidad: </strong>@ViewBag.Ubication</p>
+          </div>
+        </div>
+        <div class="user-info">
+          <p><strong>Valoracion Promedio:</strong></p>
+        </div>
       </div>
-      <div class="div-select">
-        <p>@ViewBag.Age siendo parte de AgroServices</p>
-      </div>
-      <div class="div-select">
-        <p><strong>Localidad: </strong>@ViewBag.Ubication</p>
-      </div>
+  @{
+    if (ViewBag.Email != null)
+    {
+                      <div class="col-12 col-md-6">
+                        <div class="card-header">Información del Usuario <i class="bx bx-hide" title="informacion Privada"></i></div>
+                        <div class="user-info">
+                          <div class="div-select">
+                            <a class="btn-info-perfil"  href="../../Identity/Account/manage"><strong>Nombre Completo: </strong>@ViewBag.PersonalName</a>
+                          </div>
+                          <div class="div-select">
+                            <a class="btn-info-perfil"  href="../../Identity/Account/manage"><strong>Telefono: </strong>@ViewBag.PhoneNumber</a>
+                          </div>
+                          <div class="div-select">
+                            <a class="btn-info-perfil"  href="../../Identity/Account/manage/ChangeEmail"><strong>Email: </strong>@ViewBag.Email</a>
+                          </div>
+                        </div>
+                      </div>
+    }
+  }
     </div>
-    <div class="user-info">
-      <p><strong>Valoracion Promedio:</strong></p>
-    </div>
-  </div>
 
-  <div class="col-12 col-md-6">
-    <div class="card-header">Información del Usuario <i class="bx bx-hide" title="informacion Privada"></i></div>
-    <div class="user-info">
-      <div class="div-select">
-        <a class="btn-info-perfil"  href="../../Identity/Account/manage"><strong>Nombre Completo: </strong>@ViewBag.PersonalName</a>
+      <!-- Card 2 - Lista de publicaciones asociadas a la cuenta -->
+      <div class="card-perfil mx-auto">
+        <div class="card-header">Publicaciones Relacionadas</div>
+        <table id="example" class="table table-striped bg-white mb-4 table-bordered w-100">
+          <thead class="thead-light">
+            <tr>
+              <th class="w-80">Publicación</th>
+              <th class="w-20">Valoracion</th>
+            </tr>
+          </thead>
+          <tbody id="tbody-servicios">
+          </tbody>
+        </table>
       </div>
-      <div class="div-select">
-        <a class="btn-info-perfil"  href="../../Identity/Account/manage"><strong>Telefono: </strong>@ViewBag.PhoneNumber</a>
-      </div>
-      <div class="div-select">
-        <a class="btn-info-perfil"  href="../../Identity/Account/manage/ChangeEmail"><strong>Email: </strong>@ViewBag.Email</a>
-      </div>
-    </div>
-  </div>
 
-</div>
-
-  <!-- Card 2 - Lista de publicaciones asociadas a la cuenta -->
-  <div class="card-perfil mx-auto">
-    <div class="card-header">Publicaciones Relacionadas</div>
-    <table id="example" class="table table-striped bg-white mb-4 table-bordered w-100">
-      <thead class="thead-light">
-        <tr>
-          <th class="w-80">Publicación</th>
-          <th class="w-20">Valoracion</th>
-        </tr>
-      </thead>
-      <tbody id="tbody-servicios">
-      </tbody>
-    </table>
-  </div>
-
-  @* <!-- Card 3 - Otra información del Usuario -->
+@* <!-- Card 3 - Otra información del Usuario -->
   <div class="card-perfil">
     <div class="card-header">Contactar</div>
     <div class="user-details">
@@ -75,8 +87,8 @@
       <!-- Puedes añadir más detalles aquí -->
     </div>
   </div> *@
-</div>
+    </div>
 
 @section Scripts{
-          <script src="~/js/tablas/perfil-1.0.0.js"></script>
-} 
+                    <script src="~/js/tablas/perfil-1.0.0.js"></script>
+  } 

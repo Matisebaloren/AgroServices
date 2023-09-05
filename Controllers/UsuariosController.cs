@@ -30,47 +30,62 @@ public class UsuariosController : Controller
     }
 
 
-    public async Task<IActionResult> Perfil(string? username = null)
+    public async Task<IActionResult> Perfil(int? id = 0)
     {
-        if (username == null)
+        var usuarioAsp = await _userManager.GetUserAsync(User);
+        var usuario = new AgroServices.Models.Usuario();
+        if (id == 0)
         {
-            var usuarioAsp = await _userManager.GetUserAsync(User);
-            if (usuarioAsp != null)
+            if (usuarioAsp == null)
             {
-                var usuario = _contexto.Usuarios
-                .Include(s => s.Localidades)
-                .Include(s => s.Localidades.provincias)
-                .Where(u => u.ASP_UserID == usuarioAsp.Id)
-                .FirstOrDefault();
+                return View("Perfil");
+            }
+            usuario = _contexto.Usuarios.Include(s => s.Localidades).Include(s => s.Localidades.provincias).Where(u => u.ASP_UserID == usuarioAsp.Id).FirstOrDefault();
+        }
+        else
+        {
+            usuario = _contexto.Usuarios.Include(s => s.Localidades).Include(s => s.Localidades.provincias).Where(u => u.UsuarioID == id).FirstOrDefault();
+        }
+        if (usuario != null)
+        {
+            var usuarioAspOther = await _userManager.FindByIdAsync(usuario.ASP_UserID);
 
-                var ageDiff = DateTime.Now - usuario.Fecha;
-                var age = "";
-                if (ageDiff.TotalDays > 365)
+
+
+            var ageDiff = DateTime.Now - usuario.Fecha;
+            var age = "";
+            if (ageDiff.TotalDays > 365)
+            {
+                var years = ageDiff.Days / 365;
+                if (years < 2)
                 {
-                    var years = ageDiff.Days / 365;
-                    if (years < 2)
-                    {
-                        age = years + " Año";
-                    }
-                    else
-                    {
-                        age = years + " Años";
-                    }
+                    age = years + " Año";
                 }
                 else
                 {
-                    age = ageDiff.Days + " dias y " + ageDiff.Hours + " horas";
+                    age = years + " Años";
                 }
-
-                // pasa la información del usuario a la vista si es necesario
-                ViewBag.PersonalName = usuario.Apellido + " " + usuario.Nombre;
-                ViewBag.Ubication = usuario.Localidades.Nombre + ", " + usuario.Localidades.provincias.Nombre;
-                ViewBag.UserName = usuarioAsp.UserName;
-                ViewBag.Email = usuarioAsp.Email;
-                ViewBag.PhoneNumber = usuarioAsp.PhoneNumber;
-                ViewBag.Age = age;
             }
+            else
+            {
+                age = ageDiff.Days + " dias y " + ageDiff.Hours + " horas";
+            }
+
+            // pasa la información del usuario a la vista si es necesario
+            
+            ViewBag.Ubication = usuario.Localidades.Nombre + ", " + usuario.Localidades.provincias.Nombre;
+            ViewBag.UserName = usuarioAspOther.UserName;
+
+            ViewBag.Age = age;
+            if (usuarioAspOther == usuarioAsp)
+            {
+                ViewBag.Email = usuarioAspOther.Email;
+                ViewBag.PhoneNumber = usuarioAspOther.PhoneNumber;
+                ViewBag.PersonalName = usuario.Apellido + " " + usuario.Nombre;
+            }
+
         }
+
 
 
         return View("Perfil");

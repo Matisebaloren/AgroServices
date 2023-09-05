@@ -43,6 +43,7 @@ html {
 body {
   background-color: #adb5bd;
   transition: all 0.5s ease;
+  /* background-image: url(../img/logo.jpg); */
 }
 body.dark {
   background-color: #333;
@@ -203,9 +204,9 @@ body.dark {
   color: rgb(255, 255, 255);
   background: #32a64f;
 }
-.sidebar.close .nav_link:hover {
+/* .sidebar.close .nav_link:hover {
   background: var(--white-color);
-}
+} */
 .submenu_item {
   cursor: pointer;
 }
@@ -479,7 +480,7 @@ body.dark {
   text-decoration: none;
   color: black;
   cursor: pointer;
-  align-items: center;
+  /* align-items: center; */
 }
 
 /* CODIGO DE TABLAS PARA LAS DIFERENTES VISTAS */
@@ -786,6 +787,11 @@ tbody td.active {
   align-items: center; /* Centra verticalmente las imágenes */
   justify-content: center; /* Centra horizontalmente las imágenes */
   height: 30vw;
+  border-radius: 10px;
+}
+
+.carousel-item{
+  height: 100%;
 }
 
 @media (max-width: 768px) {

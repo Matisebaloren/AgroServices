@@ -1,0 +1,109 @@
+
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+@model List<Solicitud>
+  <div id="solicitudesData" data-solicitudes="@Html.Raw(Json.Serialize(Model))"></div>
+<link rel="stylesheet" href="~/css/tables.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/modals-solicitudes.css"/>
+
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalConcretar">
+  Launch demo modal
+</button>
+
+<!-- Modal cancelar / rechazar -->
+<div class="modal fade" id="modalCancelar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Cancelar Solicitud</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Se cancelará la solicitud relaciana a la publicación "".
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Volver</button>
+        <button id="btn-cancelar" type="button" class="btn btn-danger">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal concretar/aceptar  -->
+<div class="modal fade" id="modalConcretar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Concretar Servicio</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Se cancelará la solicitud relaciana a la publicación "".
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Volver</button>
+        <button id="btn-concretar" type="button" class="btn btn-success">Concretar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal info  -->
+<div class="modal fade" id="modalConcretar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Concretar Servicio</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Se cancelará la solicitud relaciana a la publicación "".
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Volver</button>
+        <button id="btn-concretar" type="button" class="btn btn-success">Concretar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="FondoGlass-1 my-5">
+  <h1 class="display-4">Solicitudes</h1>
+  <select id="FiltroTipo">
+    <option value="0">Todas</option>
+    <option value="1">Entrada</option>
+    <option value="2">Salidas</option>
+  </select>
+  <select id="FiltroEstado">
+    <option value="">Todas</option>
+    <option value="0">En espera</option>
+    <option value="1">Canceladas</option>
+    <option value="2">Rechazadas</option>
+    <option value="3">Aceptadas</option>
+    <option value="4">Concretadas</option>
+  </select>
+  @* Tabla con los datos de cada elemento *@
+  <table class="table table-hover">
+    <thead class="table-dark">
+        <tr>
+          <th class="th-icon"></th>
+          <th>Fecha</th>
+          <th>Descripcion</th>
+          <th>estado</th>
+          <th></th>
+        </tr>
+    </thead>
+    <tbody id="tablaSolicitudes">
+       
+    </tbody>
+</table>
+</div>
+
+@section Scripts{
+    <script src="~/js/tablas/solicitud-1.0.0.js"></script>
+}

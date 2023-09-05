@@ -12,6 +12,8 @@ namespace AgroServices.Models
 
         public string? Titulo { get; set; }
 
+        public string? Resumen { get; set; }
+
         public string? Descripcion { get; set; }
         
         [DataType(DataType.Date)]

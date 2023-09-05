@@ -99,6 +99,7 @@ const BuscarInformacionPublicacion = (publicacionID) => {
           seleccionarTipo(publicacion.esOferta ? "1" : "2");
           $("#UsuarioID").val(publicacion.usuarioID);
           $("#Titulo").val(publicacion.titulo);
+          $("#Resumen").val(publicacion.resumen);
           // $("#descripcion").InnerHtML(publicacion.descripcion);
           tinymce.activeEditor.setContent(publicacion.descripcion);
         } else {
@@ -119,13 +120,14 @@ function GuardarPublicacion() {
   console.log("descripcion:" + contenido);
   let esOferta = null;
   let titulo = $("#Titulo").val();
+  let resumen = $("#Resumen").val();
   if ($("#EsOferta").val() == 1) {
     esOferta = true;
   } else {
     esOferta = false;
   }
 
-  if (titulo || descripcion || esOferta > 0) {
+  if (titulo && descripcion && esOferta > 0 && resumen) {
     $.ajax({
       // la URL para la petición
       url: "../../Publicaciones/GuardarPublicacion",
@@ -137,6 +139,7 @@ function GuardarPublicacion() {
         esOferta: esOferta,
         titulo: titulo,
         usuarioID: usuarioID,
+        resumen: resumen
       },
       // especifica si será una petición POST o GET
       type: "POST",
@@ -245,6 +248,7 @@ function seleccionarTipo(value) {
   const isHidden = value === "0" ? true : false;
 
   $("#Titulo").prop("disabled", isDisabled);
+  $("#Resumen").prop("disabled", isDisabled);
   $("#ServicioID").prop("disabled", isDisabled);
   $("#Etiqueta-List").toggle(!isHidden);
   $("#descripcion").prop("disabled", isDisabled);
@@ -338,33 +342,33 @@ function QuitarTag(id) {
   actualizarTag();
 }
 
-$("#div-imagenes").hide();
+// $("#div-imagenes").hide();
 
-function CambiarSeccion() {
-  $("#div-main").addClass("animate__slideOutUp");
-  setTimeout(() => {
-    $("#div-datos").hide();
-    $("#div-imagenes").show();
-    $("#div-main").removeClass("animate__slideOutUp");
-    $("#div-main").addClass("animate__slideInUp");
-    setTimeout(() => {
-      $("#div-main").removeClass("animate__slideInUp");
-    }, 1000);
-  }, 1000);
-}
+// function CambiarSeccion() {
+//   $("#div-main").addClass("animate__slideOutUp");
+//   setTimeout(() => {
+//     $("#div-datos").hide();
+//     $("#div-imagenes").show();
+//     $("#div-main").removeClass("animate__slideOutUp");
+//     $("#div-main").addClass("animate__slideInUp");
+//     setTimeout(() => {
+//       $("#div-main").removeClass("animate__slideInUp");
+//     }, 1000);
+//   }, 1000);
+// }
 
-function CambiarSeccion2() {
-  $("#div-main").addClass("animate__slideOutDown");
-  setTimeout(() => {
-    $("#div-datos").show();
-    $("#div-imagenes").hide();
-    $("#div-main").removeClass("animate__slideOutDown");
-    $("#div-main").addClass("animate__slideInDown");
-    setTimeout(() => {
-      $("#div-main").removeClass("animate__slideInDown");
-    }, 1500);
-  }, 700);
-}
+// function CambiarSeccion2() {
+//   $("#div-main").addClass("animate__slideOutDown");
+//   setTimeout(() => {
+//     $("#div-datos").show();
+//     $("#div-imagenes").hide();
+//     $("#div-main").removeClass("animate__slideOutDown");
+//     $("#div-main").addClass("animate__slideInDown");
+//     setTimeout(() => {
+//       $("#div-main").removeClass("animate__slideInDown");
+//     }, 1500);
+//   }, 700);
+// }
 
 function NuevaImagen() {
   $("#ModalImagen").modal("show");

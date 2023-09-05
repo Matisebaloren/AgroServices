@@ -125,7 +125,7 @@ function nuevaSolicitud() {
 function EnviarSolicitud() {
   var descripcion = $("#descripcionSolicitud").val();
   $.ajax({
-    url: "../../Solicitudes/GuardarSolicitud",
+    url: "../../Notificaciones/GuardarSolicitud",
     data: {
       publicacionID: publicacionID,
       descripcion: descripcion,

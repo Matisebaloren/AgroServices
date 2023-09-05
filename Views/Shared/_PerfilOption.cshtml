@@ -4,7 +4,7 @@
 @inject UserManager<IdentityUser> UserManager
 
 <li class="item"> 
-    <a onclick="perfilView('@UserManager.GetUserName(User)')" class="nav_link">
+    <a onclick="perfilView(0)" class="nav_link">
         <span class="navlink_icon">
             <i class="bx bxs-user"></i>
         </span>
@@ -20,7 +20,7 @@
     </a>
 </li>
 <li class="item">
-    <a asp-area="" asp-controller="Solicitudes" asp-action="Index" class="nav_link">
+    <a asp-area="" asp-controller="Notificaciones" asp-action="Solicitudes" class="nav_link">
         <span class="navlink_icon">
         <i class="bx bx-envelope"></i>
         </span>
