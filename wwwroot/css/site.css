@@ -100,7 +100,7 @@ body.dark {
 .navbar_content {
   display: flex;
   align-items: center;
-  column-gap: 25px;
+  /* column-gap: 25px; */
 }
 .navbar_content i {
   cursor: pointer;
@@ -469,22 +469,17 @@ body.dark {
 
 /* CSS para el buscador */
 
-.itemImg {
+/* .itemImg {
   height: 35vw;
   border-radius: 10px;
   background-color: black !important;
-}
+} */
 
 .itemA {
   text-decoration: none;
   color: black;
   cursor: pointer;
-}
-
-@media (min-width: 768px) {
-  .itemImg {
-    height: 20vw;
-  }
+  align-items: center;
 }
 
 /* CODIGO DE TABLAS PARA LAS DIFERENTES VISTAS */
@@ -575,13 +570,15 @@ table {
   width: 100%;
 }
 
-td img {
+/* td img {
   width: 36px;
   height: 36px;
   margin-right: 0.5rem;
-  /* border-radius: 50%; */
+  
   vertical-align: middle;
-}
+} 
+
+*/
 
 table,
 th,
@@ -781,11 +778,96 @@ tbody td.active {
 
 /* FIN CODIGO DE TABLAS PARA LAS DIFERENTES VISTAS */
 
+/* imagen de carrousel de vista publicacion */
+
+/* Agrega estilos personalizados */
+.carousel-inner {
+  display: flex;
+  align-items: center; /* Centra verticalmente las imágenes */
+  justify-content: center; /* Centra horizontalmente las imágenes */
+  height: 30vw;
+}
+
+@media (max-width: 768px) {
+  .carousel-inner {
+    height: 40vw;
+  }
+}
+
+.carousel-inner img {
+  object-fit: contain; /* Ajusta para mantener la relación de aspecto */
+  max-height: 100%; /* Evita recorte vertical */
+  max-width: 100%; /* Evita recorte horizontal */
+}
+
+.carousel-item,
+.itemImg {
+  text-align: center; /* Centra el contenido del item */
+  margin-right: 0;
+  background-color: #000000;
+}
+
+.itemImg {
+  display: flex;
+}
+
+.itemImg img {
+  object-fit: contain; /* Ajusta para mantener la relación de aspecto */
+  /* text-align: center; */
+  max-height: 100%; /* Evita recorte vertical */
+  max-width: 100%; /* Evita recorte horizontal */
+  margin-inline: auto;
+  height: 20rem;
+}
+
+#Lista_imagenes {
+  background-color: black;
+}
+
+@media (min-width: 768px) {
+  .itemImg {
+    height: 20vw;
+  }
+}
+
+/* fin de imagen de carrousel */
+
+a:hover {
+  color: rgb(25, 135, 84);
+}
+
+.logo_item {
+  background-color: white;
+  padding-left: 1%;
+  border-radius: 30px;
+}
+
+/* .carrousel-ajuste {
+  height: 100%;
+} */
+
+.fondo-coment {
+  padding-top: 10px;
+  background-color: rgb(255, 255, 255);
+  color: black !important;
+  border-radius: 5px;
+  border: 1px solid black;
+}
+
+.div-boton-centrado {
+  display: flex;
+  justify-content: center;
+}
+
+.div-boton-der {
+  display: flex;
+  justify-content: end;
+}
+
 h3 {
   font-family: sans-serif;
   color: #32a64f;
 }
-
 
 .modalSolicitud {
   max-width: 800px;

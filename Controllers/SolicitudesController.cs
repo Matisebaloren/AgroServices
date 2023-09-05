@@ -6,16 +6,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
-
-
-// private readonly NombreProyectoContext _context;
-
-
 namespace AgroServices.Controllers;
 
 public class SolicitudesController : Controller
 {
-    // private readonly UserManager<IdentityUser> _userManager;
+    private readonly UserManager<IdentityUser> _userManager;
     private readonly ILogger<SolicitudesController> _logger;
     private AgroServicesDbContext _contexto;
 
@@ -25,25 +20,66 @@ public class SolicitudesController : Controller
     {
         _logger = logger;
         _contexto = contexto;
-        // _userManager = userManager;
+        _userManager = userManager;
     }
 
-    public JsonResult GuardarSolicitud(int usuarioID, int publicacionID, string contenido)
+    public IActionResult Index()
     {
+        var usuarioIDActual = _userManager.GetUserId(HttpContext.User);
+        if (usuarioIDActual == null)
+        {
+            return RedirectToAction("Index", "Home");
+        }
+        return View();
+    }
+    public JsonResult BuscarSolicitud(int tipo = 0, int visto = 0)
+    {
+        var usuarioIDActual = _userManager.GetUserId(HttpContext.User);
+        if (usuarioIDActual == null)
+        {
+            return Json(new { error = "Usuario no autenticado" });
+        }
+
+        var usuario = _contexto.Usuarios.FirstOrDefault(u => u.ASP_UserID == usuarioIDActual);
+        if (usuario == null)
+        {
+            return Json(new { error = "Usuario no encontrado" });
+        }
+
+        var solicitudes = _contexto.Solicitudes
+            .Where(s => s.UsuarioID == usuario.UsuarioID || s.Publicaciones.UsuarioID == usuario.UsuarioID)
+            .Distinct()
+            .ToList();
+        return Json(new { solicitudes = solicitudes, usuario = usuario});
+    }
+
+
+    public JsonResult GuardarSolicitud(int publicacionID, string descripcion)
+    {
+        var usuarioIDActual = _userManager.GetUserId(HttpContext.User);
+        if (usuarioIDActual == null)
+        {
+            return Json(false);
+        }
+        var usuario = _contexto.Usuarios.FirstOrDefault(u => u.ASP_UserID == usuarioIDActual);
+        if (usuario == null)
+        {
+            return Json(new { error = "Usuario no encontrado" });
+        }
+
         string resultado = "Error";
         //DECLARAMOS EL OBJETO DANDO EL VALOR
         var SolicitudGuardar = new Solicitud
         {
-            UsuarioID = usuarioID,
+            Descripcion = descripcion,
+            UsuarioID = usuario.UsuarioID,
             PublicacionID = publicacionID,
             Fecha = DateTime.Now,
-            estado = 0
+            Estado = 0
         };
         _contexto.Add(SolicitudGuardar);
         _contexto.SaveChanges();
         resultado = "Crear";
-
         return Json(resultado);
     }
-
 }

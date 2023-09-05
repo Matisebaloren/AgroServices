@@ -4,6 +4,7 @@ using AgroServices.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AgroServices.Migrations.AgroServicesDb
 {
     [DbContext(typeof(AgroServicesDbContext))]
-    partial class AgroServicesDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230821201431_Notificaciones2.0")]
+    partial class Notificaciones20
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -208,9 +210,6 @@ namespace AgroServices.Migrations.AgroServicesDb
                     b.Property<string>("Descripcion")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Estado")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("Fecha")
                         .HasColumnType("datetime2");
 
@@ -218,6 +217,9 @@ namespace AgroServices.Migrations.AgroServicesDb
                         .HasColumnType("int");
 
                     b.Property<int>("UsuarioID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("estado")
                         .HasColumnType("int");
 
                     b.HasKey("SolicitudID");

@@ -22,3 +22,20 @@ namespace AgroServices.Models
         public int UsuarioID { get; set; }
     }
 }
+
+public class VistaValoracion{
+    public int ValoracionID { get; set; }
+
+    public string? Contenido { get; set; }
+
+    public int Puntuacion { get; set; }
+
+    [DataType(DataType.Date)]
+    public DateTime Fecha { get; set; }
+
+    public int PublicacionID { get; set; }
+
+    public int UsuarioID { get; set; }
+
+    public string Username { get; set; }
+}

@@ -57,7 +57,7 @@ namespace AgroServices.Areas.Identity.Pages.Account
             /// </summary>
             [Required]
             [Display(Name = "Email")]
-            [EmailAddress]
+            // [EmailAddress]
             public string Email { get; set; }
 
             /// <summary>
@@ -101,6 +101,11 @@ namespace AgroServices.Areas.Identity.Pages.Account
             {
 
                 var user = await _userManager.FindByEmailAsync(Input.Email); // Buscar usuario por email
+                if( user == null)
+                {
+                    user = await _userManager.FindByNameAsync(Input.Email);
+                }
+
                 if (user != null)
                 {
                     var result = await _signInManager.PasswordSignInAsync(user, Input.Password, Input.RememberMe, lockoutOnFailure: false);
@@ -126,7 +131,7 @@ namespace AgroServices.Areas.Identity.Pages.Account
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Usuario no encontrado.");
+                    ModelState.AddModelError(string.Empty, "Usuario o contraseña invalida.");
                     return Page();
                 }
             }

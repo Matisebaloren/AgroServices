@@ -90,7 +90,7 @@ public class PublicacionesController : Controller
         {
             ViewBag.usuarioID = 0;
         }
-        ViewBag.publicacionID = id;
+        ViewBag.publicacion = publicacion;
         return View();
     }
 
@@ -304,5 +304,26 @@ public class PublicacionesController : Controller
     public IActionResult Index()
     {
         return View();
+    }
+
+    public async Task<JsonResult> BuscarValoracionesAsync(int publicacionID = 0)
+    {
+        List<VistaValoracion> ValoracionesMostrar = new List<VistaValoracion>();
+        var valoraciones = _contexto.Valoraciones.Where(p => p.PublicacionID == publicacionID).OrderByDescending(v => v.Fecha).ToList();
+        foreach (var valoracion in valoraciones)
+        {
+            var usuario = _contexto.Usuarios.Where(u => u.UsuarioID == valoracion.UsuarioID).FirstOrDefault();
+            var userAsp = await _userManager.FindByIdAsync(usuario.ASP_UserID);
+            var ValoracionMostrar = new VistaValoracion
+            {
+                Username = userAsp.UserName,
+                Contenido = valoracion.Contenido,
+                Fecha = valoracion.Fecha,
+                Puntuacion = valoracion.Puntuacion
+            };
+            ValoracionesMostrar.Add(ValoracionMostrar);
+        }
+
+        return Json(ValoracionesMostrar);
     }
 }

@@ -6,9 +6,9 @@
     --text-headline: #000;
     --card-shadow: #0082ff;
     --card-height: 190px;
-    --card-width: 190px;
+    /* --card-width: 190px; */
     --card-radius: 12px;
-    --header-height: 47px;
+    /* --header-height: 47px; */
     --blend-mode: overlay;
     --transition: 0.15s;
     -webkit-user-select: none;

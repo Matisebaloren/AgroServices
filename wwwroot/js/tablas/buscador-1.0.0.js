@@ -148,7 +148,7 @@ async function BuscarPublicaciones(pagina = 1, elementosPorPagina = 10) {
       let img = "";
       let col = "";
       if (imagenes.length > 0) {
-        img = `<div class="col-12 col-md-6 itemImg mb-3"><img src="data:${imagenes[0].tipoImagen};base64, ${imagenes[0].imagenBase64}" style="width: 100%; height: 100%;"/></div>`;
+        img = `<div class="col-12 col-md-6 itemImg"><img src="data:${imagenes[0].tipoImagen};base64, ${imagenes[0].imagenBase64}"/></div>`;
         col = "col-md-6";
       }
 

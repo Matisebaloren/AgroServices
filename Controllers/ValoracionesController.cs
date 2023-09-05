@@ -21,29 +21,10 @@ public class ValoracionesController : Controller
         return View();
     }
 
-    // public JsonResult GuardarValoracion(int usuarioID, string contenido)
-    // {
-    //     string resultado = "Error";
-    //     //DECLARAMOS EL OBJETO DANDO EL VALOR
-    //     var ValoracionGuardar = new Valoracion
-    //     {
-    //         id_usuario = usuarioID,
-    //         contenido = contenido
-    //     };
-    //     _contexto.Add(ValoracionGuardar);
-    //     _contexto.SaveChanges();
-    //     resultado = "Crear";
-
-
-
-
-    //     else
-    //     {
-    //         resultado = "faltas";
-    //     }
-
-    //     return Json(resultado);
-    // }
-
+    public JsonResult BuscarValoraciones(int publicacionID = 0)
+    {
+        var valoraciones = _contexto.Valoraciones.Where(p => p.PublicacionID == publicacionID).OrderBy(v => v.Fecha).ToList();
+        return Json(valoraciones);
+    }
 }
 
