@@ -41,7 +41,7 @@ html {
 }
 /* CAMBIA EL COLOR DE FONDO */
 body {
-  background-color: #adb5bd;
+  background-color: #e8eaecfa;
   transition: all 0.5s ease;
   /* background-image: url(../img/logo.jpg); */
 }
@@ -913,3 +913,14 @@ a.card-body:hover {
   }
 }
 
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #e4e2e2c7;
+  background-clip: border-box;
+  border: 1px solid rgba(0,0,0,.125);
+  border-radius: .25rem;
+}

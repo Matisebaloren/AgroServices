@@ -1,13 +1,20 @@
+const inputs = document.querySelectorAll(".input");
 
 
-const signUpButton = document.getElementById('signUp');
-const signInButton = document.getElementById('signIn');
-const container = document.getElementById('container');
+function addcl(){
+	let parent = this.parentNode.parentNode;
+	parent.classList.add("focus");
+}
 
-signUpButton.addEventListener('click', () => {
-	container.classList.add("right-panel-active");
-});
+function remcl(){
+	let parent = this.parentNode.parentNode;
+	if(this.value == ""){
+		parent.classList.remove("focus");
+	}
+}
 
-signInButton.addEventListener('click', () => {
-	container.classList.remove("right-panel-active");
+
+inputs.forEach(input => {
+	input.addEventListener("focus", addcl);
+	input.addEventListener("blur", remcl);
 });

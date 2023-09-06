@@ -19,7 +19,7 @@ async function BuscarPublicaciones(pagina = 1, elementosPorPagina = 10) {
     const ListaServicios = new Map(
       servicios.map((servicio) => [servicio.servicioID, servicio.descripcion])
     );
-
+    
     $("#tbody-publicaciones").empty();
 
     for (const publicacion of publicaciones.lista) {
