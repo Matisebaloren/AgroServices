@@ -71,10 +71,7 @@ function mostrarNotificaciones() {
 
     notificacionesContainer.append(`
         <tr onclick="modalInfo(${notificacion.notificacionID})" class="${classTable}">
-            <td><i class="${iconClass}"></i></td>
-            <td>${solicitud.descripcion}</td>
-            <td>${estado}</td>
-            <td>${botones}</td>
+            <td>${notificacion.descripcion}</td>
         </tr>
       `);
   });

@@ -38,7 +38,7 @@ public class NotificacionesController : Controller
             return RedirectToAction("Index", "Home");
         }
 
-        var notificaciones = _contexto.Notificaciones.Where(n => n.UsuarioID == usuario.UsuarioID).ToList();
+        // var notificaciones = _contexto.Notificaciones.Where(n => n.UsuarioID == usuario.UsuarioID).ToList();
         return View();
     }
 
