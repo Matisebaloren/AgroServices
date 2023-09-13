@@ -56,11 +56,11 @@ public class NotificacionesController : Controller
             return Json(new { error = "Usuario no encontrado" });
         }
 
-        var notificaciones = _contexto.Notificaciones.Where(s => s.UsuarioID == usuario.UsuarioID).ToList();
-        return Json(new { notificaciones = notificaciones});
+        var notificaciones = _contexto.Notificaciones.Where(s => s.UsuarioID == usuario.UsuarioID).OrderBy(s => s.Fecha).ToList();
+        return Json(new { notificaciones = notificaciones });
     }
 
-    public JsonResult GuardarNotificacion(int usuarioID, int publicacionID, string descripcion, string link)
+    public JsonResult GuardarNotificacion(int usuarioID, string descripcion, string link)
     {
         //DECLARAMOS EL OBJETO DANDO EL VALOR
         var NotificacionGuardar = new Notificacion
@@ -68,12 +68,34 @@ public class NotificacionesController : Controller
             UsuarioID = usuarioID,
             Link = link,
             Descripcion = descripcion,
-            Check = false
+            Check = false,
+            Fecha = DateTime.Now
+            //falta publiID
         };
         _contexto.Add(NotificacionGuardar);
         _contexto.SaveChanges();
         return Json(true);
     }
+
+    // public void NotificacionCheck(int notificacionID){
+    //     var usuarioIDActual = _userManager.GetUserId(HttpContext.User);
+    //     if (usuarioIDActual == null)
+    //     {
+    //         return Json(new { error = "Usuario no autenticado" });
+    //     }
+
+    //     var usuario = _contexto.Usuarios.FirstOrDefault(u => u.ASP_UserID == usuarioIDActual);
+    //     if (usuario == null)
+    //     {
+    //         return Json(new { error = "Usuario no encontrado" });
+    //     }
+    //     var notificacion = _contexto.Notificacion.FirstOrDefault(s => s.notificacionID == notificacionID);
+    //     notificacion.Check = true;
+    //     _contexto.SaveChanges();
+    // }
+
+    // SOLICITUDES
+
     public IActionResult Solicitudes()
     {
         var usuarioIDActual = _userManager.GetUserId(HttpContext.User);
@@ -117,62 +139,32 @@ public class NotificacionesController : Controller
     }
 
 
-    // public JsonResult GuardarSolicitud(int publicacionID, string descripcion)
-    // {
-    //     var publicacion = _contexto.Publicaciones.FirstOrDefault(u => u.PublicacionID == publicacionID);
-    //     var usuarioIDActual = _userManager.GetUserId(HttpContext.User);
-    //     if (usuarioIDActual == null)
-    //     {
-    //         return Json(false);
-    //     }
-    //     var usuario = _contexto.Usuarios.FirstOrDefault(u => u.ASP_UserID == usuarioIDActual);
-    //     if (usuario == null)
-    //     {
-    //         return Json(new { error = "Usuario no encontrado" });
-    //     }
-
-    //     string resultado = "Error";
-    //     //DECLARAMOS EL OBJETO DANDO EL VALOR
-    //     var SolicitudGuardar = new Solicitud
-    //     {
-    //         Descripcion = descripcion,
-    //         UsuarioID = usuario.UsuarioID,
-    //         PublicacionID = publicacionID,
-    //         Fecha = DateTime.Now,
-    //         Estado = 0
-    //     };
-    //     _contexto.Add(SolicitudGuardar);
-    //     _contexto.SaveChanges();
-    //     resultado = "Crear";
-    //     return Json(resultado);
-    // }
-
-
     public JsonResult GuardarSolicitud(int publicacionID, string descripcion)
     {
+        var publicacion = _contexto.Publicaciones.FirstOrDefault(u => u.PublicacionID == publicacionID);
+        var usuarioIDActual = _userManager.GetUserId(HttpContext.User);
+        if (usuarioIDActual == null || publicacion == null)
+        {
+            return Json(false);
+        }
+        var usuario = _contexto.Usuarios.FirstOrDefault(u => u.ASP_UserID == usuarioIDActual);
+        if (usuario == null)
+        {
+            return Json(new { error = "Usuario no encontrado" });
+        }
+
+        string resultado = "Error";
         using (var scope = new TransactionScope())
         {
             try
             {
-                var publicacion = _contexto.Publicaciones.FirstOrDefault(u => u.PublicacionID == publicacionID);
-                var usuarioIDActual = _userManager.GetUserId(HttpContext.User);
-                if (usuarioIDActual == null || publicacion == null)
-                {
-                    return Json(false);
-                }
-                var usuario = _contexto.Usuarios.FirstOrDefault(u => u.ASP_UserID == usuarioIDActual);
-                if (usuario == null)
-                {
-                    return Json(new { error = "Usuario no encontrado" });
-                }
 
-                string resultado = "Error";
 
                 // 1. Crear la solicitud
                 var SolicitudGuardar = new Solicitud
                 {
                     Descripcion = descripcion,
-                    UsuarioID = publicacion.UsuarioID,
+                    UsuarioID = usuario.UsuarioID,
                     PublicacionID = publicacionID,
                     Fecha = DateTime.Now,
                     Estado = 0
@@ -183,16 +175,7 @@ public class NotificacionesController : Controller
                 resultado = "Crear";
 
                 // 2. Crear la notificación relacionada
-                var NotificacionGuardar = new Notificacion
-                {
-                    UsuarioID = 0,
-                    Link = "Enlace de la notificación",
-                    Descripcion = "Descripción de la notificación",
-                    Check = false
-                };
-                _contexto.Add(NotificacionGuardar);
-                _contexto.SaveChanges();
-
+                GuardarNotificacion(publicacion.UsuarioID, "Nueva solicitud de la publicación " + publicacion.Titulo + ", Por favor, revísala.", "../../Notificaciones/Solicitudes/" + SolicitudGuardar.SolicitudID);
                 // 3. Confirmar la transacción
                 scope.Complete();
 
@@ -212,28 +195,29 @@ public class NotificacionesController : Controller
 
 
 
-    // public JsonResult ValidarUsuarios(int solicitudID = 0)
-    // {
-    //     var usuarioIDActual = _userManager.GetUserId(HttpContext.User);
-    //     if (usuarioIDActual == null)
-    //     {
-    //         return Json(new { error = "registrado no encontrado" });
-    //     }
-    //     var usuario = _contexto.Usuarios.FirstOrDefault(u => u.ASP_UserID == usuarioIDActual);
-    //     if (usuario == null)
-    //     {
-    //         return Json(new { error = "Usuario no encontrado" });
-    //     }
-    //     return Json(true);
-    // }
+    public JsonResult ValidarUsuarios(int solicitudID = 0)
+    {
+        var usuarioIDActual = _userManager.GetUserId(HttpContext.User);
+        if (usuarioIDActual == null)
+        {
+            return Json(new { error = "registrado no encontrado" });
+        }
+        var usuario = _contexto.Usuarios.FirstOrDefault(u => u.ASP_UserID == usuarioIDActual);
+        if (usuario == null)
+        {
+            return Json(new { error = "Usuario no encontrado" });
+        }
+        return Json(usuario);
+    }
 
-    public JsonResult CancelarSolicitud(int solicitudID)
+    public JsonResult ModificarSolicitud(int solicitudID, int estadoNuevo)
     {
         // var resultadoValidacion = ValidarUsuarios();
         // if (!(bool)resultadoValidacion.Value)
         // {
-        //     return resultadoValidacion; // Devuelve el resultado de la validación
+        //     return Json(new { error = "Usuario Invalido" }); // Devuelve el resultado de la validación
         // }
+
         var usuarioIDActual = _userManager.GetUserId(HttpContext.User);
         if (usuarioIDActual == null)
         {
@@ -246,22 +230,29 @@ public class NotificacionesController : Controller
         }
 
         var solicitud = _contexto.Solicitudes.Include(s => s.Publicaciones).FirstOrDefault(s => s.SolicitudID == solicitudID);
-        if (solicitud != null)
+        if (solicitud != null && solicitud.Estado != 1 && solicitud.Estado != 2)
         {
-            if (usuario.UsuarioID == solicitud.SolicitudID)
+            if (usuario.UsuarioID == solicitud.UsuarioID)
             {
-                solicitud.Estado = 1;
+                solicitud.Estado = 1; // Cancelado
             }
             else if (usuario.UsuarioID == solicitud.Publicaciones.UsuarioID)
             {
-                solicitud.Estado = 2;
+                if (estadoNuevo == 1)
+                {
+                    solicitud.Estado = 2; // Rechazado
+                }
+                else
+                {
+                    solicitud.Estado = estadoNuevo; // si es 3 se acepta y si es 4 se concreta
+                }
             }
             _contexto.SaveChanges();
             return Json(true);
         }
         else
         {
-            return Json(new { error = "Solicitud no encontrada" });
+            return Json(new { error = "Solicitud Invalida" });
         }
     }
 }

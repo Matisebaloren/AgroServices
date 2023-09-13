@@ -48,8 +48,8 @@
         <hr>
         <form id="formulario" method="post">
 
-        <input type="hidden" id="PublicacionID" value=@ViewBag.publicacionID></input>
-        <input type="hidden" id="usuarioID" value=@ViewBag.usuarioID></input>
+            <input type="hidden" id="PublicacionID" value=@ViewBag.publicacionID></input>
+            <input type="hidden" id="usuarioID" value=@ViewBag.usuarioID></input>
 
             <div class="row">
 
@@ -69,7 +69,7 @@
                     <input disabled type="text" class="form-control" id="Titulo">
                 </div>
 
-                <div class="mb-3 col-12 col-md-8">
+                <div class="mb-3 col-12 col-md-6">
                     <label class="form-label fw-bold text-black">Resumen</label>
                     <input disabled type="text" class="form-control" id="Resumen">
                 </div>
@@ -97,36 +97,43 @@
                 <textarea disabled type="text" class="form-control" id="descripcion"></textarea>@*Texto enriquecido*@
             </div>
 
-            
+
 
         </form>
-        <h2>Imagenes Asociadas</h2>
-        <div id="carouselExampleFade" class="carousel slide my-3" data-bs-ride="carousel" data-bs-touch="true" data-bs-interval="false">
-            <div class="carousel-inner" id="Lista_imagenes"></div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
+        <div id="divImagenes">
+            <h2>Imagenes Asociadas</h2>
+            <div id="carouselExampleFade" class="carousel slide my-3" data-bs-ride="carousel" data-bs-touch="true"
+                data-bs-interval="false">
+                <div class="carousel-inner" id="Lista_imagenes"></div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+            <div class="btn-formulario py-3">
+                <button type="button" onclick="NuevaImagen()" class="btn btn-secondary">
+                    <span class="fs-5">Añadir Imagen</span>
+                </button>
+                <button type="button" onclick="EliminarImagen()" class="btn btn-danger ml-2">
+                    <span class="fs-5">Eliminar Imagen</span>
+                </button>
+            </div>
         </div>
-        <div class="btn-formulario pt-3">
-            <button type="button" onclick="NuevaImagen()" class="btn btn-secondary">
-                <span class="fs-5">Añadir Imagen</span>
-            </button>
-            <button type="button" onclick="EliminarImagen()" class="btn btn-danger ml-2">
-                <span class="fs-5">Eliminar Imagen</span>
-            </button>
-        </div>
+
         <div class="btn-formulario px-auto">
-            <button id="btn-guardar" type="button" onclick=GuardarPublicacion() class="btn btn-primary">Guardar Datos</button>
+            <button id="btn-guardar" type="button" onclick=GuardarPublicacion() class="btn btn-primary">Guardar
+                Datos</button>
         </div>
     </div>
 </div>
 
 
 @section Scripts{
-                    <script src="~/js/tablas/publicacion-1.0.0.js"></script>
+    <script src="~/js/tablas/publicacion-1.0.0.js"></script>
 }

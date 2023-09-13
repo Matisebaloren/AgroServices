@@ -1,5 +1,7 @@
 window.onload = BuscarPublicaciones();
 
+// autoregenerar paginacion cuando se esta en la ultima pagina,
+
 async function BuscarPublicaciones(pagina = 1, elementosPorPagina = 10) {
   try {
     const [publicaciones, servicios] = await Promise.all([

@@ -10,10 +10,10 @@ function BuscarNotificaciones() {
     dataType: "json",
     success: function (data) {
       console.log(data);
-      listaNotificaciones = data.notificaciones;
+      listaNotificaciones = data.notificaciones; // Almacena todas las solicitudes en la variable
       // usuario = data.usuario;
-      console.log(listaSolicitudes); // Almacena todas las solicitudes en la variable
-      MostrarNotificaciones(); // Llama a la función para filtrar y mostrar las solicitudes
+      console.log(listaNotificaciones);
+      mostrarNotificaciones(); // Llama a la función para filtrar y mostrar las solicitudes
     },
     error: function (xhr, status, error) {
       console.error("Error en la solicitud Ajax:");
@@ -64,86 +64,91 @@ function BuscarNotificaciones() {
 // }
 
 function mostrarNotificaciones() {
-  var notificacionesContainer = $("#tablaNotificaciones}");
+  var notificacionesContainer = $("#tablaNotificaciones");
   notificacionesContainer.empty();
 
   $.each(listaNotificaciones, function (index, notificacion) {
-
     notificacionesContainer.append(`
-        <tr onclick="modalInfo(${notificacion.notificacionID})" class="${classTable}">
+         
+        <tr onclick="modalInfo(${notificacion.notificacionID})">
+            <td class="ps-3"><i class='bx bx-envelope'></i></td>
+            <td>${moment(notificacion.fecha).format("DD-MM-YYYY")}</td>
             <td>${notificacion.descripcion}</td>
         </tr>
+        
       `);
   });
 }
 
-function modalCancelar(id) {
-  let solicitud = listaSolicitudes.find((s) => s.solicitudID === id);
-  let tipo = solicitud.usuarioID != usuario.usuarioID ? "rechazar" : "cancelar";
-  $("#modalCancelar .modal-body").html(
-    `Se procederá a ${tipo} la solicitud relacionada con la publicación <strong>"${solicitud.publicacionTitulo}"</strong>. Esta acción implica la anulación de la solicitud y su eliminación del proceso en curso.`
-  );
-  $("#btn-cancelar").html(tipo);
-  $("#modalCancelar").modal("show");
-  $("#btn-cancelar").click(function () {
-    cancelar(id);
-  });
-}
+// function modalCancelar(id) {
+//   let solicitud = listaSolicitudes.find((s) => s.solicitudID === id);
+//   let tipo = solicitud.usuarioID != usuario.usuarioID ? "rechazar" : "cancelar";
+//   $("#modalCancelar .modal-body").html(
+//     `Se procederá a ${tipo} la solicitud relacionada con la publicación <strong>"${solicitud.publicacionTitulo}"</strong>. Esta acción implica la anulación de la solicitud y su eliminación del proceso en curso.`
+//   );
+//   $("#btn-cancelar").html(tipo);
+//   $("#modalCancelar").modal("show");
+//   $("#btn-cancelar").click(function () {
+//     cancelar(id);
+//   });
+// }
 
-function cancelar(id) {
-  $.ajax({
-    url: "../../Notificaciones/cancelarSolicitud",
-    type: "POST",
-    data: {solicitudID : id},
-    async: true,
-    success: function (resultado) {
-      $("#modalCancelar").modal("hide");
-      BuscarSolicitudes(); // Actualizar la tabla
-    },
-    cache: false,
-    error: function (xhr, status) {
-      console.log("Disculpe, existió un problema");
-    },
-  });
-}
+// function cancelar(id) {
+//   $.ajax({
+//     url: "../../Notificaciones/cancelarSolicitud",
+//     type: "POST",
+//     data: { solicitudID: id },
+//     async: true,
+//     success: function (resultado) {
+//       $("#modalCancelar").modal("hide");
+//       BuscarSolicitudes(); // Actualizar la tabla
+//     },
+//     cache: false,
+//     error: function (xhr, status) {
+//       console.log("Disculpe, existió un problema");
+//     },
+//   });
+// }
 
-function modalConcretar(id) {
-  let solicitud = listaSolicitudes.find((s) => s.solicitudID === id);
-  $("#modalConcretar .modal-title").html(`Cocretar solicitud` );
-  $("#modalConcretar .modal-body").html(
-    `A continuación, se procederá a concretar el servicio relacionado con <strong>"${solicitud.publicacionTitulo}"</strong>. Este paso permite a los participantes en el servicio proporcionar sus valoraciones, lo que beneficia tanto a quienes brindan el servicio como al solicitante. `
-  );
-  $("#modalConcretar").modal("show");
-  $("#btn-cancelar").click(function () {
-    concretar(id);
-  });
-}
+// function modalConcretar(id) {
+//   let solicitud = listaSolicitudes.find((s) => s.solicitudID === id);
+//   $("#modalConcretar .modal-title").html(`Cocretar solicitud`);
+//   $("#modalConcretar .modal-body").html(
+//     `A continuación, se procederá a concretar el servicio relacionado con <strong>"${solicitud.publicacionTitulo}"</strong>. Este paso permite a los participantes en el servicio proporcionar sus valoraciones, lo que beneficia tanto a quienes brindan el servicio como al solicitante. `
+//   );
+//   $("#modalConcretar").modal("show");
+//   $("#btn-concretar").click(function () {
+//     concretar(id);
+//   });
+// }
 
-function modalAceptar(id) {
-  let solicitud = listaSolicitudes.find((s) => s.solicitudID === id);
-  $("#modalConcretar .modal-title").html(`Aceptar Solcitud`);
-  $("#modalConcretar .modal-body").html(
-    `A continuación, se procederá a concretar el servicio relacionado con <strong>"${solicitud.publicacionTitulo}"</strong>. Este paso permite a los participantes en el servicio proporcionar sus valoraciones, lo que beneficia tanto a quienes brindan el servicio como al solicitante. `
-  );
-  $("#modalConcretar").modal("show");
-  $("#btn-cancelar").click(function () {
-    aceptar(id);
-  });
-}
+// function modalAceptar(id) {
+//   let solicitud = listaSolicitudes.find((s) => s.solicitudID === id);
+//   $("#modalConcretar .modal-title").html(`Aceptar Solcitud`);
+//   $("#modalConcretar .modal-body").html(
+//     `A continuación, se procederá a concretar el servicio relacionado con <strong>"${solicitud.publicacionTitulo}"</strong>. Este paso permite a los participantes en el servicio proporcionar sus valoraciones, lo que beneficia tanto a quienes brindan el servicio como al solicitante. `
+//   );
+//   $("#modalConcretar").modal("show");
+//   console.log("modalconcretar");
+//   $("#btn-concretar").click(function () {
+//     aceptar(id);
+//   });
+// }
 
-function concretar(id) {
-  $.ajax({
-    url: "../../Notificaciones/concretarSolicitud",
-    type: "POST",
-    data: { solicitudID : id },
-    async: true,
-    success: function (resultado) {
-      $("#modalCancelar").modal("hide");
-      BuscarSolicitudes(); // Actualizar la tabla
-    },
-    cache: false,
-    error: function (xhr, status) {
-      console.log("Disculpe, existió un problema");
-    },
-  });
-}
+// function concretar  (id) {
+//   console.log("concretar");
+//   $.ajax({
+//     url: "../../Notificaciones/concretarSolicitud",
+//     type: "POST",
+//     data: { solicitudID: id },
+//     async: true,
+//     success: function (resultado) {
+//       $("#modalCancelar").modal("hide");
+//       BuscarSolicitudes(); // Actualizar la tabla
+//     },
+//     cache: false,
+//     error: function (xhr, status) {
+//       console.log("Disculpe, existió un problema");
+//     },
+//   });
+// }

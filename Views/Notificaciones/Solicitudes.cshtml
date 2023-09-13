@@ -1,18 +1,19 @@
-
-
 @{
-    ViewData["Title"] = "Home Page";
+  ViewData["Title"] = "Home Page";
 }
-@model List<Solicitud>
-  <div id="solicitudesData" data-solicitudes="@Html.Raw(Json.Serialize(Model))"></div>
+@{
+  // Captura el valor de solicitudID desde la URL
+  var solicitudID = ViewContext.RouteData.Values["id"] as string;
+}
+<div id="solicitudesData" data-solicitudes="@Html.Raw(Json.Serialize(Model))"></div>
 <link rel="stylesheet" href="~/css/tables.css" asp-append-version="true" />
-<link rel="stylesheet" href="~/css/modals-solicitudes.css"/>
+<link rel="stylesheet" href="~/css/modals-solicitudes.css" />
 
 
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalConcretar">
+@* <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalConcretar">
   Launch demo modal
-</button>
+</button> *@
 
 <!-- Modal cancelar / rechazar -->
 <div class="modal fade" id="modalCancelar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -90,20 +91,26 @@
   @* Tabla con los datos de cada elemento *@
   <table class="table table-hover">
     <thead class="table-dark">
-        <tr>
-          <th class="th-icon"></th>
-          <th>Fecha</th>
-          <th>Descripcion</th>
-          <th>estado</th>
-          <th></th>
-        </tr>
+      <tr>
+        <th class="th-icon"></th>
+        <th>Fecha</th>
+        <th>Descripcion</th>
+        <th>estado</th>
+        <th></th>
+      </tr>
     </thead>
     <tbody id="tablaSolicitudes">
-       
+
     </tbody>
-</table>
+  </table>
 </div>
 
 @section Scripts{
-    <script src="~/js/tablas/solicitud-1.0.0.js"></script>
+  <script src="~/js/tablas/solicitud-1.0.0.js"></script>
 }
+
+<script>
+    // Luego, dentro del bloque de script, asigna el valor a una variable JavaScript
+    var solicitudIDJS = @Html.Raw(Json.Serialize(solicitudID));
+    console.log(solicitudIDJS);
+</script>

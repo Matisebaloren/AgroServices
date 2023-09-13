@@ -41,7 +41,7 @@ html {
 }
 /* CAMBIA EL COLOR DE FONDO */
 body {
-  background-color: #e8eaecfa;
+  background-color: #adb5bd;
   transition: all 0.5s ease;
   /* background-image: url(../img/logo.jpg); */
 }
@@ -838,9 +838,9 @@ tbody td.active {
 
 /* fin de imagen de carrousel */
 
-a:hover {
+/* a:hover {
   color: rgb(25, 135, 84);
-}
+} */
 
 .logo_item {
   background-color: white;
@@ -913,7 +913,7 @@ a.card-body:hover {
   }
 }
 
-.card {
+/* .card {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -923,4 +923,63 @@ a.card-body:hover {
   background-clip: border-box;
   border: 1px solid rgba(0,0,0,.125);
   border-radius: .25rem;
+} */
+
+
+/* css de campana */
+.campana{
+  color: white;
+}
+
+.campana:hover{
+  color: rgb(179, 179, 179);
+}
+
+.notification {
+  position: relative;
+  display: inline-block;
+}
+
+.notification-icon {
+  cursor: pointer;
+}
+
+.notification-dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  min-width: 200px;
+  max-width: 25rem;
+  margin-right: 2rem;
+}
+
+.notification-dropdown ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.notification-dropdown li {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  color: darkgreen;
+
+}
+
+.notification-dropdown li:last-child {
+  border-bottom: none;
+}
+
+.badge {
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  padding: 3px 6px;
+  position: absolute;
+  top: -8px;
+  right: -8px;
 }

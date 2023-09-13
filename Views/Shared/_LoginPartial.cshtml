@@ -7,6 +7,21 @@
 <ul class="navbar-nav">
     @if (SignInManager.IsSignedIn(User))
     {
+        @* <li class="my-auto mx-3">
+            <a href="#" class="campana"><i class='bx bxs-bell'></i><sub id="numNotificacion">5</sub></a>
+            <span id="contadorNotificaciones" class="contador">2</span>
+        </li> *@
+        <li class=" my-auto mx-3">
+            <div class="notification-icon campana">
+                <i class='bx bxs-bell'></i>
+                <sub id="numNotificacion"></sub>
+            </div>
+            <div class="notification-dropdown">
+                <ul id="notification-list">
+                    <!-- Aquí se agregarían las notificaciones dinámicamente -->
+                </ul>
+            </div>
+        </li>
         <li class="nav-item">
             <a id="manage" class="btn btn-success me-2 text-light" asp-area="Identity" asp-page="/Account/Manage/Index"
                 title="Perfil"><i class='bx bxs-user-check'></i> @UserManager.GetUserName(User)

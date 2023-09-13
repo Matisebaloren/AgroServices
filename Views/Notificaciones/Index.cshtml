@@ -7,30 +7,19 @@
 
 <div class="FondoGlass-1 my-5">
     <h1 class="display-4">Notificaciones</h1>
-
-      <!-- Button trigger modal -->
-
-  @* Tabla con los datos de cada elemento *@
-  <table class="table table-hover">
-    <thead class="table-dark">
-        <tr>
-            <th>Contenido</th>
-            <th>Relacionado</th>
-            @* <th>Fecha</th> *@
-        </tr>
-    </thead>
-    <tbody id="tablaNotificaciones">
-        @* @foreach (var notificacion in Model)
-        {
-            <a href="@notificacion.Link" class="notificacion @((notificacion.Check) ? "leida" : "")">
-                <tr>
-                    <td>@notificacion.Descripcion</td>
-                    <td class="w-20">@((notificacion.Check) ? "Leída" : "Nuevo")</td>
-                </tr>
-            </a>
-        } *@
-    </tbody>
-</table>
+    @* Tabla con los datos de cada elemento *@
+    <table class="table table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th></th>
+                <th>Fecha</th>
+                <th>Contenido</th>
+                @* <th>Fecha</th> *@
+            </tr>
+        </thead>
+        <tbody id="tablaNotificaciones">
+        </tbody>
+    </table>
 </div>
 
 @section Scripts{

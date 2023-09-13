@@ -12,7 +12,9 @@ window.onload = () => {
 
 const BuscarPublicacion = (publicacionID = 0) => {
   BuscarServicios();
-
+  if(publicacionID == 0){
+    $("#divImagenes").hide();
+  }
   if (publicacionID !== 0) {
     BuscarTagsActivos(publicacionID);
     BuscarImagenes();
@@ -115,7 +117,7 @@ const BuscarInformacionPublicacion = (publicacionID) => {
 
 function GuardarPublicacion() {
   //JAVASCRIPT
-
+  
   var contenido = tinymce.activeEditor.getContent();
   console.log("descripcion:" + contenido);
   let esOferta = null;
@@ -178,16 +180,17 @@ function GuardarPublicacion() {
             title: "Se modifico correctamente",
           });
           GuardarTags();
+          
         }
         if (resultado > 0) {
           Toast.fire({
             icon: "success",
-            title: "Se creo correctamente",
+            title: "Publicación inicializada. Recuerda añadir imagenes",
           });
           publicacionID = resultado;
           console.log("el id ahora es: " + resultado);
           GuardarTags();
-          $("#btn-cambiar").show();
+          $("#divImagenes").show();
         }
       },
 

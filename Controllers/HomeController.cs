@@ -60,17 +60,24 @@ public class HomeController : Controller
             creado = result.Succeeded;
         }
         administrador = _contextUsuario.Users.Where(u => u.Email == "administrador@administrador.com").SingleOrDefault();
-         if (administrador != null){
-            var UsuarioGuardar = new Usuario{
-                ASP_UserID = administrador.Id,
-                LocalidadID = 1,
-                Fecha = DateTime.Now
-            };
-            _contexto.Add(UsuarioGuardar);
-            _contexto.SaveChanges();
+        if (administrador != null)
+        {
+            var administradorUsuario = _contexto.Usuarios.Where(u => u.ASP_UserID == administrador.Id).SingleOrDefault();
+            if (administradorUsuario == null)
+            {
+                var UsuarioGuardar = new Usuario
+                {
+                    ASP_UserID = administrador.Id,
+                    LocalidadID = 1,
+                    Fecha = DateTime.Now
+                };
+                _contexto.Add(UsuarioGuardar);
+                _contexto.SaveChanges();
+            }
 
-         }
-       
+
+        }
+
         // //CODIGO PARA BUSCAR EL USUARIO EN CASO DE NECESITARLO
         // var superusuario = _contextUsuario.Users.Where(r => r.Email == "usuario@sistema.com").SingleOrDefault();
         // if (superusuario != null)
