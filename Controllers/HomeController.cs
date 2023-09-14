@@ -49,7 +49,7 @@ public class HomeController : Controller
         //CREAR USUARIO PRINCIPAL
         bool creado = false;
         //BUSCAR POR MEDIO DE CORREO ELECTRONICO SI EXISTE EL USUARIO
-        var administrador = _contextUsuario.Users.Where(u => u.Email == "administrador@administrador.com").SingleOrDefault();
+        var administrador = _contextUsuario.Users.Where(u => u.Email == "administrador@administrador.com").FirstOrDefault();
         if (administrador == null)
         {
             var user = new IdentityUser { UserName = "AgroAdmin", Email = "administrador@administrador.com" };
@@ -59,10 +59,10 @@ public class HomeController : Controller
             await _userManager.AddToRoleAsync(user, "Administrador");
             creado = result.Succeeded;
         }
-        administrador = _contextUsuario.Users.Where(u => u.Email == "administrador@administrador.com").SingleOrDefault();
+        administrador = _contextUsuario.Users.Where(u => u.Email == "administrador@administrador.com").FirstOrDefault();
         if (administrador != null)
         {
-            var administradorUsuario = _contexto.Usuarios.Where(u => u.ASP_UserID == administrador.Id).SingleOrDefault();
+            var administradorUsuario = _contexto.Usuarios.Where(u => u.ASP_UserID == administrador.Id).FirstOrDefault();
             if (administradorUsuario == null)
             {
                 var UsuarioGuardar = new Usuario

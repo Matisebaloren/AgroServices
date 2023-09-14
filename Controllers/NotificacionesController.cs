@@ -77,22 +77,29 @@ public class NotificacionesController : Controller
         return Json(true);
     }
 
-    // public void NotificacionCheck(int notificacionID){
-    //     var usuarioIDActual = _userManager.GetUserId(HttpContext.User);
-    //     if (usuarioIDActual == null)
-    //     {
-    //         return Json(new { error = "Usuario no autenticado" });
-    //     }
+    public void NotificacionCheck(int notificacionID)
+    {
+        var usuarioIDActual = _userManager.GetUserId(HttpContext.User);
+        if (usuarioIDActual == null)
+        {
+            return;
+        }
 
-    //     var usuario = _contexto.Usuarios.FirstOrDefault(u => u.ASP_UserID == usuarioIDActual);
-    //     if (usuario == null)
-    //     {
-    //         return Json(new { error = "Usuario no encontrado" });
-    //     }
-    //     var notificacion = _contexto.Notificacion.FirstOrDefault(s => s.notificacionID == notificacionID);
-    //     notificacion.Check = true;
-    //     _contexto.SaveChanges();
-    // }
+        var usuario = _contexto.Usuarios.FirstOrDefault(u => u.ASP_UserID == usuarioIDActual);
+        if (usuario == null)
+        {
+            return;
+
+        }
+
+        var notificacion = _contexto.Notificaciones.FirstOrDefault(s => s.NotificacionID == notificacionID);
+        if (notificacion != null)
+        {
+            notificacion.Check = true;
+            _contexto.SaveChanges();
+        }
+
+    }
 
     // SOLICITUDES
 

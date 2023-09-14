@@ -39,7 +39,7 @@
   } */
 
 
-  .btn-eliminar{
+  /* .btn-eliminar{
     background-image: url(../img/x.svg);
     background-color: #0400ff00;
     background-repeat: no-repeat;
@@ -60,5 +60,29 @@
   
   .btn-habilitar{
     background-image: url(../img/check.svg);
+    filter: invert(29%) sepia(78%) saturate(4052%) hue-rotate(145deg) brightness(90%) contrast(80%);
+  } */
+
+  .btn-eliminar{
+    background-image: url(../img/eliminar.png);
+    background-color: #0400ff00;
+    background-repeat: no-repeat;
+    background-size: contain;
+    filter: invert(23%) sepia(100%) saturate(2024%) hue-rotate(337deg) brightness(94%) contrast(85%);
+    width: 2em;
+    height: 2em; 
+  }
+  
+  .btn-eliminar:hover{
+    filter: grayscale(100%);
+  }
+  
+  .btn-editar{
+    background-image: url(../img/editar.png);
+    /* filter: invert(34%) sepia(66%) saturate(5719%) hue-rotate(214deg) brightness(106%) contrast(105%);  */
+  }
+  
+  .btn-habilitar{
+    background-image: url(../img/habilitar.png);
     filter: invert(29%) sepia(78%) saturate(4052%) hue-rotate(145deg) brightness(90%) contrast(80%);
   }

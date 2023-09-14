@@ -7,18 +7,7 @@ function agregarNotificacion(mensaje, link, id) {
   const li = document.createElement("li");
   li.textContent = mensaje;
   li.onclick = function () {
-    // $.ajax({
-    //   url: "../../Notificaciones/NotificacionCheck",
-    //   type: "POST",
-    //   data: { notificacionID: id },
-    //   async: true,
-    //   success: function (resultado) {
-    //   },
-    //   cache: false,
-    //   error: function (xhr, status) {
-    //     console.log("Disculpe, existió un problema");
-    //   },
-    // });
+    check(id);
     window.location.href = link;
   };
   notificationList.appendChild(li);
@@ -64,4 +53,20 @@ function BuscarNotificaciones() {
       console.error("Error: " + error);
     },
   });
+}
+
+function check(id) {
+   $.ajax({
+      url: "../../Notificaciones/NotificacionCheck",
+      type: "POST",
+      data: { notificacionID: id },
+      async: true,
+      success: function (resultado) {
+      },
+      cache: false,
+      error: function (xhr, status) {
+        console.log("Disculpe, existió un problema");
+      },
+    });
+    console.log("check"+id)
 }

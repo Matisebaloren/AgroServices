@@ -136,6 +136,7 @@ function EnviarSolicitud() {
 
     success: function (resultado) {
       console.log(resultado);
+      $("#ModalSolicitud").modal("hide");
       const Toast = Swal.mixin({
         toast: true,
         position: "top-end",
@@ -147,16 +148,16 @@ function EnviarSolicitud() {
           toast.addEventListener("mouseleave", Swal.resumeTimer);
         },
       });
-      if (resultado < -1) {
+      if (resultado == "Error") {
         Toast.fire({
-          icon: "error",
-          title: "error",
+          icon: "Error",
+          title: "Petición invalida, Prueba en otro momento",
         });
       }
-      if (resultado > 1) {
+      if (resultado == "Crear") {
         Toast.fire({
           icon: "success",
-          title: "Se creo correctamente",
+          title: "Solicitud enviada correctamente.",
         });
         console.log("el id ahora es: " + resultado);
         $("#ModalSolicitud").modal("hide");

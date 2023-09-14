@@ -802,7 +802,7 @@ tbody td.active {
 
 .carousel-inner img {
   object-fit: contain; /* Ajusta para mantener la relación de aspecto */
-  max-height: 100%; /* Evita recorte vertical */
+  height: 100%; /* Evita recorte vertical */
   max-width: 100%; /* Evita recorte horizontal */
 }
 
@@ -950,11 +950,13 @@ a.card-body:hover {
   top: 100%;
   right: 0;
   background-color: #fff;
-  border: 1px solid #ccc;
+  /* border: 1px solid #ccc; */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   min-width: 200px;
   max-width: 25rem;
   margin-right: 2rem;
+  border-radius: 10px;
+
 }
 
 .notification-dropdown ul {
@@ -967,7 +969,11 @@ a.card-body:hover {
   padding: 10px;
   border-bottom: 1px solid #ccc;
   color: darkgreen;
-
+}
+.notification-dropdown li:hover {
+    color: black;
+    background-color: #c8fdca;
+    border-radius: 10px;
 }
 
 .notification-dropdown li:last-child {
