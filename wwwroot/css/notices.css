@@ -38,7 +38,7 @@
     margin: 0;
     -webkit-appearance: none;
   }
-  .card__input:checked ~ .card__body {
+  /* .card__input:checked ~ .card__body {
     --shadow: 0 0 0 3px var(--card-shadow);
   }
   .card__input:checked ~ .card__body .card__body-cover-checkbox {
@@ -63,7 +63,7 @@
   }
   .card__input:disabled ~ .card__body:active {
     --scale: 1;
-  }
+  } */
   .card__body {
     display: grid;
     grid-auto-rows: calc(var(--card-height) - var(--header-height)) auto;
@@ -78,6 +78,11 @@
     transition: transform var(--transition), box-shadow var(--transition);
     transform: scale(var(--scale, 1)) translateZ(0);
   }
+
+  .card__body:hover .card__body-cover-image {
+    --filter-bg: grayscale(0);
+  }
+
   .card__body:active {
     --scale: 0.96;
   }
@@ -107,7 +112,7 @@
     -o-object-fit: cover;
        object-fit: cover;
     border-radius: var(--c-border);
-    filter: var(--filter-bg, grayscale(1));
+    /* filter: var(--filter-bg, grayscale(1)); */
     -webkit-clip-path: polygon(0% 0%, 100% 0%, var(--x-y1, 100% 90%), var(--x-y2, 67% 83%), var(--x-y3, 33% 90%), var(--x-y4, 0% 85%));
             clip-path: polygon(0% 0%, 100% 0%, var(--x-y1, 100% 90%), var(--x-y2, 67% 83%), var(--x-y3, 33% 90%), var(--x-y4, 0% 85%));
   }
@@ -193,3 +198,49 @@
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 1rem;
   }
+
+  /* Estilo del contenedor del video */
+.contenedor-video {
+  position: relative;
+  width: 100%;
+  height: auto; /* Altura ajustable automáticamente */
+  overflow: hidden; /* Oculta el contenido que desborde del contenedor */
+}
+
+/* Estilo del video de fondo */
+.video-fondo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Escala el video para llenar el contenedor */
+  z-index: -1; /* Coloca el video detrás del contenido superpuesto */
+}
+
+/* Estilo del contenido superpuesto */
+.contenido-superpuesto {
+  position: relative;
+  z-index: 1; /* Coloca el contenido encima del video */
+  padding: 20px; /* Ajusta el espaciado según tus necesidades */
+  color: white; /* Color del texto */
+}
+
+.grey-text{
+  color: darkgreen;
+  font-family: system-ui;
+
+}
+
+.btn-servicios{
+  font-size: 38px;
+  color: greenyellow;
+  border: none;
+  background: none;
+  position: absolute;
+  bottom: 10px;
+}
+
+.vuelta{
+  transform: rotate(180deg);
+}

@@ -1,4 +1,4 @@
-@model AgroServices.Models.Publicacion;
+@* @model AgroServices.Models.Publicacion; *@
 
 @{
     ViewData["Title"] = "Home Page";
@@ -49,7 +49,7 @@
         <form id="formulario" method="post">
 
             <input type="hidden" id="PublicacionID" value=@ViewBag.publicacionID></input>
-            <input type="hidden" id="usuarioID" value=@ViewBag.usuarioID></input>
+            @* <input type="hidden" id="usuarioID" value=@ViewBag.usuarioID></input> *@
 
             <div class="row">
 
@@ -135,5 +135,5 @@
 
 
 @section Scripts{
-    <script src="~/js/tablas/publicacion-1.0.0.js"></script>
+    <script src="~/js/tablas/formulario-1.0.0.js"></script>
 }

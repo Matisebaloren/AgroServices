@@ -117,16 +117,16 @@
                 </div>
                 <div class="form-group col-12 col-md-6">
                     <label for="selectProvincias">Provincias</label>
-                    <select name="Provincias" class="form-control" id="ProvinciaID" onchange=CambiarProvincia(this.value)>
+                    <select name="Provincias" class="form-control" id="ProvinciaID" aria-required="true" onchange=CambiarProvincia(this.value)>
                         <option value="0">Elija una provincia</option>
                     </select>
                 </div>
                 <div class="form-group col-12 col-md-6">
                     <label for="selectLocalidad">Localidad</label>
-                    <select id="LocalidadID" asp-for="Input.LocalidadID" class="form-control" autocomplete="new-password" aria-required="true"></select>
+                    <select id="LocalidadID" asp-for="Input.LocalidadID" class="form-control" aria-required="true" autocomplete="new-password" aria-required="true"></select>
                     <span asp-validation-for="Input.LocalidadID" class="text-danger"></span>
                 </div>
-                
+
             </div>
             <hr>
             <button id="registerSubmit" class="btn btn-primary" type="submit">Registrarse</button>

@@ -70,6 +70,12 @@
 .valoracion {
   color: #ffd700; /* Color de las estrellas seleccionadas */
   font-size: 20px;
+  display: flex;
+  font-size: 24px; /* Tamaño del ícono */
+  border: 2px solid #797979; /* Ancho y estilo del borde */
+  border-radius: 5px; /* Hace que el borde siga la forma del ícono circular */
+  padding: 5px; /* Espacio dentro del borde */
+  margin: 5px; /* Espacio entre los íconos */
 }
 
 /* #descripcion {
@@ -77,10 +83,21 @@
   border: 1px solid rgb(121, 121, 121);
 } */
 
-.card-vista-publi{
+.card-vista-publi {
   background-color: #f5f5f5;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    margin-bottom: 1rem;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  margin-bottom: 1rem;
+}
+
+#Contenido {
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid rgb(36 79 34);
+  padding: 1rem;
+}
+
+.btn{
+  box-shadow: -2px 3px 2px 1px darkgrey;
 }

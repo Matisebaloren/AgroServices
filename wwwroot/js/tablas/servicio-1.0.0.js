@@ -66,7 +66,7 @@ $("#tbody-servicios").empty();
 
 
 function VaciarFormulario(){
-    $("#Nombre").val('');
+    $("#descripcion").val('');
     $("#ServicioID").val(0);
     document.getElementById("tituloModal").innerHTML = "Agregar Servicio";
 }
@@ -89,7 +89,7 @@ function BuscarServicio(servicioID){
        
         if (servicios.length == 1){
             let servicio = servicios[0];
-            $("#Nombre").val(servicio.descripcion);
+            $("#descripcion").val(servicio.descripcion);
             $("#ServicioID").val(servicio.servicioID);
             document.getElementById("tituloModal").innerHTML = "Editar Servicio";
             $("#ModalServicio").modal("show");

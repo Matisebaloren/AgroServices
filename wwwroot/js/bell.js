@@ -20,15 +20,17 @@ const notificationDropdown = document.querySelector(".notification-dropdown");
 
 let isOpen = false;
 
-notificationIcon.addEventListener("click", () => {
-  isOpen = !isOpen; // Cambiar el estado de abierto/cerrado
+if (notificationIcon) {
+  notificationIcon.addEventListener("click", () => {
+    isOpen = !isOpen; // Cambiar el estado de abierto/cerrado
 
-  if (isOpen) {
-    notificationDropdown.style.display = "block"; // Abrir la lista
-  } else {
-    notificationDropdown.style.display = "none"; // Cerrar la lista
-  }
-});
+    if (isOpen) {
+      notificationDropdown.style.display = "block"; // Abrir la lista
+    } else {
+      notificationDropdown.style.display = "none"; // Cerrar la lista
+    }
+  });
+}
 
 function BuscarNotificaciones() {
   $.ajax({
@@ -36,15 +38,21 @@ function BuscarNotificaciones() {
     type: "GET",
     dataType: "json",
     success: function (data) {
-      console.log(data.notificaciones);
-      var notificaciones = data.notificaciones.filter(function (element) {
-        return !element.check; // Filtrar solo las notificaciones con check en false
-      });
-      notificaciones.forEach((element) => {
-        agregarNotificacion(element.descripcion, element.link, element.notificacionID);
-      });
-      if (notificaciones.length > 0) {
-        $("#numNotificacion").html(notificaciones.length);
+      console.log("info:" + data.error);
+      if (!data.error) {
+        var notificaciones = data.notificaciones.filter(function (element) {
+          return !element.check; // Filtrar solo las notificaciones con check en false
+        });
+        notificaciones.forEach((element) => {
+          agregarNotificacion(
+            element.descripcion,
+            element.link,
+            element.notificacionID
+          );
+        });
+        if (notificaciones.length > 0) {
+          $("#numNotificacion").html(notificaciones.length);
+        }
       }
     },
     error: function (xhr, status, error) {
@@ -56,17 +64,16 @@ function BuscarNotificaciones() {
 }
 
 function check(id) {
-   $.ajax({
-      url: "../../Notificaciones/NotificacionCheck",
-      type: "POST",
-      data: { notificacionID: id },
-      async: true,
-      success: function (resultado) {
-      },
-      cache: false,
-      error: function (xhr, status) {
-        console.log("Disculpe, existió un problema");
-      },
-    });
-    console.log("check"+id)
+  $.ajax({
+    url: "../../Notificaciones/NotificacionCheck",
+    type: "POST",
+    data: { notificacionID: id },
+    async: true,
+    success: function (resultado) {},
+    cache: false,
+    error: function (xhr, status) {
+      console.log("Disculpe, existió un problema");
+    },
+  });
+  console.log("check" + id);
 }

@@ -6,11 +6,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 
-
-
-// private readonly NombreProyectoContext _context;
-
-
 namespace AgroServices.Controllers;
 
 public class PublicacionesController : Controller
@@ -43,20 +38,6 @@ public class PublicacionesController : Controller
             return RedirectToAction("Index", "Home");
         }
 
-        var servicios = _contexto.Servicios
-            .Where(x => x.Eliminado == false)
-            .OrderBy(p => p.descripcion)
-            .ToList();
-
-        servicios.Insert(0, new Servicio
-        {
-            ServicioID = 0,
-            descripcion = "[SELECCIONE UN SERVICIO]"
-        });
-
-        ViewBag.usuarioID = usuario.UsuarioID;
-        ViewBag.ServicioID = new SelectList(servicios, "ServicioID", "descripcion", 0);
-
         if (id != 0)
         {
             var publicacion = _contexto.Publicaciones
@@ -72,6 +53,48 @@ public class PublicacionesController : Controller
 
         return View("Formulario");
     }
+
+    public async Task<IActionResult> BuscarPublicacion(int publicacionID = 0)
+    {
+        var usuarioIDActual = _userManager.GetUserId(HttpContext.User);
+
+        if (usuarioIDActual == null)
+        {
+            return Json(new { error = "Usuario no registrado" });
+        }
+
+        var usuario = _contexto.Usuarios.FirstOrDefault(u => u.ASP_UserID == usuarioIDActual);
+        if (usuario == null)
+        {
+            return Json(new { error = "Usuario no inicializado" });
+        }
+
+        var publicacionBD = _contexto.Publicaciones
+         .Where(p => p.PublicacionID == publicacionID && p.UsuarioID == usuario.UsuarioID)
+         .FirstOrDefault();
+        if (publicacionBD == null)
+        {
+            return Json(new { error = "Publicación Inválida" });
+        }
+
+        // var imagenes = BuscarImagenes(publicacionID); // Pasa el publicacionID a la función
+        var etiquetas = _contexto.Etiquetas.Where(x => x.PublicacionID == publicacionID).ToList();
+        var resultado = new
+        {
+            Publicacion = new
+            {
+                PublicacionID = publicacionBD.PublicacionID,
+                Titulo = publicacionBD.Titulo,
+                Resumen = publicacionBD.Resumen,
+                Descripcion = publicacionBD.Descripcion,
+                EsOferta = publicacionBD.EsOferta
+            },
+            Etiquetas = etiquetas
+        };
+        return Json(resultado);
+    }
+
+
 
     public async Task<IActionResult> VistaPublicacion(int? id = 0)
     {
@@ -118,13 +141,12 @@ public class PublicacionesController : Controller
                 item.ImagenBase64 = System.Convert.ToBase64String(item.Img);
             }
         }
-        _contexto.SaveChanges();
         return Json(imagenes);
     }
 
 
 
-    public JsonResult BuscarPublicaciones(int publicacionID = 0, int pagina = 1, int elementosPorPagina = 10)
+    public JsonResult BuscarPublicaciones(int publicacionID = 0, int pagina = 1, int elementosPorPagina = 10, int limite = 0)
     {
         var publicaciones = _contexto.Publicaciones.ToList();
         publicaciones = publicaciones.OrderByDescending(p => p.Fecha).ToList();
@@ -174,7 +196,6 @@ public class PublicacionesController : Controller
                 _contexto.Add(PublicacionGuardar);
                 _contexto.SaveChanges();
                 resultado = PublicacionGuardar.PublicacionID;
-
             }
             else
             {
@@ -196,7 +217,6 @@ public class PublicacionesController : Controller
         {
             resultado = -1;
         }
-
         return Json(resultado);
     }
 
@@ -326,4 +346,6 @@ public class PublicacionesController : Controller
 
         return Json(ValoracionesMostrar);
     }
+
+
 }

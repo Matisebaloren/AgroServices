@@ -56,6 +56,7 @@ public class LocalidadesController : Controller
         //verificamos si Nombre esta completo
         if (!string.IsNullOrEmpty(nombre))
         {
+            nombre = nombre.Trim();
             //SI ES 0 QUIERE DECIR QUE ESTA CREANDO EL ELEMENTO
             if (localidadID == 0)
             {

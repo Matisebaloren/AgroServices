@@ -25,12 +25,12 @@ public class ServiciosController : Controller
     public JsonResult BuscarServicios(int servicioID = 0)
     {
         var servicios = _contexto.Servicios.ToList();
-        
+
         if (servicioID > 0)
-        {   
+        {
             servicios = servicios.Where(p => p.ServicioID == servicioID).OrderBy(p => p.descripcion).ToList();
         }
-        
+
         _contexto.SaveChanges();
         return Json(servicios);
     }
@@ -42,15 +42,21 @@ public class ServiciosController : Controller
         string resultado = "Error";
 
         //verificamos si Nombre esta completo
-        if (!string.IsNullOrEmpty(descripcion)){     
+        if (!string.IsNullOrEmpty(descripcion))
+        {
+            descripcion = descripcion.Trim();
+
             //SI ES 0 QUIERE DECIR QUE ESTA CREANDO EL ELEMENTO
-            if(servicioID == 0){
+            if (servicioID == 0)
+            {
                 //BUSCAMOS EN LA TABLA SI EXISTE UNA CON LA MISMO NOMBRE
                 var servicioOriginal = _contexto.Servicios.Where(c => c.descripcion == descripcion).FirstOrDefault();
-                if(servicioOriginal == null){
-                
+                if (servicioOriginal == null)
+                {
+
                     //DECLARAMOS EL OBJETO DANDO EL VALOR
-                    var ServicioGuardar = new Servicio{
+                    var ServicioGuardar = new Servicio
+                    {
                         descripcion = descripcion
                     };
                     _contexto.Add(ServicioGuardar);
@@ -58,30 +64,36 @@ public class ServiciosController : Controller
                     resultado = "Crear";
 
                 }
-                else{
+                else
+                {
                     resultado = "repetir";
                 }
             }
-            else{
+            else
+            {
                 //BUSCAMOS EN LA TABLA SI EXISTE UNA CON LA MISMA DESCRIPCION Y DISTINTO ID DE REGISTRO AL QUE ESTAMOS EDITANDO
                 var servicioOriginal = _contexto.Servicios.Where(c => c.descripcion == descripcion && c.ServicioID != servicioID).Count();
                 // var categoriaIguales = categoriaOriginal.Where(c => c.CategoriaID == categoriaID).Count();
-                if(servicioOriginal == 0){
+                if (servicioOriginal == 0)
+                {
                     //crear variable que guarde el objeto segun el id deseado
                     var servicioEditar = _contexto.Servicios.Find(servicioID);
-                    if(servicioEditar != null){
+                    if (servicioEditar != null)
+                    {
                         servicioEditar.descripcion = descripcion;
                         _contexto.SaveChanges();
-                            resultado = "Crear";
+                        resultado = "Crear";
                     }
-                    
+
                 }
-                else{
+                else
+                {
                     resultado = "repetir";
                 }
-            }                          
+            }
         }
-        else{
+        else
+        {
             resultado = "faltas";
         }
 
@@ -89,27 +101,28 @@ public class ServiciosController : Controller
     }
 
 
-    public JsonResult Deshabilitar(int servicioID){
-     String resultado = "error";
-     var servicio = _contexto.Servicios.Where(c => c.ServicioID == servicioID).FirstOrDefault();
-    // var categoriaDeshabilitada = _contexto.Categorias.Where(c => c.Eliminado == true && c.CategoriaID == servicio.Categoria.CategoriaID).Count();
-    // var servicios = _contexto.Servicios.Where(s => s.Eliminado == false && s.ServicioID == servicioID).Count();
-   
+    public JsonResult Deshabilitar(int servicioID)
+    {
+        String resultado = "error";
+        var servicio = _contexto.Servicios.Where(c => c.ServicioID == servicioID).FirstOrDefault();
+        // var categoriaDeshabilitada = _contexto.Categorias.Where(c => c.Eliminado == true && c.CategoriaID == servicio.Categoria.CategoriaID).Count();
+        // var servicios = _contexto.Servicios.Where(s => s.Eliminado == false && s.ServicioID == servicioID).Count();
+
         if (servicio.Eliminado == true)
         {
             servicio.Eliminado = false;
-            
+
         }
         else
         {
             servicio.Eliminado = true;
-            
+
         }
         resultado = "cambiar";
-            
+
         _contexto.SaveChanges();
-    
-     return Json(resultado);
-}
+
+        return Json(resultado);
+    }
 }
 

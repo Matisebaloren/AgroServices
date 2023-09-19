@@ -1,161 +1,127 @@
 ﻿@{
-	ViewData["Title"] = "Home Page";
+  ViewData["Title"] = "Home Page";
 }
 
 <link rel="stylesheet" href="~/css/notices.css" asp-append-version="true" />
 
 
+@*SECCION CARDS*@
+<div class="contenedor-video">
+  <video autoplay loop muted playsinline class="video-fondo">
+    <source src="../../img/videoCampo.mp4" type="video/mp4">
+    Tu navegador no admite el elemento de video.
+  </video>
+  <div class="contenido-superpuesto">
+    <!-- Tu contenido aquí -->
+    <div class="d-flex flex-column text-white py-3 align-items-center">
+      <h4 class="h5 text-center">Sitio Web Online</h4>
+      <h1 class="font-weight-bold text-center pb-3">AgroServices</h1>
+    </div>
 
+    <!-- itens em blocos -->
+    <div id="cards-servicios" class="row py-4 justify-content-evenly">
+    </div>
+    <div class="d-flex justify-content-center">
+      <button id="toggleButton" class="btn-servicios">
+        <i class='bx bx-chevron-down'></i>
+      </button>
+    </div>
 
-@*SECCION NOTICIAS*@
-<div class="mb-3" style="background: url('https://blog.cresol.com.br/wp-content/uploads/2021/05/homem-com-neto-no-campo.jpg') top center / cover no-repeat;">
-	<div
-		style="width: 100%;height: 360px !important;background: linear-gradient(25deg,rgba(178, 197, 180, 0.096),rgba(150, 182, 154, 0.774)3));">
-	</div>
+  </div>
 </div>
 
-<!-- Inicio container -->
-<div class="container" style="margin-top: -310px;">
-	<div class="d-flex flex-column text-white py-3 align-items-center">
-		<h4 class="h5 text-center">Sitio Web Online</h4>
-		<h1 class="font-weight-bold text-center pb-3">AgroServices</h1>
-	</div>
 
-	<!-- itens em blocos -->
-	<div class="row py-4">
-		<div class="col-md-3 col-sm-6 pb-3 px-2 card-mobile">
-			<div class="card shadow rounded-lg">
-				<div href="#" class="card-body text-center">
-					<p><i class="grey-text fas fa-graduation-cap fa-3x"></i></p>
-					<h4 class="grey-text">Cosecha</h4>
-					<p></p>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-3 col-sm-6 pb-3 px-2 card-mobile">
-			<div class="card shadow rounded-lg">
-				<div href="#" class="card-body text-center">
-					<p><i class="grey-text far fa-calendar-alt fa-3x"></i></p>
-					<h4 class="grey-text">Picado</h4>
-					<p></p>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-3 col-sm-6 pb-3 px-2 card-mobile">
-			<div class="card shadow rounded-lg">
-				<div href="#" class="card-body text-center">
-					<p><i class="grey-text far fa-calendar-alt fa-3x"></i></p>
-					<h4 class="grey-text">Desmalezado</h4>
-					<p></p>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-3 col-sm-6 pb-3 px-2 card-mobile">
-			<div class="card shadow rounded-lg">
-				<div href="#" class="card-body text-center">
-					<p><i class="grey-text far fa-calendar-alt fa-3x"></i></p>
-					<h4 class="grey-text">Trillado</h4>
-					<p></p>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Fim itens em blocos -->
-</div>
+
+
 <!-- Container principal -->
 <div class="FondoGlass-1 my-5">
-	<div class="flex">
-		
-	</div>
+  <div class="flex">
 
-<div class="grid">
-  <label class="card">
-    <input class="card__input" type="checkbox"/>
-    <div class="card__body">
-      <div class="card__body-cover"><img class="card__body-cover-image" src="https://i.ibb.co/0F3SdsX/category-t.png"/><span class="card__body-cover-checkbox"> 
-        <svg class="card__body-cover-checkbox--svg" viewBox="0 0 12 10">
-          <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-        </svg></span>
+  </div>
+
+  <div class="grid">
+    <label class="card">
+      <input class="card__input" type="checkbox" />
+      <div class="card__body">
+        <div class="card__body-cover"><img class="card__body-cover-image"
+            src="https://i.ibb.co/0F3SdsX/category-t.png" /><span class="card__body-cover-checkbox">
+            <svg class="card__body-cover-checkbox--svg" viewBox="0 0 12 10">
+              <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+            </svg></span>
+        </div>
+        <header class="card__body-header">
+          <h4 class="card__body-header-title">Busco servicio de cosechado</h4>
+        </header>
       </div>
-      <header class="card__body-header">
-        <h4 class="card__body-header-title">Busco servicio de cosechado</h4>
-      </header>
-    </div>
-  </label>
-  <label class="card">
-    <input class="card__input" type="checkbox"/>
-    <div class="card__body">
-      <div class="card__body-cover"><img class="card__body-cover-image" src="https://i.ibb.co/0F3SdsX/category-t.png"/><span class="card__body-cover-checkbox"> 
-          <svg class="card__body-cover-checkbox--svg" viewBox="0 0 12 10">
-            <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-          </svg></span></div>
-      <header class="card__body-header">
-        <h4 class="card__body-header-title">Ofresco Picado de Maíz</h4>
-      </header>
-    </div>
-  </label>
-  <label class="card">
-    <input class="card__input" type="checkbox"/>
-    <div class="card__body">
-      <div class="card__body-cover"><img class="card__body-cover-image" src="https://i.ibb.co/0F3SdsX/category-t.png"/><span class="card__body-cover-checkbox"> 
-          <svg class="card__body-cover-checkbox--svg" viewBox="0 0 12 10">
-            <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-          </svg></span></div>
-      <header class="card__body-header">
-        <h4 class="card__body-header-title">Ofrezco servicio de Cosecha de lechuga</h2>
-      </header>
-    </div>
-  </label>
-  <label class="card">
-    <input class="card__input" type="checkbox"/>
-    <div class="card__body">
-      <div class="card__body-cover"><img class="card__body-cover-image" src="https://i.ibb.co/0F3SdsX/category-t.png"/><span class="card__body-cover-checkbox"> 
-          <svg class="card__body-cover-checkbox--svg" viewBox="0 0 12 10">
-            <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-          </svg></span></div>
-      <header class="card__body-header">
-        <h4 class="card__body-header-title">Desmalezado por hectárea</h4>
-      </header>
-    </div>
-  </label>
-  <label class="card">
-    <input class="card__input" type="checkbox"/>
-    <div class="card__body">
-      <div class="card__body-cover"><img class="card__body-cover-image" src="https://i.ibb.co/0F3SdsX/category-t.png"/><span class="card__body-cover-checkbox"> 
-          <svg class="card__body-cover-checkbox--svg" viewBox="0 0 12 10">
-            <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-          </svg></span></div>
-      <header class="card__body-header">
-        <h4 class="card__body-header-title">Transporte de grano</h4>
-      </header>
-    </div>
-  </label>
-  <label class="card">
-    <input class="card__input" type="checkbox" disabled="disabled"/>
-    <div class="card__body">
-      <div class="card__body-cover"><img class="card__body-cover-image" src="https://i.ibb.co/0F3SdsX/category-t.png"/><span class="card__body-cover-checkbox"> 
-          <svg class="card__body-cover-checkbox--svg" viewBox="0 0 12 10">
-            <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-          </svg></span></div>
-      <header class="card__body-header">
-        <h4 class="card__body-header-title">Other</h4>
-      </header>
-    </div>
-  </label>
-</div>
+    </label>
+    <label class="card">
+      <input class="card__input" type="checkbox" />
+      <div class="card__body">
+        <div class="card__body-cover"><img class="card__body-cover-image"
+            src="https://i.ibb.co/0F3SdsX/category-t.png" /><span class="card__body-cover-checkbox">
+            <svg class="card__body-cover-checkbox--svg" viewBox="0 0 12 10">
+              <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+            </svg></span></div>
+        <header class="card__body-header">
+          <h4 class="card__body-header-title">Ofresco Picado de Maíz</h4>
+        </header>
+      </div>
+    </label>
+    <label class="card">
+      @* <input class="card__input" type="checkbox" /> *@
+      <div class="card__body">
+        <div class="card__body-cover"><img class="card__body-cover-image"
+            src="https://i.ibb.co/0F3SdsX/category-t.png" /><span class="card__body-cover-checkbox">
+            <svg class="card__body-cover-checkbox--svg" viewBox="0 0 12 10">
+              <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+            </svg></span></div>
+        <header class="card__body-header">
+          <h4 class="card__body-header-title">Ofrezco servicio de Cosecha de lechuga</h2>
+        </header>
+      </div>
+    </label>
+    <label class="card">
+      <input class="card__input" type="checkbox" />
+      <div class="card__body">
+        <div class="card__body-cover"><img class="card__body-cover-image"
+            src="https://i.ibb.co/0F3SdsX/category-t.png" /><span class="card__body-cover-checkbox">
+            <svg class="card__body-cover-checkbox--svg" viewBox="0 0 12 10">
+              <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+            </svg></span></div>
+        <header class="card__body-header">
+          <h4 class="card__body-header-title">Desmalezado por hectárea</h4>
+        </header>
+      </div>
+    </label>
+    <label class="card">
+      <input class="card__input" type="checkbox" />
+      <div class="card__body">
+        <div class="card__body-cover"><img class="card__body-cover-image"
+            src="https://i.ibb.co/0F3SdsX/category-t.png" /><span class="card__body-cover-checkbox">
+            <svg class="card__body-cover-checkbox--svg" viewBox="0 0 12 10">
+              <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+            </svg></span></div>
+        <header class="card__body-header">
+          <h4 class="card__body-header-title">Transporte de grano</h4>
+        </header>
+      </div>
+    </label>
+    <label class="card">
+      <input class="card__input" type="checkbox" disabled="disabled" />
+      <div class="card__body">
+        <div class="card__body-cover"><img class="card__body-cover-image"
+            src="https://i.ibb.co/0F3SdsX/category-t.png" /><span class="card__body-cover-checkbox">
+            <svg class="card__body-cover-checkbox--svg" viewBox="0 0 12 10">
+              <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+            </svg></span></div>
+        <header class="card__body-header">
+          <h4 class="card__body-header-title">Other</h4>
+        </header>
+      </div>
+    </label>
+  </div>
 
-	@* FIN SECCION NOTICIAS ----------*@
-
-
-<script src="~/js/notices.js"></script>
-
-
-
-
-
-
-
-
-
-
-
+  @* FIN SECCION NOTICIAS ----------*@
+  @section Scripts{
+    <script src="~/js/home.js"></script>
+  }

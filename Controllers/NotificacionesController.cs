@@ -237,7 +237,7 @@ public class NotificacionesController : Controller
         }
 
         var solicitud = _contexto.Solicitudes.Include(s => s.Publicaciones).FirstOrDefault(s => s.SolicitudID == solicitudID);
-        if (solicitud != null && solicitud.Estado != 1 && solicitud.Estado != 2)
+        if (solicitud != null && solicitud.Estado != 1 && solicitud.Estado != 2 && solicitud.Estado != 4 && (estadoNuevo >= 0 && estadoNuevo <= 4))
         {
             if (usuario.UsuarioID == solicitud.UsuarioID)
             {

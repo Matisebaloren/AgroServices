@@ -28,7 +28,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Mukta:wght@300;400;600;700;800&family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
 
   @*LINK PARA EL BUSCADOR*@
-  <link rel="stylesheet" href="~/css/buscador.css" />
+  @* <link rel="stylesheet" href="~/css/buscador.css" /> *@
 </head>
 
 
@@ -135,11 +135,11 @@
 
             <ul class="menu_items submenu">
               <a asp-controller="Provincias" asp-action="Index" class="nav_link sublink">
-                <i class="bx bxs-map-pin"></i> Provincias</a>
+                <i class='bx bxs-map'></i> Provincias</a>
             </ul>
             <ul class="menu_items submenu">
               <a asp-controller="Localidades" asp-action="Index" class="nav_link sublink">
-                <i class="bx bxs-map-pin"></i> Localidades</a>
+                <i class='bx bxs-map'></i> Localidades</a>
             </ul>
             <ul class="menu_items submenu">
               <a asp-controller="Servicios" asp-action="Index" class="nav_link sublink">
@@ -176,7 +176,7 @@
 
 
     @*SCRIPT PARA BUSCADOR*@
-    <script defer src="~/js/buscador.js"></script>
+    @* <script defer src="~/js/buscador.js"></script> *@
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

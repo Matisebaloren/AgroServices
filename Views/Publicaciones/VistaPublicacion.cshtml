@@ -15,7 +15,8 @@
         <input type="hidden" id="usuarioID" value="@ViewBag.usuarioID">
 
         <div class="mensaje-intro">
-            Completa el formulario para solicitar el servicio. Una vez enviado, tus detalles y mensaje serán entregados al remitente. Te mantendremos informado sobre cualquier respuesta.
+          Completa el formulario para solicitar el servicio. Una vez enviado, tus detalles y mensaje serán entregados al
+          remitente. Te mantendremos informado sobre cualquier respuesta.
         </div>
         <hr>
         <div>
@@ -30,7 +31,7 @@
       </div>
     </div>
   </div>
-</div>  
+</div>
 
 
 
@@ -38,33 +39,34 @@
   <input type="hidden" id="PublicacionID" value=@ViewBag.publicacion.PublicacionID></input>
   <div class="row card-vista-publi">
     @* <div class="col-12 desaparecer">
-      <h2>@ViewBag.publicacion.Titulo</h2>
-      <p class="mt-2">@ViewBag.publicacion.Fecha</p>
-      <hr>
+    <h2>@ViewBag.publicacion.Titulo</h2>
+    <p class="mt-2">@ViewBag.publicacion.Fecha</p>
+    <hr>
 
-      <spam style="display: none;" id="" class="tag"></spam>
-      <hr>
-      
-      <div class="div-usuario">
-          <span>
-          <p id=User-name><i class="bx bx-user"></i>@ViewBag.username</p>
-          </span>
-      </div>
+    <spam style="display: none;" id="" class="tag"></spam>
+    <hr>
+
+    <div class="div-usuario">
+    <span>
+    <p id=User-name><i class="bx bx-user"></i>@ViewBag.username</p>
+    </span>
+    </div>
     </div> *@
     @* carosel de imagenes *@
     <div class="col-12 col-md-8">
-      <div id="carouselExampleFade" class="carousel slide my-3" style="border: 2px solid black; border-radius: 17px" data-bs-ride="carousel" data-bs-touch="true" data-bs-interval="false">
+      <div id="carouselExampleFade" class="carousel slide my-3" style="border: 2px solid black; border-radius: 17px"
+        data-bs-ride="carousel" data-bs-touch="true" data-bs-interval="false">
         <div class="carousel-inner" id="Lista_imagenes">
 
-            <!-- Agrega más elementos de carousel aquí -->
+          <!-- Agrega más elementos de carousel aquí -->
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
         </button>
         <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
         </button>
       </div>
     </div>
@@ -74,27 +76,41 @@
       <h2>@ViewBag.publicacion.Titulo</h2>
       <p class="mt-2">@ViewBag.publicacion.Fecha</p>
       <hr>
+
       @* tags *@
       <spam style="display: none;" id="tags" class="tag"></spam>
       <hr>
       @* usuario *@
       <div class="div-usuario">
-          <span>
+        <span>
           <p id=User-name><i class="bx bx-user"></i>@ViewBag.username</p>
-          </span>
+        </span>
+      </div>
+      <div id="btn-editar" style="display: none;" class="div-boton-der my-3">
+        <a class="btn btn-success" asp-controller="Publicaciones" asp-action="Formulario"
+          asp-route-id=@ViewBag.publicacion.PublicacionID>Editar</a>
+        @* <button onclick=Editar() class="btn btn-success">EDITAR</button> *@
       </div>
     </div>
     @* descripcion *@
     <div id="descripcion"></div>
 
     <div id="btn-solicitud" class="div-boton-der my-3">
-        <button onclick=nuevaSolicitud() class="btn btn-success"> @{if(ViewBag.publicacion.EsOferta){<p class="m-0">SOLICITAR SERVICIO</p>}else{<p class="m-0">OFERTAR SERVICIO</p>}} </button>
+      <button onclick=nuevaSolicitud() class="btn btn-success"> @{
+          if (ViewBag.publicacion.EsOferta)
+          {
+            <p class="m-0">
+              SOLICITAR SERVICIO</p>
+          }
+          else
+          {
+            <p class="m-0">OFERTAR SERVICIO</p>
+          }
+        }
+      </button>
     </div>
 
-    <div id="btn-editar" style="display: none;" class="div-boton-der my-3">
-      <a class="btn btn-success" asp-controller="Publicaciones" asp-action="Formulario" asp-route-id=@ViewBag.publicacion.PublicacionID>EDITAR</a>
-      @* <button onclick=Editar() class="btn btn-success">EDITAR</button> *@
-    </div>
+
 
     @* caja valoraciones y Valoracion general de 1 a 5 estrellas *@
   </div>
@@ -102,13 +118,29 @@
 
 
   <div class="comentarios-container" id="Valoraciones">
-  <h2>Valoraciones</h2>
-</div>
-
-  @*BOTON PARA VOLVER A LA LISTA PUBLICACIONES GENERAL*@
-  <div id="btn-volver" class="div-boton-der my-3">
-    <buttom onclick="volver()" class="btn btn-success" ><i class='bx bx-arrow-back'></i>VOLVER</buttom>
+    <h2>Valoraciones</h2>
+    <div class="comentario-contenido">
+      <div class="comentario-header">
+        <p class="nombre-usuario">Danos tu valoración:</p>
+        <div id="inputValoracion" class="valoracion">
+          <i class="bx bxs-star"></i>
+          <i class="bx bxs-star"></i>
+          <i class="bx bxs-star"></i>
+          <i class="bx bxs-star"></i>
+          <i class="bx bxs-star"></i>
+        </div>
+      </div>
+      <textarea name="" rows="4" placeholder="Comparte tus experiencia al participar en esta publicación..." id="Contenido"></textarea>
+      <div id="btn-volver" class="div-boton-der my-3">
+        <button onclick="enviarValoracion()" class="btn btn-success">Guardar</button>
+      </div>
+    </div>
   </div>
+
+@*BOTON PARA VOLVER A LA LISTA PUBLICACIONES GENERAL*@
+<div id="btn-volver" class="div-boton-der my-3">
+  <buttom onclick="volver()" class="btn btn-success"><i class='bx bx-arrow-back'></i>Volver</buttom>
+</div>
 </div>
 @section Scripts{
   <script src="~/js/tablas/vista-1.0.0.js"></script>

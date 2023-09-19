@@ -6,8 +6,6 @@ var publicacionID = $("#PublicacionID").val();
 
 window.onload = BuscarPublicaciones();
 
-
-
 function BuscarPublicaciones() {
   BuscarValoraciones();
   var publicacionID = $("#PublicacionID").val();
@@ -173,15 +171,17 @@ function EnviarSolicitud() {
 }
 
 function enviarValoracion() {
-  contenido = $("contenido").val();
+  contenido = $("#Contenido").val();
+  console.log(contenido);
+  puntuacion = selectValor;
   $.ajax({
-    url: "../../Valoraciones/crearValoracion",
+    url: "../../Valoraciones/GuardarValoracion",
     data: {
       publicacionID: publicacionID,
       contenido: contenido,
-      usuarioID: usuarioID,
+      puntuacion: puntuacion
     },
-    type: "GET",
+    type: "POST",
     dataType: "json",
     success: function (tags) {},
     error: function (xhr, status) {
@@ -189,23 +189,23 @@ function enviarValoracion() {
     },
   });
 }
-function enviarSolicitud() {
-  descripcion = $("#descripcionSolicitud").val();
-  $.ajax({
-    url: "../../Solicitudes/GuardarSolicitud",
-    data: {
-      publicacionID: publicacionID,
-      descripcion: descripcion,
-      usuarioID: usuarioID,
-    },
-    type: "GET",
-    dataType: "json",
-    success: function (tags) {},
-    error: function (xhr, status) {
-      alert("Error al cargar valoracion");
-    },
-  });
-}
+// function enviarSolicitud() {
+//   descripcion = $("#descripcionSolicitud").val();
+//   $.ajax({
+//     url: "../../Solicitudes/GuardarSolicitud",
+//     data: {
+//       publicacionID: publicacionID,
+//       descripcion: descripcion,
+//       usuarioID: usuarioID,
+//     },
+//     type: "GET",
+//     dataType: "json",
+//     success: function (tags) {},
+//     error: function (xhr, status) {
+//       alert("Error al cargar valoracion");
+//     },
+//   });
+// }
 
 function BuscarValoraciones() {
   console.log("prueba valoraciones:" + publicacionID);
@@ -217,8 +217,6 @@ function BuscarValoraciones() {
     type: "GET",
     dataType: "json",
     success: function (valoraciones) {
-
-      
       let texto = "";
       $.each(valoraciones, function (index, valoracion) {
         var fechaMoment = moment(valoracion.fecha, "YYYY-MM-DDTHH:mm:ss.SS");
@@ -232,7 +230,9 @@ function BuscarValoraciones() {
                 </div>
               </div>
               <p class="texto-comentario">${valoracion.contenido}</p>
-              <p class="fecha-comentario">Publicado el ${fechaMoment.format('D [de] MMMM, YYYY')}</p>
+              <p class="fecha-comentario">Publicado el ${fechaMoment.format(
+                "D [de] MMMM, YYYY"
+              )}</p>
             </div>
           </div>
         `;
@@ -254,23 +254,71 @@ function generarIconos(valor) {
 
   // Determinar el número de iconos llenos, medios llenos y vacíos
   const iconosLlenos = Math.floor(valor / 2);
-  const iconoMedia = valor % 2 === 1 ? iconoMediaLlena : '';
-  const iconosVacios = 5 - iconosLlenos - (iconoMedia === '' ? 0 : 1);
+  const iconoMedia = valor % 2 === 1 ? iconoMediaLlena : "";
+  const iconosVacios = 5 - iconosLlenos - (iconoMedia === "" ? 0 : 1);
 
   // Agregar iconos llenos
   for (let i = 0; i < iconosLlenos; i++) {
-      iconos.push(iconoLlena);
+    iconos.push(iconoLlena);
   }
 
   // Agregar icono medio lleno si es necesario
-  if (iconoMedia !== '') {
-      iconos.push(iconoMedia);
+  if (iconoMedia !== "") {
+    iconos.push(iconoMedia);
   }
 
   // Agregar iconos vacíos
   for (let i = 0; i < iconosVacios; i++) {
-      iconos.push(iconoVacia);
+    iconos.push(iconoVacia);
   }
 
-  return iconos.join(''); // Convertir el arreglo a una cadena de iconos
+  return iconos.join(""); // Convertir el arreglo a una cadena de iconos
 }
+
+const stars = document.querySelectorAll("#inputValoracion i");
+console.log(stars.length);
+stars.forEach((star, index) => {
+  star.addEventListener("mousemove", function (event) {
+    const starRect = star.getBoundingClientRect();
+    const centerx = (starRect.left + starRect.right) / 2;
+    const touchX = event.clientX;
+    var valor = index * 2;
+    if (touchX < centerx) {
+      valor = valor + 1;
+    } else {
+      valor = valor + 2;
+    }
+    showValoracion(valor);
+    hoverValor = valor;
+  });
+  star.addEventListener("click", function (event) {
+    selectValor = hoverValor;
+  });
+  star.addEventListener("mouseleave", function () {
+    showValoracion(selectValor);
+  });
+});
+
+var hoverValor = 10;
+var selectValor = 10;
+
+function showValoracion(valor) {
+  stars.forEach((star, index) => {
+    i = (index + 1) * 2;
+    console.log(valor + " " + i);
+
+    star.className = "";
+    if (valor >= i) {
+      console.log("mayor");
+      star.classList.add("bx", "bxs-star");
+    } else {
+      if (valor == i - 1) {
+        star.classList.add("bx", "bxs-star-half");
+      } else {
+        console.log("menor o igual");
+        star.classList.add("bx", "bx-star");
+      }
+    }
+  });
+}
+function seleccionarValor(valor) {}

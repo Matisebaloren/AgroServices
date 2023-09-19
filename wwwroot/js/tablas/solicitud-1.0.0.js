@@ -152,24 +152,7 @@ function modalCancelar(id) {
   $("#btn-cancelar").html(tipo);
   $("#modalCancelar").modal("show");
   $("#btn-cancelar").click(function () {
-    cancelar(id);
-  });
-}
-
-function cancelar(id) {
-  $.ajax({
-    url: "../../Notificaciones/ModificarSolicitud",
-    type: "POST",
-    data: { solicitudID: id, estadoNuevo: 1 },
-    async: true,
-    success: function (resultado) {
-      $("#modalCancelar").modal("hide");
-      BuscarSolicitudes(); // Actualizar la tabla
-    },
-    cache: false,
-    error: function (xhr, status) {
-      console.log("Disculpe, existió un problema");
-    },
+    actualizarSolicitud(id, 1);
   });
 }
 
@@ -177,11 +160,20 @@ function modalConcretar(id) {
   let solicitud = listaSolicitudes.find((s) => s.solicitudID === id);
   $("#modalConcretar .modal-title").html(`Cocretar solicitud`);
   $("#modalConcretar .modal-body").html(
-    `A continuación, se procederá a concretar el servicio relacionado con <strong>"${solicitud.publicacionTitulo}"</strong>. Este paso permite a los participantes en el servicio proporcionar sus valoraciones, lo que beneficia tanto a quienes brindan el servicio como al solicitante. `
+    `<p>
+    A continuación, se procederá a concretar el servicio relacionado con <strong>"${solicitud.publicacionTitulo}"</strong>. Este paso es esencial ya que permite a los participantes en el servicio proporcionar sus valoraciones y comentarios sobre la experiencia.
+  </p>
+  <p>
+    Las valoraciones y comentarios son valiosos tanto para quienes brindan el servicio como para el solicitante. Ayudan a construir la reputación de los usuarios y a mantener la calidad de los servicios en nuestra plataforma.
+  </p>
+  <p>
+    ¿Estás seguro de que deseas concretar esta solicitud?
+  </p>`
   );
   $("#modalConcretar").modal("show");
+  $("#btn-concretar").html("Concretar solicitud");
   $("#btn-concretar").click(function () {
-    concretar(id);
+    actualizarSolicitud(id, 4);
   });
 }
 
@@ -189,36 +181,31 @@ function modalAceptar(id) {
   let solicitud = listaSolicitudes.find((s) => s.solicitudID === id);
   $("#modalConcretar .modal-title").html(`Aceptar Solcitud`);
   $("#modalConcretar .modal-body").html(
-    `A continuación, se procederá a concretar el servicio relacionado con <strong>"${solicitud.publicacionTitulo}"</strong>. Este paso permite a los participantes en el servicio proporcionar sus valoraciones, lo que beneficia tanto a quienes brindan el servicio como al solicitante. `
+  `<p>
+    Al aceptar esta solicitud relacionada con el servicio <strong>"${solicitud.publicacionTitulo}"</strong>, estás confirmando tu compromiso de avanzar con la transacción acordada.
+  </p>
+  <p>
+    Una vez que se complete el trabajo, podrás marcar la solicitud como "Concretada" y permitir que tanto tú como el solicitante califiquen y valoren la experiencia. Esto ayuda a mantener la confianza y la transparencia en nuestra plataforma.
+  </p>
+  <p>
+    ¿Estás seguro de que deseas aceptar esta solicitud?
+  </p>`
   );
   $("#modalConcretar").modal("show");
+  $("#btn-concretar").html("Aceptar solicitud");
   $("#btn-concretar").click(function () {
-    aceptar(id);
+    actualizarSolicitud(id, 3);
   });
 }
 
-function concretar(id) {
+function actualizarSolicitud(id, newState) {
+  $("#modalConcretar").modal("hide");
+  $("#modalCancelar").modal("hide");
+  console.log(newState);
   $.ajax({
     url: "../../Notificaciones/ModificarSolicitud",
     type: "POST",
-    data: { solicitudID: id, estadoNuevo: 4 },
-    async: true,
-    success: function (resultado) {
-      $("#modalCancelar").modal("hide");
-      BuscarSolicitudes(); // Actualizar la tabla
-    },
-    cache: false,
-    error: function (xhr, status) {
-      console.log("Disculpe, existió un problema");
-    },
-  });
-}
-
-function aceptar(id) {
-  $.ajax({
-    url: "../../Notificaciones/ModificarSolicitud",
-    type: "POST",
-    data: { solicitudID: id, estadoNuevo: 3 },
+    data: { solicitudID: id, estadoNuevo: newState},
     async: true,
     success: function (resultado) {
       $("#modalCancelar").modal("hide");
