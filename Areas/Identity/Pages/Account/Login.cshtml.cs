@@ -55,14 +55,14 @@ namespace AgroServices.Areas.Identity.Pages.Account
         {
             /// <summary>
             /// </summary>
-            [Required]
+            [Required(ErrorMessage = "Por favor, ingrese su usuario o Email.")]
             [Display(Name = "Email")]
             // [EmailAddress]
             public string Email { get; set; }
 
             /// <summary>
             /// </summary>
-            [Required]
+            [Required(ErrorMessage = "Por favor, ingrese su contraseña.")]
             [Display(Name = "Contraseña")]
             [DataType(DataType.Password)]
             public string Password { get; set; }

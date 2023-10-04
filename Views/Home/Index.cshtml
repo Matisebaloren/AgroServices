@@ -7,19 +7,23 @@
 
 @*SECCION CARDS*@
 <div class="contenedor-video">
-  <video autoplay loop muted playsinline class="video-fondo">
-    <source src="../../img/videoCampo.mp4" type="video/mp4">
-    Tu navegador no admite el elemento de video.
-  </video>
+  @* <video autoplay loop muted playsinline class="video-fondo">
+  <source src="../../img/videoCampo.mp4" type="video/mp4">
+  Tu navegador no admite el elemento de video.
+  </video> *@
   <div class="contenido-superpuesto">
     <!-- Tu contenido aquí -->
     <div class="d-flex flex-column text-white py-3 align-items-center">
+
+      @* <h1 class="font-weight-bold text-center pb-3">AgroServices</h1> *@
+      <div class="div-logo">
+        <img src="../../img/icono-verde2.png" alt="">
+      </div>
       <h4 class="h5 text-center">Sitio Web Online</h4>
-      <h1 class="font-weight-bold text-center pb-3">AgroServices</h1>
     </div>
 
     <!-- itens em blocos -->
-    <div id="cards-servicios" class="row py-4 justify-content-evenly">
+    <div id="cards-servicios" class="row py-4 px-2 justify-content-evenly">
     </div>
     <div class="d-flex justify-content-center">
       <button id="toggleButton" class="btn-servicios">
@@ -30,98 +34,36 @@
   </div>
 </div>
 
-
-
-
 <!-- Container principal -->
-<div class="FondoGlass-1 my-5">
-  <div class="flex">
+<div class="FondoGlass-1 div-reciente my-4 pt-3">
+  <h2 class="mb-3 mx-auto title-reciente">Publicaciones Recientes</h2>
 
-  </div>
-
-  <div class="grid">
+  <div class="grid" id="grid-Publicaciones">
     <label class="card">
-      <input class="card__input" type="checkbox" />
       <div class="card__body">
         <div class="card__body-cover"><img class="card__body-cover-image"
-            src="https://i.ibb.co/0F3SdsX/category-t.png" /><span class="card__body-cover-checkbox">
-            <svg class="card__body-cover-checkbox--svg" viewBox="0 0 12 10">
-              <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-            </svg></span>
+            src="https://i.ibb.co/0F3SdsX/category-t.png" /></span>
         </div>
         <header class="card__body-header">
           <h4 class="card__body-header-title">Busco servicio de cosechado</h4>
         </header>
       </div>
     </label>
+
     <label class="card">
-      <input class="card__input" type="checkbox" />
       <div class="card__body">
         <div class="card__body-cover"><img class="card__body-cover-image"
-            src="https://i.ibb.co/0F3SdsX/category-t.png" /><span class="card__body-cover-checkbox">
-            <svg class="card__body-cover-checkbox--svg" viewBox="0 0 12 10">
-              <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-            </svg></span></div>
+            src="https://i.ibb.co/0F3SdsX/category-t.png" /></span>
+        </div>
         <header class="card__body-header">
-          <h4 class="card__body-header-title">Ofresco Picado de Maíz</h4>
-        </header>
-      </div>
-    </label>
-    <label class="card">
-      @* <input class="card__input" type="checkbox" /> *@
-      <div class="card__body">
-        <div class="card__body-cover"><img class="card__body-cover-image"
-            src="https://i.ibb.co/0F3SdsX/category-t.png" /><span class="card__body-cover-checkbox">
-            <svg class="card__body-cover-checkbox--svg" viewBox="0 0 12 10">
-              <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-            </svg></span></div>
-        <header class="card__body-header">
-          <h4 class="card__body-header-title">Ofrezco servicio de Cosecha de lechuga</h2>
-        </header>
-      </div>
-    </label>
-    <label class="card">
-      <input class="card__input" type="checkbox" />
-      <div class="card__body">
-        <div class="card__body-cover"><img class="card__body-cover-image"
-            src="https://i.ibb.co/0F3SdsX/category-t.png" /><span class="card__body-cover-checkbox">
-            <svg class="card__body-cover-checkbox--svg" viewBox="0 0 12 10">
-              <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-            </svg></span></div>
-        <header class="card__body-header">
-          <h4 class="card__body-header-title">Desmalezado por hectárea</h4>
-        </header>
-      </div>
-    </label>
-    <label class="card">
-      <input class="card__input" type="checkbox" />
-      <div class="card__body">
-        <div class="card__body-cover"><img class="card__body-cover-image"
-            src="https://i.ibb.co/0F3SdsX/category-t.png" /><span class="card__body-cover-checkbox">
-            <svg class="card__body-cover-checkbox--svg" viewBox="0 0 12 10">
-              <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-            </svg></span></div>
-        <header class="card__body-header">
-          <h4 class="card__body-header-title">Transporte de grano</h4>
-        </header>
-      </div>
-    </label>
-    <label class="card">
-      <input class="card__input" type="checkbox" disabled="disabled" />
-      <div class="card__body">
-        <div class="card__body-cover"><img class="card__body-cover-image"
-            src="https://i.ibb.co/0F3SdsX/category-t.png" /><span class="card__body-cover-checkbox">
-            <svg class="card__body-cover-checkbox--svg" viewBox="0 0 12 10">
-              <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-            </svg></span></div>
-        <header class="card__body-header">
-          <h4 class="card__body-header-title">Other</h4>
+          <h4 class="card__body-header-title">Busco servicio de cosechado</h4>
         </header>
       </div>
     </label>
   </div>
+</div>
 
-  @* FIN SECCION NOTICIAS ----------*@
-  @section Scripts{
-    <script src="~/js/home.js"></script>
-  }
+@* FIN SECCION NOTICIAS ----------*@
+@section Scripts{
+  <script src="~/js/home.js"></script>
+}

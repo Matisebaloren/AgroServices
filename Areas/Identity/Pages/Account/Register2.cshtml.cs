@@ -85,8 +85,8 @@ namespace AgroServices.Areas.Identity.Pages.Account
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
-            [EmailAddress]
+            [Required(ErrorMessage = "Por favor, ingresa tu dirección de correo electrónico.")]
+            [EmailAddress(ErrorMessage = "El correo electrónico ingresado no es válido.")]
             [Display(Name = "Email")]
             public string Email { get; set; }
 
@@ -94,8 +94,9 @@ namespace AgroServices.Areas.Identity.Pages.Account
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [Required(ErrorMessage = "Por favor, ingresa tu contraseña.")]
+            [RegularExpression(@"^(?=.*[A-Za-z])(?=.*\d).+$", ErrorMessage = "El campo {0} debe contener al menos una letra y un número.")]
+            [StringLength(15, ErrorMessage = "El campo {0} debe tener al menos {2} y como máximo {1} caracteres de longitud.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Contraseña")]
             public string Password { get; set; }
@@ -106,21 +107,21 @@ namespace AgroServices.Areas.Identity.Pages.Account
             /// </summary>
             [DataType(DataType.Password)]
             [Display(Name = "Confirmar Contraseña")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            [Compare("Password", ErrorMessage = "La contraseña y la confirmación de contraseña no coinciden.")]
             public string ConfirmPassword { get; set; }
 
             // desde aca toco
-            [Required]
+            [Required(ErrorMessage = "Por favor, ingresa tu nombre de usuario.")]
             [Display(Name = "Usuario")]
             [Compare("UserName", ErrorMessage = "usuario sin especificar.")]
             public string UserName { get; set; }
 
             // [StringLength(10, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 9)]
-          /*   [Display(Name = "Telefono")]
-            [Compare("PhoneNumber", ErrorMessage = "No PhoneNumber is specified.")]
-            public string PhoneNumber { get; set; } */
+            /*   [Display(Name = "Telefono")]
+              [Compare("PhoneNumber", ErrorMessage = "No PhoneNumber is specified.")]
+              public string PhoneNumber { get; set; } */
 
-            [Required]
+            [Required(ErrorMessage = "Por favor, Selecciona una ciudad")]
             [Display(Name = "Localidad")]
             [Compare("LocalidadID", ErrorMessage = "Localidad sin especificar.")]
             public int LocalidadID { get; set; }
@@ -142,7 +143,7 @@ namespace AgroServices.Areas.Identity.Pages.Account
             {
                 var user = CreateUser();
                 // Se coloca numero de telefono
-               /*  user.PhoneNumber = Input.PhoneNumber; */
+                /*  user.PhoneNumber = Input.PhoneNumber; */
                 // hasta aca
                 await _userStore.SetUserNameAsync(user, Input.UserName, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
@@ -219,5 +220,5 @@ namespace AgroServices.Areas.Identity.Pages.Account
 
     }
 
-    
+
 }

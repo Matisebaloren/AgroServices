@@ -2,8 +2,11 @@
 using Microsoft.AspNetCore.Mvc;
 using AgroServices.Data;
 using AgroServices.Models;
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace AgroServices.Controllers;
+
 
 public class ServiciosController : Controller
 {
@@ -15,7 +18,7 @@ public class ServiciosController : Controller
         _logger = logger;
         _contexto = contexto;
     }
-
+[Authorize(Roles = "Administrador")]
     public IActionResult Index()
     {
         return View();

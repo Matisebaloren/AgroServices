@@ -54,7 +54,10 @@ public class PublicacionesController : Controller
         return View("Formulario");
     }
 
-    public async Task<IActionResult> BuscarPublicacion(int publicacionID = 0)
+
+
+    // public async Task<IActionResult> BuscarPublicacion(int publicacionID = 0)
+    public JsonResult BuscarPublicacion(int publicacionID = 0)
     {
         var usuarioIDActual = _userManager.GetUserId(HttpContext.User);
 
@@ -79,8 +82,10 @@ public class PublicacionesController : Controller
 
         // var imagenes = BuscarImagenes(publicacionID); // Pasa el publicacionID a la función
         var etiquetas = _contexto.Etiquetas.Where(x => x.PublicacionID == publicacionID).ToList();
+        var imagenes = BuscarImagenes(publicacionID);
         var resultado = new
         {
+            
             Publicacion = new
             {
                 PublicacionID = publicacionBD.PublicacionID,
@@ -89,7 +94,8 @@ public class PublicacionesController : Controller
                 Descripcion = publicacionBD.Descripcion,
                 EsOferta = publicacionBD.EsOferta
             },
-            Etiquetas = etiquetas
+            Etiquetas = etiquetas,
+            // Imagenes = imagenes,
         };
         return Json(resultado);
     }
@@ -144,9 +150,7 @@ public class PublicacionesController : Controller
         return Json(imagenes);
     }
 
-
-
-    public JsonResult BuscarPublicaciones(int publicacionID = 0, int pagina = 1, int elementosPorPagina = 10, int limite = 0)
+    public JsonResult BuscarPublicaciones(int publicacionID = 0, int pagina = 1, int elementosPorPagina = 10)
     {
         var publicaciones = _contexto.Publicaciones.ToList();
         publicaciones = publicaciones.OrderByDescending(p => p.Fecha).ToList();
@@ -171,13 +175,25 @@ public class PublicacionesController : Controller
     }
 
     // anexar publi, img, tags
-    public JsonResult GuardarPublicacion(int publicacionID, string titulo, string descripcion, bool esOferta, int usuarioID, string resumen)
+    public JsonResult GuardarPublicacion(int publicacionID, string titulo, string descripcion, bool esOferta, string resumen)
     {
+        var usuarioIDActual = _userManager.GetUserId(HttpContext.User);
+        if (usuarioIDActual == null)
+        {
+            return Json(new { error = "Usuario no registrado" });
+        }
+
+        var usuario = _contexto.Usuarios.FirstOrDefault(u => u.ASP_UserID == usuarioIDActual);
+        if (usuario == null)
+        {
+            return Json(new { error = "Usuario no inicializado" });
+        }
+
         // >0: crear   0: editar   -1: faltan rellenar campos  -2: error
         int resultado = -2;
 
         //verificamos si Nombre esta completo
-        if (!string.IsNullOrEmpty(titulo) || !string.IsNullOrEmpty(descripcion) || !esOferta || !string.IsNullOrEmpty(resumen))
+        if (!string.IsNullOrEmpty(titulo) || !string.IsNullOrEmpty(descripcion) || !string.IsNullOrEmpty(resumen))
         {
             //SI ES 0 QUIERE DECIR QUE ESTA CREANDO EL ELEMENTO
             if (publicacionID == 0)
@@ -189,7 +205,7 @@ public class PublicacionesController : Controller
                     Titulo = titulo,
                     Descripcion = descripcion,
                     EsOferta = esOferta,
-                    UsuarioID = usuarioID,
+                    UsuarioID = usuario.UsuarioID,
                     Fecha = hoy,
                     Resumen = resumen
                 };

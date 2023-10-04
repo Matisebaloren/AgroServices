@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace AgroServices.Controllers;
 
+ 
 public class UsuariosController : Controller
 {
     private readonly UserManager<IdentityUser> _userManager;
@@ -22,6 +23,7 @@ public class UsuariosController : Controller
         _userManager = userManager;
     }
 
+    [Authorize(Roles = "Administrador")]
     public IActionResult Index()
     {
         var localidades = _contexto.Localidades.Where(c => c.Eliminado == false).ToList();

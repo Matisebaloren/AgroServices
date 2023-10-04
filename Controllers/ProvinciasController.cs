@@ -2,9 +2,12 @@
 using Microsoft.AspNetCore.Mvc;
 using AgroServices.Data;
 using AgroServices.Models;
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace AgroServices.Controllers;
 
+[Authorize(Roles = "Administrador")]
 public class ProvinciasController : Controller
 {
     private readonly ILogger<ProvinciasController> _logger;

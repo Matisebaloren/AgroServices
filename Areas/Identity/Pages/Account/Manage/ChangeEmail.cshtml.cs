@@ -79,7 +79,7 @@ namespace AgroServices.Areas.Identity.Pages.Account.Manage
 
             await _signInManager.RefreshSignInAsync(user);
             _logger.LogInformation("User changed their email successfully.");
-            StatusMessage = "Your email has been changed.";
+            StatusMessage = "Tu email ha sido cambiado.";
 
             return RedirectToPage();
         }

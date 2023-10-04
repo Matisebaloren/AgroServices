@@ -1,16 +1,14 @@
 let tagsActive = [];
 let serviciosDisp = [];
 let publicacionID = $("#PublicacionID").val();
-let usuarioID = $("#usuarioID").val();
 
 console.log(publicacionID + " este es el id de publicacion");
-console.log(usuarioID + " este es el id del usuario");
 
 window.onload = () => {
-  BuscarPublicacion2(publicacionID);
+  BuscarPublicacion(publicacionID);
 };
 
-const BuscarPublicacion2 = (publicacionID = 0) => {
+const BuscarPublicacion = (publicacionID = 0) => {
   BuscarServicios();
   if (publicacionID != 0) {
     $("#btn-cambiar").show();
@@ -24,7 +22,7 @@ const BuscarPublicacion2 = (publicacionID = 0) => {
         if (resultado.publicacion) {
           BuscarImagenes(publicacionID);
           resultado.etiquetas.forEach((tag) => {
-            console.log("tag: "+tag);
+            console.log("tag: " + tag);
             if (!tag.eliminado) {
               AñadirEtiqueta(tag.servicioID);
             }
@@ -45,7 +43,7 @@ const BuscarPublicacion2 = (publicacionID = 0) => {
         if (xhr && xhr.responseJSON && xhr.responseJSON.error) {
           errorMessage += ": " + xhr.responseJSON.error;
         } else {
-          errorMessage += ". Detalles del error: " + xhr.statusText;
+          errorMessage += ". Detalles del error: " + xhr.statusText + status;
         }
 
         alert(errorMessage);
@@ -53,17 +51,6 @@ const BuscarPublicacion2 = (publicacionID = 0) => {
     });
   } else {
     $("#divImagenes").hide();
-  }
-};
-
-const BuscarPublicacion = (publicacionID = 0) => {
-  BuscarServicios();
-  if (publicacionID == 0) {
-  }
-  if (publicacionID !== 0) {
-    BuscarTagsActivos(publicacionID);
-    BuscarImagenes();
-    BuscarInformacionPublicacion(publicacionID);
   }
 };
 
@@ -81,25 +68,6 @@ const BuscarServicios = () => {
   });
 };
 
-const BuscarTagsActivos = (publicacionID) => {
-  $.ajax({
-    url: "../../Publicaciones/BuscarTagsActivos",
-    data: { publicacionID: publicacionID },
-    type: "GET",
-    dataType: "json",
-    success: (etiquetas) => {
-      etiquetas.forEach((tag) => {
-        if (!tag.eliminado) {
-          AñadirEtiqueta(tag.servicioID);
-        }
-      });
-    },
-    error: (xhr, status) => {
-      alert("Error al cargar etiquetas");
-    },
-  });
-};
-
 const BuscarImagenes = () => {
   $("#Lista_imagenes").empty();
   $.ajax({
@@ -110,12 +78,11 @@ const BuscarImagenes = () => {
     success: (imagenes) => {
       let clase = "active";
       if (imagenes.length === 0) {
-        // Código para mostrar la imagen por defecto
       }
       imagenes.forEach((item) => {
         let imagen = "<td></td>";
         if (item.imagenBase64) {
-          imagen = `<center><input hidden name="id" value="${item.imagenID}"></input><img src="data:${item.tipoImagen};base64, ${item.imagenBase64}" style="height: 35vw; display: block"/></center>`;
+          imagen = `<input hidden name="id" value="${item.imagenID}"></input><img src="data:${item.tipoImagen};base64, ${item.imagenBase64}"/>`;
         }
         $("#Lista_imagenes").append(
           `<div class="carousel-item ${clase}" >
@@ -131,40 +98,9 @@ const BuscarImagenes = () => {
   });
 };
 
-const BuscarInformacionPublicacion = (publicacionID) => {
-  if (publicacionID > 0) {
-    $("#btn-cambiar").show();
-    $.ajax({
-      url: "../../Publicaciones/BuscarPublicaciones",
-      data: { publicacionID: publicacionID },
-      type: "GET",
-      dataType: "json",
-      success: (publicaciones) => {
-        if (publicaciones.length > 0) {
-          const publicacion = publicaciones[0];
-          $("#EsOferta").val(publicacion.esOferta ? "1" : "2");
-          seleccionarTipo(publicacion.esOferta ? "1" : "2");
-          $("#UsuarioID").val(publicacion.usuarioID);
-          $("#Titulo").val(publicacion.titulo);
-          $("#Resumen").val(publicacion.resumen);
-          // $("#descripcion").InnerHtML(publicacion.descripcion);
-          tinymce.activeEditor.setContent(publicacion.descripcion);
-        } else {
-          publicacionID = 0;
-        }
-      },
-      error: (xhr, status) => {
-        alert("Error al cargar publicaciones");
-      },
-    });
-  }
-};
-
 function GuardarPublicacion() {
   //JAVASCRIPT
-
-  var contenido = tinymce.activeEditor.getContent();
-  console.log("descripcion:" + contenido);
+  var descripcion = tinymce.activeEditor.getContent();
   let esOferta = null;
   let titulo = $("#Titulo").val();
   let resumen = $("#Resumen").val();
@@ -173,8 +109,8 @@ function GuardarPublicacion() {
   } else {
     esOferta = false;
   }
-
-  if (titulo && descripcion && esOferta > 0 && resumen) {
+  console.log(titulo, descripcion, esOferta, resumen);
+  if (titulo && descripcion && esOferta != null && resumen) {
     $.ajax({
       // la URL para la petición
       url: "../../Publicaciones/GuardarPublicacion",
@@ -182,10 +118,9 @@ function GuardarPublicacion() {
       // (también es posible utilizar una cadena de datos)
       data: {
         publicacionID: publicacionID,
-        descripcion: contenido,
+        descripcion: descripcion,
         esOferta: esOferta,
         titulo: titulo,
-        usuarioID: usuarioID,
         resumen: resumen,
       },
       // especifica si será una petición POST o GET
@@ -386,34 +321,6 @@ function QuitarTag(id) {
   // tagsActive = tagsActive.filter((tags) => tags.servicioID != id);
   actualizarTag();
 }
-
-// $("#div-imagenes").hide();
-
-// function CambiarSeccion() {
-//   $("#div-main").addClass("animate__slideOutUp");
-//   setTimeout(() => {
-//     $("#div-datos").hide();
-//     $("#div-imagenes").show();
-//     $("#div-main").removeClass("animate__slideOutUp");
-//     $("#div-main").addClass("animate__slideInUp");
-//     setTimeout(() => {
-//       $("#div-main").removeClass("animate__slideInUp");
-//     }, 1000);
-//   }, 1000);
-// }
-
-// function CambiarSeccion2() {
-//   $("#div-main").addClass("animate__slideOutDown");
-//   setTimeout(() => {
-//     $("#div-datos").show();
-//     $("#div-imagenes").hide();
-//     $("#div-main").removeClass("animate__slideOutDown");
-//     $("#div-main").addClass("animate__slideInDown");
-//     setTimeout(() => {
-//       $("#div-main").removeClass("animate__slideInDown");
-//     }, 1500);
-//   }, 700);
-// }
 
 function NuevaImagen() {
   $("#ModalImagen").modal("show");

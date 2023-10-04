@@ -1,15 +1,10 @@
 .card {
+  border-radius: 15px;
     --background: #fff;
-    --background-checkbox: #0082ff;
-    --background-image: #fff, rgba(0, 107, 175, 0.2);
-    --text-color: #666;
-    --text-headline: #000;
-    --card-shadow: #0082ff;
     --card-height: 190px;
-    /* --card-width: 190px; */
-    --card-radius: 12px;
-    /* --header-height: 47px; */
+    --card-radius: 15px;
     --blend-mode: overlay;
+    overflow: hidden;
     --transition: 0.15s;
     -webkit-user-select: none;
        -moz-user-select: none;
@@ -93,7 +88,7 @@
     position: relative;
     overflow: hidden;
   }
-  .card__body-cover:after {
+  /* .card__body-cover:after {
     content: "";
     position: absolute;
     left: 0;
@@ -105,7 +100,7 @@
     mix-blend-mode: var(--blend-mode);
     opacity: var(--opacity-bg, 1);
     transition: opacity var(--transition) linear;
-  }
+  } */
   .card__body-cover-image {
     width: var(--c-width);
     height: var(--c-height);
@@ -116,7 +111,7 @@
     -webkit-clip-path: polygon(0% 0%, 100% 0%, var(--x-y1, 100% 90%), var(--x-y2, 67% 83%), var(--x-y3, 33% 90%), var(--x-y4, 0% 85%));
             clip-path: polygon(0% 0%, 100% 0%, var(--x-y1, 100% 90%), var(--x-y2, 67% 83%), var(--x-y3, 33% 90%), var(--x-y4, 0% 85%));
   }
-  .card__body-cover-checkbox {
+  /* .card__body-cover-checkbox {
     background: var(--check-bg, var(--background-checkbox));
     border: 2px solid var(--check-border, #fff);
     position: absolute;
@@ -129,8 +124,8 @@
     opacity: var(--check-opacity, 0);
     transition: transform var(--transition), opacity calc(var(--transition) * 1.2) linear;
     transform: scale(var(--check-scale, 0));
-  }
-  .card__body-cover-checkbox--svg {
+  } */
+  /* .card__body-cover-checkbox--svg {
     width: 13px;
     height: 11px;
     display: inline-block;
@@ -144,7 +139,7 @@
     stroke-dasharray: 16px;
     stroke-dashoffset: var(--stroke-dashoffset, 16px);
     transition: stroke-dashoffset 0.4s ease var(--transition);
-  }
+  } */
   .card__body-header {
     height: var(--header-height);
     background: var(--background);
@@ -205,6 +200,9 @@
   width: 100%;
   height: auto; /* Altura ajustable automáticamente */
   overflow: hidden; /* Oculta el contenido que desborde del contenedor */
+  background-color: #0000001e;
+  border-radius: 15px;
+  background-blend-mode: color-burn;
 }
 
 /* Estilo del video de fondo */
@@ -239,8 +237,52 @@
   background: none;
   position: absolute;
   bottom: 10px;
+  animation: flotar 1s ease-in-out infinite;
+}
+
+@keyframes flotar {
+  0% {
+    transform: translateY(0px) scaleX(1.2);
+  }
+  15% {
+    transform: translateY(10px);
+  }
+  100% {
+    transform: translateY(0px) scaleX(1.2);
+  }
 }
 
 .vuelta{
-  transform: rotate(180deg);
+  
+  animation: flotar2 1s ease-in-out infinite;
+}
+
+@keyframes flotar2 {
+  0% {
+    transform: rotate(180deg) translateY(0px) scaleX(1.2);;
+  } 
+  15% {
+    transform: rotate(180deg) translateY(10px);
+  }
+  100% {
+    transform: rotate(180deg) translateY(0px) scaleX(1.2);
+  }
+} 
+
+.div-logo{
+  display: flex;
+  height: 13vh;
+  align-items: center;
+}
+
+.div-logo img {
+  height: 250%;
+}
+
+.title-reciente{
+  font-family: Roboto;
+}
+.div-reciente {
+  display: grid;
+  border-radius: 40px 5px;
 }

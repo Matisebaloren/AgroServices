@@ -5,7 +5,10 @@ const submenuItems = document.querySelectorAll(".submenu_item");
 const sidebarOpen = document.querySelector("#sidebarOpen");
 const sidebarClose = document.querySelector(".collapse_sidebar");
 const sidebarExpand = document.querySelector(".expand_sidebar");
-sidebarOpen.addEventListener("click", () => sidebar.classList.toggle("close"));
+sidebarOpen.addEventListener("click", () => {
+console.log("sidebarExpand");
+sidebar.classList.toggle("close");
+});
 
 // sidebarClose.addEventListener("click", () => {
 //   sidebar.classList.add("close", "hoverable");
@@ -432,4 +435,8 @@ function volver(){
     window.history.back();
   }
 
-  
+  function Vista(publicacionID) {
+    console.log(publicacionID);
+    window.location.href =
+      `../../Publicaciones/VistaPublicacion/` + publicacionID;
+  }

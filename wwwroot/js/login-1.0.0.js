@@ -12,7 +12,7 @@ function CargarLugares() {
     success: function (provincias) {
       var optionI = document.createElement("option");
       optionI.value = 0;
-      optionI.text = "Selecciona una Provincia";
+      optionI.text = "Primero seleccione una Provincia";
       $("#LocalidadID").append(optionI);
       $.each(provincias, function (index, provincia) {
         if (provincia.eliminado != true) {

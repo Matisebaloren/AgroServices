@@ -32,18 +32,22 @@
 </head>
 
 
+@* autoplay *@
 
-
-<body>
+<body class="fondo_img">
+  @* <img class="fondo_img" src="../../img/videoCampo.mp4" alt=""> *@
+  <video id="miVideo" loop muted playsinline preload="auto" class="video-fondo2" style="opacity: 0; transition: opacity 3s;">
+    <source src="../../img/videoCampo.mp4" type="video/mp4">
+  </video>
   <!-- navbar -->
   <nav class="navbar FondoGlass-Navbar">
-    <div class="logo_item py-1">
+    <div class="logo_item">
       @* <img src="/img/logoprueba.png" alt="Logo"> *@
-      <i class="bx bx-menu" id="sidebarOpen"></i>
+      
       @* <img class="imgLogo" alt=""></i> *@
+        <img src="../../img/icono-verde2.png" alt="">
 
-
-      <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">AgroServices</a>
+      @* <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">AgroServices</a> *@
 
     </div>
 
@@ -55,6 +59,7 @@
     </div> *@
 
     <div class="navbar_content">
+      <i class="bx bx-menu" id="sidebarOpen"></i>
       <partial name="_LoginPartial" />
       <i class="bi bi-grid"></i>
       @* <i class='bx bx-sun' id="darkLight"></i> *@
@@ -62,7 +67,7 @@
   </nav>
 
 
-  <div class="hstack gap-2">
+  <div class="hstack p-body gap-2">
 
 
     <!-- sidebar -->
@@ -119,7 +124,7 @@
                   class='bx bx-image'></i>General</a>
             </ul>
           </li>
-
+          @if (User.IsInRole("Administrador")){
           <li class="item">
             <hr>
           </li>
@@ -150,6 +155,7 @@
                 <i class="bx bxs-user-pin"></i> Usuarios</a>
             </ul>
           </li>
+          }
         </ul>
         <!-- End -->
       </div>

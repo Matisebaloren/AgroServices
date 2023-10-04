@@ -4,9 +4,11 @@ using AgroServices.Data;
 using AgroServices.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace AgroServices.Controllers;
-
+[Authorize(Roles = "Administrador")]
 public class LocalidadesController : Controller
 {
     private readonly ILogger<LocalidadesController> _logger;

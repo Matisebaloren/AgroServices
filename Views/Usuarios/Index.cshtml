@@ -4,12 +4,14 @@
 
   ViewData["Title"] = "Home Page";
 }
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Mukta:wght@300;400;600;700;800&family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="~/css/tables.css" asp-append-version="true" />
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link
+  href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Mukta:wght@300;400;600;700;800&family=Noto+Sans:wght@400;700&display=swap"
+  rel="stylesheet">
+<link rel="stylesheet" href="~/css/tables.css" asp-append-version="true" />
 
- 
-  
+
+
 
 
 
@@ -34,11 +36,11 @@
 
           <label class="control-label">Email</label>
           <input type="email" class="form-control" id="Email" autocomplete="off" onkeyup="this.value =
-          this.value.toUpperCase()"/>
+          this.value.toUpperCase()" />
 
           <label class="control-label">Telefono</label>
           <input type="tel" class="form-control" id="Telefono" autocomplete="off" onkeyup="this.value =
-          this.value.toUpperCase()"/>
+          this.value.toUpperCase()" />
 
           <label class="control-label">Localidad</label>
           <select asp-for="LocalidadID" class="form-control" id="LocalidadID" asp-items="ViewBag.LocalidadID"></select>
@@ -64,35 +66,35 @@
 
 
   @* Tabla con los datos de cada elemento *@
-<div class="FondoGlass-1 my-5">
-<h2 class="text-black">Usuarios</h2>
-  <table id="example" class="table table-striped" style="width:100%">
-    <thead class="table-dark">
-      <tr>
-        <th>Usuario</th>
-        <th>Email</th>
-        <th>Nombre Completo</th>
-        <th>Teléfono</th>
-        <th>Localidad</th>
-      </tr>
-    </thead>
-    <tbody id="tbody-usuarios">
-    </tbody>
-  </table>
-</div>
-  
+  <div class="FondoGlass-1 my-5">
+    <h2 class="text-black">Usuarios</h2>
+    <div class="table-responsive">
+      <table id="example" class="table table-striped" style="width:100%">
+        <thead class="table-dark">
+          <tr>
+            <th>Usuario</th>
+            <th>Email</th>
+            <th>Nombre Completo</th>
+            <th>Teléfono</th>
+            <th>Localidad</th>
+          </tr>
+        </thead>
+        <tbody id="tbody-usuarios">
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
 </div>
 @* <th class="text-end">
-          <button type="button" onclick="VaciarFormulario()" class="btn btn-primary" data-bs-toggle="modal"
-            data-bs-target="#ModalUsuario">Nuevo <i class="bx bx-plus"></i>
-            
-            </button>
-        </th> *@
+<button type="button" onclick="VaciarFormulario()" class="btn btn-primary" data-bs-toggle="modal"
+data-bs-target="#ModalUsuario">Nuevo <i class="bx bx-plus"></i>
+
+</button>
+</th> *@
 
 @section Scripts{
   @* <script src="~/js/dataTable.js"></script> *@
   <script src="~/js/tablas/usuario-1.0.0.js"></script>
 }
-
- 
-

@@ -62,7 +62,7 @@ async function BuscarPublicaciones(pagina = 1, elementosPorPagina = 10) {
           <td>
             <a onclick="Vista(${publicacion.publicacionID})" asp-route-id="0" class="row mx-2 itemA">
               ${img}
-              <div class="col-12 ${col}">
+              <div class="col-12 pt-2 ${col}">
                 <h3>${publicacion.titulo}</h3>
                 <p>${moment(publicacion.fecha, "YYYY-MM-DD").format("DD-MM-YYYY")}</p>
                 <p class="badge bg-success text-wrap">${tagstring}</p>
@@ -82,22 +82,6 @@ async function BuscarPublicaciones(pagina = 1, elementosPorPagina = 10) {
     console.error("Error al cargar datos:", error);
   }
 }
-
-// function transFecha(fecha) {
-//   var ageDiff = DateTime.Now - fecha;
-//   var age = "";
-//   if (ageDiff.TotalDays > 365) {
-//     var years = ageDiff.Days / 365;
-//     if (years < 2) {
-//       age = years + " Año";
-//     } else {
-//       age = years + " Años";
-//     }
-//   } else {
-//     age = ageDiff.Days + " dias y " + ageDiff.Hours + " horas";
-//   }
-//   return age;
-// }
 
 let currentPage = 1;
 let elementsPerPage = 10; // Cambiar según tu necesidad
@@ -164,8 +148,4 @@ function PublicacionesPorPagina(cantidad) {
   BuscarPublicaciones(1, elementsPerPage); // Volver a cargar las publicaciones con la nueva cantidad por página
 }
 
-function Vista(publicacionID) {
-  console.log(publicacionID);
-  window.location.href =
-    `../../Publicaciones/VistaPublicacion/` + publicacionID;
-}
+
