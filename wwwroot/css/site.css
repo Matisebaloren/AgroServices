@@ -72,16 +72,23 @@ body.dark {
 .logo_item {
   column-gap: 10px;
   top: 0;
+  overflow: hidden;
   /* background-color: white; */
   border-radius: 0px 0px 10px 0px;
   height: 100%;
   align-items: center;
   display: flex;
+  width: 260px;
+  background-color: white;
+  box-shadow: 1px 1px 7px black inset;
+  transition: all 0.5s ease;
+  min-width: 80px;
 }
 
 .navbar img {
-  /* width: 35px; */
-  height: 200%;
+  margin-inline: auto;
+  max-height: 100%;
+  max-width: 100%;
   border-radius: 50%;
 }
 .search_bar {
@@ -118,7 +125,8 @@ body.dark {
   top: 0;
   left: 0;
   height: 100%;
-  padding: 80px 20px;
+  padding-top: 11vh;
+  padding-inline: 20px;
   z-index: 100;
   overflow-y: scroll;
   box-shadow: 0 0 1px var(--grey-color-light);
@@ -126,8 +134,8 @@ body.dark {
   scrollbar-width: none;
 }
 
-.sidebar.close {
-  padding: 80px 0;
+.close {
+  padding-inline: 0;
   width: 80px;
 }
 
@@ -391,7 +399,7 @@ body.dark {
 /* Fondo de tablas */
 
 .display-4 {
-  font-size: calc(1.475rem + 2.7vw);
+  font-size: calc(2.7vw);
   font-weight: 300;
   line-height: 1.2;
   color: #000000;
@@ -667,11 +675,13 @@ tbody tr.hide td img {
   background-color: #6fcaea;
 }
 
-@media (max-width: 1000px) {
+/* @media (max-width: 1000px) {
   td:not(:first-of-type) {
     min-width: 12.1rem;
   }
-}
+} */
+
+
 
 thead th span.icon-arrow {
   display: inline-block;

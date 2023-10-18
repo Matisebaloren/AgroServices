@@ -6,44 +6,51 @@
 }
 
 <!-- Tarjeta (div) que contiene la información -->
-<div class="fUser m-0">
+<div class="fUser me-auto ms-0">
     <h3>@ViewData["Title"]</h3>
     <partial name="_StatusMessage" for="StatusMessage" />
     <form id="profile-form" method="post">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <div class="form-group">
-            <label for="inputUsername">Nombre de Usuario</label>
-            <input asp-for="Username" class="form-control" disabled />
+        <div class="row">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label for="inputUsername">Nombre de Usuario</label>
+                <input asp-for="Username" class="form-control" />
+            </div>
+            <div class="form-group col-6">
+                <label for="Nombre">Nombre</label>
+                <input asp-for="Input.Nombre" class="form-control" />
+                <span asp-validation-for="Input.Nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group col-6">
+                <label for="Apellido">Apellido</label>
+                <input asp-for="Input.Apellido" class="form-control" />
+                <span asp-validation-for="Input.Apellido" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="inputPhoneNumber">Número de Teléfono</label>
+                <input asp-for="Input.PhoneNumber" class="form-control" />
+                <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group col-6">
+                <input asp-for="Input.ProvinciaIDGet" type="hidden" id="ProvinciaIDGet">
+                <label for="selectProvincias">Provincias</label>
+                <select name="Provincias" class="form-control" id="ProvinciaID" aria-required="true"
+                    onchange=CambiarProvincia(this.value)>
+                    <option value="0">Elija una provincia</option>
+                </select>
+            </div>
+            <div class="form-group col-6">
+                <input asp-for="Input.LocalidadIDGet" type="hidden" id="LocalidadIDGet">
+                <label for="selectLocalidad">Localidad</label>
+                <select id="LocalidadID" asp-for="Input.LocalidadID" class="form-control" aria-required="true"></select>
+                <span asp-validation-for="Input.LocalidadID" class="text-danger"></span>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="Nombre">Nombre</label>
-            <input asp-for="Input.Nombre" class="form-control" />
-            <span asp-validation-for="Input.Nombre" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label for="Apellido">Apellido</label>
-            <input asp-for="Input.Apellido" class="form-control" />
-            <span asp-validation-for="Input.Apellido" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label for="inputPhoneNumber">Número de Teléfono</label>
-            <input asp-for="Input.PhoneNumber" class="form-control" />
-            <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
-        </div>
-        @* <div class="form-group">
-            <label for="Provincia">Provincia</label>
-            <input asp-for="Input.Provincia" class="form-control" />
-            <span asp-validation-for="Input.Provincia" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label for="Localidad">Localidad</label>
-            <input asp-for="Input.Localidad" class="form-control" />
-            <span asp-validation-for="Input.Localidad" class="text-danger"></span>
-        </div> *@
         <button id="update-profile-button" type="submit" class="btn btn-primary">Guardar</button>
     </form>
 </div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script src="~/js/login-1.0.0.js"></script>
 }

@@ -52,8 +52,6 @@ public class UsuariosController : Controller
         {
             var usuarioAspOther = await _userManager.FindByIdAsync(usuario.ASP_UserID);
 
-
-
             var ageDiff = DateTime.Now - usuario.Fecha;
             var age = "";
             if (ageDiff.TotalDays > 365)
@@ -92,26 +90,6 @@ public class UsuariosController : Controller
 
         return View("Perfil");
     }
-
-    /* public IActionResult VistaPublicacion(int? id = 0)
-    {
-        var usuarioIDActual = _userManager.GetUserId(HttpContext.User);
-        if (usuarioIDActual != null)
-        {
-            var usuarioID = _contexto.Usuarios.Where(u => u.ASP_UserID == usuarioIDActual).FirstOrDefault();
-            ViewBag.usuarioID = usuarioID.UsuarioID;
-        }
-        else
-        {
-            ViewBag.usuarioID = 0;
-        }
-        ViewBag.publicacionID = id;
-        return View();
-    } */
-    /* public IActionResult Perfil()
-    {
-        return View();
-    } */
 
     // Busca usuarios para la tabla
     public async Task<JsonResult> BuscarUsuarios(int usuarioID = 0)

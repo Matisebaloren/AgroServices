@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace AgroServices.Controllers;
 
-[Authorize(Roles = "Administrador")]
+
 public class ProvinciasController : Controller
 {
     private readonly ILogger<ProvinciasController> _logger;
@@ -19,6 +19,7 @@ public class ProvinciasController : Controller
         _contexto = contexto;
     }
 
+    [Authorize(Roles = "Administrador")]
     public IActionResult Index()
     {
         return View();
@@ -39,7 +40,7 @@ public class ProvinciasController : Controller
     }
 
     // crea o modifica elemento de la base de datos
-
+    [Authorize(Roles = "Administrador")]
     public JsonResult GuardarProvincia(int provinciaID, string nombre)
     {
         string resultado = "Error";
@@ -102,7 +103,7 @@ public class ProvinciasController : Controller
         return Json(resultado);
     }
 
-
+    [Authorize(Roles = "Administrador")]
     public JsonResult Deshabilitar(int provinciaID)
     {
         String resultado = "error";

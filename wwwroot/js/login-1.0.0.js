@@ -1,3 +1,6 @@
+var provinciaID = $("#ProvinciaIDGet").length > 0 ? $("#ProvinciaIDGet").val() : null;
+var localidadID = $("#LocalidadIDGet").length > 0 ? $("#LocalidadIDGet").val() : null;
+
 window.onload = CargarLugares();
 var provinciasList = new Array();
 $("#LocalidadID").prop("disabled", true);
@@ -20,12 +23,17 @@ function CargarLugares() {
           let option = document.createElement("option");
           option.value = provincia.provinciaID;
           option.text = provincia.nombre;
+          if (provinciaID != null && provincia.provinciaID == provinciaID) {
+            option.selected = true;
+            CambiarProvincia(provinciaID);
+          }
+
           $("#ProvinciaID").append(option);
         }
       });
     },
     error: function (xhr, status) {
-      alert("Error al cargar usuarios");
+      alert("Error al cargar provincias");
     },
     complete: function (xhr, status) {},
   });
@@ -57,12 +65,16 @@ function CambiarProvincia(id) {
           let option = document.createElement("option");
           option.value = localidad.localidadID;
           option.text = localidad.nombre;
+
+          if (localidadID != null && localidad.localidadID == localidadID) {
+            option.selected = true;
+          }
           $("#LocalidadID").append(option);
         }
       });
     },
     error: function (xhr, status) {
-      alert("Error al cargar usuarios");
+      alert("Error al cargar localidades");
     },
     complete: function (xhr, status) {},
   });

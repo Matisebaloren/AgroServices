@@ -179,11 +179,14 @@ function enviarValoracion() {
     data: {
       publicacionID: publicacionID,
       contenido: contenido,
-      puntuacion: puntuacion
+      puntuacion: puntuacion,
     },
     type: "POST",
     dataType: "json",
-    success: function (tags) {},
+    success: function (tags) {
+      $("#ValoracionCreate").hide();
+      BuscarValoraciones();
+    },
     error: function (xhr, status) {
       alert("Error al cargar valoracion");
     },
@@ -208,8 +211,7 @@ function enviarValoracion() {
 // }
 
 function BuscarValoraciones() {
-  console.log("prueba valoraciones:" + publicacionID);
-
+  $("#Valoraciones").empty();
   // $("#Valoraciones").empty();
   $.ajax({
     url: "../../Publicaciones/BuscarValoraciones",

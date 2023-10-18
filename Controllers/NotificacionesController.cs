@@ -7,8 +7,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Transactions;
 
-
-
 namespace AgroServices.Controllers;
 
 public class NotificacionesController : Controller
@@ -113,8 +111,9 @@ public class NotificacionesController : Controller
         return View();
     }
 
-    public JsonResult BuscarSolicitud(int tipo = 0, int visto = 0)
+    public async Task<JsonResult> BuscarSolicitudAsync(int tipo = 0, int visto = 0)
     {
+        List<VistaSolicitud> SolicitudesMostrar = new List<VistaSolicitud>();
         var usuarioIDActual = _userManager.GetUserId(HttpContext.User);
         if (usuarioIDActual == null)
         {
@@ -127,22 +126,33 @@ public class NotificacionesController : Controller
             return Json(new { error = "Usuario no encontrado" });
         }
 
-        var solicitudes = _contexto.Solicitudes.Include(s => s.Publicaciones)
+        var solicitudes = _contexto.Solicitudes.Include(s => s.Publicaciones).ThenInclude(p => p.Usuario)
             .Where(s => s.UsuarioID == usuario.UsuarioID || s.Publicaciones.UsuarioID == usuario.UsuarioID)
-            .Select(s => new
-            {
-                s.SolicitudID,
-                s.Descripcion,
-                s.Estado,
-                s.Fecha,
-                s.PublicacionID,
-                s.UsuarioID,
-                PublicacionTitulo = s.Publicaciones.Titulo
-            })
-            .Distinct()
             .ToList();
-        solicitudes = solicitudes.OrderByDescending(s => s.Fecha).ToList();
-        return Json(new { solicitudes = solicitudes, usuario = usuario });
+
+        foreach (var solicitud in solicitudes)
+        {
+            var username = "Desconocido";
+            if (solicitud.Publicaciones.Usuario.ASP_UserID != null)
+            {
+                var usuarioSolicitud = await _userManager.FindByIdAsync(solicitud.Publicaciones.Usuario.ASP_UserID);
+                username = usuarioSolicitud.UserName;
+            }
+
+            var SolicitudMostrar = new VistaSolicitud
+            {
+                SolicitudID = solicitud.SolicitudID,
+                Descripcion = solicitud.Descripcion,
+                Fecha = solicitud.Fecha,
+                PublicacionID = solicitud.PublicacionID,
+                PublicacionTitulo = solicitud.Publicaciones.Titulo,
+                UsuarioID = solicitud.UsuarioID,
+                userName = username,
+                Estado = solicitud.Estado
+            };
+            SolicitudesMostrar.Add(SolicitudMostrar);
+        }
+        return Json(new { solicitudes = SolicitudesMostrar, usuario = usuario });
     }
 
 

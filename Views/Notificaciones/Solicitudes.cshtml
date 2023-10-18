@@ -12,7 +12,7 @@
 
 <!-- Button trigger modal -->
 @* <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalConcretar">
-  Launch demo modal
+Launch demo modal
 </button> *@
 
 <!-- Modal cancelar / rechazar -->
@@ -75,42 +75,52 @@
 
 <div class="FondoGlass-1 my-5">
   <h1 class="display-4">Solicitudes</h1>
-  <select id="FiltroTipo">
-    <option value="0">Todas</option>
-    <option value="1">Entrada</option>
-    <option value="2">Salidas</option>
-  </select>
-  <select id="FiltroEstado">
-    <option value="">Todas</option>
-    <option value="0">En espera</option>
-    <option value="1">Canceladas</option>
-    <option value="2">Rechazadas</option>
-    <option value="3">Aceptadas</option>
-    <option value="4">Concretadas</option>
-  </select>
-  @* Tabla con los datos de cada elemento *@
-  <table class="table table-hover">
-    <thead class="table-dark">
-      <tr>
-        <th class="th-icon"></th>
-        <th>Fecha</th>
-        <th>Descripcion</th>
-        <th>estado</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody id="tablaSolicitudes">
+  <div class="d-flex m-1">
+    <div class=" col-6 px-3">
+      <select class="form-control" id="FiltroTipo">
+        <option value="0">Todas</option>
+        <option value="1">Entrada</option>
+        <option value="2">Salidas</option>
+      </select>
+    </div>
+    <div class=" col-6 px-3">
+      <select class="form-control col-6 px-3" id="FiltroEstado">
+        <option value="">Todas</option>
+        <option value="0">En espera</option>
+        <option value="1">Canceladas</option>
+        <option value="2">Rechazadas</option>
+        <option value="3">Aceptadas</option>
+        <option value="4">Concretadas</option>
+      </select>
+    </div>
+  </div>
 
-    </tbody>
-  </table>
+  @* Tabla con los datos de cada elemento *@
+  <div class="overflow-auto">
+    <table class="table table-hover">
+      <thead class="table-dark">
+        <tr>
+          <th class="th-icon"></th>
+          <th>Fecha</th>
+          <th>Asociado</th>
+          <th>Descripcion</th>
+          <th>estado</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="tablaSolicitudes">
+
+      </tbody>
+    </table>
+  </div>
 </div>
 
-@section Scripts{
+@section Scripts {
   <script src="~/js/tablas/solicitud-1.0.0.js"></script>
 }
 
 <script>
-    // Luego, dentro del bloque de script, asigna el valor a una variable JavaScript
-    var solicitudIDJS = @Html.Raw(Json.Serialize(solicitudID));
-    console.log(solicitudIDJS);
+  // Luego, dentro del bloque de script, asigna el valor a una variable JavaScript
+  var solicitudIDJS = @Html.Raw(Json.Serialize(solicitudID));
+  console.log(solicitudIDJS);
 </script>

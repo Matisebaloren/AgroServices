@@ -5,6 +5,10 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>@ViewData["Title"] - AgroServices</title>
+  @* <link rel="icon" href="../../img/icons/iconAgroServices.jpg" type="image/svg"> *@
+  <link rel="icon"  type="image/ico" sizes="128x128" href="/../../img/icons/icon180.ico">
+  <link rel="icon" type="image/ico" sizes="32x32" href="../../img/icons/icon32.ico">
+  <link rel="icon" type="image/ico" sizes="16x16" href="../../img/icons/icon16.ico">
   <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
   <link rel="stylesheet" href="~/node_modules/animate/animate.min.css" />
   <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
@@ -17,7 +21,8 @@
 
   <link rel="stylesheet" href="https://fontawesome.com/icons" />
 
-  @* <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css"> *@
+  @* <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+  *@
   <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
 
 
@@ -25,7 +30,9 @@
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
 
   <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Mukta:wght@300;400;600;700;800&family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Mukta:wght@300;400;600;700;800&family=Noto+Sans:wght@400;700&display=swap"
+    rel="stylesheet">
 
   @*LINK PARA EL BUSCADOR*@
   @* <link rel="stylesheet" href="~/css/buscador.css" /> *@
@@ -36,26 +43,20 @@
 
 <body class="fondo_img">
   @* <img class="fondo_img" src="../../img/videoCampo.mp4" alt=""> *@
-  <video id="miVideo" loop muted playsinline preload="auto" class="video-fondo2" style="opacity: 0; transition: opacity 3s;">
+  <video id="miVideo" loop muted playsinline preload="auto" class="video-fondo2"
+    style="opacity: 0; transition: opacity 3s;">
     <source src="../../img/videoCampo.mp4" type="video/mp4">
   </video>
   <!-- navbar -->
   <nav class="navbar FondoGlass-Navbar">
-    <div class="logo_item">
-      @* <img src="/img/logoprueba.png" alt="Logo"> *@
-      
-      @* <img class="imgLogo" alt=""></i> *@
-        <img src="../../img/icono-verde2.png" alt="">
-
-      @* <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">AgroServices</a> *@
-
-    </div>
-
+    <a class="logo_item close" href="/">
+      <img src="../../img/icons/iconRecortado.png" alt="">
+    </a>
     @* <div class="search">
-      <form action="@Url.Action("BuscarPublicaciones", "Publicaciones")" method="get">
-        <input type="text" name="consulta" placeholder="Buscar publicaciones">
-        <input type="submit" value="Buscar">
-      </form>
+    <form action="@Url.Action("BuscarPublicaciones", "Publicaciones")" method="get">
+    <input type="text" name="consulta" placeholder="Buscar publicaciones">
+    <input type="submit" value="Buscar">
+    </form>
     </div> *@
 
     <div class="navbar_content">
@@ -68,15 +69,11 @@
 
 
   <div class="hstack p-body gap-2">
-
-
     <!-- sidebar -->
     <nav class="sidebar FondoGlass-Navbar hoverable close">
       <div class="menu_content">
         <ul class="menu_items">
-
           <!-- inicio -->
-
           <li class="item">
             <a asp-area="" asp-controller="Home" asp-action="Index" class="nav_link">
               <span class="navlink_icon">
@@ -85,8 +82,9 @@
               <span class="navlink">Inicio</span>
             </a>
           </li>
-          <!-- perfil solo si estoy registrado -->
+          @* <partial name="_LoginPartial2" /> *@
 
+          <!-- perfil solo si estoy registrado -->
           @if (User.Identity.IsAuthenticated)
           {
             <partial name="_PerfilOption" />
@@ -124,37 +122,38 @@
                   class='bx bx-image'></i>General</a>
             </ul>
           </li>
-          @if (User.IsInRole("Administrador")){
-          <li class="item">
-            <hr>
-          </li>
+          @if (User.IsInRole("Administrador"))
+          {
+            <li class="item">
+              <hr>
+            </li>
 
-          <li class="item">
-            <div href="#" class="nav_link submenu_item">
-              <span class="navlink_icon">
-                <i class="bx bx-layer"></i>
-              </span>
-              <span class="navlink">Moderar</span>
-              <i class="bx bx-chevron-right arrow-left"></i>
-            </div>
+            <li class="item">
+              <div href="#" class="nav_link submenu_item">
+                <span class="navlink_icon">
+                  <i class="bx bx-layer"></i>
+                </span>
+                <span class="navlink">Moderar</span>
+                <i class="bx bx-chevron-right arrow-left"></i>
+              </div>
 
-            <ul class="menu_items submenu">
-              <a asp-controller="Provincias" asp-action="Index" class="nav_link sublink">
-                <i class='bx bxs-map'></i> Provincias</a>
-            </ul>
-            <ul class="menu_items submenu">
-              <a asp-controller="Localidades" asp-action="Index" class="nav_link sublink">
-                <i class='bx bxs-map'></i> Localidades</a>
-            </ul>
-            <ul class="menu_items submenu">
-              <a asp-controller="Servicios" asp-action="Index" class="nav_link sublink">
-                <i class="bx bx-cog"></i> Servicios</a>
-            </ul>
-            <ul class="menu_items submenu">
-              <a asp-controller="Usuarios" asp-action="Index" class="nav_link sublink">
-                <i class="bx bxs-user-pin"></i> Usuarios</a>
-            </ul>
-          </li>
+              <ul class="menu_items submenu">
+                <a asp-controller="Provincias" asp-action="Index" class="nav_link sublink">
+                  <i class='bx bxs-map'></i> Provincias</a>
+              </ul>
+              <ul class="menu_items submenu">
+                <a asp-controller="Localidades" asp-action="Index" class="nav_link sublink">
+                  <i class='bx bxs-map'></i> Localidades</a>
+              </ul>
+              <ul class="menu_items submenu">
+                <a asp-controller="Servicios" asp-action="Index" class="nav_link sublink">
+                  <i class="bx bx-cog"></i> Servicios</a>
+              </ul>
+              <ul class="menu_items submenu">
+                <a asp-controller="Usuarios" asp-action="Index" class="nav_link sublink">
+                  <i class="bx bxs-user-pin"></i> Usuarios</a>
+              </ul>
+            </li>
           }
         </ul>
         <!-- End -->

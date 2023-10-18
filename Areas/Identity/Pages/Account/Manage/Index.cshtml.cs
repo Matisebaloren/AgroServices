@@ -11,6 +11,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using AgroServices.Data;
 using AgroServices.Models;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace AgroServices.Areas.Identity.Pages.Account.Manage
 {
@@ -69,6 +71,17 @@ namespace AgroServices.Areas.Identity.Pages.Account.Manage
 
             [Display(Name = "Apellido")]
             public string Apellido { get; set; }
+
+            [Required(ErrorMessage = "Por favor, Selecciona una ciudad")]
+            [Display(Name = "Localidad")]
+            [Compare("LocalidadID", ErrorMessage = "Localidad sin especificar.")]
+            public int LocalidadID { get; set; }
+
+
+            [NotMapped]
+            public int ProvinciaIDGet { get; set; }
+            [NotMapped]
+            public int LocalidadIDGet { get; set; }
         }
 
         private async Task LoadAsync(IdentityUser user)
@@ -92,7 +105,7 @@ namespace AgroServices.Areas.Identity.Pages.Account.Manage
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
 
-            var usuario = _contexto.Usuarios.Where(u => u.ASP_UserID == user.Id).FirstOrDefault();
+            var usuario = _contexto.Usuarios.Include(u => u.Localidades).Where(u => u.ASP_UserID == user.Id).FirstOrDefault();
             // Nombre = usuario.Nombre;
             // Apellido = usuario.Apellido;
 
@@ -100,6 +113,10 @@ namespace AgroServices.Areas.Identity.Pages.Account.Manage
 
             Input.Apellido = usuario.Apellido;
             Input.Nombre = usuario.Nombre;
+            Input.LocalidadID = usuario.LocalidadID;
+            Input.LocalidadIDGet = usuario.LocalidadID;
+            Input.ProvinciaIDGet = usuario.Localidades.ProvinciaID;
+
             return Page();
         }
 
@@ -113,14 +130,13 @@ namespace AgroServices.Areas.Identity.Pages.Account.Manage
             var usuario = _contexto.Usuarios.Where(u => u.ASP_UserID == user.Id).FirstOrDefault();
             if (usuario != null)
             {
-                if (usuario.Apellido != Input.Apellido)
-                {
-                    usuario.Apellido = Input.Apellido;
-                }
-                if (usuario.Nombre != Input.Nombre)
-                {
-                    usuario.Nombre = Input.Nombre;
-                }
+
+                usuario.Apellido = Input.Apellido;
+
+                usuario.Nombre = Input.Nombre;
+
+                usuario.LocalidadID = Input.LocalidadID;
+
                 _contexto.SaveChanges();
             }
 

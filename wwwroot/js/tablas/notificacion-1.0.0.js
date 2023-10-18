@@ -40,7 +40,7 @@ function mostrarNotificaciones() {
       check = `<i class='bx bx-envelope'></i>`
     }
     notificacionesContainer.append(`     
-        <tr ${link}>
+        <tr style="cursor: pointer;" ${link}>
             <td class="px-auto"><h2 class="my-auto">${check}</h2></td>
             <td>${moment(notificacion.fecha).format("DD-MM-YYYY")}</td>
             <td>${notificacion.descripcion}</td>

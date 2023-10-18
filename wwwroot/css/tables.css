@@ -3,8 +3,8 @@
   box-shadow: 0 5px 10px #6b6a6a;
   background-color: white;
   text-align: left;
-  overflow: hidden;
   border-radius: 6px;
+  padding: 0;
 }
 table thead {
   box-shadow: 0 5px 10px #e1e5ee;

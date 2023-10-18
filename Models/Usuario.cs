@@ -1,5 +1,6 @@
 using AgroServices.Models;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace AgroServices.Models{
 
@@ -23,6 +24,7 @@ namespace AgroServices.Models{
 
         public virtual Localidad? Localidades { get; set; }
 
+        [JsonIgnore] 
         public virtual ICollection<Publicacion>? Publicaciones { get; set; }
  
     }

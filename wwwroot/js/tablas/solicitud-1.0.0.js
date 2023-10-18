@@ -9,9 +9,9 @@ function BuscarSolicitudes() {
     type: "GET",
     dataType: "json",
     success: function (data) {
-      console.log(data);
+      console.log("data: " +data);
       listaSolicitudes = data.solicitudes;
-      usuario = data.usuario;
+      usuario = data.usuario; //mejor pasar el usuarioID
       console.log(listaSolicitudes); // Almacena todas las solicitudes en la variable
       filtrarYMostrarSolicitudes(); // Llama a la función para filtrar y mostrar las solicitudes
     },
@@ -124,6 +124,7 @@ function mostrarSolicitudes(solicitudes) {
         })" class="${classTable} ${selected}">
             <td><i class="${iconClass}"></i></td>
             <td>${moment(solicitud.fecha).format("DD-MM-YYYY")}</td>
+            <td>${solicitud.userName}</td>
             <td>${solicitud.descripcion}</td>
             <td>${estado}</td>
             <td>${botones}</td>
