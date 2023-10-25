@@ -280,10 +280,7 @@ body.dark {
 }
 #sidebarOpen {
   display: none;
-
 }
-
-
 
 @media screen and (max-width: 768px) {
   #sidebarOpen {
@@ -497,6 +494,7 @@ body.dark {
   color: black;
   cursor: pointer;
   /* align-items: center; */
+  margin: 0;
 }
 
 /* CODIGO DE TABLAS PARA LAS DIFERENTES VISTAS */
@@ -681,8 +679,6 @@ tbody tr.hide td img {
   }
 } */
 
-
-
 thead th span.icon-arrow {
   display: inline-block;
   width: 1.3rem;
@@ -810,6 +806,7 @@ tbody td.active {
 
 .carousel-item {
   height: 100%;
+  position: absolute;
 }
 
 @media (max-width: 768px) {
@@ -829,6 +826,7 @@ tbody td.active {
   text-align: center; /* Centra el contenido del item */
   margin-right: 0;
   background-color: #000000;
+  max-height: 40vh;
 }
 
 .itemImg {
@@ -851,7 +849,7 @@ tbody td.active {
 
 @media (min-width: 768px) {
   .itemImg {
-    height: 20vw;
+    height: auto;
   }
 }
 
@@ -892,7 +890,7 @@ tbody td.active {
   justify-content: end;
 }
 
-h3 {
+h4 {
   font-family: sans-serif;
   color: #32a64f;
 }
@@ -1000,7 +998,7 @@ a.card-body:hover {
   border-bottom: none;
 }
 
-.badge {
+/* .badge {
   background-color: red;
   color: white;
   border-radius: 50%;
@@ -1008,6 +1006,14 @@ a.card-body:hover {
   position: absolute;
   top: -8px;
   right: -8px;
+} */
+.badge {
+  background-color: red;
+  color: white;
+  border-radius: 5px;
+  padding: 3px 6px;
+  /* position: absolute; */
+  top: -8px;
 }
 
 .video-fondo2 {
@@ -1034,3 +1040,9 @@ a.card-body:hover {
   margin-top: 11vh;
 }
 
+@media (max-width: 769px) {
+  .container,
+  .container-sm {
+    max-width: none;
+  }
+}

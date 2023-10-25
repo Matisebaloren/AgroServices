@@ -85,7 +85,7 @@
 
 .card-vista-publi {
   background-color: #f5f5f5;
-  padding: 20px;
+  padding: 1%;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   margin-bottom: 1rem;
@@ -101,3 +101,8 @@
  /* .btn{
   box-shadow: -2px 3px 2px 1px darkgrey;
 } */
+
+.carousel-item,
+.itemImg {
+  max-height: none;
+}

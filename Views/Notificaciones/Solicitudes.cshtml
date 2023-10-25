@@ -43,7 +43,7 @@ Launch demo modal
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        Se cancelará la solicitud relaciana a la publicación "".
+        Se cancelará la solicitud relacionada a la publicación "".
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Volver</button>
@@ -54,19 +54,17 @@ Launch demo modal
 </div>
 
 <!-- Modal info  -->
-<div class="modal fade" id="modalConcretar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modalDetalle" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Concretar Servicio</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Detalle de Solicitud</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
-        Se cancelará la solicitud relaciana a la publicación "".
+      <div class="modal-body modal-body">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Volver</button>
-        <button id="btn-concretar" type="button" class="btn btn-success">Concretar</button>
       </div>
     </div>
   </div>
@@ -78,14 +76,14 @@ Launch demo modal
   <div class="d-flex m-1">
     <div class=" col-6 px-3">
       <select class="form-control" id="FiltroTipo">
-        <option value="0">Todas</option>
+        <option value="0">Cualquier Tipo</option>
         <option value="1">Entrada</option>
         <option value="2">Salidas</option>
       </select>
     </div>
     <div class=" col-6 px-3">
       <select class="form-control col-6 px-3" id="FiltroEstado">
-        <option value="">Todas</option>
+        <option value="">Cualquier estado</option>
         <option value="0">En espera</option>
         <option value="1">Canceladas</option>
         <option value="2">Rechazadas</option>
@@ -103,7 +101,7 @@ Launch demo modal
           <th class="th-icon"></th>
           <th>Fecha</th>
           <th>Asociado</th>
-          <th>Descripcion</th>
+          <th>Mensaje</th>
           <th>estado</th>
           <th></th>
         </tr>

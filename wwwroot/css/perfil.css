@@ -1,21 +1,3 @@
-.card-perfil {
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  margin-bottom: 20px; /* Espacio entre las tarjetas */
-  width: 80%;
-}
-
-
-
-.card-header {
-  text-align: center;
-  font-weight: bold;
-  font-size: 18px;
-  color: #47a847;
-  margin-bottom: 10px;
-}
 
 .user-info {
   margin-bottom: 10px;
@@ -43,3 +25,6 @@
 .btn-info-perfil {
   cursor: pointer;
 }
+
+
+

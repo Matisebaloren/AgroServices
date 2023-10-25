@@ -1,6 +1,7 @@
 using AgroServices.Models;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace AgroServices.Models
 {
@@ -13,6 +14,7 @@ namespace AgroServices.Models
 
         public int PublicacionID { get; set; }
 
+        [JsonIgnore]
         public virtual Publicacion? Publicaciones { get; set; }
 
         public string? TipoImagen { get; set; }
@@ -23,3 +25,10 @@ namespace AgroServices.Models
         public string? ImagenBase64 { get; set; }
     }
 }
+
+public class VistaImagen
+    {
+        public int ImagenID { get; set; }
+        public string? TipoImagen { get; set; }
+        public string? ImagenBase64 { get; set; }
+    }

@@ -1,42 +1,81 @@
 let tagsActive = [];
+let tagsExistentes = [];
 let serviciosDisp = [];
+var imageActive = "active";
+
 let publicacionID = $("#PublicacionID").val();
-
-console.log(publicacionID + " este es el id de publicacion");
-
 window.onload = () => {
+  BuscarServicios();
   BuscarPublicacion(publicacionID);
 };
 
+function BuscarServicios() {
+  $("#cards-servicios").empty();
+
+  $.ajax({
+    url: "../../Servicios/BuscarServicios",
+    data: {},
+    type: "GET",
+    dataType: "json",
+    success: function (servicios) {
+      $.each(servicios, function (index, servicio) {
+        if (servicio.eliminado == false) {
+          serviciosDisp.push(servicio);
+        }
+      });
+      console.log(tagsActive);
+    },
+    error: function (xhr, status) {
+      console.log("Error en la solicitud AJAX:", status);
+    },
+  });
+}
+
 const BuscarPublicacion = (publicacionID = 0) => {
-  BuscarServicios();
   if (publicacionID != 0) {
-    $("#btn-cambiar").show();
+    // $("#btn-cambiar").show();
     $.ajax({
-      url: "../../Publicaciones/BuscarPublicacion",
+      url: "../../Publicaciones/BuscarPublicaciones2",
       data: { publicacionID: publicacionID },
       type: "GET",
       dataType: "json",
       success: (resultado) => {
         console.log(resultado);
-        if (resultado.publicacion) {
-          BuscarImagenes(publicacionID);
-          resultado.etiquetas.forEach((tag) => {
-            console.log("tag: " + tag);
-            if (!tag.eliminado) {
-              AñadirEtiqueta(tag.servicioID);
-            }
+        if (resultado.lista[0]) {
+          var publicacion = resultado.lista[0];
+
+          publicacion.servicios.forEach((tag) => {
+            //seteamos los servicios que ya tiene
+            tagsExistentes.push(tag.servicioID);
+            AñadirEtiqueta(tag.servicioID);
           });
-          $("#EsOferta").val(resultado.publicacion.esOferta ? "1" : "2");
-          seleccionarTipo(resultado.publicacion.esOferta ? "1" : "2");
-          $("#UsuarioID").val(resultado.publicacion.usuarioID);
-          $("#Titulo").val(resultado.publicacion.titulo);
-          $("#Resumen").val(resultado.publicacion.resumen);
+          $("#EsOferta").val(publicacion.esOferta ? "1" : "2");
+          seleccionarTipo(publicacion.esOferta ? "1" : "2");
+          $("#UsuarioID").val(publicacion.usuarioID);
+          $("#Titulo").val(publicacion.titulo);
+          $("#Resumen").val(publicacion.resumen);
           // $("#descripcion").InnerHtML(publicacion.descripcion);
-          tinymce.activeEditor.setContent(resultado.publicacion.descripcion);
+          tinymce.activeEditor.setContent(publicacion.descripcion);
         } else {
           publicacionID = 0;
         }
+
+        //imagenes
+
+        if (publicacion.imagenes.length === 0) {
+        }
+        publicacion.imagenes.forEach((item) => {
+          let imagen = "<td></td>";
+          if (item.imagenBase64) {
+            imagen = `<input hidden name="id" value="${item.imagenID}"></input><img src="data:${item.tipoImagen};base64, ${item.imagenBase64}"/>`;
+          }
+          $("#Lista_imagenes").append(
+            `<div class="carousel-item ${imageActive}" >
+              ${imagen}
+            </div>`
+          );
+          imageActive = "";
+        });
       },
       error: (xhr, status) => {
         var errorMessage = "Error al cargar publicaciones";
@@ -49,53 +88,7 @@ const BuscarPublicacion = (publicacionID = 0) => {
         alert(errorMessage);
       },
     });
-  } else {
-    $("#divImagenes").hide();
   }
-};
-
-const BuscarServicios = () => {
-  $.ajax({
-    url: "../../Publicaciones/BuscarServicios",
-    type: "GET",
-    dataType: "json",
-    success: (servicios) => {
-      serviciosDisp = servicios;
-    },
-    error: (xhr, status) => {
-      alert("Error al cargar servicios");
-    },
-  });
-};
-
-const BuscarImagenes = () => {
-  $("#Lista_imagenes").empty();
-  $.ajax({
-    url: "../../Publicaciones/BuscarImagenes",
-    data: { publicacionID: publicacionID },
-    type: "GET",
-    dataType: "json",
-    success: (imagenes) => {
-      let clase = "active";
-      if (imagenes.length === 0) {
-      }
-      imagenes.forEach((item) => {
-        let imagen = "<td></td>";
-        if (item.imagenBase64) {
-          imagen = `<input hidden name="id" value="${item.imagenID}"></input><img src="data:${item.tipoImagen};base64, ${item.imagenBase64}"/>`;
-        }
-        $("#Lista_imagenes").append(
-          `<div class="carousel-item ${clase}" >
-              ${imagen}
-            </div>`
-        );
-        clase = "";
-      });
-    },
-    error: (xhr, status) => {
-      alert("Error al cargar imagenes");
-    },
-  });
 };
 
 function GuardarPublicacion() {
@@ -112,10 +105,7 @@ function GuardarPublicacion() {
   console.log(titulo, descripcion, esOferta, resumen);
   if (titulo && descripcion && esOferta != null && resumen) {
     $.ajax({
-      // la URL para la petición
       url: "../../Publicaciones/GuardarPublicacion",
-      // la información a enviar
-      // (también es posible utilizar una cadena de datos)
       data: {
         publicacionID: publicacionID,
         descripcion: descripcion,
@@ -123,12 +113,8 @@ function GuardarPublicacion() {
         titulo: titulo,
         resumen: resumen,
       },
-      // especifica si será una petición POST o GET
       type: "POST",
-      // el tipo de información que se espera de respuesta
       dataType: "json",
-      // código a ejecutar si la petición es satisfactoria;
-      // la respuesta es pasada como argumento a la función
       success: function (resultado) {
         console.log(resultado);
         const Toast = Swal.mixin({
@@ -142,12 +128,6 @@ function GuardarPublicacion() {
             toast.addEventListener("mouseleave", Swal.resumeTimer);
           },
         });
-        // if (resultado == -1) {
-        //   Toast.fire({
-        //     icon: "error",
-        //     title: "Complete el campo",
-        //   });
-        // }
         if (resultado < 0) {
           Toast.fire({
             icon: "error",
@@ -159,7 +139,7 @@ function GuardarPublicacion() {
             icon: "success",
             title: "Se modifico correctamente",
           });
-          GuardarTags();
+          
         }
         if (resultado > 0) {
           Toast.fire({
@@ -167,9 +147,13 @@ function GuardarPublicacion() {
             title: "Publicación inicializada. Recuerda añadir imagenes",
           });
           publicacionID = resultado;
+          imagenesCargadas.forEach(function (imagenCargada) {
+            imagenCargada.append("publicacionID", publicacionID);
+            cargarImagen(imagenCargada);
+          });
+          GuardarTags();
           console.log("el id ahora es: " + resultado);
           GuardarTags();
-          $("#divImagenes").show();
         }
       },
 
@@ -239,22 +223,69 @@ function seleccionarTipo(value) {
   actualizarTag();
 }
 
-// Crear Imagen
-$("#files").submit(function () {
-  console.log($(this)[0]);
-  var formData = new FormData($(this)[0]);
-  formData.append("publicacionID", publicacionID);
-  console.log(formData);
+imagenesCargadas = [];
+
+// // Crear Imagen
+// $("#files").submit(function (event) {
+//   event.preventDefault(); // Prevenir la acción por defecto del formulario
+
+//   console.log(this);
+//   var formData = new FormData(this);
+//   // formData.append("publicacionID", publicacionID);
+//   console.log(formData);
+//   if (formData.has("file")) {
+//     imagenesCargadas.push(formData);
+
+//     var imagen = `<input hidden name="id" value="c${
+//       imagenesCargadas.length
+//     }"></input><img src="${formData.get("file").name}"/>`;
+
+//     $("#Lista_imagenes").append(
+//       `<div class="carousel-item ${imageActive}" >
+//               ${imagen}
+//             </div>`
+//     );
+//     imageActive = "";
+//   }
+// });
+
+$("#files").submit(function (event) {
+  event.preventDefault();
+  var imagenInput = document.getElementById("imagen");
+
+  if (imagenInput.files.length > 0) {
+    var file = imagenInput.files[0];
+
+    var formData = new FormData();
+    formData.append("imagen", file);
+    formData.append("imagenID", "temp" + (imagenesCargadas.length + 1));
+
+    imagenesCargadas.push(formData);
+
+    var imagenSrc = URL.createObjectURL(file);
+
+    var imagen = `<input type="hidden" name="temp${imagenesCargadas.length}" value="temp${imagenesCargadas.length}"></input><img src="${imagenSrc}"/>`;
+
+    $("#Lista_imagenes").append(
+      `<div class="carousel-item ${imageActive}" >
+                ${imagen}
+              </div>`
+    );
+    imageActive = "";
+  }
+});
+
+function cargarImagen(formdata) {
   $.ajax({
     url: "../../Publicaciones/GuardarImagen",
     type: "POST",
-    data: formData,
+    data: formdata,
     async: false,
     success: function (resultado) {
-      $("#ModalImagen").modal("hide");
-      setTimeout(function () {
-        BuscarImagenes();
-      }, 100);
+      // $("#ModalImagen").modal("hide");
+      // setTimeout(function () {
+      //   // BuscarImagenes();
+      // }, 100);
     },
     cache: false,
     contentType: false,
@@ -265,7 +296,7 @@ $("#files").submit(function () {
   });
 
   return false;
-});
+}
 
 function actualizarTag() {
   etiquetas = "";
@@ -301,10 +332,12 @@ function actualizarTag() {
 }
 
 function AñadirEtiqueta(id) {
-  /*   console.log(resultado);*/
+  console.log(id);
   if (tagsActive.find((tags) => tags.servicioID == id)) {
     let resultado = serviciosDisp.find((tags) => tags.servicioID == id);
-    resultado.eliminado = false;
+    if(resultado.eliminado != undefined){
+      resultado.eliminado = false;
+    } 
   } else {
     let resultado = serviciosDisp.find((tags) => tags.servicioID == id);
     tagsActive.push(resultado);
@@ -337,8 +370,8 @@ function EliminarImagen() {
     type: "POST",
     dataType: "json",
     success: function (resultado) {
-      console.log(resultado);
-      BuscarImagenes();
+      // console.log(resultado);
+      // BuscarImagenes();
     },
     error: function (xhr, status) {
       alert("Disculpe, existió un problema");

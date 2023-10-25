@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace AgroServices.Controllers;
 
- 
+
 public class UsuariosController : Controller
 {
     private readonly UserManager<IdentityUser> _userManager;
@@ -40,7 +40,7 @@ public class UsuariosController : Controller
         {
             if (usuarioAsp == null)
             {
-                return View("Perfil");
+                return RedirectToAction("Index", "Home");
             }
             usuario = _contexto.Usuarios.Include(s => s.Localidades).Include(s => s.Localidades.provincias).Where(u => u.ASP_UserID == usuarioAsp.Id).FirstOrDefault();
         }
@@ -72,22 +72,40 @@ public class UsuariosController : Controller
             }
 
             // pasa la información del usuario a la vista si es necesario
-            
+            ViewBag.UsuarioID = usuario.UsuarioID;
             ViewBag.Ubication = usuario.Localidades.Nombre + ", " + usuario.Localidades.provincias.Nombre;
             ViewBag.UserName = usuarioAspOther.UserName;
-
             ViewBag.Age = age;
             if (usuarioAspOther == usuarioAsp)
             {
                 ViewBag.Email = usuarioAspOther.Email;
-                ViewBag.PhoneNumber = usuarioAspOther.PhoneNumber;
-                ViewBag.PersonalName = usuario.Apellido + " " + usuario.Nombre;
+                ViewBag.PhoneNumber = usuarioAspOther.PhoneNumber != null ? usuarioAspOther.PhoneNumber : "Sin Asignar";
+                ViewBag.PersonalName = (!string.IsNullOrEmpty(usuario.Apellido) && !string.IsNullOrEmpty(usuario.Nombre)) ? usuario.Apellido + " " + usuario.Nombre : "Sin Asignar";
             }
 
+            var sumatoriaTotal = 0;
+            var publicCount = 0;
+            var publicaciones = _contexto.Publicaciones.Include(p => p.Valoraciones).Where(u => u.UsuarioID == id).Select(p => p.Valoraciones).ToList();
+            foreach (var valoracionesXpublicacion in publicaciones)
+            {
+                if (valoracionesXpublicacion.Count > 0)
+                {
+                    publicCount++;
+                    var sumatoria = 0;
+                    foreach (var valoracion in valoracionesXpublicacion)
+                    {
+                        sumatoria += valoracion.Puntuacion;
+                    }
+                    sumatoriaTotal += (int)Math.Round((double)sumatoria / valoracionesXpublicacion.Count());
+                }
+            }
+            var promedio = 0;
+            if(sumatoriaTotal != 0){
+              promedio = (int)Math.Round((decimal)sumatoriaTotal / publicCount);
+            }
+            ViewBag.ValoracionPuntaje = promedio;
         }
-
-
-
+        
         return View("Perfil");
     }
 

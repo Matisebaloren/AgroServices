@@ -49,7 +49,6 @@ function BuscarServicios() {
     },
   });
 
-  console.log("Fin de la función BuscarServicios");
 }
 
 // Agrega un botón o elemento que desencadenará la alternancia de visibilidad
@@ -108,11 +107,10 @@ function BuscarPublicaciones() {
           let img = "";
           if (imagen != null) {
             img = `data:${imagen.tipoImagen};base64, ${imagen.imagenBase64}`;
-          }
-          else{
+          } else {
             img = `../img/cosechadora.jpg`;
           }
-         
+
           // Construir la representación de la publicación
           $("#grid-Publicaciones").append(`
             <label class="card" onclick="Vista(${publicacion.publicacionID})">
@@ -138,87 +136,50 @@ function BuscarPublicaciones() {
   console.log("Fin de la función BuscarServicios");
 }
 
-// async function BuscarPublicaciones(limite = 6) {
-//   try {
-//     const [publicaciones, servicios] = await Promise.all([
-//       $.ajax({
-//         url: "../../Publicaciones/BuscarPublicaciones",
-//         data: { pagina, elementosPorPagina },
-//         type: "GET",
-//         dataType: "json",
-//       }),
-//       $.ajax({
-//         url: "../../Publicaciones/BuscarServicios",
-//         type: "GET",
-//         dataType: "json",
-//       }),
-//     ]);
-//     console.log("publicaciones: " + publicaciones.lista);
-//     const ListaServicios = new Map(
-//       servicios.map((servicio) => [servicio.servicioID, servicio.descripcion])
-//     );
+async function BuscarPublicaciones(pagina = 1, elementosPorPagina = 6) {
+  const data = await $.ajax({
+    url: "../../Publicaciones/BuscarPublicaciones2",
+    data: { pagina: pagina, elementosPorPagina: elementosPorPagina },
+    type: "GET",
+    dataType: "json",
+  });
+  console.log(data);
+  $("#tbody-publicaciones").empty();
 
-//     $("#tbody-publicaciones").empty();
+  // Construir la representación de las publicaciónes
+  data.lista.forEach((publicacion) => {
+    // Agregar el elemento a la tabla
+    // publicacion.servicios.forEach((etiqueta) => {
+    //   tags += `<label class="badge bg-success text-wrap">${etiqueta.servicioNombre}</label> `;
+    // });
+    if (
+      publicacion.imagenes.length > 0 &&
+      publicacion.imagenes[0].tipoImagen &&
+      publicacion.imagenes[0].imagenBase64
+    ) {
+      img = `<img class="card__body-cover-image" src="data:${publicacion.imagenes[0].tipoImagen};base64, ${publicacion.imagenes[0].imagenBase64}"/>`;
+    }
+    else{
+      img = "";
+    }
+    tags = "";
+    publicacion.servicios.forEach((etiqueta) => {
+      tags += `<label class="badge bg-success text-wrap">${etiqueta.servicioNombre}</label> `;
+    });
+    
 
-//     for (const publicacion of publicaciones.lista) {
-//       // Llamada AJAX para obtener las etiquetas
-//       const tags = await $.ajax({
-//         url: "../../Publicaciones/BuscarTagsActivos",
-//         data: { publicacionID: publicacion.publicacionID },
-//         type: "GET",
-//         dataType: "json",
-//       });
-
-//       // Crear una cadena de etiquetas
-//       let tagstring = "";
-//       for (const tag of tags) {
-//         if (tag.eliminado === false && ListaServicios.has(tag.servicioID)) {
-//           tagstring += ListaServicios.get(tag.servicioID) + " - ";
-//         }
-//       }
-
-//       // Llamada AJAX para obtener las imágenes
-//       const imagenes = await $.ajax({
-//         url: "../../Publicaciones/BuscarImagenes",
-//         data: { publicacionID: publicacion.publicacionID },
-//         type: "GET",
-//         dataType: "json",
-//       });
-
-//       // Construir la representación de la publicación
-//       let img = "";
-//       let col = "";
-//       if (imagenes.length > 0) {
-//         img = `<div class="col-12 col-md-6 itemImg"><img src="data:${imagenes[0].tipoImagen};base64, ${imagenes[0].imagenBase64}"/></div>`;
-//         col = "col-md-6";
-//       }
-//       // var fechaMoment = moment(publicacion.fecha, "YYYY-MM-DDTHH:mm:ss.SS");
-//       const item = `
-//           <tr>
-//             <td>
-//               <a onclick="Vista(${
-//                 publicacion.publicacionID
-//               })" asp-route-id="0" class="row mx-2 itemA">
-//                 ${img}
-//                 <div class="col-12 ${col}">
-//                   <h3>${publicacion.titulo}</h3>
-//                   <p>${moment(publicacion.fecha, "YYYY-MM-DD").format(
-//                     "DD-MM-YYYY"
-//                   )}</p>
-//                   <p class="badge bg-success text-wrap">${tagstring}</p>
-//                   <p>${publicacion.resumen}</p>
-
-//                 </div>
-//               </a>
-//             </td>
-//           </tr>`;
-
-//       // Agregar el elemento a la tabla
-//       $("#tbody-publicaciones").append(item);
-//     }
-
-//     MostrarPaginacion(pagina, publicaciones.totalPaginas);
-//   } catch (error) {
-//     console.error("Error al cargar datos:", error);
-//   }
-// }
+    var html = `
+              <label class="card" onclick="Vista(${publicacion.publicacionID})">
+                <div class="card__body">
+                  <div class="card__body-cover">${img}</span>
+                  </div>
+                  <header class="card__body-header">
+                    <h4 class="card__body-header-title">${publicacion.titulo}</h4>
+                    <label>${tags}</label>
+                  </header>
+                </div>
+              </label>       
+            `;
+    $("#grid-Publicaciones").append(html);
+  });
+}

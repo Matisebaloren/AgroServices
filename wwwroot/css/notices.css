@@ -93,7 +93,6 @@
 }
 .card__body-header-title {
   color: var(--text-headline);
-  font-weight: 700;
   margin-bottom: 8px;
 }
 .card__body-header-subtitle {
@@ -137,6 +136,12 @@ body .grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 1rem;
+}
+
+@media screen and (max-width: 760px) {
+  body .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 /* Estilo del contenedor del video */

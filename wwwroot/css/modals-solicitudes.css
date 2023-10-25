@@ -18,3 +18,36 @@
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   }
 }
+
+/* #modalDetalle {
+  .modal-header {
+    background-color: #007bff;
+  }
+  .modal-title{
+    color: whitesmoke;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  }
+} */
+.modal-content {
+  background-color: #e9ecef;
+  border: none;
+  border-radius: 0.3rem;
+}
+
+.modal-header {
+  background-color: #17a2b8;
+  color: white;
+}
+
+.modal-footer {
+  background-color: #6c757d;
+  color: white;
+}
+
+.modal-title {
+  font-weight: bold;
+}
+
+.btn-close {
+  color: #ffffff;
+}

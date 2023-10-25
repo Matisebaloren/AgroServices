@@ -22,6 +22,7 @@ namespace AgroServices.Models
         public int UsuarioID { get; set; }
 
         public int Estado { get; set; } //0: Creado, 1: Rechazado, 2: Aceptado, 3: Terminado
+        public int Valorado { get; set; } //0: sin valorar, 1: valorado solo por el participante, 2: valorado solo el dueño de la publi, 3: valorado por dos
     }
 }
 
@@ -36,4 +37,5 @@ public class VistaSolicitud
     public int UsuarioID { get; set; }
     public string? userName { get; set; }
     public int Estado { get; set; } //0: Creado, 1: Rechazado, 2: Aceptado, 3: Terminado
+    public int Valorado { get; set; } //0: sin valorar, 1: valorado solo por el participante, 2: valorado solo el dueño de la publi, 3: valorado por dos
 }

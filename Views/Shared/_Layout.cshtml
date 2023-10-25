@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>@ViewData["Title"] - AgroServices</title>
   @* <link rel="icon" href="../../img/icons/iconAgroServices.jpg" type="image/svg"> *@
-  <link rel="icon"  type="image/ico" sizes="128x128" href="/../../img/icons/icon180.ico">
+  <link rel="icon" type="image/ico" sizes="128x128" href="/../../img/icons/icon180.ico">
   <link rel="icon" type="image/ico" sizes="32x32" href="../../img/icons/icon32.ico">
   <link rel="icon" type="image/ico" sizes="16x16" href="../../img/icons/icon16.ico">
   <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
@@ -45,12 +45,12 @@
   @* <img class="fondo_img" src="../../img/videoCampo.mp4" alt=""> *@
   <video id="miVideo" loop muted playsinline preload="auto" class="video-fondo2"
     style="opacity: 0; transition: opacity 3s;">
-    <source src="../../img/videoCampo.mp4" type="video/mp4">
+    <source src="/img/videoCampo.mp4" type="video/mp4">
   </video>
   <!-- navbar -->
   <nav class="navbar FondoGlass-Navbar">
     <a class="logo_item close" href="/">
-      <img src="../../img/icons/iconRecortado.png" alt="">
+      <img src="/img/icons/iconRecortado.png" alt="">
     </a>
     @* <div class="search">
     <form action="@Url.Action("BuscarPublicaciones", "Publicaciones")" method="get">
@@ -88,6 +88,17 @@
           @if (User.Identity.IsAuthenticated)
           {
             <partial name="_PerfilOption" />
+          }
+          else
+          {
+            <li class="item">
+              <a href="/Identity/Account/Login" class="nav_link">
+                <span class="navlink_icon">
+                  <i class="bx bxs-user"></i>
+                </span>
+                <span class="navlink">Acceder</span>
+              </a>
+            </li>
           }
 
 

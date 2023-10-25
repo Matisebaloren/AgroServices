@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="~/css/VistaPublicacion.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/publicacionList.css" asp-append-version="true" />
 <!-- Carga de Moment.js y en español-->
 
 
@@ -35,24 +36,9 @@
 
 
 
-<div class="FondoGlass-3 my-1">
+<div class="card-blanco mx-auto">
   <input type="hidden" id="PublicacionID" value=@ViewBag.publicacion.PublicacionID></input>
   <div class="row card-vista-publi">
-    @* <div class="col-12 desaparecer">
-    <h2>@ViewBag.publicacion.Titulo</h2>
-    <p class="mt-2">@ViewBag.publicacion.Fecha</p>
-    <hr>
-
-    <spam style="display: none;" id="" class="tag"></spam>
-    <hr>
-
-    <div class="div-usuario">
-    <span>
-    <p id=User-name><i class="bx bx-user"></i>@ViewBag.username</p>
-    </span>
-    </div>
-    </div> *@
-    @* carosel de imagenes *@
     <div class="col-12 col-md-8">
       <div id="carouselExampleFade" class="carousel slide my-3" style="border: 2px solid black; border-radius: 17px"
         data-bs-ride="carousel" data-bs-touch="true" data-bs-interval="false">
@@ -71,66 +57,60 @@
       </div>
     </div>
     @* datos principales*@
-    <div class="col-12 col-md-4">
+    <div class="col-12 col-md-4 d-flex flex-column">
       @* fecha *@
-      <h2>@ViewBag.publicacion.Titulo</h2>
-      <p class="mt-2">@ViewBag.publicacion.Fecha</p>
-      <hr>
-
+      @* <h4>@ViewBag.publicacion.Titulo</h4> *@
+      <h4 id="titulo"></h4>
+      @* <label class="mt-2">@ViewBag.publicacion.Fecha</label> *@
+      <label id="usuario"></label>
       @* tags *@
-      <spam style="display: none;" id="tags" class="tag"></spam>
-      <hr>
-      @* usuario *@
-      <div class="div-usuario">
-        <span>
-          <p id=User-name><i class="bx bx-user"></i>@ViewBag.username</p>
-        </span>
-      </div>
+      <label id="tags"></label>
+    <hr>
+      <label class="mb-auto" id="resumen"></label>
+
       <div id="btn-editar" style="display: none;" class="div-boton-der my-3">
         <a class="btn btn-success" asp-controller="Publicaciones" asp-action="Formulario"
           asp-route-id=@ViewBag.publicacion.PublicacionID>Editar</a>
-        @* <button onclick=Editar() class="btn btn-success">EDITAR</button> *@
+      </div>
+      <div id="btn-solicitud" class="div-boton-der my-3">
+        <button onclick=nuevaSolicitud() class="btn btn-success">
+          @{
+            if (ViewBag.publicacion.EsOferta)
+            {
+              <p class="m-0">
+                Solicitar servicio</p>
+            }
+            else
+            {
+              <p class="m-0">Ofertar servicio</p>
+            }
+          }
+        </button>
       </div>
     </div>
+    <hr>
     @* descripcion *@
-    <div id="descripcion"></div>
-
-    <div id="btn-solicitud" class="div-boton-der my-3">
-      <button onclick=nuevaSolicitud() class="btn btn-success"> @{
-          if (ViewBag.publicacion.EsOferta)
-          {
-            <p class="m-0">
-              SOLICITAR SERVICIO</p>
-          }
-          else
-          {
-            <p class="m-0">OFERTAR SERVICIO</p>
-          }
-        }
-      </button>
-    </div>
-
+    <label id="descripcion"></label>
 
 
     @* caja valoraciones y Valoracion general de 1 a 5 estrellas *@
   </div>
 
-
-
   <div class="comentarios-container">
     <h2>Valoraciones</h2>
-    <div class="mb-2 comentario-contenido" id="ValoracionCreate">
+    <div class="mb-2 comentario-contenido" style="display: none;" id="ValoracionCreate">
       <div class="comentario-header">
         <p class="nombre-usuario">Danos tu valoración:</p>
         <div id="inputValoracion" class="valoracion">
-          <i class="bx bxs-star"></i>
-          <i class="bx bxs-star"></i>
-          <i class="bx bxs-star"></i>
-          <i class="bx bxs-star"></i>
-          <i class="bx bxs-star"></i>
+          <i class="bx bx-star"></i>
+          <i class="bx bx-star"></i>
+          <i class="bx bx-star"></i>
+          <i class="bx bx-star"></i>
+          <i class="bx bx-star"></i>
         </div>
       </div>
-      <textarea name="" rows="4" placeholder="Comparte tus experiencia al participar en esta publicación..." id="Contenido"></textarea>
+      <textarea name="" rows="4" placeholder="Comparte tus experiencia al participar en esta publicación..."
+        id="Contenido"></textarea>
       <div id="btn-volver" class="div-boton-der my-3">
         <button onclick="enviarValoracion()" class="btn btn-success">Guardar</button>
       </div>
@@ -140,11 +120,11 @@
     </div>
   </div>
 
-@*BOTON PARA VOLVER A LA LISTA PUBLICACIONES GENERAL*@
-<div id="btn-volver" class="div-boton-der my-3">
-  <buttom onclick="volver()" class="btn btn-success"><i class='bx bx-arrow-back'></i>Volver</buttom>
+  @*BOTON PARA VOLVER A LA LISTA PUBLICACIONES GENERAL*@
+  <div id="btn-volver" class="div-boton-der my-3">
+    <buttom onclick="volver()" class="btn btn-success"><i class='bx bx-arrow-back'></i>Volver</buttom>
+  </div>
 </div>
-</div>
-@section Scripts{
+@section Scripts {
   <script src="~/js/tablas/vista-1.0.0.js"></script>
 }

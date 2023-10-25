@@ -1,7 +1,8 @@
 using AgroServices.Models;
 using System.ComponentModel.DataAnnotations;
 
-namespace AgroServices.Models{
+namespace AgroServices.Models
+{
 
     public class Etiqueta
     {
@@ -10,10 +11,9 @@ namespace AgroServices.Models{
 
         public int ServicioID { get; set; }
 
+        public virtual Servicio? Servicio { get; set; }
+
         public int PublicacionID { get; set; }
-
-        public bool Eliminado { get; set; }
-
- 
     }
 }
+

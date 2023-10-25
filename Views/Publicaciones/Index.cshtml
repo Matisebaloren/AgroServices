@@ -3,8 +3,6 @@
     ViewData["Title"] = "Home Page";
 }
 <link rel="stylesheet" href="~/css/publicacionList.css" />
-
-
 <!-- Modal -->
 <div class="modal fade" id="ModalPublicacion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -30,13 +28,10 @@
 </div>
 
 
-<div class="FondoGlass-1 my-5">
-  <h2 class="text-black">Publicaciones</h2>
-  @* Tabla con los datos de cada elemento *@
- 
-  <table class="table table-bordered table-hover table-light table-condensed text-uppercase">
-    <tbody id="tbody-publicaciones"></tbody>
-  </table>
+<div class="card-blanco mx-auto">
+  <div class="card-header">Publicaciones Relacionadas</div>
+  <div id="tbody-publicaciones">
+  </div>
   <div id="paginationContainer" class="row">
     <div id="pagination" class="col-12 col-md-6">
     </div>
@@ -56,4 +51,5 @@
 
 @section Scripts{
     <script src="~/js/tablas/buscador-1.0.0.js"></script>
+    <script src="~/js/estrellas.js"></script>
 }

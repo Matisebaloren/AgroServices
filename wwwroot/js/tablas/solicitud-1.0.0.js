@@ -9,7 +9,7 @@ function BuscarSolicitudes() {
     type: "GET",
     dataType: "json",
     success: function (data) {
-      console.log("data: " +data);
+      console.log("data: " + data);
       listaSolicitudes = data.solicitudes;
       usuario = data.usuario; //mejor pasar el usuarioID
       console.log(listaSolicitudes); // Almacena todas las solicitudes en la variable
@@ -80,14 +80,13 @@ function mostrarSolicitudes(solicitudes) {
     }
     switch (solicitud.estado) {
       case 0:
-        console.log("0, recien creado");
         estado = "En espera";
         if (solicitud.usuarioID == usuario.usuarioID) {
-          botones = `<button class="btn btn-danger" onclick="modalCancelar(${solicitud.solicitudID})">Cancelar</button>`;
+          botones = `<button class="btn btn-danger" onclick="event.stopPropagation(); modalCancelar(${solicitud.solicitudID})">Cancelar</button>`;
         } else {
           botones = `
-          <button class="btn btn-primary" onclick="modalAceptar(${solicitud.solicitudID})">Aceptar</button>
-          <button class="btn btn-danger" onclick="modalCancelar(${solicitud.solicitudID})">Rechazar</button>
+          <button class="btn btn-primary" onclick="event.stopPropagation(); modalAceptar(${solicitud.solicitudID})">Aceptar</button>
+          <button class="btn btn-danger" onclick="event.stopPropagation(); modalCancelar(${solicitud.solicitudID})">Rechazar</button>
           `;
         }
         break;
@@ -103,7 +102,7 @@ function mostrarSolicitudes(solicitudes) {
         estado = "Aceptada"; // Cuando es aceptada la solicitud
         classTable = "table-success";
         if (solicitud.usuarioID != usuario.usuarioID) {
-          botones = `<button class="btn btn-success" onclick="modalConcretar(${solicitud.solicitudID})">Concretar</button>`;
+          botones = `<button class="btn btn-success" onclick="event.stopPropagation(); modalConcretar(${solicitud.solicitudID})">Concretar</button>`;
         }
         break;
       case 4:
@@ -119,7 +118,7 @@ function mostrarSolicitudes(solicitudes) {
     }
 
     solicitudesContainer.append(`
-        <tr onclick="modalInfo(${
+        <tr onclick="modalDetalle(${
           solicitud.solicitudID
         })" class="${classTable} ${selected}">
             <td><i class="${iconClass}"></i></td>
@@ -182,7 +181,7 @@ function modalAceptar(id) {
   let solicitud = listaSolicitudes.find((s) => s.solicitudID === id);
   $("#modalConcretar .modal-title").html(`Aceptar Solcitud`);
   $("#modalConcretar .modal-body").html(
-  `<p>
+    `<p>
     Al aceptar esta solicitud relacionada con el servicio <strong>"${solicitud.publicacionTitulo}"</strong>, estás confirmando tu compromiso de avanzar con la transacción acordada.
   </p>
   <p>
@@ -206,7 +205,7 @@ function actualizarSolicitud(id, newState) {
   $.ajax({
     url: "../../Notificaciones/ModificarSolicitud",
     type: "POST",
-    data: { solicitudID: id, estadoNuevo: newState},
+    data: { solicitudID: id, estadoNuevo: newState },
     async: true,
     success: function (resultado) {
       $("#modalCancelar").modal("hide");
@@ -216,5 +215,61 @@ function actualizarSolicitud(id, newState) {
     error: function (xhr, status) {
       console.log("Disculpe, existió un problema");
     },
+  });
+}
+
+function modalDetalle(id) {
+  let solicitud = listaSolicitudes.find((s) => s.solicitudID === id);
+
+  let estado;
+  switch (solicitud.estado) {
+    case 0:
+      estado = "En espera";
+      break;
+    case 1:
+      estado = "Cancelada"; // Cuando el que solicito se retracta de la solicitud.
+      break;
+    case 2:
+      estado = "Rechazada"; // Cuando el dueño de la publicacion rechaza la solicitud.
+      break;
+    case 3:
+      estado = "Aceptada"; // Cuando es aceptada la solicitud
+      break;
+    case 4:
+      estado = "Cerrada";
+      break;
+    default:
+      break;
+  }
+  // $("#modalDetalle .modal-title").html(`Detalle de`);
+  $("#modalDetalle .modal-body").html(
+    `
+  <li class="d-flex">
+    <i class="me-auto">Publicacion relacionada:</i> <a class="btn p-0 fw-bold" onclick="Vista(${
+      solicitud.publicacionID
+    })">"${solicitud.publicacionTitulo}"</a>
+  </li>
+  <li class="d-flex">
+    <i class="me-auto">Solicitante:</i> <a class="btn p-0 fw-bold" onclick="perfilView(${
+      solicitud.usuarioID
+    })">"${solicitud.userName}"</a>
+  </li>
+  <li class="d-flex">
+   <i class="me-auto"> Mensaje:</i> "${solicitud.descripcion}"
+  </li>
+  <li class="d-flex">
+    <i class="me-auto">Fecha de Solicitud:</i> "${moment(solicitud.fecha, "YYYY-MM-DD").format(
+      "DD-MM-YYYY"
+    )}"
+  </li>
+  <li class="d-flex">
+    <i class="me-auto">Estado:</i> ${estado}
+  </li>
+  `
+  );
+  $("#modalDetalle").modal("show");
+  $("#btn-concretar").html("Aceptar solicitud");
+  $("#btn-concretar").click(function () {
+    actualizarSolicitud(id, 3);
   });
 }

@@ -1,4 +1,5 @@
 using AgroServices.Models;
+using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 
 namespace AgroServices.Models
@@ -16,7 +17,7 @@ namespace AgroServices.Models
         public DateTime Fecha { get; set; }
 
         public int PublicacionID { get; set; }
-
+         [JsonIgnore]
         public virtual Publicacion? Publicaciones { get; set; }
 
         public int UsuarioID { get; set; }
@@ -33,6 +34,7 @@ public class VistaValoracion{
     [DataType(DataType.Date)]
     public DateTime Fecha { get; set; }
 
+   
     public int PublicacionID { get; set; }
 
     public int UsuarioID { get; set; }

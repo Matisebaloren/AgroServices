@@ -75,3 +75,74 @@
 #pagination .current:hover {
   background-color: #155d3c;
 }
+
+.card-blanco {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 20px; /* Espacio entre las tarjetas */
+  width: 80%;
+}
+
+@media screen and (max-width: 769px) {
+  .card-blanco {
+    width: 95%;
+  }
+}
+
+.card-header {
+  text-align: center;
+  font-weight: bold;
+  font-size: 18px;
+  color: #47a847;
+  margin-bottom: 10px;
+}
+
+.infoCard{
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  padding-inline: 0;
+}
+.infoCard label {
+  cursor: pointer;
+  padding-inline: 0.5rem;
+  width: max-content;
+  z-index: 1;
+  /* font-size: 1.2vw; */
+}
+
+.infoCard .card-footer {
+  background: gray;
+  color: white;
+  padding: 0;
+  margin: 0;
+}
+
+
+.valoracion {
+  color: #ffffff; /* Color de las estrellas seleccionadas */
+  font-size: 20px;
+  display: flex;
+  font-size: 1rem; /* Tamaño del ícono */
+  border: 2px solid #797979; /* Ancho y estilo del borde */
+  border-radius: 5px; /* Hace que el borde siga la forma del ícono circular */
+  padding: 5px; /* Espacio dentro del borde */
+  margin: 5px; /* Espacio entre los íconos */
+  /* box-shadow: 2px 2px 7px #00000082; */
+  background: rgb(25 135 84)
+}
+
+.valoracion i {
+    line-height: inherit;
+    text-shadow: 2px 2px 7px grey;
+}
+
+.card_perfil {
+  border: 1px solid rgb(196, 196, 196);
+  overflow: hidden;
+  border-radius: 5px;
+  box-shadow: 2px 2px 7px grey;
+  /* height: 20vw; */
+}

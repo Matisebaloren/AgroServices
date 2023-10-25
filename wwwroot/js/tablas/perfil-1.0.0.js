@@ -1,15 +1,16 @@
-window.onload = BuscarPublicaciones();
-
-// autoregenerar paginacion cuando se esta en la ultima pagina,
+window.onload = function() {
+BuscarPublicaciones();
+visualizarPromedio();
+}
 
 async function BuscarPublicaciones(pagina = 1, elementosPorPagina = 10) {
+  var usuarioID = $("#UsuarioID").val();
   const data = await $.ajax({
     url: "../../Publicaciones/BuscarPublicaciones2",
-    data: {pagina:pagina,elementosPorPagina:elementosPorPagina},
+    data: {pagina:pagina,elementosPorPagina:elementosPorPagina, validarUsuario: usuarioID },
     type: "GET",
     dataType: "json",
   });
-  console.log(data);
   $("#tbody-publicaciones").empty();
 
   // Construir la representación de las publicaciónes
@@ -25,7 +26,6 @@ async function BuscarPublicaciones(pagina = 1, elementosPorPagina = 10) {
       img = `<div class="col-12 col-md-6 itemImg"><img src="data:${publicacion.imagenes[0].tipoImagen};base64, ${publicacion.imagenes[0].imagenBase64}"/></div>`;
       col = "col-md-6";
     }
-    
     publicacion.servicios.forEach((etiqueta) => {
       tags += `<label class="badge bg-success text-wrap">${etiqueta.servicioNombre}</label> `;
     });
@@ -56,9 +56,9 @@ async function BuscarPublicaciones(pagina = 1, elementosPorPagina = 10) {
   });
 }
 
-let currentPage = 1;
-let elementsPerPage = 10; // Cambiar según tu necesidad
 
+let currentPage = 1;
+let elementsPerPage = 10;
 function MostrarPaginacion(paginaActual, totalPaginas) {
   const maxPaginasCercanas = 2; // Cantidad de páginas cercanas a mostrar
   let minPagina = Math.max(paginaActual - maxPaginasCercanas, 1);
@@ -121,4 +121,7 @@ function PublicacionesPorPagina(cantidad) {
   BuscarPublicaciones(1, elementsPerPage); // Volver a cargar las publicaciones con la nueva cantidad por página
 }
 
-
+function visualizarPromedio(){
+  var icons = generarIconos($("#ValoracionPuntaje").val());
+  $("#ValoracionPromedio").html(icons);
+};

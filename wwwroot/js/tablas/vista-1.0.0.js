@@ -4,7 +4,93 @@ if (usuarioID == 0) {
 }
 var publicacionID = $("#PublicacionID").val();
 
-window.onload = BuscarPublicaciones();
+window.onload = BuscarPublicacion();
+
+async function BuscarPublicacion() {
+  const data = await $.ajax({
+    url: "../../Publicaciones/BuscarPublicaciones2",
+    data: { publicacionID: publicacionID, verficarValorar: true },
+    type: "GET",
+    dataType: "json",
+  });
+  console.log(data);
+  $("#tbody-publicaciones").empty();
+
+  // Construir la representación de las publicaciónes
+  var publicacion = data.lista[0];
+  //imagenes
+  if (publicacion.imagenes.length > 0) {
+    let claseActive = "active";
+    publicacion.imagenes.forEach((imagen) => {
+      let imagenHtml = "<td></td>";
+      if (imagen.imagenBase64) {
+        imagenHtml = `<img class="mx-auto imagen" alt="Imagen" src="data:${imagen.tipoImagen};base64, ${imagen.imagenBase64}" />`;
+      }
+      $("#Lista_imagenes").append(
+        `<div class="carousel-item carrousel-ajuste ${claseActive}" >
+            ${imagenHtml}
+          </div>
+          `
+      );
+      claseActive = "";
+    });
+  }
+
+  //servicios
+  var tags = "";
+  publicacion.servicios.forEach((etiqueta) => {
+    tags += `<label class="badge bg-success text-wrap">${etiqueta.servicioNombre}</label>`;
+  });
+  console.log("tags: " + tags);
+
+  //asignando html
+  $("#tags").html(tags);
+  $("#titulo").html(publicacion.titulo);
+  $("#tituloModal").html(publicacion.titulo);
+  $("#usuario").html(
+    "Publicado por <i class='bx bx-user'></i><a href='#' onclick='perfilView(" +
+      publicacion.usuarioID +
+      ")'>" +
+      publicacion.usuarioNombre +
+      "</a> (" +
+      moment(publicacion.fecha, "YYYY-MM-DD").format("DD-MM-YYYY") +
+      ")"
+  );
+  $("#userName").append(publicacion.usuarioNombre);
+  $("#resumen").html(publicacion.resumen);
+  $("#descripcion").html(publicacion.descripcion);
+
+  //validaciones
+  if (publicacion.propia == true) {
+    $("#btn-solicitud").hide();
+    $("#btn-editar").show();
+  } else {
+    if (publicacion.puedeValorar == true) {
+      $("#ValoracionCreate").show();
+    }
+  }
+
+  publicacion.valoraciones.forEach((valoracion) => {
+    var fechaMoment = moment(valoracion.fecha, "YYYY-MM-DDTHH:mm:ss.SS");
+    comentario = `
+          <div class="comentario">
+            <div class="comentario-contenido">
+              <div class="comentario-header">
+                <p class="nombre-usuario">${valoracion.username}</p>
+                <div class="valoracion">
+                ${generarIconos(valoracion.puntuacion)}
+                </div>
+              </div>
+              <p class="texto-comentario">${valoracion.contenido}</p>
+              <p class="fecha-comentario">Publicado el ${fechaMoment.format(
+                "D [de] MMMM, YYYY"
+              )}</p>
+            </div>
+          </div>
+        `;
+    $("#Valoraciones").append(comentario);
+  });
+}
 
 function BuscarPublicaciones() {
   BuscarValoraciones();
@@ -23,11 +109,7 @@ function BuscarPublicaciones() {
       let arrTime = publicaciones[0].fecha.split("T");
       let dia = arrTime[0].split("-");
       let diaArmado = dia[2] + "/" + dia[1] + "/" + dia[0];
-      if (publicaciones[0].usuarioID == usuarioID) {
-        $("#btn-solicitud").hide();
-        // console.log("dueño");
-        $("#btn-editar").show();
-      }
+
       console.log(arrTime);
       // $("#fecha").html(arrTime[0]);
       $("#fecha").html(diaArmado);
@@ -50,68 +132,6 @@ function BuscarPublicaciones() {
     },
     error: function (xhr, status) {
       alert("Error al cargar servicios");
-    },
-  });
-
-  $.ajax({
-    url: "../../Publicaciones/BuscarTagsActivos",
-    data: { publicacionID: publicacionID },
-    type: "GET",
-    dataType: "json",
-    success: function (tags) {
-      console.log(tags);
-      let tagstring = "";
-      $.each(tags, function (key, tag) {
-        if (tag.eliminado == false) {
-          let search = ListaServicios.find(
-            (s) => s.servicioID == tag.servicioID
-          );
-          tagstring += " - " + search.descripcion;
-          console.log(tagstring);
-          $("#tags").show();
-        }
-      });
-      $("#tags").html(tagstring);
-    },
-    error: function (xhr, status) {
-      alert("Error al cargar tags");
-    },
-  });
-
-  // buscamos imagenes relacionadas
-  $.ajax({
-    url: "../../Publicaciones/BuscarImagenes",
-    data: { publicacionID: publicacionID },
-    type: "GET",
-    dataType: "json",
-    success: function (imagenes) {
-      let clase = "active";
-      if (imagenes.length == 0) {
-        $("#Lista_imagenes").append(
-          `<div class="carousel-item ${clase}" >
-        <div class="FondoGlass-1" style="width: 100%; height: 35vw;">
-        <svg style="fill:#ffffff; position: absolute; right: 43%; top: 32%;" xmlns="http://www.w3.org/2000/svg" height="6em" viewBox="0 0 576 512"><path d="M160 80H512c8.8 0 16 7.2 16 16V320c0 8.8-7.2 16-16 16H490.8L388.1 178.9c-4.4-6.8-12-10.9-20.1-10.9s-15.7 4.1-20.1 10.9l-52.2 79.8-12.4-16.9c-4.5-6.2-11.7-9.8-19.4-9.8s-14.8 3.6-19.4 9.8L175.6 336H160c-8.8 0-16-7.2-16-16V96c0-8.8 7.2-16 16-16zM96 96V320c0 35.3 28.7 64 64 64H512c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H160c-35.3 0-64 28.7-64 64zM48 120c0-13.3-10.7-24-24-24S0 106.7 0 120V344c0 75.1 60.9 136 136 136H456c13.3 0 24-10.7 24-24s-10.7-24-24-24H136c-48.6 0-88-39.4-88-88V120zm208 24a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"/></svg>          </div>
-          </div>
-          `
-        );
-      }
-      $.each(imagenes, function (index, item) {
-        console.log("id de item" + item.imagenID);
-        let imagen = "<td></td>";
-        if (item.imagenBase64) {
-          imagen = `<img class="mx-auto imagen" alt="Imagen" src="data:${item.tipoImagen};base64, ${item.imagenBase64}" />`;
-        }
-        $("#Lista_imagenes").append(
-          `<div class="carousel-item carrousel-ajuste ${clase}" >
-            ${imagen}
-          </div>
-          `
-        );
-        clase = "";
-      });
-    },
-    error: function (xhr, status) {
-      alert("Error al cargar publicaciones");
     },
   });
 }
@@ -172,7 +192,6 @@ function EnviarSolicitud() {
 
 function enviarValoracion() {
   contenido = $("#Contenido").val();
-  console.log(contenido);
   puntuacion = selectValor;
   $.ajax({
     url: "../../Valoraciones/GuardarValoracion",
@@ -183,32 +202,47 @@ function enviarValoracion() {
     },
     type: "POST",
     dataType: "json",
-    success: function (tags) {
-      $("#ValoracionCreate").hide();
-      BuscarValoraciones();
+    success: function (resultado) {
+      if (resultado == "Crear") {
+        $("#ValoracionCreate").hide();
+        BuscarValoraciones();
+      } else {
+        const Toast = Swal.mixin({
+          toast: true,
+          position: "top-end",
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener("mouseenter", Swal.stopTimer);
+            toast.addEventListener("mouseleave", Swal.resumeTimer);
+          },
+        });
+        if (resultado == "Puntuacion0") {
+          Toast.fire({
+            icon: "error",
+            title: "Puntuación inválida. La valoración mínima es de media estrella."+
+            `<div class=" mx-auto valoracion">
+              <i class="bx bxs-star-half"></i>
+              <i class="bx bx-star"></i>
+              <i class="bx bx-star"></i>
+              <i class="bx bx-star"></i>
+              <i class="bx bx-star"></i>
+            </div>`
+          });
+        } else {
+          Toast.fire({
+            icon: "error",
+            title: "error",
+          });
+        }
+      }
     },
     error: function (xhr, status) {
       alert("Error al cargar valoracion");
     },
   });
 }
-// function enviarSolicitud() {
-//   descripcion = $("#descripcionSolicitud").val();
-//   $.ajax({
-//     url: "../../Solicitudes/GuardarSolicitud",
-//     data: {
-//       publicacionID: publicacionID,
-//       descripcion: descripcion,
-//       usuarioID: usuarioID,
-//     },
-//     type: "GET",
-//     dataType: "json",
-//     success: function (tags) {},
-//     error: function (xhr, status) {
-//       alert("Error al cargar valoracion");
-//     },
-//   });
-// }
 
 function BuscarValoraciones() {
   $("#Valoraciones").empty();
@@ -302,9 +336,10 @@ stars.forEach((star, index) => {
 });
 
 var hoverValor = 10;
-var selectValor = 10;
+var selectValor = 0;
 
 function showValoracion(valor) {
+  console.log("estrellas: " + valor);
   stars.forEach((star, index) => {
     i = (index + 1) * 2;
     console.log(valor + " " + i);

@@ -31,28 +31,121 @@ public class ValoracionesController : Controller
         return Json(valoraciones);
     }
 
-    public JsonResult GuardarValoracion(int puntuacion, int publicacionID, string contenido)
-    {
-        string resultado = "Error";
+    // public JsonResult GuardarValoracion(int puntuacion, int publicacionID, string contenido)
+    // {
+        
 
-        var usuarioIDActual = _userManager.GetUserId(HttpContext.User);
+    //     string resultado = "Error";
+
+    //     var usuarioIDActual = _userManager.GetUserId(HttpContext.User);
+    //     if (usuarioIDActual == null)
+    //     {
+    //         return Json(new { error = "registrado no encontrado" });
+    //     }
+    //     var usuario = _contexto.Usuarios.FirstOrDefault(u => u.ASP_UserID == usuarioIDActual);
+    //     if (usuario == null)
+    //     {
+    //         return Json(new { error = "Usuario no encontrado" });
+    //     }
+
+    //     var solicitud = _contexto.Solicitudes.FirstOrDefault(s => s.PublicacionID == publicacionID && s.UsuarioID == usuario.UsuarioID);
+    //     if(solicitud.Valorado == 0){
+    //        solicitud.Valorado = 1; 
+    //     }
+    //     if(solicitud.Valorado == 2){
+    //        solicitud.Valorado = 3; 
+    //     }
+    //     _contexto.SaveChanges();
+
+    //     if(puntuacion >= 0){
+    //         return Json("Puntuacion0");
+    //     }
+    //     //verificamos si Nombre esta completo
+    //     if (!string.IsNullOrEmpty(contenido))
+    //     {
+    //         contenido = contenido.Trim();
+    //         //si puntuacion es mayor a 10 se setea a 10
+    //         if(puntuacion > 10){
+    //             puntuacion = 10;
+    //         }
+    //         //SI ES 0 QUIERE DECIR QUE ESTA CREANDO EL ELEMENTO
+    //         if (publicacionID != 0)
+    //         {
+    //             //DECLARAMOS EL OBJETO DANDO EL VALOR
+    //             var ValoracionGuardar = new Valoracion
+    //             {
+    //                 Puntuacion = puntuacion,
+    //                 Contenido = contenido,
+    //                 UsuarioID = usuario.UsuarioID,
+    //                 Fecha = DateTime.Now,
+    //                 PublicacionID = publicacionID
+    //             };
+    //             _contexto.Add(ValoracionGuardar);
+    //             _contexto.SaveChanges();
+    //             resultado = "Crear";
+    //         }
+    //         else
+    //         {
+    //             resultado = "sin publicacion";
+    //         }
+    //     }
+    //     else
+    //     {
+    //         resultado = "faltas";
+    //     }
+    //     return Json(resultado);
+    // }
+
+    public JsonResult GuardarValoracion(int puntuacion, int publicacionID, string contenido)
+{
+    string resultado = "Error";
+
+    var usuarioIDActual = _userManager.GetUserId(HttpContext.User);
+
+    try
+    {
         if (usuarioIDActual == null)
         {
             return Json(new { error = "registrado no encontrado" });
         }
+
         var usuario = _contexto.Usuarios.FirstOrDefault(u => u.ASP_UserID == usuarioIDActual);
+
         if (usuario == null)
         {
             return Json(new { error = "Usuario no encontrado" });
         }
-        //verificamos si Nombre esta completo
+
+        var solicitud = _contexto.Solicitudes.FirstOrDefault(s => s.PublicacionID == publicacionID && s.UsuarioID == usuario.UsuarioID);
+
+        if (solicitud.Valorado == 0)
+        {
+            solicitud.Valorado = 1;
+        }
+
+        if (solicitud.Valorado == 2)
+        {
+            solicitud.Valorado = 3;
+        }
+
+        _contexto.SaveChanges();
+
+        if (puntuacion <= 0)
+        {
+            return Json("Puntuacion0");
+        }
+
         if (!string.IsNullOrEmpty(contenido))
         {
             contenido = contenido.Trim();
-            //SI ES 0 QUIERE DECIR QUE ESTA CREANDO EL ELEMENTO
+
+            if (puntuacion > 10)
+            {
+                puntuacion = 10;
+            }
+
             if (publicacionID != 0)
             {
-                //DECLARAMOS EL OBJETO DANDO EL VALOR
                 var ValoracionGuardar = new Valoracion
                 {
                     Puntuacion = puntuacion,
@@ -61,6 +154,7 @@ public class ValoracionesController : Controller
                     Fecha = DateTime.Now,
                     PublicacionID = publicacionID
                 };
+
                 _contexto.Add(ValoracionGuardar);
                 _contexto.SaveChanges();
                 resultado = "Crear";
@@ -74,8 +168,14 @@ public class ValoracionesController : Controller
         {
             resultado = "faltas";
         }
-
-        return Json(resultado);
     }
+    catch (Exception ex)
+    {
+        resultado = "Error: " + ex.Message;
+        // Aquí puedes registrar o manejar la excepción de alguna manera si es necesario.
+    }
+
+    return Json(resultado);
+}
 }
 
