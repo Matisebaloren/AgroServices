@@ -70,8 +70,36 @@ async function BuscarPublicacion() {
     }
   }
 
+  var valoSumatoria = 0;
+  var dataGrapht = [0, 0, 0, 0, 0];
   publicacion.valoraciones.forEach((valoracion) => {
+    console.log(valoracion);
+    switch (valoracion.puntuacion) {
+      case 1:
+      case 2:
+        dataGrapht[0]++;
+        break;
+      case 3:
+      case 4:
+        dataGrapht[1]++;
+        break;
+      case 5:
+      case 6:
+        dataGrapht[2]++;
+        break;
+      case 7:
+      case 8:
+        dataGrapht[3]++;
+        break;
+      case 9:
+      case 10:
+        dataGrapht[4]++;
+        break;
+      default:
+      // Acciones predeterminadas si num no coincide con ningún caso
+    }
     var fechaMoment = moment(valoracion.fecha, "YYYY-MM-DDTHH:mm:ss.SS");
+    valoSumatoria += valoracion.puntuacion;
     comentario = `
           <div class="comentario">
             <div class="comentario-contenido">
@@ -89,51 +117,53 @@ async function BuscarPublicacion() {
           </div>
         `;
     $("#Valoraciones").append(comentario);
+    
+    let trImprimir = `
+            <tr>
+                <td>${valoracion.username} </td>
+                <td>${valoracion.contenido} </td>
+                <td>${valoracion.puntuacion}/10</td>
+                <td>${fechaMoment.format(
+                  "D [de] MMMM, YYYY"
+                )} </td>
+            </tr>
+            `;
+            $("#tbody-imprimir").append(trImprimir);  
   });
+  console.log(dataGrapht);
+  actualizarGraph(dataGrapht);
+
+  var puntaje = 0;
+  if (publicacion.valoraciones.length > 0) {
+    puntaje = Math.round(valoSumatoria / publicacion.valoraciones.length);
+  }
+  $("#ValoracionGeneral").append(`
+    <div id="valoracionPublicacion" class="ms-auto valoracion" onmouseover="mostrarInfo()" onmouseout="ocultarInfo()" ontouchstart="mostrarInfo()">
+      ${generarIconos(puntaje)}
+      </div>`);
 }
 
-function BuscarPublicaciones() {
-  BuscarValoraciones();
-  var publicacionID = $("#PublicacionID").val();
-  console.log(publicacionID);
-  $.ajax({
-    url: "../../Publicaciones/BuscarPublicaciones",
-    data: { publicacionID: publicacionID },
-    type: "GET",
-    dataType: "json",
-    success: function (publicaciones) {
-      $("#titulo").html(publicaciones[0].titulo);
-      $("#tituloModal").html(publicaciones[0].titulo);
+function mostrarInfo() {
+  var elemEstrellas = document.querySelector("#ValoracionGeneral .valoracion");
+  var elemGraph = document.getElementById("ValoracionInfo");
+    // Obtén las coordenadas de ValoracionGeneral
+    var rect = elemEstrellas.getBoundingClientRect();
+    console.log(rect);
+    var top = rect.top + window.scrollY;
+    var left = rect.left + window.scrollX + rect.width;
 
-      // let time = publicaciones[0].fecha.ToString("dd/MM/yyyy")
-      let arrTime = publicaciones[0].fecha.split("T");
-      let dia = arrTime[0].split("-");
-      let diaArmado = dia[2] + "/" + dia[1] + "/" + dia[0];
 
-      console.log(arrTime);
-      // $("#fecha").html(arrTime[0]);
-      $("#fecha").html(diaArmado);
-      $("#descripcion").html(publicaciones[0].descripcion);
-    },
-    error: function (xhr, status) {
-      alert("Error al cargar publicaciones");
-    },
-  });
-  let item = "";
-  var ListaServicios = "";
-  $.ajax({
-    url: "../../Publicaciones/BuscarServicios",
-    data: {},
-    type: "GET",
-    dataType: "json",
-    success: function (servicios) {
-      ListaServicios = servicios;
-      console.log(ListaServicios);
-    },
-    error: function (xhr, status) {
-      alert("Error al cargar servicios");
-    },
-  });
+    // Muestra ValoracionInfo y posiciona en las mismas coordenadas
+    $("#ValoracionInfo").show();
+    elemGraph.style.opacity = 1;
+    elemGraph.style.zIndex = 1;
+    elemGraph.style.top = top + 5 + elemEstrellas.clientHeight + "px";
+    elemGraph.style.left = (left - 300) + "px";
+    console.log(elemGraph);
+  
+}
+function ocultarInfo() {
+  $("#ValoracionInfo").hide();
 }
 
 function nuevaSolicitud() {
@@ -221,14 +251,15 @@ function enviarValoracion() {
         if (resultado == "Puntuacion0") {
           Toast.fire({
             icon: "error",
-            title: "Puntuación inválida. La valoración mínima es de media estrella."+
-            `<div class=" mx-auto valoracion">
+            title:
+              "Puntuación inválida. La valoración mínima es de media estrella." +
+              `<div class=" mx-auto valoracion">
               <i class="bx bxs-star-half"></i>
               <i class="bx bx-star"></i>
               <i class="bx bx-star"></i>
               <i class="bx bx-star"></i>
               <i class="bx bx-star"></i>
-            </div>`
+            </div>`,
           });
         } else {
           Toast.fire({
@@ -358,4 +389,91 @@ function showValoracion(valor) {
     }
   });
 }
-function seleccionarValor(valor) {}
+
+function actualizarGraph(data) {
+  const ctx = document.getElementById("GraphValoracion");
+
+  new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: ["1", "2", "3", "4", "5"],
+      datasets: [
+        {
+          label: "# numero de valoraciones",
+          data: data,
+          borderWidth: 1,
+        },
+      ],
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+        },
+      },
+    },
+  });
+}
+
+function Imprimir() {
+  var doc = new jsPDF();
+  //var doc = new jsPDF('l', 'mm', [297, 210]);
+
+  var totalPagesExp = "{total_pages_count_string}";
+  var pageContent = function (data) {
+    var pageHeight =
+      doc.internal.pageSize.height || doc.internal.pageSize.getHeight();
+    var pageWidth =
+      doc.internal.pageSize.width || doc.internal.pageSize.getWidth();
+
+    // FOOTER
+    var str = "Pagina " + data.pageCount;
+    // Total page number plugin only available in jspdf v1.0+
+    if (typeof doc.putTotalPages == "function") {
+      str = str + " de " + totalPagesExp;
+    }
+
+    doc.setLineWidth(8);
+    doc.setDrawColor(238, 238, 238);
+    doc.line(14, pageHeight - 11, 196, pageHeight - 11);
+
+    doc.setFontSize(10);
+
+    doc.setFontStyle("bold");
+
+    doc.text(str, 17, pageHeight - 10);
+  };
+
+  var table = doc.autoTableHtmlToJson(
+    document.getElementById("tabla-imprimir")
+  );
+  doc.autoTable({
+    head: [table.columns],
+    body: table.data,
+    didDrawPage: function (data) {
+      // Agrega tu función de pie de página aquí
+    },
+  });
+
+  // ESTO SE LLAMA ANTES DE ABRIR EL PDF PARA QUE MUESTRE EN EL PDF EL NRO TOTAL DE PAGINAS. ACA CALCULA EL TOTAL DE PAGINAS.
+  if (typeof doc.putTotalPages === "function") {
+    doc.putTotalPages(totalPagesExp);
+  }
+
+  //doc.save('InformeSistema.pdf')
+
+  var string = doc.output("datauristring");
+  var iframe =
+    "<iframe width='100%' height='100%' src='" + string + "'></iframe>";
+
+  var x = window.open();
+  if (x) {
+    x.document.open();
+    // Resto del código...
+  } else {
+    console.log("La ventana no se pudo abrir");
+  }
+  x.document.open();
+  x.document.write(iframe);
+  x.document.close();
+}

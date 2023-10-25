@@ -2,6 +2,18 @@
 <link rel="stylesheet" href="~/css/publicacionList.css" asp-append-version="true" />
 <!-- Carga de Moment.js y en español-->
 
+<table id="tabla-imprimir" class="table table-bordered" hidden>
+  <thead>
+    <tr>
+      <th>Usuario</th>
+      <th>Comentario</th>
+      <th>Puntuacion</th>
+      <th>Fecha</th>
+    </tr>
+  </thead>
+  <tbody id="tbody-imprimir">
+  </tbody>
+</table>
 
 
 <div class="modal fade" id="ModalSolicitud" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -65,7 +77,7 @@
       <label id="usuario"></label>
       @* tags *@
       <label id="tags"></label>
-    <hr>
+      <hr>
       <label class="mb-auto" id="resumen"></label>
 
       <div id="btn-editar" style="display: none;" class="div-boton-der my-3">
@@ -87,6 +99,10 @@
           }
         </button>
       </div>
+      <div id="ValoracionGeneral"></div>
+      <div id="ValoracionInfo">
+        <canvas id="GraphValoracion" </canvas>
+      </div>
     </div>
     <hr>
     @* descripcion *@
@@ -97,7 +113,10 @@
   </div>
 
   <div class="comentarios-container">
+
     <h2>Valoraciones</h2>
+
+
     <div class="mb-2 comentario-contenido" style="display: none;" id="ValoracionCreate">
       <div class="comentario-header">
         <p class="nombre-usuario">Danos tu valoración:</p>
@@ -121,10 +140,20 @@
   </div>
 
   @*BOTON PARA VOLVER A LA LISTA PUBLICACIONES GENERAL*@
-  <div id="btn-volver" class="div-boton-der my-3">
-    <buttom onclick="volver()" class="btn btn-success"><i class='bx bx-arrow-back'></i>Volver</buttom>
+  <div class="btn-container">
+    <div id="btn-volver" class="div-boton-der my-3">
+      <buttom onclick="volver()" class="btn btn-success"><i class='bx bx-arrow-back'></i>Volver</buttom>
+    </div>
+    <div class="div-boton-der my-3">
+      <buttom onclick="Imprimir()" class="btn btn-success">Imprimir Valoraciones</buttom>
+    </div>
   </div>
 </div>
+
+
+
 @section Scripts {
   <script src="~/js/tablas/vista-1.0.0.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 }

@@ -1,6 +1,7 @@
 var elementosOcultos = null;
+$("#toggleButton").hide();
 $(document).ready(function () {
-  BuscarServicios();
+  // BuscarServicios();
   BuscarPublicaciones();
 });
 var rotateCols;

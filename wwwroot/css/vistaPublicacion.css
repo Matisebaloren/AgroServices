@@ -76,7 +76,12 @@
   border-radius: 5px; /* Hace que el borde siga la forma del ícono circular */
   padding: 5px; /* Espacio dentro del borde */
   margin: 5px; /* Espacio entre los íconos */
+  width: min-content;
 }
+
+/* #ValoracionGeneral:hover{
+  height: 100px;
+} */
 
 /* #descripcion {
   border-radius: 5px;
@@ -105,4 +110,19 @@
 .carousel-item,
 .itemImg {
   max-height: none;
+}
+
+#ValoracionInfo {
+ /* display: none; */
+  background-color: white;
+  padding: 1px;
+  position: absolute;
+  border-radius: 5px;
+  opacity: 0;
+  z-index: -1;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: space-between;
 }
