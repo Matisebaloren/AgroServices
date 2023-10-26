@@ -3,9 +3,10 @@ window.onload = BuscarPublicaciones();
 // autoregenerar paginacion cuando se esta en la ultima pagina,
 
 async function BuscarPublicaciones(pagina = 1, elementosPorPagina = 10) {
+  servicioID = $("#ServicioID").val();
   const data = await $.ajax({
     url: "../../Publicaciones/BuscarPublicaciones2",
-    data: {pagina:pagina,elementosPorPagina:elementosPorPagina},
+    data: {pagina:pagina,elementosPorPagina:elementosPorPagina,servicioID:servicioID},
     type: "GET",
     dataType: "json",
   });

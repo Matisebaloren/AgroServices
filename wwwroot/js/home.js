@@ -1,7 +1,7 @@
 var elementosOcultos = null;
 $("#toggleButton").hide();
 $(document).ready(function () {
-  // BuscarServicios();
+  BuscarServicios();
   BuscarPublicaciones();
 });
 var rotateCols;
@@ -25,13 +25,13 @@ function BuscarServicios() {
           }
           console.log("Añadiendo servicio:", servicio.nombre);
           $("#cards-servicios").append(`
-            <div class="col-4 col-sm-3 col-lg-2 pb-3 px-2 card-mobile rotate-col ${oculto}">
-              <div class="card shadow rounded-lg">
-                <div href="#" class="text-center">
-                  <h6 class="grey-text my-2">${servicio.descripcion}</h6>
-                </div>
+          <a href="/Publicaciones/Index/${servicio.servicioID}" class="text-decoration-none col-4 col-sm-3 col-lg-2 pb-3 px-2 card-mobile rotate-col ${oculto}">
+            <div class="card shadow rounded-lg">
+              <div class="text-center">
+                <h6 class="grey-text my-2">${servicio.descripcion}</h6>
               </div>
-            </div>       
+            </div>
+          </a>     
           `);
         }
       });

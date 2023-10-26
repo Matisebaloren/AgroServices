@@ -4,6 +4,8 @@
 }
 <link rel="stylesheet" href="~/css/publicacionList.css" />
 <!-- Modal -->
+
+<input type="hidden" value="@ViewBag.Id" id="ServicioID" />
 <div class="modal fade" id="ModalPublicacion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content fondo2">
@@ -29,7 +31,7 @@
 
 
 <div class="card-blanco mx-auto">
-  <div class="card-header">Publicaciones Relacionadas</div>
+  <div class="card-header">Publicaciones</div>
   <div id="tbody-publicaciones">
   </div>
   <div id="paginationContainer" class="row">

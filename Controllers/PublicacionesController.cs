@@ -5,6 +5,7 @@ using AgroServices.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using MessagePack.Formatters;
 
 namespace AgroServices.Controllers;
 
@@ -153,7 +154,7 @@ public class PublicacionesController : Controller
         return Json(imagenes);
     }
 
-    public async Task<JsonResult> BuscarPublicaciones2(int publicacionID = 0, int pagina = 1, int elementosPorPagina = 10, int validarUsuario = 0, bool masAntiguas = false, bool verficarValorar = false)
+    public async Task<JsonResult> BuscarPublicaciones2(int publicacionID = 0, int pagina = 1, int elementosPorPagina = 10, int validarUsuario = 0, bool masAntiguas = false, bool verficarValorar = false, int servicioID = 0)
     {
         List<Publicacion> publicaciones;
         var publicacionesMostrar = new List<VistaPublicacion>();
@@ -194,8 +195,14 @@ public class PublicacionesController : Controller
                 {
                     publicaciones = _contexto.Publicaciones.Include(p => p.Usuario).Include(p => p.Valoraciones).Include(p => p.Imagenes.Take(1)).OrderByDescending(p => p.Fecha).Skip(skipPaginas).Take(elementosPorPagina).ToList();
                 }
+                if (servicioID > 0)
+                {
+                    var tagsValidos = _contexto.Etiquetas.Where(e => e.ServicioID == servicioID).Select(e => e.PublicacionID).ToList();
+                    publicaciones = publicaciones.Where(p => tagsValidos.Contains(p.PublicacionID)).ToList();
+                }
             }
         }
+
         foreach (var publicacion in publicaciones)
         {
             //etiquetas
@@ -355,7 +362,7 @@ public class PublicacionesController : Controller
         {
             usuarioID_Actual = _contexto.Usuarios.Where(u => u.ASP_UserID == usuarioASPID_Actual).Select(u => u.UsuarioID).FirstOrDefault();
         }
-        else{return Json(resultado);}
+        else { return Json(resultado); }
 
 
         //verificamos si Nombre esta completo
@@ -451,8 +458,9 @@ public class PublicacionesController : Controller
         return Json(resultado);
     }
 
-    public IActionResult Index()
+    public IActionResult Index(int? Id = 0)
     {
+        ViewBag.Id = Id;
         return View();
     }
 
