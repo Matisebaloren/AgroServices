@@ -18,6 +18,7 @@ async function BuscarPublicacion() {
 
   // Construir la representación de las publicaciónes
   var publicacion = data.lista[0];
+  console.log(publicacion);
   //imagenes
   if (publicacion.imagenes.length > 0) {
     let claseActive = "active";

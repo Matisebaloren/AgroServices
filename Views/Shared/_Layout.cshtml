@@ -35,13 +35,15 @@
     rel="stylesheet">
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.13/jspdf.plugin.autotable.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.13/jspdf.plugin.autotable.min.js"></script>
 
-   <script>
-        window.jsPDF = window.jspdf.jsPDF; // Asignación global de jsPDF
-    </script>
+  <script>
+    window.jsPDF = window.jspdf.jsPDF; // Asignación global de jsPDF
+  </script>
   @*LINK PARA EL BUSCADOR*@
   @* <link rel="stylesheet" href="~/css/buscador.css" /> *@
+
+  
 </head>
 
 
@@ -170,6 +172,15 @@
                 <a asp-controller="Usuarios" asp-action="Index" class="nav_link sublink">
                   <i class="bx bxs-user-pin"></i> Usuarios</a>
               </ul>
+            </li>
+
+            <li class="item">
+              <a asp-area="" asp-controller="Graficos" asp-action="Index" class="nav_link">
+                <span class="navlink_icon">
+                  <i class='bx bx-bar-chart-alt'></i>
+                </span>
+                <span class="navlink">Graficos</span>
+              </a>
             </li>
           }
         </ul>
