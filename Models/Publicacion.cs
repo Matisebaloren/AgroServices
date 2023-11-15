@@ -28,6 +28,7 @@ namespace AgroServices.Models
     public virtual Usuario? Usuario { get; set; }
 
     public bool Eliminado { get; set; }
+    public bool Habilitado { get; set; }
 
 
     // [NotMapped]
@@ -66,4 +67,6 @@ public class VistaPublicacion
   public int ValoracionPuntaje { get; set; }
   public int ValoracionesCantidad { get; set; }
   public List<VistaImagen>? Imagenes { get; set; }
+  public int PuntajeRelevancia { get; set; }
 }
+

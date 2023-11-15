@@ -111,7 +111,7 @@ public class NotificacionesController : Controller
         return View();
     }
 
-    public async Task<JsonResult> BuscarSolicitudAsync(int tipo = 0, int visto = 0)
+    public async Task<JsonResult> BuscarSolicitud(int tipo = 0, int visto = 0)
     {
         List<VistaSolicitud> SolicitudesMostrar = new List<VistaSolicitud>();
         var usuarioIDActual = _userManager.GetUserId(HttpContext.User);
@@ -135,22 +135,29 @@ public class NotificacionesController : Controller
             var username = "Desconocido";
             if (solicitud.Publicaciones.Usuario.ASP_UserID != null)
             {
-                var usuarioSolicitud = await _userManager.FindByIdAsync(solicitud.Publicaciones.Usuario.ASP_UserID);
-                username = usuarioSolicitud.UserName;
-            }
+                var usuarioPublicacion = await _userManager.FindByIdAsync(solicitud.Publicaciones.Usuario.ASP_UserID);
+                var usuarioSolicitante = _contexto.Usuarios.Where(u => u.UsuarioID == solicitud.UsuarioID).FirstOrDefault();
+                var userSolicitante = _userManager.FindByIdAsync(usuarioSolicitante.ASP_UserID).Result;
 
-            var SolicitudMostrar = new VistaSolicitud
-            {
-                SolicitudID = solicitud.SolicitudID,
-                Descripcion = solicitud.Descripcion,
-                Fecha = solicitud.Fecha,
-                PublicacionID = solicitud.PublicacionID,
-                PublicacionTitulo = solicitud.Publicaciones.Titulo,
-                UsuarioID = solicitud.UsuarioID,
-                userName = username,
-                Estado = solicitud.Estado
-            };
-            SolicitudesMostrar.Add(SolicitudMostrar);
+                // username = usuarioSolicitud.erName;
+
+                var SolicitudMostrar = new VistaSolicitud
+                {
+                    SolicitudID = solicitud.SolicitudID,
+                    Descripcion = solicitud.Descripcion,
+                    Fecha = solicitud.Fecha,
+                    PublicacionID = solicitud.PublicacionID,
+                    PublicacionTitulo = solicitud.Publicaciones.Titulo,
+                    UsuarioID = solicitud.Publicaciones.UsuarioID,
+                    UsuarioIDSolicitante = solicitud.UsuarioID,
+                    userName = usuarioPublicacion.UserName,
+                    userNameSolicitante = userSolicitante.UserName,
+                    emailSolicitante = userSolicitante.Email,
+                    Estado = solicitud.Estado,
+                    phone = userSolicitante.PhoneNumber
+                };
+                SolicitudesMostrar.Add(SolicitudMostrar);
+            }
         }
         return Json(new { solicitudes = SolicitudesMostrar, usuario = usuario });
     }
@@ -158,19 +165,27 @@ public class NotificacionesController : Controller
 
     public JsonResult GuardarSolicitud(int publicacionID, string descripcion)
     {
+        string resultado = "Error";
+        if (!User.IsInRole("usuarioComun"))
+        {
+            resultado = "Bloqueado";
+            return Json(resultado);
+        }
         var publicacion = _contexto.Publicaciones.FirstOrDefault(u => u.PublicacionID == publicacionID);
         var usuarioIDActual = _userManager.GetUserId(HttpContext.User);
         if (usuarioIDActual == null || publicacion == null)
         {
-            return Json(false);
+            resultado = "SinUsuario";
+            return Json(resultado);
         }
         var usuario = _contexto.Usuarios.FirstOrDefault(u => u.ASP_UserID == usuarioIDActual);
         if (usuario == null)
         {
-            return Json(new { error = "Usuario no encontrado" });
+            resultado = "SinUsuario";
+            return Json(resultado);
         }
 
-        string resultado = "Error";
+        
         using (var scope = new TransactionScope())
         {
             try

@@ -9,11 +9,14 @@ window.onload = BuscarPublicacion();
 async function BuscarPublicacion() {
   const data = await $.ajax({
     url: "../../Publicaciones/BuscarPublicaciones2",
-    data: { publicacionID: publicacionID, verficarValorar: true },
+    data: { publicacionID: publicacionID, verficarValorar: true, habilitados: false },
     type: "GET",
     dataType: "json",
   });
-  console.log(data);
+  if(data.lista.length == 0){
+    console.log("sin info");
+    window.location.href = "/Publicaciones/Formulario/" + publicacionID;
+  }
   $("#tbody-publicaciones").empty();
 
   // Construir la representación de las publicaciónes
@@ -35,6 +38,9 @@ async function BuscarPublicacion() {
       );
       claseActive = "";
     });
+  }
+  if(publicacion.imagenes.length < 2){
+    $(".carousel-control-prev , .carousel-control-next").hide();
   }
 
   //servicios
@@ -118,18 +124,16 @@ async function BuscarPublicacion() {
           </div>
         `;
     $("#Valoraciones").append(comentario);
-    
+
     let trImprimir = `
             <tr>
                 <td>${valoracion.username} </td>
                 <td>${valoracion.contenido} </td>
                 <td>${valoracion.puntuacion}/10</td>
-                <td>${fechaMoment.format(
-                  "D [de] MMMM, YYYY"
-                )} </td>
+                <td>${fechaMoment.format("D [de] MMMM, YYYY")} </td>
             </tr>
             `;
-            $("#tbody-imprimir").append(trImprimir);  
+    $("#tbody-imprimir").append(trImprimir);
   });
   console.log(dataGrapht);
   actualizarGraph(dataGrapht);
@@ -144,24 +148,38 @@ async function BuscarPublicacion() {
       </div>`);
 }
 
+// function redireccion(publicacionID) {
+//   $.ajax({
+//     url: "../../Publicaciones/Index",
+//     data: {
+//       publicacionID: publicacionID
+//     },
+//     type: "POST",
+//     dataType: "json",
+//     success: function (resultado) {
+//     },
+//     error: function (xhr, status) {
+//       alert("Error al cargar valoracion");
+//     },
+//   });
+// }
+
 function mostrarInfo() {
   var elemEstrellas = document.querySelector("#ValoracionGeneral .valoracion");
   var elemGraph = document.getElementById("ValoracionInfo");
-    // Obtén las coordenadas de ValoracionGeneral
-    var rect = elemEstrellas.getBoundingClientRect();
-    console.log(rect);
-    var top = rect.top + window.scrollY;
-    var left = rect.left + window.scrollX + rect.width;
+  // Obtén las coordenadas de ValoracionGeneral
+  var rect = elemEstrellas.getBoundingClientRect();
+  console.log(rect);
+  var top = rect.top + window.scrollY;
+  var left = rect.left + window.scrollX + rect.width;
 
-
-    // Muestra ValoracionInfo y posiciona en las mismas coordenadas
-    $("#ValoracionInfo").show();
-    elemGraph.style.opacity = 1;
-    elemGraph.style.zIndex = 1;
-    elemGraph.style.top = top + 5 + elemEstrellas.clientHeight + "px";
-    elemGraph.style.left = (left - 300) + "px";
-    console.log(elemGraph);
-  
+  // Muestra ValoracionInfo y posiciona en las mismas coordenadas
+  $("#ValoracionInfo").show();
+  elemGraph.style.opacity = 1;
+  elemGraph.style.zIndex = 1;
+  elemGraph.style.top = top + 5 + elemEstrellas.clientHeight + "px";
+  elemGraph.style.left = left - 300 + "px";
+  console.log(elemGraph);
 }
 function ocultarInfo() {
   $("#ValoracionInfo").hide();
@@ -199,17 +217,23 @@ function EnviarSolicitud() {
       });
       if (resultado == "Error") {
         Toast.fire({
-          icon: "Error",
+          icon: "error",
           title: "Petición invalida, Prueba en otro momento",
         });
       }
-      if (resultado == "Crear") {
+      else if (resultado == "Crear") {
         Toast.fire({
           icon: "success",
           title: "Solicitud enviada correctamente.",
         });
         console.log("el id ahora es: " + resultado);
         $("#ModalSolicitud").modal("hide");
+      }
+      else if (resultado == "Bloqueado") {
+        Toast.fire({
+          icon: "error",
+          title: "Usuario Invalido",
+        });
       }
     },
 
@@ -236,7 +260,7 @@ function enviarValoracion() {
     success: function (resultado) {
       if (resultado == "Crear") {
         $("#ValoracionCreate").hide();
-        BuscarValoraciones();
+        BuscarPublicacion();
       } else {
         const Toast = Swal.mixin({
           toast: true,

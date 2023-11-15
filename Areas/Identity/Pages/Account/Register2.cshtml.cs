@@ -161,6 +161,10 @@ namespace AgroServices.Areas.Identity.Pages.Account
                     _contexto.Add(UsuarioGuardar);
                     _contexto.SaveChanges();
                     // hasta aca
+
+                    // Asignar un rol al usuario recién registrado
+                    await _userManager.AddToRoleAsync(user, "usuarioComun");
+
                     _logger.LogInformation("User created a new account with password.");
 
                     var userId = await _userManager.GetUserIdAsync(user);

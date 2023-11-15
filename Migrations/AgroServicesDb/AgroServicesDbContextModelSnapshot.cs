@@ -167,6 +167,9 @@ namespace AgroServices.Migrations.AgroServicesDb
                     b.Property<DateTime>("Fecha")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool>("Habilitado")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Resumen")
                         .HasColumnType("nvarchar(max)");
 

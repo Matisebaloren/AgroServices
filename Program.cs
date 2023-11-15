@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using AgroServices.Data;
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddScoped<RefreshRolesFilter>();
+
 var AgroServicesDbContext = builder.Configuration.GetConnectionString("AgroServicesDB");
 builder.Services.AddDbContext<AgroServicesDbContext>(options =>
     options.UseSqlServer(AgroServicesDbContext));

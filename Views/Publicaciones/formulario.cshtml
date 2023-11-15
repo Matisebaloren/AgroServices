@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="~/css/textEditor.css" />
-
+<link rel="stylesheet" href="~/css/formulario.css" />
 
 @*SCRIPT EDITOR DE TEXTO *@
 <script defer src="~/js/textEditor.js"></script>
@@ -44,7 +44,14 @@
 
 <div id="div-main" class="FondoGlass-1 my-5 animate__animated animate__delay-0s">
     <div id="div-datos">
-        <h2 class="fw-bold text-black"> Nueva Publicación</h2>
+        <div class="d-flex  justify-content-between">
+            <h2 class="fw-bold text-black">Nueva Publicación</h2>
+            <div class="d-flex align-items-center">
+                <label for="Estado" class="me-2">Colocar en buscador:</label>
+                <input type="checkbox" id="Estado" name="check" />
+            </div>
+        </div>
+
         <hr>
         <form id="formulario" method="post">
 
@@ -134,6 +141,6 @@
 </div>
 
 
-@section Scripts{
+@section Scripts {
     <script src="~/js/tablas/formulario-1.0.0.js"></script>
 }

@@ -177,17 +177,10 @@ function DeshabilitarLocalidad(localidadID){
     console.log("hola")
 
     $.ajax({
-    // la URL para la petición
     url : '../../Localidades/Deshabilitar',
-    // la información a enviar
-    // (también es posible utilizar una cadena de datos)
     data : { localidadID: localidadID},    
-    // especifica si será una petición POST o GET
     type : 'GET',
-    // el tipo de información que se espera de respuesta
     dataType : 'json',
-    // código a ejecutar si la petición es satisfactoria;
-    // la respuesta es pasada como argumento a la función
     success : function(resultado) {
         console.log(resultado);
        if(resultado == "error"){

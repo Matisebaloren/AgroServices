@@ -43,7 +43,7 @@
   @*LINK PARA EL BUSCADOR*@
   @* <link rel="stylesheet" href="~/css/buscador.css" /> *@
 
-  
+
 </head>
 
 
@@ -118,7 +118,7 @@
           {
             <!-- publicar -->
             <li class="item">
-              <a asp-controller="Publicaciones" asp-action="Formulario" asp-route-id="0" class="nav_link">
+              <a asp-controller="Publicaciones" asp-action="Formulario" asp-route-id="0" class="nav_link subMenuFunc">
                 <span class="navlink_icon">
                   <i class="bx bx-add-to-queue"></i>
                 </span>
@@ -126,8 +126,18 @@
               </a>
             </li>
           }
-          <!-- Start -->
+          <!-- publicaciones -->
           <li class="item">
+            <a asp-controller="Publicaciones" asp-action="Index" asp-route-id="0" class="nav_link">
+              <span class="navlink_icon">
+                <i class="bx bx-news"></i>
+              </span>
+              <span class="navlink">Publicaciones</span>
+            </a>
+          </li>
+
+
+          @* <li class="item">
             <div href="#" class="nav_link submenu_item">
               <span class="navlink_icon">
                 <i class='bx bx-news'></i>
@@ -140,7 +150,15 @@
               <a asp-controller="Publicaciones" asp-action="Index" class="nav_link sublink"><i
                   class='bx bx-image'></i>General</a>
             </ul>
-          </li>
+            <ul class="menu_items submenu">
+            <a asp-controller="Publicaciones" asp-action="Index" class="nav_link sublink"><i class='bx
+            bxs-tag-alt'></i>Ofertas</a>
+            </ul>
+            <ul class="menu_items submenu">
+            <a asp-controller="Publicaciones" asp-action="Index" class="nav_link sublink"><i class='bx
+            bx-tag-alt'></i>Demandas</a>
+            </ul>
+          </li> *@
           @if (User.IsInRole("Administrador"))
           {
             <li class="item">
@@ -183,13 +201,21 @@
               </a>
             </li>
           }
+          @if (!User.IsInRole("usuarioComun") && User.Identity.IsAuthenticated)
+          {
+            <li class="item">
+              <div class="nav_link itemBloqueo">
+                <span class="navlink_icon">
+                  <i class='bx bx-error iBloqueo'></i> </span>
+                <span class="navlink">Cuenta Deshabilitada</span>
+              </div>
+            </li>
+          }
+
         </ul>
         <!-- End -->
       </div>
     </nav>
-
-
-
 
     @* aca empieza las vistas *@
     <div class="container container2">
@@ -229,6 +255,16 @@
 
 
     @await RenderSectionAsync("Scripts", required: false)
+    @if (!User.IsInRole("usuarioComun") && User.Identity.IsAuthenticated)
+    {
+      <script>
+        $(".subMenuFunc").addClass("subMenuBloq");
+        $(".subMenuFunc").removeAttr("href");
+        $(".bloqueable").hide();
+      </script>
+
+    }
+
 </body>
 
 </html>

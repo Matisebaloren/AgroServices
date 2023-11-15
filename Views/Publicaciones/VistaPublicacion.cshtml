@@ -78,13 +78,13 @@
       @* tags *@
       <label id="tags"></label>
       <hr>
-      <label class="mb-auto" id="resumen"></label>
+      <p class="mb-auto" id="resumen"></p>
 
       <div id="btn-editar" style="display: none;" class="div-boton-der my-3">
         <a class="btn btn-success" asp-controller="Publicaciones" asp-action="Formulario"
           asp-route-id=@ViewBag.publicacion.PublicacionID>Editar</a>
       </div>
-      <div id="btn-solicitud" class="div-boton-der my-3">
+      <div id="btn-solicitud" class="div-boton-der my-3 bloqueable">
         <button onclick=nuevaSolicitud() class="btn btn-success">
           @{
             if (ViewBag.publicacion.EsOferta)
@@ -155,5 +155,4 @@
 @section Scripts {
   <script src="~/js/tablas/vista-1.0.0.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
 }

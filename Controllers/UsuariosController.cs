@@ -31,7 +31,7 @@ public class UsuariosController : Controller
         return View();
     }
 
-
+    
     public async Task<IActionResult> Perfil(int? id = 0)
     {
         var usuarioAsp = await _userManager.GetUserAsync(User);
@@ -100,12 +100,13 @@ public class UsuariosController : Controller
                 }
             }
             var promedio = 0;
-            if(sumatoriaTotal != 0){
-              promedio = (int)Math.Round((decimal)sumatoriaTotal / publicCount);
+            if (sumatoriaTotal != 0)
+            {
+                promedio = (int)Math.Round((decimal)sumatoriaTotal / publicCount);
             }
             ViewBag.ValoracionPuntaje = promedio;
         }
-        
+
         return View("Perfil");
     }
 
@@ -128,6 +129,9 @@ public class UsuariosController : Controller
             var user = allUsers.Where(u => u.Id == usuario.ASP_UserID).FirstOrDefault();
             if (user != null)
             {
+                // Verificar si el usuario tiene el rol "usuarioComun"
+                var esUsuarioComun = await _userManager.IsInRoleAsync(user, "usuarioComun");
+
                 var UsuarioMostrar = new VistaUsuario
                 {
                     UsuarioID = usuario.UsuarioID,
@@ -136,12 +140,11 @@ public class UsuariosController : Controller
                     LocalidadDescripcion = usuario.Localidades.Nombre,
                     LocalidadID = usuario.LocalidadID,
                     ProvinciaDescripcion = usuario.Localidades.provincias.Nombre,
-                    Eliminado = usuario.Eliminado,
+                    // Eliminado = usuario.Eliminado,
+                    Eliminado = !esUsuarioComun, //Si no tiene el rol es que esta deshabilitado
                     Telefono = user.PhoneNumber,
                     Email = user.Email,
                     Username = user.UserName
-
-
                 };
                 UsuariosMostrar.Add(UsuarioMostrar);
             }
@@ -219,26 +222,38 @@ public class UsuariosController : Controller
     }
 
 
-    public JsonResult Deshabilitar(int usuarioID)
+    public async Task<JsonResult> Deshabilitar(int usuarioID)
     {
         String resultado = "error";
         var usuario = _contexto.Usuarios.Where(c => c.UsuarioID == usuarioID).FirstOrDefault();
-        // var categoriaDeshabilitada = _contexto.Categorias.Where(c => c.Eliminado == true && c.CategoriaID == usuario.Categoria.CategoriaID).Count();
-        // var servicios = _contexto.Servicios.Where(s => s.Eliminado == false && s.UsuarioID == usuarioID).Count();
+        var user = await _userManager.FindByIdAsync(usuario.ASP_UserID);
 
-        if (usuario.Eliminado == true)
+        if (usuario != null && user != null)
         {
-            usuario.Eliminado = false;
+            // Verificar si el usuario tiene el rol "UsuarioComun"
+            var esUsuarioComun = await _userManager.IsInRoleAsync(user, "UsuarioComun");
 
+            if (esUsuarioComun)
+            {
+                // Quitar el rol "UsuarioComun" al usuario
+                await _userManager.RemoveFromRoleAsync(user, "UsuarioComun");
+                resultado = "cambiar a Deshabilitado";
+
+                var publicaciones = _contexto.Publicaciones.Where(p => p.UsuarioID == usuario.UsuarioID).ToList();
+                foreach (var publicacion in publicaciones)
+                {
+                    publicacion.Eliminado = true;
+                }
+            }
+            else
+            {
+                // Agregar el rol "UsuarioComun" al usuario
+                await _userManager.AddToRoleAsync(user, "UsuarioComun");
+                resultado = "cambiar a Habilitado";
+            }
+
+            _contexto.SaveChanges();
         }
-        else
-        {
-            usuario.Eliminado = true;
-
-        }
-        resultado = "cambiar";
-
-        _contexto.SaveChanges();
 
         return Json(resultado);
     }

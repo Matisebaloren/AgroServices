@@ -37,8 +37,8 @@ function BuscarServicios() {
       });
       elementosOcultos = $(".oculto");
       elementosOcultos.hide();
-      if (servicios.length <= 6) {
-        $("#toggleButton").hide();
+      if (servicios.length > 5) {
+        $("#toggleButton").show();
       }
       rotateCols = document.querySelectorAll(".rotate-col");
       // console.log("cols:" + rotateCols);
@@ -80,62 +80,62 @@ window.addEventListener("resize", function () {
   rotateServicios();
 });
 
-function BuscarPublicaciones() {
-  $("#cards-servicios").empty();
+// function BuscarPublicaciones() {
+//   $("#cards-servicios").empty();
 
-  $.ajax({
-    url: "../../Publicaciones/BuscarPublicaciones",
-    data: { elementosPorPagina: 6 },
-    type: "GET",
-    dataType: "json",
-    success: function (datos) {
-      console.log(datos);
-      $.each(datos.lista, async function (index, publicacion) {
-        if (publicacion.eliminado == false) {
-          //  Llamada AJAX para obtener las imágenes
-          var imagen = null;
-          await $.ajax({
-            url: "../../Publicaciones/BuscarImagenes",
-            data: { publicacionID: publicacion.publicacionID },
-            type: "GET",
-            dataType: "json",
-            success: function (imagenes) {
-              imagen = imagenes[0];
-            },
-          });
+//   $.ajax({
+//     url: "../../Publicaciones/BuscarPublicaciones",
+//     data: { elementosPorPagina: 6 },
+//     type: "GET",
+//     dataType: "json",
+//     success: function (datos) {
+//       console.log(datos);
+//       $.each(datos.lista, async function (index, publicacion) {
+//         if (publicacion.eliminado == false) {
+//           //  Llamada AJAX para obtener las imágenes
+//           var imagen = null;
+//           await $.ajax({
+//             url: "../../Publicaciones/BuscarImagenes",
+//             data: { publicacionID: publicacion.publicacionID },
+//             type: "GET",
+//             dataType: "json",
+//             success: function (imagenes) {
+//               imagen = imagenes[0];
+//             },
+//           });
 
-          console.log(imagen);
-          let img = "";
-          if (imagen != null) {
-            img = `data:${imagen.tipoImagen};base64, ${imagen.imagenBase64}`;
-          } else {
-            img = `../img/cosechadora.jpg`;
-          }
+//           console.log(imagen);
+//           let img = "";
+//           if (imagen != null) {
+//             img = `data:${imagen.tipoImagen};base64, ${imagen.imagenBase64}`;
+//           } else {
+//             img = `../img/cosechadora.jpg`;
+//           }
 
-          // Construir la representación de la publicación
-          $("#grid-Publicaciones").append(`
-            <label class="card" onclick="Vista(${publicacion.publicacionID})">
-              <div class="card__body">
-                <div class="card__body-cover"><img class="card__body-cover-image"
-                    src="${img}" /></span>
-                </div>
-                <header class="card__body-header">
-                  <h4 class="card__body-header-title">${publicacion.titulo}</h4>
-                </header>
-              </div>
-            </label>       
-          `);
-        }
-      });
-    },
-    error: function (xhr, status) {
-      console.log("Error en la solicitud AJAX:", status);
-      alert("Error al cargar servicios");
-    },
-  });
+//           // Construir la representación de la publicación
+//           $("#grid-Publicaciones").append(`
+//             <label class="card" onclick="Vista(${publicacion.publicacionID})">
+//               <div class="card__body">
+//                 <div class="card__body-cover"><img class="card__body-cover-image"
+//                     src="${img}" /></span>
+//                 </div>
+//                 <header class="card__body-header">
+//                   <h4 class="card__body-header-title">${publicacion.titulo}</h4>
+//                 </header>
+//               </div>
+//             </label>       
+//           `);
+//         }
+//       });
+//     },
+//     error: function (xhr, status) {
+//       console.log("Error en la solicitud AJAX:", status);
+//       alert("Error al cargar servicios");
+//     },
+//   });
 
-  console.log("Fin de la función BuscarServicios");
-}
+//   console.log("Fin de la función BuscarServicios");
+// }
 
 async function BuscarPublicaciones(pagina = 1, elementosPorPagina = 6) {
   const data = await $.ajax({

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Components.Forms;
 
 namespace AgroServices.Controllers;
+[ServiceFilter(typeof(RefreshRolesFilter))]
 
 public class HomeController : Controller
 {
@@ -25,6 +26,7 @@ public class HomeController : Controller
         _rolManager = rolManager;
 
     }
+
 
     public async Task<IActionResult> Index()
     {

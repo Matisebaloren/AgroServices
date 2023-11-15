@@ -116,8 +116,10 @@ public class ValoracionesController : Controller
             return Json(new { error = "Usuario no encontrado" });
         }
 
-        var solicitud = _contexto.Solicitudes.FirstOrDefault(s => s.PublicacionID == publicacionID && s.UsuarioID == usuario.UsuarioID);
-
+        var solicitud = _contexto.Solicitudes.FirstOrDefault(s => s.PublicacionID == publicacionID && s.UsuarioID == usuario.UsuarioID && s.Valorado == 0);
+        if(solicitud == null){
+            return Json("Nulo");
+        }
         if (solicitud.Valorado == 0)
         {
             solicitud.Valorado = 1;

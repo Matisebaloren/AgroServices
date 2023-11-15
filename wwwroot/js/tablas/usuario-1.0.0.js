@@ -1,22 +1,13 @@
 window.onload = BuscarUsuarios();
 
 function BuscarUsuarios() {
-  console.log("prueba uno");
-
   $("#tbody-usuarios").empty();
 
   $.ajax({
-    // la URL para la petición
     url: "../../Usuarios/BuscarUsuarios",
-    // la información a enviar
-    // (también es posible utilizar una cadena de datos)
     data: {},
-    // especifica si será una petición POST o GET
     type: "GET",
-    // el tipo de información que se espera de respuesta
     dataType: "json",
-    // código a ejecutar si la petición es satisfactoria;
-    // la respuesta es pasada como argumento a la función
 
     success: function (usuarios) {
       $("#tbody-usuarios").empty();
@@ -28,45 +19,35 @@ function BuscarUsuarios() {
                         <td> ${usuario.username} </td>
                         <td> ${usuario.email} </td>
                         <td> ${usuario.apellido ? usuario.apellido : ''}, ${usuario.nombre ? usuario.nombre : ''}</td>
-                        <td> ${usuario.telefono}</td>
+                        <td>${(usuario.telefono) ? usuario.telefono : "-"}</td>
                         <td> ${usuario.localidadDescripcion}, ${usuario.provinciaDescripcion}</td>
-                        
+                        <td class=" text-end">
+                        <a class="btn btn-eliminar btn-habilitar" onClick="DeshabilitarUsuario('${usuario.usuarioID}')" role="button"></a>
+                        </td>
                     </tr>
                     `;
         }
-        // <td class=" text-end">
-        //                     <a class="btn btn-eliminar btn-habilitar" onClick="DeshabilitarUsuario('${usuario.usuarioID}')" role="button"></a>
-        //                 </td>
         else {
           BotonDeshabilitado = `
                     <tr>
-                        <td class=" danger" > ${usuario.username} </td>
+                        <td class="" > ${usuario.username} </td>
                         <td class=" danger" > ${usuario.email} </td>
                         <td class=" danger"> ${usuario.apellido ? usuario.apellido+"," : ' - '}${usuario.nombre ? usuario.nombre : ' -'}</td>
-                        <td class=" danger"> ${usuario.telefono ? usuario.telefono : "-"}</td>
+                        <td class=" danger">${(usuario.telefono) ? usuario.telefono : "-"}</td>
                         <td class=" danger"> ${usuario.localidadDescripcion}, ${usuario.provinciaDescripcion}</td>
-                       
+                        <td class=" text-end">
+                        <a class="btn btn-eliminar" onClick="DeshabilitarUsuario('${usuario.usuarioID}')" role="button"></a>
+                        </td>
                     </tr>
                     `;
-// boton editar: <a class="btn btn-eliminar btn-editar" onClick="BuscarUsuario(${usuario.usuarioID})" role="button"></a>
-
         }
         $("#tbody-usuarios").append(`
                     ${BotonDeshabilitado}
                 `);
       });
     },
-
-    // código a ejecutar si la petición falla;
-    // son pasados como argumentos a la función
-    // el objeto de la petición en crudo y código de estatus de la petición
     error: function (xhr, status) {
-      alert("Error al cargar usuarios");
-    },
-
-    // código a ejecutar sin importar si la petición falló o no
-    complete: function (xhr, status) {
-      //alert('Petición realizada');
+      console.log("Error al cargar usuarios");
     },
   });
 }
@@ -177,11 +158,25 @@ function GuardarUsuario() {
       }
     },
 
-    // código a ejecutar si la petición falla;
-    // son pasados como argumentos a la función
-    // el objeto de la petición en crudo y código de estatus de la petición
     error: function (xhr, status) {
       alert("Disculpe, existió un problema");
     },
   });
+}
+
+
+function DeshabilitarUsuario(usuarioID){
+  $.ajax({
+  url : '../../Usuarios/Deshabilitar',
+  data : { usuarioID: usuarioID},    
+  type : 'GET',
+  dataType : 'json',
+  success : function(resultado) {
+      // console.log(resultado);
+      BuscarUsuarios();
+  },
+  error : function(xhr, status) {
+      alert('Error al cargar servicios');
+  }
+});
 }

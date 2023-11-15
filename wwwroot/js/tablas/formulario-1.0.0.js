@@ -1,12 +1,25 @@
 let tagsActive = [];
 let tagsExistentes = [];
 let serviciosDisp = [];
-var imageActive = "active";
+var imgTemporalID = 0;
 
 let publicacionID = $("#PublicacionID").val();
 window.onload = () => {
   BuscarServicios();
   BuscarPublicacion(publicacionID);
+  var formData = new FormData();
+
+  // Verificar si el objeto FormData está vacío
+  var estaVacio = true;
+  formData.forEach(function (value, key) {
+    estaVacio = false;
+  });
+
+  if (estaVacio) {
+    console.log("El objeto FormData está vacío.");
+  } else {
+    console.log("El objeto FormData contiene datos.");
+  }
 };
 
 function BuscarServicios() {
@@ -36,7 +49,7 @@ const BuscarPublicacion = (publicacionID = 0) => {
     // $("#btn-cambiar").show();
     $.ajax({
       url: "../../Publicaciones/BuscarPublicaciones2",
-      data: { publicacionID: publicacionID },
+      data: { publicacionID: publicacionID, validarActiva : false, habilitados: false},
       type: "GET",
       dataType: "json",
       success: (resultado) => {
@@ -53,6 +66,13 @@ const BuscarPublicacion = (publicacionID = 0) => {
           seleccionarTipo(publicacion.esOferta ? "1" : "2");
           $("#UsuarioID").val(publicacion.usuarioID);
           $("#Titulo").val(publicacion.titulo);
+          if(publicacion.eliminado == true){
+            $("#Estado").prop("checked", false);
+          }
+          else{
+            $("#Estado").prop("checked", true);
+          }
+          
           $("#Resumen").val(publicacion.resumen);
           // $("#descripcion").InnerHtML(publicacion.descripcion);
           tinymce.activeEditor.setContent(publicacion.descripcion);
@@ -62,20 +82,25 @@ const BuscarPublicacion = (publicacionID = 0) => {
 
         //imagenes
 
-        if (publicacion.imagenes.length === 0) {
-        }
+        // if (publicacion.imagenes.length === 0) {
+        // }
         publicacion.imagenes.forEach((item) => {
-          let imagen = "<td></td>";
-          if (item.imagenBase64) {
-            imagen = `<input hidden name="id" value="${item.imagenID}"></input><img src="data:${item.tipoImagen};base64, ${item.imagenBase64}"/>`;
+          if (imgTemporalID > item.imagenID) {
+            imgTemporalID = item.imagenID + 1;
           }
-          $("#Lista_imagenes").append(
-            `<div class="carousel-item ${imageActive}" >
-              ${imagen}
-            </div>`
-          );
-          imageActive = "";
+
+          var imagenSrc = `data:${item.tipoImagen};base64, ${item.imagenBase64}`;
+
+          var formData = new FormData();
+          formData.append("imagen", null);
+          formData.append("imagenSrc", imagenSrc);
+          formData.append("imgTemporalID", item.imagenID);
+          formData.append("imagenID", item.imagenID);
+          formData.append("liminado", false);
+
+          imagenesCargadas.push(formData);
         });
+        actualizarImgs();
       },
       error: (xhr, status) => {
         var errorMessage = "Error al cargar publicaciones";
@@ -97,11 +122,13 @@ function GuardarPublicacion() {
   let esOferta = null;
   let titulo = $("#Titulo").val();
   let resumen = $("#Resumen").val();
+  let estado = $("#Estado").prop("checked");
   if ($("#EsOferta").val() == 1) {
     esOferta = true;
   } else {
     esOferta = false;
   }
+  var tagsJSON = JSON.stringify(tagsActive);
   console.log(titulo, descripcion, esOferta, resumen);
   if (titulo && descripcion && esOferta != null && resumen) {
     $.ajax({
@@ -112,6 +139,8 @@ function GuardarPublicacion() {
         esOferta: esOferta,
         titulo: titulo,
         resumen: resumen,
+        tagsJSON: tagsJSON,
+        estado: estado,
       },
       type: "POST",
       dataType: "json",
@@ -139,7 +168,7 @@ function GuardarPublicacion() {
             icon: "success",
             title: "Se modifico correctamente",
           });
-          
+          cargarImagenes();
         }
         if (resultado > 0) {
           Toast.fire({
@@ -147,13 +176,8 @@ function GuardarPublicacion() {
             title: "Publicación inicializada. Recuerda añadir imagenes",
           });
           publicacionID = resultado;
-          imagenesCargadas.forEach(function (imagenCargada) {
-            imagenCargada.append("publicacionID", publicacionID);
-            cargarImagen(imagenCargada);
-          });
-          GuardarTags();
+          cargarImagenes();
           console.log("el id ahora es: " + resultado);
-          GuardarTags();
         }
       },
 
@@ -182,7 +206,9 @@ function GuardarPublicacion() {
   }
 }
 
+// QUITAR
 function GuardarTags() {
+  // invalidado con el controlador principal
   if (tagsActive.length > 0) {
     $.each(tagsActive, function (index, tag) {
       let tagServicioID = tag.servicioID;
@@ -224,78 +250,77 @@ function seleccionarTipo(value) {
 }
 
 imagenesCargadas = [];
-
-// // Crear Imagen
-// $("#files").submit(function (event) {
-//   event.preventDefault(); // Prevenir la acción por defecto del formulario
-
-//   console.log(this);
-//   var formData = new FormData(this);
-//   // formData.append("publicacionID", publicacionID);
-//   console.log(formData);
-//   if (formData.has("file")) {
-//     imagenesCargadas.push(formData);
-
-//     var imagen = `<input hidden name="id" value="c${
-//       imagenesCargadas.length
-//     }"></input><img src="${formData.get("file").name}"/>`;
-
-//     $("#Lista_imagenes").append(
-//       `<div class="carousel-item ${imageActive}" >
-//               ${imagen}
-//             </div>`
-//     );
-//     imageActive = "";
-//   }
-// });
-
 $("#files").submit(function (event) {
   event.preventDefault();
   var imagenInput = document.getElementById("imagen");
 
   if (imagenInput.files.length > 0) {
+    imgTemporalID++;
     var file = imagenInput.files[0];
-
+    var imagenSrc = URL.createObjectURL(file);
     var formData = new FormData();
     formData.append("imagen", file);
-    formData.append("imagenID", "temp" + (imagenesCargadas.length + 1));
+    formData.append("imagenSrc", imagenSrc);
+    formData.append("imgTemporalID", imgTemporalID);
+    formData.append("imagenID", 0);
+    // formData.append("eliminado", false);
 
     imagenesCargadas.push(formData);
+    actualizarImgs();
 
-    var imagenSrc = URL.createObjectURL(file);
-
-    var imagen = `<input type="hidden" name="temp${imagenesCargadas.length}" value="temp${imagenesCargadas.length}"></input><img src="${imagenSrc}"/>`;
-
-    $("#Lista_imagenes").append(
-      `<div class="carousel-item ${imageActive}" >
-                ${imagen}
-              </div>`
-    );
-    imageActive = "";
+    $("#ModalImagen").modal("hide");
   }
 });
 
-function cargarImagen(formdata) {
-  $.ajax({
-    url: "../../Publicaciones/GuardarImagen",
-    type: "POST",
-    data: formdata,
-    async: false,
-    success: function (resultado) {
-      // $("#ModalImagen").modal("hide");
-      // setTimeout(function () {
-      //   // BuscarImagenes();
-      // }, 100);
-    },
-    cache: false,
-    contentType: false,
-    processData: false,
-    error: function (xhr, status) {
-      alert("Disculpe, existió un problema");
-    },
+function actualizarImgs() {
+  $("#Lista_imagenes").empty();
+  var imageActive = "active";
+  var cantidad = 0;
+  var botones = $("#carouselExampleFade button");
+  botones.hide();
+  imagenesCargadas.forEach(function (img) {
+    // var imagen = img.get("imagen");
+    var imagenSrc = img.get("imagenSrc");
+    var imgTemporalID = img.get("imgTemporalID");
+    var eliminado = img.get("eliminado");
+    
+    eliminado = !!eliminado; // Forzamos a que la variable sea un bool
+    console.log(eliminado);
+    if (eliminado != true) {
+      cantidad++;
+      if(cantidad > 1){
+        botones.show();
+      }
+      console.log("paso");
+      var imagenImput = `<input type="hidden" name="selectID" value="${imgTemporalID}"></input><img src="${imagenSrc}"/>`;
+      $("#Lista_imagenes").append(
+        `<div class="carousel-item ${imageActive}">${imagenImput}</div>`
+      );
+      imageActive = "";
+    }
   });
+}
 
-  return false;
+function cargarImagenes() {
+  imagenesCargadas.forEach(function (imagenCargada) {
+    imagenCargada.append("publicacionID", publicacionID);
+    $.ajax({
+      url: "../../Publicaciones/GuardarImagen",
+      type: "POST",
+      data: imagenCargada,
+      success: function (resultado) {
+        console.log("imagen Guardada");
+      },
+      cache: false,
+      contentType: false,
+      processData: false,
+      error: function (xhr, status) {
+        // alert("Disculpe, existió un problema");
+        console.log("imagen no Guardada");
+      },
+    });
+  });
+  return;
 }
 
 function actualizarTag() {
@@ -335,9 +360,9 @@ function AñadirEtiqueta(id) {
   console.log(id);
   if (tagsActive.find((tags) => tags.servicioID == id)) {
     let resultado = serviciosDisp.find((tags) => tags.servicioID == id);
-    if(resultado.eliminado != undefined){
+    if (resultado.eliminado != undefined) {
       resultado.eliminado = false;
-    } 
+    }
   } else {
     let resultado = serviciosDisp.find((tags) => tags.servicioID == id);
     tagsActive.push(resultado);
@@ -360,21 +385,17 @@ function NuevaImagen() {
 }
 
 function EliminarImagen() {
-  var imagenID = $(".active").find('[name="id"]').val();
-  console.log(imagenID);
-  $.ajax({
-    url: "../../Publicaciones/GuardarImagen",
-    data: {
-      ImagenID: imagenID,
-    },
-    type: "POST",
-    dataType: "json",
-    success: function (resultado) {
-      // console.log(resultado);
-      // BuscarImagenes();
-    },
-    error: function (xhr, status) {
-      alert("Disculpe, existió un problema");
-    },
+  
+  var imgTemporalID = $(".active").find('[name="selectID"]').val();
+  console.log(imgTemporalID);
+  // Buscar el elemento en el array por imgTemporalID
+  var elementoAEliminar = imagenesCargadas.find(function (element) {
+    return element.get("imgTemporalID") === imgTemporalID;
   });
+
+  if (elementoAEliminar) {
+    // Modificar la propiedad "Eliminado" a true
+    elementoAEliminar.set("eliminado", true);
+  }
+  actualizarImgs();
 }

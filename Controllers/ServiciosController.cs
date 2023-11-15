@@ -39,7 +39,7 @@ public class ServiciosController : Controller
     }
 
     // crea o modifica elemento de la base de datos
-
+    [Authorize(Roles = "Administrador")]
     public JsonResult GuardarServicio(int servicioID, string descripcion)
     {
         string resultado = "Error";
@@ -103,7 +103,7 @@ public class ServiciosController : Controller
         return Json(resultado);
     }
 
-
+[Authorize(Roles = "Administrador")]
     public JsonResult Deshabilitar(int servicioID)
     {
         String resultado = "error";

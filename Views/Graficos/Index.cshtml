@@ -3,15 +3,65 @@
   ViewData["Title"] = "Graficos";
 }
 <link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Mukta:wght@300;400;600;700;800&family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
+<link
+  href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Mukta:wght@300;400;600;700;800&family=Noto+Sans:wght@400;700&display=swap"
+  rel="stylesheet">
 @* <link rel="stylesheet" href="~/css/tables.css" asp-append-version="true" /> *@
 
 <div class="fondoTablas">
   <div class="FondoGlass-1 my-5">
     <h1 class="display-4">Graficos</h1>
+    <section>
+      <div class="row">
+
+        <div class="col-12 col-lg-6">
+          <h2>Servicios mas solicitados:</h2>
+          <div class="row">
+            <div class="col-6">
+              <label for="anioServicio">Año:</label>
+              <select class="form-control" id="anioServicio" onchange="actualizarMesServicio(this.value)">
+                <option value="0">Desde el comienzo</option>
+              </select>
+            </div>
+            <div class="col-6">
+              <label for="mesServicio">Mes:</label>
+              <select class="form-control" id="mesServicio" onchange="buscarDatosServicio()">
+                <option value="0">Todo el año</option>
+              </select>
+            </div>
+          </div>
+          <div class="mx-auto" style="width: 43%;">
+            <canvas id="GraphServicios" </canvas>
+          </div>
+        </div>
+
+        <div class="col-12 col-lg-6">
+          <h2>Seguimiento de Servicio especifico:</h2>
+          <div class="row">
+            <div class="col-6">
+              <label for="servicioUnico">Servicio:</label>
+              <select class="form-control" id="servicioUnico" onchange="actualizarGraphServicioUnico()">
+                <option value="0">Seleccione un Servicio...</option>
+              </select>
+            </div>
+            <div class="col-6">
+              <label for="anioServicioUnico">Año:</label>
+              <select class="form-control" id="anioServicioUnico" onchange="actualizarGraphServicioUnico()">
+                <option value="0">Desde el comienzo</option>
+              </select>
+            </div>
+          </div>
+          <div class="mx-auto">
+            <canvas id="GraphServicioUnico" </canvas>
+          </div>
+        </div>
+
+      </div>
+    </section>
   </div>
 </div>
 
-@section Scripts{
-  <script src="~/js/tablas/provincia-1.0.0.js"></script>
+<script src="chart.js/dist/chart.umd.js"></script>
+@section Scripts {
+  <script src="~/js/graficos.js"></script>
 }

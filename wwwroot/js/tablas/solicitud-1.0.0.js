@@ -12,6 +12,7 @@ function BuscarSolicitudes() {
       console.log("data: " + data);
       listaSolicitudes = data.solicitudes;
       usuario = data.usuario; //mejor pasar el usuarioID
+      console.log(usuario);
       console.log(listaSolicitudes); // Almacena todas las solicitudes en la variable
       filtrarYMostrarSolicitudes(); // Llama a la función para filtrar y mostrar las solicitudes
     },
@@ -54,9 +55,9 @@ function cumpleConFiltros(solicitud, tipo, estado) {
     return false; // No cumple con el filtro de "estado 4" Cocretado
   }
 
-  if (tipo === "1" && solicitud.usuarioID == usuario.usuarioID) {
+  if (tipo === "2" && solicitud.usuarioID == usuario.usuarioID) {
     return false;
-  } else if (tipo === "2" && solicitud.usuarioID != usuario.usuarioID) {
+  } else if (tipo === "1" && solicitud.usuarioID != usuario.usuarioID) {
     return false;
   }
 
@@ -73,7 +74,7 @@ function mostrarSolicitudes(solicitudes) {
       estado,
       selected = "",
       classTable = "table-light";
-    if (solicitud.usuarioID == usuario.usuarioID) {
+    if (solicitud.usuarioID != usuario.usuarioID) {
       iconClass = `bx bxs-phone-outgoing text-success`;
     } else {
       iconClass = `bx bxs-phone-incoming text-primary`;
@@ -81,7 +82,7 @@ function mostrarSolicitudes(solicitudes) {
     switch (solicitud.estado) {
       case 0:
         estado = "En espera";
-        if (solicitud.usuarioID == usuario.usuarioID) {
+        if (solicitud.usuarioID != usuario.usuarioID) {
           botones = `<button class="btn btn-danger" onclick="event.stopPropagation(); modalCancelar(${solicitud.solicitudID})">Cancelar</button>`;
         } else {
           botones = `
@@ -101,7 +102,7 @@ function mostrarSolicitudes(solicitudes) {
       case 3:
         estado = "Aceptada"; // Cuando es aceptada la solicitud
         classTable = "table-success";
-        if (solicitud.usuarioID != usuario.usuarioID) {
+        if (solicitud.usuarioID == usuario.usuarioID) {
           botones = `<button class="btn btn-success" onclick="event.stopPropagation(); modalConcretar(${solicitud.solicitudID})">Concretar</button>`;
         }
         break;
@@ -116,14 +117,14 @@ function mostrarSolicitudes(solicitudes) {
     if (solicitudIDJS && solicitudIDJS == solicitud.solicitudID) {
       selected = "selected";
     }
-
     solicitudesContainer.append(`
         <tr onclick="modalDetalle(${
           solicitud.solicitudID
         })" class="${classTable} ${selected}">
             <td><i class="${iconClass}"></i></td>
             <td>${moment(solicitud.fecha).format("DD-MM-YYYY")}</td>
-            <td>${solicitud.userName}</td>
+            <td>${solicitud.publicacionTitulo}</td>
+            
             <td>${solicitud.descripcion}</td>
             <td>${estado}</td>
             <td>${botones}</td>
@@ -247,21 +248,41 @@ function modalDetalle(id) {
   <li class="d-flex">
     <i class="me-auto">Publicacion relacionada:</i> <a class="btn p-0 fw-bold" onclick="Vista(${
       solicitud.publicacionID
-    })">"${solicitud.publicacionTitulo}"</a>
+    })">${solicitud.publicacionTitulo}</a>
   </li>
+  <li class="d-flex">
+    <i class="me-auto">Dueño de publicacion:</i> <a class="btn p-0 fw-bold" onclick="perfilView(${
+      solicitud.usuarioID
+    })">${solicitud.userName}</a>
+  </li>
+  <hr>
   <li class="d-flex">
     <i class="me-auto">Solicitante:</i> <a class="btn p-0 fw-bold" onclick="perfilView(${
-      solicitud.usuarioID
-    })">"${solicitud.userName}"</a>
+      solicitud.usuarioIDSolicitante
+    })">${solicitud.userNameSolicitante}</a>
   </li>
   <li class="d-flex">
-   <i class="me-auto"> Mensaje:</i> "${solicitud.descripcion}"
+  <i class="me-auto">Email:</i> <span class="fw-bold">${
+    solicitud.emailSolicitante !== null ? solicitud.emailSolicitante : "-"
+  }</span>
+</li>
+  <li class="d-flex">
+  <i class="me-auto">Teléfono:</i> <a class="btn p-0 fw-bold">${
+    solicitud.phone !== null ? solicitud.phone : "-"
+  }</a>
+</li>
+  
+  <li class="d-flex">
+    <i class="me-auto">Fecha de Solicitud:</i> <span class="fw-bold">${moment(
+      solicitud.fecha,
+      "YYYY-MM-DD"
+    ).format("DD-MM-YYYY")}</span>
   </li>
   <li class="d-flex">
-    <i class="me-auto">Fecha de Solicitud:</i> "${moment(solicitud.fecha, "YYYY-MM-DD").format(
-      "DD-MM-YYYY"
-    )}"
+    <p>Mensaje:
+    <span class="fw-bold">"${solicitud.descripcion}"</span> </p>
   </li>
+  <hr>
   <li class="d-flex">
     <i class="me-auto">Estado:</i> ${estado}
   </li>

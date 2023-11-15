@@ -3,10 +3,15 @@ window.onload = BuscarPublicaciones();
 // autoregenerar paginacion cuando se esta en la ultima pagina,
 
 async function BuscarPublicaciones(pagina = 1, elementosPorPagina = 10) {
+  // if(currentPage && elementsPerPage){
+  //   pagina = currentPage;
+  //   elementosPorPagina = elementsPerPage;
+  // }
   servicioID = $("#ServicioID").val();
+  buscarPorTipo = $("#SelectTipo").val();
   const data = await $.ajax({
     url: "../../Publicaciones/BuscarPublicaciones2",
-    data: {pagina:pagina,elementosPorPagina:elementosPorPagina,servicioID:servicioID},
+    data: {pagina:pagina,elementosPorPagina:elementosPorPagina,servicioID:servicioID,buscarPorTipo:buscarPorTipo},
     type: "GET",
     dataType: "json",
   });
@@ -38,7 +43,7 @@ async function BuscarPublicaciones(pagina = 1, elementosPorPagina = 10) {
                       <h4 class="m-0 px-2">${publicacion.titulo}</h4>
                       <label onclick="event.stopPropagation(); perfilView(${publicacion.usuarioID})">Por <b>${publicacion.usuarioNombre}</b></label>
                       <label>${tags}</label>
-                      <label class="mb-auto">${publicacion.resumen}</label>
+                      <p class="mx-2 mb-auto">${publicacion.resumen}</p>
                       <div class="card-footer d-flex">
                         <label class="my-auto">
                           Publicado el: ${moment(publicacion.fecha, "YYYY-MM-DD").format("DD-MM-YYYY")}

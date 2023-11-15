@@ -214,6 +214,13 @@ body.dark {
   color: rgb(255, 255, 255);
   background: #32a64f;
 }
+.subMenuBloq{
+  color: #8d8d8d!important;
+  cursor: default;
+}
+.subMenuBloq:hover {
+  background: none;
+}
 /* .sidebar.close .nav_link:hover {
   background: var(--white-color);
 } */
@@ -495,6 +502,19 @@ body.dark {
   cursor: pointer;
   /* align-items: center; */
   margin: 0;
+}
+
+.itemBloqueo {
+  background-color: white;
+  color: black !important;
+}
+
+.itemBloqueo:hover {
+  background-color: white;
+}
+
+.iBloqueo{
+  color: red !important;
 }
 
 /* CODIGO DE TABLAS PARA LAS DIFERENTES VISTAS */

@@ -1,0 +1,32 @@
+.form-container {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.form-header {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+.form-checkbox {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.form-hr {
+    margin-top: 30px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+}
